@@ -1,0 +1,25 @@
+.month {
+  display: inline-block;
+  width: 300px;
+  -webkit-user-select: none;
+}
+
+.month .week {
+  -webkit-column-count: 7;
+  -webkit-column-gap: 0;
+}
+
+.month .week .day {
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.month .week .day.is-current_month {
+  opacity: 1;
+}
+
+.month .week .day.is-selected {
+  background-color: green;
+}

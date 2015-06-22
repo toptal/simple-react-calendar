@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src="https://fb.me/react-0.13.3.js"></script>
+  <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.9.3/lodash.min.js"></script>
+  <script src="dist/simple-calendar.js"></script>
+
+  <link href="src/styles/index.css" media="screen" rel="stylesheet">
+</head>
+<body>
+  <div id="month"></div>
+
+  <script type="text/jsx">
+    var date = new Date()
+    date.setMonth(date.getMonth() + 1)
+    var sampleData = {
+      '2015-06-15': {
+        modifiers: ['demoday']
+      },
+      '2015-06-16': {
+        modifiers: ['planning', 'retro'],
+        events: [
+          { name: 'Event', time: '12:00', description: 'Hey hey'}
+        ]
+      }
+    }
+    React.render(
+      <SimpleCalendar
+        selectionMode="range"
+        activeMonth={date}
+        data={sampleData}
+      />,
+      document.getElementById('month')
+    );
+  </script>
+</body>
+</html>
