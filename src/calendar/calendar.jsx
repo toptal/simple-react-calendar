@@ -23,19 +23,19 @@ export default class Calendar extends React.Component {
     }
   }
 
-  _getActiveMonth() {
-    if (_.isFunction(this.props.onActiveMonthChange) && this.props.activeMonth) {
-      return this.props.activeMonth
-    } else {
-      return this.state.activeMonth
+  componentWillReceiveProps(nextProps) {
+    if (!_.isEqual(nextProps.selected, this.props.selected)) {
+      this.setState({
+        selected: nextProps.selected
+      })
     }
   }
 
-  _getSelection() {
-    if (_.isFunction(this.props.onSelect) && this.props.selected) {
-      return this.props.selected
+  _getActiveMonth() {
+    if (_.isFunction(this.props.onActiveMonthChange)) {
+      return this.props.activeMonth
     } else {
-      return this.state.selected
+      return this.state.activeMonth
     }
   }
 
@@ -53,13 +53,12 @@ export default class Calendar extends React.Component {
   }
 
   _selectionChanged(selection) {
-    if (_.isFunction(this.props.onSelect)) {
+    if (_.isFunction(this.props.onSelect) && !selection.selectionInProgress) {
       this.props.onSelect(selection)
-    } else {
-      this.setState({
-        selected: [selection.selectionStart, selection.selectionEnd]
-      })
     }
+    this.setState({
+      selected: [selection.selectionStart, selection.selectionEnd]
+    })
   }
 
   render() {
@@ -72,7 +71,7 @@ export default class Calendar extends React.Component {
         <Month
           activeMonth   = { this._getActiveMonth() }
           selectionMode = { this.props.selectionMode }
-          selected      = { this._getSelection() }
+          selected      = { this.state.selected }
           data          = { this.props.data }
           onChange      = { this._selectionChanged.bind(this) }
         />
@@ -82,15 +81,15 @@ export default class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-  activeMonth: React.PropTypes.instanceOf(Date),
+  activeMonth:         React.PropTypes.instanceOf(Date),
   onActiveMonthChange: React.PropTypes.func,
-  selected: React.PropTypes.object,
-  onSelectionChange: React.PropTypes.func,
-  selectionMode: React.PropTypes.string,
-  data: React.PropTypes.object
+  selected:            React.PropTypes.object,
+  onSelectionChange:   React.PropTypes.func,
+  selectionMode:       React.PropTypes.string,
+  data:                React.PropTypes.object
 }
 
 Calendar.defaultProps = {
-  activeMonth: new Date(),
+  activeMonth:   new Date(),
   selectionMode: 'single'
 }

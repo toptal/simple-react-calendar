@@ -26,11 +26,16 @@
         ]
       }
     }
+    var f = function(data) {
+      console.log(data)
+    }
+
     React.render(
       <SimpleCalendar
-        selectionMode="range"
-        activeMonth={date}
-        data={sampleData}
+        selectionMode = "range"
+        activeMonth = { date }
+        data = { sampleData }
+        onSelect = { f }
       />,
       document.getElementById('month')
     );

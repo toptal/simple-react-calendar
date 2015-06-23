@@ -21,6 +21,12 @@ export default class Month extends React.Component {
     }
   }
 
+  _pushUpdate() {
+    this.props.onChange(
+      _.pick(this.state, ['selectionStart', 'selectionEnd', 'selectionInProgress'])
+    )
+  }
+
   _onDayClick(date) {
     var nextState = {}
     if (this.props.selectionMode == 'range') {
@@ -44,14 +50,14 @@ export default class Month extends React.Component {
       }
     }
     this.setState(nextState, () => {
-      this.props.onChange(this.state)
+      this._pushUpdate()
     })
   }
 
   _onDayMouseMove(date) {
     if (this.state.selectionInProgress && (!this.state.selectionEnd || this.state.selectionEnd.getTime() != date.getTime())) {
       this.setState({ selectionEnd: date }, () => {
-        this.props.onChange(this.state)
+        this._pushUpdate()
       })
     }
   }
@@ -63,7 +69,7 @@ export default class Month extends React.Component {
         <Week
           key         = { week.getTime() }
           startDate   = { week }
-          activeMonth = { this.props.activeMonth}
+          activeMonth = { this.props.activeMonth }
           selected    = { this.props.selected }
           data        = { this.props.data }
 
