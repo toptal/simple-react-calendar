@@ -6,7 +6,7 @@ const csswring     = require('csswring');
 
 const config = {
   entry: {
-    'simple-calendar':        './src/index'
+    'simple-calendar': './src/index'
   },
 
   module: {
@@ -19,7 +19,8 @@ const config = {
     ]
   },
 
-  devtool: false ? null : 'inline-source-map',
+  // TODO: figure why tests not working with sourcemaps
+  devtool: process.env.NODE_ENV == 'test' ? null : 'inline-source-map',
 
   resolve: {
     extensions: ['', '.js', '.jsx', '.coffee']

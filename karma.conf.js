@@ -4,15 +4,17 @@ module.exports = function(config) {
   config.set({
     frameworks: ['mocha'],
     files: [
-      'app/assets/bundles/**/*_spec.js'
+      'node_modules/react/dist/react.js',
+      'node_modules/lodash/index.js',
+      'tests/**/*_spec.js'
     ],
     preprocessors: {
-      '**/*.js': ['webpack', 'sourcemap']
+      'tests/**/*.js': ['webpack', 'sourcemap']
     },
     webpack: require('./webpack.config.js'),
     webpackMiddleware: {
       noInfo: true
     },
-    browsers: ['chrome']
+    browsers: ['PhantomJS2']
   });
 };
