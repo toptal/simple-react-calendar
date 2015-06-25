@@ -1,9 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const autoprefixer = require('autoprefixer-core');
-const csswring     = require('csswring');
-
 const config = {
   entry: {
     'simple-calendar': './src/index'
@@ -15,6 +12,10 @@ const config = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel'
+      },
+      {
+        test: /\.json?$/,
+        loader: 'json'
       }
     ]
   },
