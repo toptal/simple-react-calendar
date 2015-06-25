@@ -1,8 +1,16 @@
+/**
+ * Returns true if date falls between dateFrom and dateTo, false otherwise.
+ *
+ * @param {date} date
+ * @param {date|string} dateFrom
+ * @param {date|string} dateTo
+ * @returns {boolean}
+ */
 export default function isDateBetween (date, dateFrom, dateTo) {
-  let date1 = new Date(dateFrom || dateTo)
-  let date2 = new Date(dateTo || dateFrom)
-  let min = Math.min(date1.getTime(), date2.getTime())
-  let max = Math.max(date1.getTime(), date2.getTime())
+  let fromTime = new Date(dateFrom).getTime()
+  let toTime = new Date(dateTo).getTime()
+  let min = Math.min(fromTime, toTime)
+  let max = Math.max(fromTime, toTime)
   let time = date.getTime()
   return (time >= min && time <= max)
 }

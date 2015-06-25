@@ -1,7 +1,6 @@
 import Day  from './day'
 import Week from './week'
 
-import isDateBetween   from './utils/is_date_between'
 import getWeeksInMonth from './utils/get_weeks_in_month'
 
 // activeMonth   = { this._getActiveMonth() }
