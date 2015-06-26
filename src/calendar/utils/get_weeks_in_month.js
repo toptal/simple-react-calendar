@@ -1,3 +1,11 @@
+/**
+ * Accepts the first day of month and returns an array containing
+ * all mondays for all weeks that intersect that month. So, if a month
+ * starts on a Wednesday, the first entry will be the previous monday.
+ *
+ * @param {date} date
+ * @returns {array}
+ */
 export default function getWeeksInMonth(month) {
   let date = new Date(
     month.getFullYear(),

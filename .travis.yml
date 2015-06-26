@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - '0.12'
+cache:
+  directories:
+    - node_modules
+before_script:
+  # Says which display to use (could be 0.0, 0.1, 1.0 etc.). Generally, 99.0 is not used by any application,
+  # so display should not conflict with any other possible displays used by the system. That is why we choose it.
+  - export DISPLAY=:99.0
+  # Runs virtual desktop to allow Firefox to run
+  - sh -e /etc/init.d/xvfb start
+script:
+  - npm run karma -- --single-run --browsers Firefox
