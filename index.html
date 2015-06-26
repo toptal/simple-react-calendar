@@ -10,11 +10,9 @@
   <link href="src/styles/index.css" media="screen" rel="stylesheet">
 </head>
 <body>
-  <div id="month"></div>
+  <div id="calendar"></div>
 
   <script type="text/jsx">
-    var date = new Date()
-    date.setMonth(date.getMonth() + 1)
     var sampleData = {
       '2015-06-15': {
         modifiers: ['demoday']
@@ -33,11 +31,10 @@
     React.render(
       <SimpleCalendar
         selectionMode = "range"
-        activeMonth = { date }
         data = { sampleData }
         onSelect = { f }
       />,
-      document.getElementById('month')
+      document.getElementById('calendar')
     );
   </script>
 </body>

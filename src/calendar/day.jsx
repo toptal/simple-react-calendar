@@ -2,6 +2,7 @@ import classNames from 'classnames'
 
 import isWeekend     from './utils/is_weekend'
 import isToday       from './utils/is_today'
+import noOp          from './utils/no_op'
 
 import preventDefault       from './utils/prevent_default'
 
@@ -40,5 +41,7 @@ export default class Day extends React.Component {
 }
 
 Day.defaultProps = {
-  data: {}
+  data: {},
+  onClick: noOp,
+  onMouseMove: noOp
 }
