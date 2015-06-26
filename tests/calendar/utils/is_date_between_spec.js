@@ -27,4 +27,8 @@ describe('isDateBetween', function () {
   it('returns false when date is after end', function() {
     assert(!isDateBetween(new Date(2015, 5, 20), '2015-06-10', '2015-06-19'))
   })
+
+  it('correctly handles inverted range order', function() {
+    assert(isDateBetween(new Date(2015, 6, 25), '2015-07-28', '2015-07-22'))
+  })
 })

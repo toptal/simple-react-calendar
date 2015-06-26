@@ -9,4 +9,8 @@ describe('isDateInRange', function () {
   it('returns false when date is outside the range', function() {
     assert(!isDateInRange(new Date(2015, 5, 20), ['2015-06-21', '2015-06-25']))
   })
+
+  it('correctly handles inverted range order', function() {
+    assert(isDateInRange(new Date(2015, 6, 25), {selectionStart: '2015-07-28', selectionEnd: '2015-07-22'}))
+  })
 })

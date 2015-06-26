@@ -33,11 +33,6 @@ describe('dateRangeToArray', function () {
     assert.deepEqual(dateRangeToArray(param)[1].toDateString(), nowDateStr)
   })
 
-  it('defaults end to now if passed array with one element', function() {
-    var param = [start]
-    assert.deepEqual(dateRangeToArray(param)[1].toDateString(), nowDateStr)
-  })
-
   it('accepts date objects in plain object style call', function() {
     var param = {selectionStart: startDate, selectionEnd: endDate}
     assert.deepEqual(dateRangeToArray(param), [startDate, endDate])
@@ -51,5 +46,10 @@ describe('dateRangeToArray', function () {
   it('defaults to selecting today when nothing is passed', function() {
     var result = dateRangeToArray()
     assert(result[0].toDateString() == nowDateStr && result[1].toDateString() == nowDateStr)
+  })
+
+  it('accepts inverted order of entries', function() {
+    var param = [end, start]
+    assert.deepEqual(dateRangeToArray(param), [endDate, startDate])
   })
 })
