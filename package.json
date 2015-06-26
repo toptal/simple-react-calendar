@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "babel-loader": "^5.1.4",
+    "babel-plugin-espower": "^1.0.0",
     "classnames": "^2.1.2",
     "eslint": "^0.22.1",
     "json-loader": "^0.5.2",

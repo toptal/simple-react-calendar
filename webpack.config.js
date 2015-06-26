@@ -11,7 +11,7 @@ const config = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel'
+        loader: 'babel?{"plugins":["espower"]}'
       },
       {
         test: /\.json?$/,
