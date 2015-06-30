@@ -12,11 +12,11 @@ export default class MonthHeader extends React.Component {
     let date = this.props.activeMonth
     return (
       <div className="month-header">
-        <a href="#" onClick={ _.partialRight(this._switchMonth, -1).bind(this) }>prev</a>
+        <a className="prev-month" href="#" onClick={ _.partialRight(this._switchMonth, -1).bind(this) }>prev</a>
         <div className="month-title">
           {m[date.getMonth()]} {date.getFullYear()}
         </div>
-        <a href="#" onClick={ _.partialRight(this._switchMonth, 1).bind(this) }>next</a>
+        <a className="next-month" href="#" onClick={ _.partialRight(this._switchMonth, 1).bind(this) }>next</a>
       </div>
     )
   }
