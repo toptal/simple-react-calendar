@@ -10,15 +10,16 @@ import MonthHeader from './month_header'
   onSelect — function
 
   selectionMode — string | default 'single'
-
 */
 
 export default class Calendar extends React.Component {
   constructor(props) {
     super(props)
 
+    var firstDayOfMonth = this.props.activeMonth
+    firstDayOfMonth.setDate(1)
     this.state = {
-      activeMonth: this.props.activeMonth,
+      activeMonth: firstDayOfMonth,
       selected: this.props.selected
     }
   }
