@@ -55,7 +55,11 @@ export default class Calendar extends React.Component {
 
   _selectionChanged(selection) {
     if (_.isFunction(this.props.onSelect) && !selection.selectionInProgress) {
-      this.props.onSelect(selection)
+      this.props.onSelect(
+        selection.selectionStart,
+        selection.selectionEnd,
+        selection.selectionInProgress
+      )
     }
     this.setState({
       selected: [selection.selectionStart, selection.selectionEnd]
@@ -63,17 +67,20 @@ export default class Calendar extends React.Component {
   }
 
   render() {
+    let monthProps = _.pick(this.props, ['selectionMode', 'data', 'selectionBoundaries'])
+
     return (
-      <div className="calendar">
+      <div className='calendar'>
         <MonthHeader
+          ref           = 'header'
           activeMonth   = { this._getActiveMonth() }
           onMonthChange = { this._switchMonth.bind(this) }
         />
         <Month
+          { ...monthProps }
+          ref           = 'month'
           activeMonth   = { this._getActiveMonth() }
-          selectionMode = { this.props.selectionMode }
           selected      = { this.state.selected }
-          data          = { this.props.data }
           onChange      = { this._selectionChanged.bind(this) }
         />
       </div>

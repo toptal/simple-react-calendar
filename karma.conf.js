@@ -4,7 +4,7 @@ module.exports = function(config) {
   config.set({
     frameworks: ['mocha'],
     files: [
-      'node_modules/react/dist/react.js',
+      'node_modules/react/dist/react-with-addons.js',
       'node_modules/lodash/index.js',
       'tests/**/*_spec.js'
     ],

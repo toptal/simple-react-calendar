@@ -1,13 +1,8 @@
 import Day  from './day'
 import Week from './week'
 
-import getWeeksInMonth from './utils/get_weeks_in_month'
-
-// activeMonth   = { this._getActiveMonth() }
-// selectionMode = { this.props.selectionMode }
-// selection     = { this._getSelection() }
-// onChange
-
+import getWeeksInMonth    from './utils/get_weeks_in_month'
+import isDateInBoundaries from './utils/is_date_in_boundaries'
 
 export default class Month extends React.Component {
   constructor(props) {
@@ -27,6 +22,10 @@ export default class Month extends React.Component {
   }
 
   _onDayClick(date) {
+    if (!isDateInBoundaries(date, this.props.selectionBoundaries)) {
+      return false
+    }
+
     var nextState = {}
     if (this.props.selectionMode == 'range') {
       if (this.state.selectionInProgress) {
@@ -54,6 +53,10 @@ export default class Month extends React.Component {
   }
 
   _onDayMouseMove(date) {
+    if (!isDateInBoundaries(date, this.props.selectionBoundaries)) {
+      return false
+    }
+
     if (this.state.selectionInProgress && (!this.state.selectionEnd || this.state.selectionEnd.getTime() != date.getTime())) {
       this.setState({ selectionEnd: date }, () => {
         this._pushUpdate()
@@ -67,6 +70,7 @@ export default class Month extends React.Component {
       return (
         <Week
           key         = { week.getTime() }
+          ref         = { 'week' + week.getTime() }
           startDate   = { week }
           activeMonth = { this.props.activeMonth }
           selected    = { this.props.selected }
@@ -79,10 +83,9 @@ export default class Month extends React.Component {
     })
   }
 
-
   render() {
     return (
-      <div className="month">
+      <div className='month'>
         { this._renderWeeks() }
       </div>
     )

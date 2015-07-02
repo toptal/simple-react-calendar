@@ -5,5 +5,5 @@
  * @returns {boolean}
  */
 export default function isWeekend(date) {
-  return (date.getDay() == 0 || date.getDay() == 6)
+  return (date.getDay() === 0 || date.getDay() === 6)
 }

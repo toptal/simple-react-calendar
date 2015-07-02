@@ -1,5 +1,5 @@
-var React     = require('react')
-var TestUtils = require('react/lib/ReactTestUtils')
+var React     = window.React
+var TestUtils = React.addons.TestUtils
 var assert    = require('power-assert')
 
 var Month     = require('../../src/calendar/month')
@@ -19,7 +19,11 @@ describe('Month', () => {
   function clickOnDays() {
     var month = arguments[0]
     var daysToClick = Array.prototype.slice.call(arguments, 1)
-    var days = TestUtils.scryRenderedDOMComponentsWithClass(month, 'day')
+
+    var weeks = _.filter(month.refs, (v, k) => { return !!/^week/.exec(k) })
+    var days = _.flatten(weeks.map((week) => {
+      return _.filter(week.refs, (v, k) => { return !!/^day/.exec(k) })
+    })).map((day) => { return React.findDOMNode(day) })
 
     _.each(daysToClick, (day) => {
       TestUtils.Simulate.click(days[day])
