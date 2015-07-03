@@ -19,13 +19,17 @@ give you a working calendar component.
 
 * `activeMonth` - any day within the month that you want initially displayed
 * `selectionMode` - one of either `range` or `single`
+* `selectionBoundaries` - a range of dates to setup selection boundaries. Examples:
+  - `{min: new Date()}`
+  - `{min: new Date(), max: new Date(2016, 0, 1)}`
+  - `{max: new Date(2016, 0, 1)}`
 * `selected` - a range of dates to be initially selected, can be defined in various ways. Some examples:
   - `['2015-06-16', '2015-06-26']`
   - `[new Date(2015,5,16), new Date(2015,5,26)]`
   - `['2015-06-16']` - selects until today
-  - `{selectionStart: '2015-06-16', selectionEnd: '2015-06-26'}`
-  - `{selectionStart: new Date(2015,5,16), selectionEnd: new Date(2015,5,26)}`
-  - `{selectionStart: '2015-06-16'}` - select until today
+  - `{start: '2015-06-16', end: '2015-06-26'}`
+  - `{start: new Date(2015,5,16), end: new Date(2015,5,26)}`
+  - `{start: '2015-06-16'}` - select until today
 * `onActiveMonthChange` - a function that is called whenever user changes the month
 * `onSelectionChange` - a function that is called whenever user finishes a new selection
 

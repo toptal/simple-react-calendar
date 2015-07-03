@@ -1,8 +1,8 @@
 var assert  = require('power-assert')
 var getWeeksInMonth = require('../../../src/calendar/utils/get_weeks_in_month')
 
-describe('getWeeksInMonth', function () {
-  it('returns an array with starts of all the weeks that intersect the month', function() {
+describe('getWeeksInMonth', () => {
+  it('returns an array with starts of all the weeks that intersect the month', () => {
     assert.deepEqual(
       getWeeksInMonth(new Date(2015, 5, 1)),
       [
@@ -15,7 +15,7 @@ describe('getWeeksInMonth', function () {
     )
   })
 
-  it('correctly handles when month does not start on a monday', function() {
+  it('correctly handles when month does not start on a monday', () => {
     assert.deepEqual(
       getWeeksInMonth(new Date(2015, 6, 1)),
       [
@@ -28,7 +28,7 @@ describe('getWeeksInMonth', function () {
     )
   })
 
-  it('correctly handles when month lasts exactly 4 weeks', function() {
+  it('correctly handles when month lasts exactly 4 weeks', () => {
     assert.deepEqual(
       getWeeksInMonth(new Date(2021, 1, 1)),
       [

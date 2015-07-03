@@ -1,7 +1,7 @@
 import Day from './day'
 
-import getDaysInWeek from './utils/get_days_in_week'
 import dateKey from './utils/date_key'
+import getDaysInWeek from './utils/get_days_in_week'
 import isDateInRange from './utils/is_date_in_range'
 
 export default class Week extends React.Component {
@@ -10,6 +10,7 @@ export default class Week extends React.Component {
       return (
         <Day
           key  = { day.getTime() }
+          ref  = { 'day' + day.getTime() }
           date = { day }
           data = { this.props.data[dateKey(day)] }
           selected = { isDateInRange(day, this.props.selected) }
@@ -24,7 +25,7 @@ export default class Week extends React.Component {
 
   render() {
     return (
-      <div className="week">
+      <div className='week'>
         { this._renderDays() }
       </div>
     )

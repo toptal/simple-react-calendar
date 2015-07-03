@@ -1,9 +1,9 @@
-var React     = require('react')
-var TestUtils = require('react/lib/ReactTestUtils')
+var React     = window.React
+var TestUtils = React.addons.TestUtils
 var assert    = require('power-assert')
-var Week       = require('../../src/calendar/week')
+var Week      = require('../../src/calendar/week')
 
-describe('Week', function () {
+describe('Week', () => {
   // A helper function for more readable specs
   function renderWeek(startDate, options) {
     options = options || {}
@@ -23,7 +23,7 @@ describe('Week', function () {
     return days.map((day) => { return React.findDOMNode(day) })
   }
 
-  it('renders with minimal params', function () {
+  it('renders with minimal params', () => {
     var startDate = new Date(2015,6,1)
     var week = TestUtils.renderIntoDocument(
       <Week
@@ -35,27 +35,27 @@ describe('Week', function () {
     assert(week)
   })
 
-  it('displays the days of the month', function () {
+  it('displays the days of the month', () => {
     var days = daysDOMElements(renderWeek(new Date(2015, 5, 29)))
     var daysDisplayed = days.map((day) => { return day.textContent })
     assert.deepEqual(daysDisplayed, ["29","30","1","2","3","4","5"])
   })
 
-  it('correctly marks the days that fall in the active month', function () {
+  it('correctly marks the days that fall in the active month', () => {
     var days = daysDOMElements(renderWeek(new Date(2015, 5, 29)))
     var daysWithClass = days.map((day) => { return day.classList.contains('is-current_month') })
     assert.deepEqual(daysWithClass, [true, true, false, false, false, false, false])
   })
 
-  it('correctly marks the selected days', function () {
+  it('correctly marks the selected days', () => {
     var days = daysDOMElements(renderWeek(new Date(2015, 5, 29), {selected: [new Date(2015,5,30), new Date(2015,6,2)]}))
     var daysWithClass = days.map((day) => { return day.classList.contains('is-selected') })
     assert.deepEqual(daysWithClass, [false, true, true, true, false, false, false])
   })
 
-  it('accepts a function to be called when a day element is clicked', function() {
+  it('accepts a function to be called when a day element is clicked', () => {
     var clicked = false
-    var days = daysDOMElements(renderWeek(new Date(2015, 5, 29), {onDayClick: function() { clicked = true }}))
+    var days = daysDOMElements(renderWeek(new Date(2015, 5, 29), {onDayClick: () => { clicked = true }}))
     TestUtils.Simulate.click(days[0])
     assert(clicked)
   })
