@@ -31,6 +31,12 @@ const config = {
     libraryTarget: 'umd',
     path:     './dist',
     filename: '[name].js'
+  },
+
+  externals: {
+    'react': 'React',
+    'react/addons': 'React',
+    'lodash': '_'
   }
 }
 

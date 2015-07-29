@@ -1,7 +1,8 @@
-import Day  from './day'
-import Week from './week'
+import React from 'react'
+import lodash from 'lodash'
 
-import getWeeksInMonth    from './utils/get_weeks_in_month'
+import Week from './week'
+import getWeeksInMonth from './utils/get_weeks_in_month'
 import isDateInBoundaries from './utils/is_date_in_boundaries'
 
 export default class Month extends React.Component {
@@ -10,14 +11,14 @@ export default class Month extends React.Component {
 
     this.state = {
       selectionInProgress: false,
-      selectionStart:      null,
-      selectionEnd:        null
+      selectionStart: null,
+      selectionEnd: null
     }
   }
 
   _pushUpdate() {
     this.props.onChange(
-      _.pick(this.state, ['selectionStart', 'selectionEnd', 'selectionInProgress'])
+      lodash.pick(this.state, ['selectionStart', 'selectionEnd', 'selectionInProgress'])
     )
   }
 
@@ -26,13 +27,13 @@ export default class Month extends React.Component {
       return false
     }
 
-    var nextState = {}
-    if (this.props.selectionMode == 'range') {
+    let nextState = {}
+    if (this.props.selectionMode === 'range') {
       if (this.state.selectionInProgress) {
         nextState = {
           selectionInProgress: false,
           selectionStart: this.state.selectionStart.getTime() < date.getTime() ? this.state.selectionStart : date,
-          selectionEnd:   this.state.selectionStart.getTime() > date.getTime() ? this.state.selectionStart : date
+          selectionEnd: this.state.selectionStart.getTime() > date.getTime() ? this.state.selectionStart : date
         }
       } else {
         nextState = {
@@ -41,7 +42,7 @@ export default class Month extends React.Component {
           selectionEnd: date
         }
       }
-    } else if (this.props.selectionMode == 'single' || !this.props.selectionMode) {
+    } else if (this.props.selectionMode === 'single' || !this.props.selectionMode) {
       nextState = {
         selectionStart: date,
         selectionEnd: date
@@ -57,27 +58,27 @@ export default class Month extends React.Component {
       return false
     }
 
-    if (this.state.selectionInProgress && (!this.state.selectionEnd || this.state.selectionEnd.getTime() != date.getTime())) {
-      this.setState({ selectionEnd: date }, () => {
+    if (this.state.selectionInProgress && (!this.state.selectionEnd || this.state.selectionEnd.getTime() !== date.getTime())) {
+      this.setState({selectionEnd: date}, () => {
         this._pushUpdate()
       })
     }
   }
 
   _renderWeeks() {
-    let weeks = getWeeksInMonth(this.props.activeMonth)
+    const weeks = getWeeksInMonth(this.props.activeMonth)
     return weeks.map((week) => {
       return (
         <Week
-          key         = { week.getTime() }
-          ref         = { 'week' + week.getTime() }
-          startDate   = { week }
-          activeMonth = { this.props.activeMonth }
-          selected    = { this.props.selected }
-          data        = { this.props.data }
+          key={week.getTime()}
+          ref={'week' + week.getTime()}
+          startDate={week}
+          activeMonth={this.props.activeMonth}
+          selected={this.props.selected}
+          data={this.props.data}
 
-          onDayClick     = { this._onDayClick.bind(this) }
-          onDayMouseMove = { this._onDayMouseMove.bind(this) }
+          onDayClick={this._onDayClick.bind(this)}
+          onDayMouseMove={this._onDayMouseMove.bind(this)}
         />
       )
     })

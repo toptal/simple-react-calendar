@@ -1,6 +1,7 @@
-import Month       from './month'
+import React from 'react'
+import lodash from 'lodash'
+import Month from './month'
 import MonthHeader from './month_header'
-
 
 /*
   activeMonth — Date, default `new Date()`
@@ -16,7 +17,7 @@ export default class Calendar extends React.Component {
   constructor(props) {
     super(props)
 
-    var firstDayOfMonth = this.props.activeMonth
+    const firstDayOfMonth = this.props.activeMonth
     firstDayOfMonth.setDate(1)
     this.state = {
       activeMonth: firstDayOfMonth,
@@ -25,7 +26,7 @@ export default class Calendar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!_.isEqual(nextProps.selected, this.props.selected)) {
+    if (!lodash.isEqual(nextProps.selected, this.props.selected)) {
       this.setState({
         selected: nextProps.selected
       })
@@ -33,7 +34,7 @@ export default class Calendar extends React.Component {
   }
 
   _getActiveMonth() {
-    if (_.isFunction(this.props.onActiveMonthChange)) {
+    if (lodash.isFunction(this.props.onActiveMonthChange)) {
       return this.props.activeMonth
     } else {
       return this.state.activeMonth
@@ -41,10 +42,10 @@ export default class Calendar extends React.Component {
   }
 
   _switchMonth(offset) {
-    let month = new Date(this._getActiveMonth())
+    const month = new Date(this._getActiveMonth())
     month.setMonth(month.getMonth() + offset)
 
-    if (_.isFunction(this.props.onActiveMonthChange)) {
+    if (lodash.isFunction(this.props.onActiveMonthChange)) {
       this.props.onActiveMonthChange(month)
     } else {
       this.setState({
@@ -54,7 +55,7 @@ export default class Calendar extends React.Component {
   }
 
   _selectionChanged(selection) {
-    if (_.isFunction(this.props.onSelect) && !selection.selectionInProgress) {
+    if (lodash.isFunction(this.props.onSelect) && !selection.selectionInProgress) {
       this.props.onSelect(
         selection.selectionStart,
         selection.selectionEnd,
@@ -67,21 +68,21 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-    let monthProps = _.pick(this.props, ['selectionMode', 'data', 'selectionBoundaries'])
+    const monthProps = lodash.pick(this.props, ['selectionMode', 'data', 'selectionBoundaries'])
 
     return (
       <div className='calendar'>
         <MonthHeader
-          ref           = 'header'
-          activeMonth   = { this._getActiveMonth() }
-          onMonthChange = { this._switchMonth.bind(this) }
+          ref='header'
+          activeMonth={this._getActiveMonth()}
+          onMonthChange={this._switchMonth.bind(this)}
         />
         <Month
           { ...monthProps }
-          ref           = 'month'
-          activeMonth   = { this._getActiveMonth() }
-          selected      = { this.state.selected }
-          onChange      = { this._selectionChanged.bind(this) }
+          ref='month'
+          activeMonth={this._getActiveMonth()}
+          selected={this.state.selected}
+          onChange={this._selectionChanged.bind(this)}
         />
       </div>
     )
@@ -89,15 +90,15 @@ export default class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-  activeMonth:         React.PropTypes.instanceOf(Date),
+  activeMonth: React.PropTypes.instanceOf(Date),
   onActiveMonthChange: React.PropTypes.func,
-  selected:            React.PropTypes.object,
-  onSelectionChange:   React.PropTypes.func,
-  selectionMode:       React.PropTypes.string,
-  data:                React.PropTypes.object
+  selected: React.PropTypes.object,
+  onSelectionChange: React.PropTypes.func,
+  selectionMode: React.PropTypes.string,
+  data: React.PropTypes.object
 }
 
 Calendar.defaultProps = {
-  activeMonth:   new Date(),
+  activeMonth: new Date(),
   selectionMode: 'single'
 }

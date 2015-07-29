@@ -6,11 +6,11 @@
  * @param {date|string} dateTo
  * @returns {boolean}
  */
-export default function isDateBetween (date, dateFrom, dateTo) {
-  let fromTime = new Date(dateFrom).getTime()
-  let toTime = new Date(dateTo).getTime()
-  let min = Math.min(fromTime, toTime)
-  let max = Math.max(fromTime, toTime)
-  let time = date.getTime()
+export default function isDateBetween(date, dateFrom, dateTo) {
+  const fromTime = new Date(dateFrom).getTime()
+  const toTime = new Date(dateTo).getTime()
+  const min = Math.min(fromTime, toTime)
+  const max = Math.max(fromTime, toTime)
+  const time = date.getTime()
   return (time >= min && time <= max)
 }

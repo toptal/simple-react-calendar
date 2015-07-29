@@ -5,7 +5,7 @@
  * @returns {boolean}
  */
 export default function isToday(date) {
-  let today = new Date()
+  const today = new Date()
   return (
     (today.getFullYear() === date.getFullYear()) &&
     (today.getMonth() === date.getMonth()) &&

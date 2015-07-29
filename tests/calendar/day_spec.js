@@ -1,7 +1,9 @@
-var React     = window.React
-var TestUtils = React.addons.TestUtils
-var assert    = require('power-assert')
-var Day       = require('../../src/calendar/day')
+import React from 'react/addons'
+import assert from 'power-assert'
+
+import Day from '../../src/calendar/day'
+
+const TestUtils = React.addons.TestUtils
 
 describe('Day', () => {
   // A helper function for more readable specs

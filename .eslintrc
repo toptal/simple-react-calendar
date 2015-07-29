@@ -1,0 +1,18 @@
+{
+  "extends": "toptal",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "mocha": true
+  },
+  "ecmaFeatures": {
+    "modules": true,
+    "jsx": true
+  },
+  "globals": {
+    "require": true
+  },
+  "plugins": [
+    "react"
+  ]
+}
