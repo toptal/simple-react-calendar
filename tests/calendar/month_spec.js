@@ -1,9 +1,11 @@
-var React     = window.React
-var TestUtils = React.addons.TestUtils
-var assert    = require('power-assert')
+import React from 'react/addons'
+import assert from 'power-assert'
 
-var Month     = require('../../src/calendar/month')
-var Week      = require('../../src/calendar/week')
+import Month from '../../src/calendar/month'
+import Week from '../../src/calendar/week'
+
+const TestUtils = React.addons.TestUtils
+
 
 describe('Month', () => {
   function renderMonth(startDate, options) {

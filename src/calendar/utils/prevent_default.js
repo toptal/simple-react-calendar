@@ -1,5 +1,5 @@
 export default function preventDefault(func) {
-  var that = this
+  const that = this
   return function(e) {
     e.preventDefault()
     if (func) {

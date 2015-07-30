@@ -6,7 +6,7 @@
  * @returns {boolean}
  */
 export default function isDateInBoundaries(date, boundaries) {
-  let time = date.getTime()
+  const time = date.getTime()
   if (boundaries && boundaries.min && boundaries.min.getTime() > time) {
     return false
   }

@@ -1,7 +1,9 @@
-var React     = window.React
-var TestUtils = React.addons.TestUtils
-var assert    = require('power-assert')
-var Week      = require('../../src/calendar/week')
+import React from 'react/addons'
+import assert from 'power-assert'
+
+import Week from '../../src/calendar/week'
+
+const TestUtils = React.addons.TestUtils
 
 describe('Week', () => {
   // A helper function for more readable specs
@@ -9,11 +11,11 @@ describe('Week', () => {
     options = options || {}
     return TestUtils.renderIntoDocument(
       <Week
-        key = { startDate.getTime() }
-        startDate = { startDate }
-        activeMonth = { options.activeMonth || startDate }
-        selected = { options.selected }
-        onDayClick = { options.onDayClick }
+        key={startDate.getTime()}
+        startDate={startDate}
+        activeMonth={options.activeMonth || startDate}
+        selected={options.selected}
+        onDayClick={options.onDayClick}
       />
     )
   }

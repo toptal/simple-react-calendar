@@ -1,3 +1,5 @@
+import lodash from 'lodash'
+
 /**
  * It takes one of the following:
  *  - an object with 'start' and/or 'end' properties with dates
@@ -12,11 +14,11 @@
  * @returns {array}
  */
 export default function dateRangeToArray(value) {
-  let now = new Date()
+  const now = new Date()
 
-  if (_.isPlainObject(value)) {
+  if (lodash.isPlainObject(value)) {
     return [new Date(value.start || now), new Date(value.end || now)]
-  } else if (_.isArray(value)) {
+  } else if (Array.isArray(value)) {
     return [new Date(value[0] || now), new Date(value[1] || now)]
   } else {
     return [now, now]
