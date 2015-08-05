@@ -21,7 +21,9 @@ export default class Day extends React.Component {
       'is-today': isToday(this.props.date),
       'is-current_month': this.props.date.getMonth() === this.props.activeMonth.getMonth(),
       'is-prev_month': this.props.date.getMonth() < this.props.activeMonth.getMonth(),
-      'is-next_month': this.props.date.getMonth() > this.props.activeMonth.getMonth()
+      'is-next_month': this.props.date.getMonth() > this.props.activeMonth.getMonth(),
+      'is-selectable': this.props.inBoundaries,
+      'is-not-selectable': !this.props.inBoundaries
     })
 
     return classNames(classes)

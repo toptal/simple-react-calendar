@@ -16,6 +16,7 @@ describe('Week', () => {
         activeMonth={options.activeMonth || startDate}
         selected={options.selected}
         onDayClick={options.onDayClick}
+        selectionBoundaries={options.selectionBoundaries}
       />
     )
   }
@@ -54,6 +55,19 @@ describe('Week', () => {
     var daysWithClass = days.map((day) => { return day.classList.contains('is-selected') })
     assert.deepEqual(daysWithClass, [false, true, true, true, false, false, false])
   })
+
+  it('correctly marks the days inside boundaries', () => {
+    var days = daysDOMElements(renderWeek(new Date(2015, 5, 29), {selectionBoundaries: {min: '2015-06-30', max: '2015-07-01'}}))
+    var daysWithClass = days.map((day) => { return day.classList.contains('is-selectable') })
+    assert.deepEqual(daysWithClass, [false, true, true, false, false, false, false])
+  })
+
+  it('correctly marks the days outside boundaries', () => {
+    var days = daysDOMElements(renderWeek(new Date(2015, 5, 29), {selectionBoundaries: {min: '2015-06-30', max: '2015-07-01'}}))
+    var daysWithClass = days.map((day) => { return day.classList.contains('is-not-selectable') })
+    assert.deepEqual(daysWithClass, [true, false, false, true, true, true, true])
+  })
+
 
   it('accepts a function to be called when a day element is clicked', () => {
     var clicked = false

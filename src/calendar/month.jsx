@@ -75,6 +75,7 @@ export default class Month extends React.Component {
           startDate={week}
           activeMonth={this.props.activeMonth}
           selected={this.props.selected}
+          selectionBoundaries={this.props.selectionBoundaries}
           data={this.props.data}
 
           onDayClick={this._onDayClick.bind(this)}
