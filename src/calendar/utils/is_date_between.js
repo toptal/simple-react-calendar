@@ -6,11 +6,17 @@
  * @param {date|string} dateTo
  * @returns {boolean}
  */
+
+function resetDate(date) {
+  const dateObj = new Date(date)
+  return new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate(), 0, 0, 0, 0)
+}
+
 export default function isDateBetween(date, dateFrom, dateTo) {
-  const fromTime = new Date(dateFrom).getTime()
-  const toTime = new Date(dateTo).getTime()
+  const fromTime = resetDate(dateFrom).getTime()
+  const toTime = resetDate(dateTo).getTime()
   const min = Math.min(fromTime, toTime)
   const max = Math.max(fromTime, toTime)
-  const time = date.getTime()
+  const time = resetDate(date).getTime()
   return (time >= min && time <= max)
 }
