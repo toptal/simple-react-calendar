@@ -24,6 +24,29 @@ describe('isDateInBoundaries', () => {
         })
       )
     })
+
+
+    it('returns true when date is in boundaries (date in string format)', () => {
+      assert(isDateInBoundaries('2015-06-25', {min: '2015-06-20', max: '2015-06-30'}))
+    })
+
+    it('returns false when date is outside minimum boundary (date in string format)', () => {
+      assert(
+        !isDateInBoundaries('2015-06-15', {
+          min: '2015-06-20',
+          max: '2015-06-30'
+        })
+      )
+    })
+
+    it('returns false when date is outside maximum boundary (date in string format)', () => {
+      assert(
+        !isDateInBoundaries('2015-06-30', {
+          min: '2015-06-20',
+          max: '2015-06-25'
+        })
+      )
+    })
   })
 
   describe('with only minimum boundary', () => {
