@@ -1,15 +1,15 @@
 .month {
-  display: inline-block;
   width: 300px;
   -webkit-user-select: none;
+  display: table;
 }
 
 .month .week {
-  -webkit-column-count: 7;
-  -webkit-column-gap: 0;
+  display: table-row;
 }
 
 .month .week .day {
+  display: table-cell;
   text-align: center;
   line-height: 30px;
   cursor: pointer;

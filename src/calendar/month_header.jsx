@@ -10,7 +10,7 @@ export default class MonthHeader extends React.Component {
   }
 
   render() {
-    const m = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+    const m = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const date = this.props.activeMonth
     return (
       <div className='month-header'>
