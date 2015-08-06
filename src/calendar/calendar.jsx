@@ -7,7 +7,7 @@ export default class Calendar extends React.Component {
   constructor(props) {
     super(props)
 
-    const firstDayOfMonth = this.props.today
+    const firstDayOfMonth = new Date(this.props.today)
     firstDayOfMonth.setDate(1)
     this.state = {
       activeMonth: firstDayOfMonth,
@@ -59,7 +59,7 @@ export default class Calendar extends React.Component {
 
   render() {
     const monthProps = lodash.pick(this.props, ['selectionMode', 'data', 'selectionBoundaries', 'today'])
-
+    console.log(this.props.today)
     return (
       <div className='calendar'>
         <MonthHeader
