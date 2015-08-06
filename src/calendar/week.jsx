@@ -4,6 +4,7 @@ import Day from './day'
 import dateKey from './utils/date_key'
 import getDaysInWeek from './utils/get_days_in_week'
 import isDateInRange from './utils/is_date_in_range'
+import isDateInBoundaries from './utils/is_date_in_boundaries'
 
 export default class Week extends React.Component {
   _renderDays() {
@@ -15,6 +16,7 @@ export default class Week extends React.Component {
           date={day}
           data={this.props.data[dateKey(day)]}
           selected={isDateInRange(day, this.props.selected)}
+          inBoundaries={isDateInBoundaries(day, this.props.selectionBoundaries)}
           activeMonth={this.props.activeMonth}
           onClick={this.props.onDayClick}
           onMouseMove={this.props.onDayMouseMove}

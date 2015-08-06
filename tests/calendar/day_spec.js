@@ -16,6 +16,7 @@ describe('Day', () => {
         activeMonth = { options.activeMonth || day }
         selected = { options.selected || false }
         onClick = { options.onClick }
+        inBoundaries = { options.inBoundaries }
       />
     )
     return React.findDOMNode(renderedDay)
@@ -83,4 +84,15 @@ describe('Day', () => {
   it('adds is-next_month class when day falls within month next month', () => {
     assert(renderDayDOM(new Date(2015,7,1), {activeMonth: new Date(2015,6,1)}).classList.contains('is-next_month'))
   })
+
+  it('adds is-selectable class when inBoundaries is true', () => {
+    assert(renderDayDOM(new Date(2015,5,27), {inBoundaries: true}).classList.contains('is-selectable'))
+    assert(!renderDayDOM(new Date(2015,5,27), {inBoundaries: true}).classList.contains('is-not-selectable'))
+  })
+
+  it('adds is-not-selectable class when inBoundaries is false', () => {
+    assert(renderDayDOM(new Date(2015,5,27), {inBoundaries: false}).classList.contains('is-not-selectable'))
+    assert(!renderDayDOM(new Date(2015,5,27), {inBoundaries: false}).classList.contains('is-selectable'))
+  })
+
 });
