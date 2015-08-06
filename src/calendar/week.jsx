@@ -18,6 +18,7 @@ export default class Week extends React.Component {
           selected={isDateInRange(day, this.props.selected)}
           inBoundaries={isDateInBoundaries(day, this.props.selectionBoundaries)}
           activeMonth={this.props.activeMonth}
+          today={this.props.today}
           onClick={this.props.onDayClick}
           onMouseMove={this.props.onDayMouseMove}
         />

@@ -77,6 +77,7 @@ export default class Month extends React.Component {
           selected={this.props.selected}
           selectionBoundaries={this.props.selectionBoundaries}
           data={this.props.data}
+          today={this.props.today}
 
           onDayClick={this._onDayClick.bind(this)}
           onDayMouseMove={this._onDayMouseMove.bind(this)}
