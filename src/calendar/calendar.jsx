@@ -64,6 +64,7 @@ export default class Calendar extends React.Component {
       <div className='calendar'>
         <MonthHeader
           ref='header'
+          selectionBoundaries={this.props.selectionBoundaries}
           activeMonth={this._getActiveMonth()}
           onMonthChange={this._switchMonth.bind(this)}
         />
