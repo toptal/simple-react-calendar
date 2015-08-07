@@ -104,10 +104,10 @@ Calendar.propTypes = {
   ]),
   onSelectionChange: React.PropTypes.func,
   selectionMode: React.PropTypes.string,
-  data: React.PropTypes.object,
+  data: React.PropTypes.object
 }
 
 Calendar.defaultProps = {
   today: new Date(),
-  selectionMode: 'single',
+  selectionMode: 'single'
 }
