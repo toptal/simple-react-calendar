@@ -17,6 +17,7 @@ play around with its various properties.
 All of the properties are optional, just rendering `<SimpleCalendar />` will already
 give you a working calendar component.
 
+* `today` — current date (useful when you want to show current date in different time zone). Default is `new Date()`
 * `activeMonth` - any day within the month that you want initially displayed
 * `selectionMode` - one of either `range` or `single`
 * `selectionBoundaries` - a range of dates to setup selection boundaries. Examples:
@@ -32,5 +33,3 @@ give you a working calendar component.
   - `{start: '2015-06-16'}` - select until today
 * `onActiveMonthChange` - a function that is called whenever user changes the month
 * `onSelectionChange` - a function that is called whenever user finishes a new selection
-
-
