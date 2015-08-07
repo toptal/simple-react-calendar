@@ -3,14 +3,29 @@ import lodash from 'lodash'
 import Month from './month'
 import MonthHeader from './month_header'
 
+import dateRangeToArray from './utils/date_range_to_array'
+
 export default class Calendar extends React.Component {
   constructor(props) {
     super(props)
 
-    const firstDayOfMonth = new Date(this.props.today)
-    firstDayOfMonth.setDate(1)
+    let initialMonth = this.props.activeMonth
+
+    if (!initialMonth && this.props.selected) {
+      const selection = dateRangeToArray(this.props.selected)
+      const firstDayOfSelectionMonth = new Date(selection[0])
+      firstDayOfSelectionMonth.setDate(1)
+      initialMonth = firstDayOfSelectionMonth
+    }
+
+    if (!initialMonth) {
+      const firstDayOfCurrentMonth = new Date(this.props.today)
+      firstDayOfCurrentMonth.setDate(1)
+      initialMonth = firstDayOfCurrentMonth
+    }
+
     this.state = {
-      activeMonth: firstDayOfMonth,
+      activeMonth: initialMonth,
       selected: this.props.selected
     }
   }
@@ -25,7 +40,7 @@ export default class Calendar extends React.Component {
 
   _getActiveMonth() {
     if (lodash.isFunction(this.props.onActiveMonthChange)) {
-      return this.props.today
+      return this.props.activeMonth
     } else {
       return this.state.activeMonth
     }
@@ -81,6 +96,7 @@ export default class Calendar extends React.Component {
 
 Calendar.propTypes = {
   today: React.PropTypes.instanceOf(Date),
+  activeMonth: React.PropTypes.instanceOf(Date),
   onActiveMonthChange: React.PropTypes.func,
   selected: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(React.PropTypes.instanceOf(Date)),
