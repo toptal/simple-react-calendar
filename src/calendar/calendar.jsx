@@ -59,7 +59,6 @@ export default class Calendar extends React.Component {
 
   render() {
     const monthProps = lodash.pick(this.props, ['selectionMode', 'data', 'selectionBoundaries', 'today'])
-    console.log(this.props.today)
     return (
       <div className='calendar'>
         <MonthHeader
