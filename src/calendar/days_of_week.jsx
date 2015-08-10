@@ -7,7 +7,7 @@ export default class DaysOfWeek extends React.Component {
       <div className='week is-weekday_header'>
         {daysOfWeek.map((day) => {
           return (
-            <div className="day is-weekday_title">
+            <div className="day is-weekday_title" key={day}>
               {day}
             </div>
           )

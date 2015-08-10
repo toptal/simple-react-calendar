@@ -15,10 +15,12 @@ export default class MonthHeader extends React.Component {
 
     let prevEnabled = true
     let nextEnabled = true
+
     if (selectionBoundaries && selectionBoundaries.min) {
       const minDate = new Date(selectionBoundaries.min)
       prevEnabled = date.getFullYear() * 100 + date.getMonth() > minDate.getFullYear() * 100 + minDate.getMonth()
     }
+
     if (selectionBoundaries && selectionBoundaries.max) {
       const maxDate = new Date(selectionBoundaries.max)
       nextEnabled = date.getFullYear() * 100 + date.getMonth() < maxDate.getFullYear() * 100 + maxDate.getMonth()
