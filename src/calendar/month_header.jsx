@@ -11,11 +11,18 @@ export default class MonthHeader extends React.Component {
 
   render() {
     const m = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    const {activeMonth: date, selectionBoundaries: {min, max}} = this.props
-    const minDate = new Date(min)
-    const maxDate = new Date(max)
-    const prevEnabled = date.getFullYear() * 100 + date.getMonth() > minDate.getFullYear() * 100 + minDate.getMonth()
-    const nextEnabled = date.getFullYear() * 100 + date.getMonth() < maxDate.getFullYear() * 100 + maxDate.getMonth()
+    const {activeMonth: date, selectionBoundaries} = this.props
+
+    let prevEnabled = true
+    let nextEnabled = true
+    if (selectionBoundaries && selectionBoundaries.min) {
+      const minDate = new Date(selectionBoundaries.min)
+      prevEnabled = date.getFullYear() * 100 + date.getMonth() > minDate.getFullYear() * 100 + minDate.getMonth()
+    }
+    if (selectionBoundaries && selectionBoundaries.max) {
+      const maxDate = new Date(selectionBoundaries.max)
+      nextEnabled = date.getFullYear() * 100 + date.getMonth() < maxDate.getFullYear() * 100 + maxDate.getMonth()
+    }
 
     return (
       <div className='month-header'>
@@ -25,7 +32,7 @@ export default class MonthHeader extends React.Component {
           className={'prev-month' + (prevEnabled ? '' : ' is-disabled')}
           href='#'
           onClick={ lodash.partialRight(this._switchMonth, -1).bind(this) }>
-          next
+          prev
         </a>
         <div className='month-title'>
           {m[date.getMonth()]} {date.getFullYear()}

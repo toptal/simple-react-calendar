@@ -43,6 +43,7 @@ export default class Day extends React.Component {
 
 Day.defaultProps = {
   data: {},
+  today: new Date(),
   onClick: noOp,
   onMouseMove: noOp
 }

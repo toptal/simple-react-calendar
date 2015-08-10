@@ -12,8 +12,11 @@
   display: table-cell;
   text-align: center;
   line-height: 30px;
-  cursor: pointer;
   opacity: 0.5;
+}
+
+.month .week .day.is-selectable {
+  cursor: pointer;
 }
 
 .month .week .day.is-current_month {

@@ -36,5 +36,6 @@ export default class Week extends React.Component {
 }
 
 Week.defaultProps = {
-  data: {}
+  data: {},
+  today: new Date()
 }
