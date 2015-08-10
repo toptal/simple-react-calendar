@@ -2,6 +2,7 @@ import React from 'react'
 import lodash from 'lodash'
 
 import Week from './week'
+import DaysOfWeek from './days_of_week'
 import getWeeksInMonth from './utils/get_weeks_in_month'
 import isDateInBoundaries from './utils/is_date_in_boundaries'
 
@@ -89,6 +90,7 @@ export default class Month extends React.Component {
   render() {
     return (
       <div className='month'>
+        <DaysOfWeek />
         { this._renderWeeks() }
       </div>
     )
