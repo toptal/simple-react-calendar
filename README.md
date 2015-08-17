@@ -14,22 +14,14 @@ play around with its various properties.
 
 ## Available component properties
 
-All of the properties are optional, just rendering `<SimpleCalendar />` will already
+All of the properties are optional, just rendering `<Calendar />` will already
 give you a working calendar component.
 
 * `today` — current date (useful when you want to show current date in different time zone). Default is `new Date()`
 * `activeMonth` - any day within the month that you want initially displayed
-* `selectionMode` - one of either `range` or `single`
-* `selectionBoundaries` - a range of dates to setup selection boundaries. Examples:
-  - `{min: new Date()}`
-  - `{min: new Date(), max: new Date(2016, 0, 1)}`
-  - `{max: new Date(2016, 0, 1)}`
-* `selected` - a range of dates to be initially selected, can be defined in various ways. Some examples:
-  - `['2015-06-16', '2015-06-26']`
-  - `[new Date(2015,5,16), new Date(2015,5,26)]`
-  - `['2015-06-16']` - selects until today
-  - `{start: '2015-06-16', end: '2015-06-26'}`
-  - `{start: new Date(2015,5,16), end: new Date(2015,5,26)}`
-  - `{start: '2015-06-16'}` - select until today
-* `onActiveMonthChange` - a function that is called whenever user changes the month
-* `onSelectionChange` - a function that is called whenever user finishes a new selection
+* `mode` - selection mode, one of either `range` or `single`. Default is `single`
+* `minDate` — earliest date available for selection
+* `maxDate` — latest date available for selection
+* `selected` - selected dates. Can be ether single `Date` object if `mode` is `single`, or object `{start: Date(), end: Date()}` if `mode` is `range`
+* `onMonthChange` - a function that is called whenever user changes the month. If defined then you have to handle month changing by yourself by changing `activeMonth` property
+* `onSelect` - a function that is called whenever user changes selection

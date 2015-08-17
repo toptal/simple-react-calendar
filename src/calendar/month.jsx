@@ -1,87 +1,95 @@
 import React from 'react'
-import lodash from 'lodash'
 
 import Week from './week'
 import DaysOfWeek from './days_of_week'
-import getWeeksInMonth from './utils/get_weeks_in_month'
-import isDateInBoundaries from './utils/is_date_in_boundaries'
+
+import startOfWeek from 'date-fns/src/start_of_week'
+import endOfWeek from 'date-fns/src/end_of_week'
+import startOfMonth from 'date-fns/src/start_of_month'
+import endOfMonth from 'date-fns/src/end_of_month'
+import isBefore from 'date-fns/src/is_before'
+import isAfter from 'date-fns/src/is_after'
+import isEqual from 'date-fns/src/is_equal'
+import addDays from 'date-fns/src/add_days'
+import isSameDay from 'date-fns/src/is_same_day'
 
 export default class Month extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      selectionInProgress: false,
-      selectionStart: null,
-      selectionEnd: null
-    }
+  static propTypes = {
+    activeMonth: React.PropTypes.instanceOf(Date).isRequired,
+    data: React.PropTypes.object,
+    maxDate: React.PropTypes.instanceOf(Date),
+    minDate: React.PropTypes.instanceOf(Date),
+    mode: React.PropTypes.string.isRequired,
+    onChange: React.PropTypes.func.isRequired,
+    selectedMax: React.PropTypes.instanceOf(Date),
+    selectedMin: React.PropTypes.instanceOf(Date),
+    today: React.PropTypes.instanceOf(Date).isRequired
   }
 
   _pushUpdate() {
-    this.props.onChange(
-      lodash.pick(this.state, ['selectionStart', 'selectionEnd', 'selectionInProgress'])
-    )
-  }
-
-  _onDayClick(date) {
-    if (!isDateInBoundaries(date, this.props.selectionBoundaries)) {
-      return false
-    }
-
-    let nextState = {}
-    if (this.props.selectionMode === 'range') {
-      if (this.state.selectionInProgress) {
-        nextState = {
-          selectionInProgress: false,
-          selectionStart: this.state.selectionStart.getTime() < date.getTime() ? this.state.selectionStart : date,
-          selectionEnd: this.state.selectionStart.getTime() > date.getTime() ? this.state.selectionStart : date
-        }
-      } else {
-        nextState = {
-          selectionInProgress: true,
-          selectionStart: date,
-          selectionEnd: date
-        }
-      }
-    } else if (this.props.selectionMode === 'single' || !this.props.selectionMode) {
-      nextState = {
-        selectionStart: date,
-        selectionEnd: date
-      }
-    }
-    this.setState(nextState, () => {
-      this._pushUpdate()
+    this.props.onChange({
+      start: isBefore(this._selectionStart, this._selectionEnd) ? this._selectionStart : this._selectionEnd,
+      end: isAfter(this._selectionStart, this._selectionEnd) ? this._selectionStart : this._selectionEnd,
+      inProgress: this._selectionInProgress
     })
   }
 
-  _onDayMouseMove(date) {
-    if (!isDateInBoundaries(date, this.props.selectionBoundaries)) {
-      return false
-    }
-
-    if (this.state.selectionInProgress && (!this.state.selectionEnd || this.state.selectionEnd.getTime() !== date.getTime())) {
-      this.setState({selectionEnd: date}, () => {
+  _onDayMouseMove = (date) => {
+    if (this._selectionInProgress) {
+      if (!isEqual(date, this._selectionEnd)) {
+        this._selectionEnd = date
         this._pushUpdate()
-      })
+      }
     }
   }
 
+  _onDayClick = (date) => {
+    const {mode} = this.props
+    if (mode === 'range') {
+      if (this._selectionInProgress) {
+        this._selectionInProgress = false
+        this._selectionEnd = date
+      } else {
+        this._selectionInProgress = true
+        this._selectionStart = date
+        this._selectionEnd = date
+      }
+    } else if (mode === 'single') {
+      this._selectionInProgress = false
+      this._selectionStart = date
+      this._selectionEnd = date
+    } else {
+      return
+    }
+    this._pushUpdate()
+  }
+
   _renderWeeks() {
-    const weeks = getWeeksInMonth(this.props.activeMonth)
+    const {data, minDate, maxDate, selectedMin, selectedMax, activeMonth, today} = this.props
+
+    const weeks = []
+    let date = startOfWeek(startOfMonth(activeMonth), 1)
+    const endDate = endOfWeek(endOfMonth(activeMonth), 1)
+    while (isBefore(date, endDate) || isSameDay(date, endDate)) {
+      weeks.push(date)
+      date = addDays(date, 7)
+    }
+
     return weeks.map((week) => {
       return (
         <Week
           key={week.getTime()}
           ref={'week' + week.getTime()}
-          startDate={week}
-          activeMonth={this.props.activeMonth}
-          selected={this.props.selected}
-          selectionBoundaries={this.props.selectionBoundaries}
-          data={this.props.data}
-          today={this.props.today}
-
-          onDayClick={this._onDayClick.bind(this)}
-          onDayMouseMove={this._onDayMouseMove.bind(this)}
+          date={week}
+          data={data}
+          minDate={minDate}
+          maxDate={maxDate}
+          selectedMin={selectedMin}
+          selectedMax={selectedMax}
+          activeMonth={activeMonth}
+          onDayClick={this._onDayClick}
+          onDayMouseMove={this._onDayMouseMove}
+          today={today}
         />
       )
     })
@@ -91,9 +99,8 @@ export default class Month extends React.Component {
     return (
       <div className='month'>
         <DaysOfWeek />
-        { this._renderWeeks() }
+        {this._renderWeeks()}
       </div>
     )
   }
 }
-

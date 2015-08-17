@@ -24,16 +24,33 @@
         ]
       }
     }
-    var f = function(data) {
-      console.log(data)
-    }
+
+    var Test = React.createClass({
+      getInitialState: function(){
+        return {}
+      },
+
+      onSelect: function(selection) {
+        console.log(selection)
+        this.setState({selection: selection})
+      },
+
+      render: function() {
+        return (
+          <Calendar
+            selected={this.state.selection}
+            mode="range"
+            minDate={new Date('2015-06-15')}
+            maxDate={new Date('2015-10-18')}
+            data={sampleData}
+            onSelect={this.onSelect}
+          />
+        )
+      }
+    })
 
     React.render(
-      <Calendar
-        selectionMode = "range"
-        data = { sampleData }
-        onSelect = { f }
-      />,
+      <Test />,
       document.getElementById('calendar')
     );
   </script>

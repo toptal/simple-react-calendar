@@ -1,49 +1,72 @@
 import React from 'react'
-import lodash from 'lodash'
-import classNames from 'classnames'
+import classnames from 'classnames'
 
-import isWeekend from './utils/is_weekend'
-import isSameDate from './utils/is_same_date'
-import noOp from './utils/no_op'
-import preventDefault from './utils/prevent_default'
+import isWeekend from 'date-fns/src/is_weekend'
+import isSameDay from 'date-fns/src/is_same_day'
+import isSameMonth from 'date-fns/src/is_same_month'
 
 export default class Day extends React.Component {
-  _getClasses() {
-    let classes = {}
-    if (lodash.isArray(this.props.data.modifiers)) {
-      classes = lodash.zipObject(this.props.data.modifiers.map((modifier) => { return ([`is-${modifier}`, true])}))
+  static propTypes = {
+    activeMonth: React.PropTypes.instanceOf(Date).isRequired,
+    data: React.PropTypes.object,
+    date: React.PropTypes.instanceOf(Date).isRequired,
+    onClick: React.PropTypes.func.isRequired,
+    onMouseMove: React.PropTypes.func.isRequired,
+    selectable: React.PropTypes.bool,
+    selected: React.PropTypes.bool,
+    today: React.PropTypes.instanceOf(Date).isRequired
+  }
+
+  static defaultProps = {
+    data: {}
+  }
+
+  _generalModifiers() {
+    const {selected, selectable, date, today, activeMonth} = this.props
+    const classes = {
+      'is-selected': selected,
+      'is-today': isSameDay(today, date),
+      'is-current_month': isSameMonth(date, activeMonth),
+      'is-prev_month': date.getMonth() < activeMonth.getMonth(),
+      'is-next_month': date.getMonth() > activeMonth.getMonth(),
+      [isWeekend(date) ? 'is-weekend' : 'is-workday']: true,
+      [selectable ? 'is-selectable' : 'is-not-selectable']: true
     }
-    classes = lodash.assign(classes, {
-      day: true,
-      'is-selected': this.props.selected,
-      'is-weekend': isWeekend(this.props.date),
-      'is-workday': !isWeekend(this.props.date),
-      'is-today': isSameDate(this.props.today, this.props.date),
-      'is-current_month': this.props.date.getMonth() === this.props.activeMonth.getMonth(),
-      'is-prev_month': this.props.date.getMonth() < this.props.activeMonth.getMonth(),
-      'is-next_month': this.props.date.getMonth() > this.props.activeMonth.getMonth(),
-      'is-selectable': this.props.inBoundaries,
-      'is-not-selectable': !this.props.inBoundaries
-    })
-    return classNames(classes)
+    return classnames(classes)
+  }
+
+  _customModifiers() {
+    const modifiers = this.props.data.modifiers || []
+    return classnames(modifiers.map((modifier) => `is-${modifier}`))
+  }
+
+  _onClick = (e) => {
+    e.preventDefault()
+    const {selectable, date, onClick} = this.props
+    if (selectable) {
+      onClick(date)
+    }
+  }
+
+  _onMouseMove = (e) => {
+    e.preventDefault()
+    const {selectable, date, onMouseMove} = this.props
+    if (selectable) {
+      onMouseMove(date)
+    }
   }
 
   render() {
+    const {date} = this.props
+    const classes = classnames(['day', this._generalModifiers(), this._customModifiers()])
     return (
       <div
-        className={this._getClasses()}
-        onClick={preventDefault(lodash.partial(this.props.onClick, this.props.date))}
-        onMouseMove={preventDefault(lodash.partial(this.props.onMouseMove, this.props.date))}
+        className={classes}
+        onClick={this._onClick}
+        onMouseMove={this._onMouseMove}
       >
         {new Date(this.props.date).getDate()}
       </div>
     )
   }
-}
-
-Day.defaultProps = {
-  data: {},
-  today: new Date(),
-  onClick: noOp,
-  onMouseMove: noOp
 }

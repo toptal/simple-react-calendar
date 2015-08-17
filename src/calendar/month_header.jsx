@@ -1,50 +1,57 @@
 import React from 'react'
-import lodash from 'lodash'
+import classnames from 'classnames'
+
+import addMonths from 'date-fns/src/add_months'
+import isBefore from 'date-fns/src/is_before'
+import isAfter from 'date-fns/src/is_after'
+import startOfMonth from 'date-fns/src/start_of_month'
+
+const monthsNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 export default class MonthHeader extends React.Component {
-  _switchMonth(e, id, offset) {
+  static propTypes = {
+    activeMonth: React.PropTypes.instanceOf(Date).isRequired,
+    maxDate: React.PropTypes.instanceOf(Date),
+    minDate: React.PropTypes.instanceOf(Date),
+    onMonthChange: React.PropTypes.func.isRequired
+  }
+
+  _switchMonth = (e) => {
     e.preventDefault()
-    if (!e.target.attributes.getNamedItem('disabled') && lodash.isFunction(this.props.onMonthChange)) {
-      this.props.onMonthChange(offset)
+    const data = e.currentTarget.dataset
+    if (data.enabled === 'true') {
+      const {onMonthChange, activeMonth} = this.props
+      onMonthChange(addMonths(activeMonth, parseInt(data.offset)))
     }
   }
 
   render() {
-    const m = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    const {activeMonth: date, selectionBoundaries} = this.props
+    const {activeMonth, minDate, maxDate} = this.props
 
-    let prevEnabled = true
-    let nextEnabled = true
-
-    if (selectionBoundaries && selectionBoundaries.min) {
-      const minDate = new Date(selectionBoundaries.min)
-      prevEnabled = date.getFullYear() * 100 + date.getMonth() > minDate.getFullYear() * 100 + minDate.getMonth()
-    }
-
-    if (selectionBoundaries && selectionBoundaries.max) {
-      const maxDate = new Date(selectionBoundaries.max)
-      nextEnabled = date.getFullYear() * 100 + date.getMonth() < maxDate.getFullYear() * 100 + maxDate.getMonth()
-    }
+    const prevEnabled = minDate ? isBefore(startOfMonth(minDate), startOfMonth(activeMonth)) : true
+    const nextEnabled = maxDate ? isAfter(startOfMonth(maxDate), startOfMonth(activeMonth)) : true
 
     return (
       <div className='month-header'>
         <a
           ref='prevMonthLink'
-          disabled={!prevEnabled}
-          className={'prev-month' + (prevEnabled ? '' : ' is-disabled')}
+          className={classnames('prev-month', {'is-disabled': !prevEnabled})}
           href='#'
-          onClick={ lodash.partialRight(this._switchMonth, -1).bind(this) }>
+          data-enabled={prevEnabled}
+          data-offset={-1}
+          onClick={this._switchMonth}>
           prev
         </a>
         <div className='month-title'>
-          {m[date.getMonth()]} {date.getFullYear()}
+          {monthsNames[activeMonth.getMonth()]} {activeMonth.getFullYear()}
         </div>
         <a
           ref='nextMonthLink'
-          disabled={!nextEnabled}
           className={'next-month' + (nextEnabled ? '' : ' is-disabled')}
           href='#'
-          onClick={ lodash.partialRight(this._switchMonth, 1).bind(this) }>
+          data-enabled={nextEnabled}
+          data-offset={1}
+          onClick={this._switchMonth}>
           next
         </a>
       </div>
