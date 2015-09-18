@@ -38,12 +38,12 @@ describe('Month', () => {
   })
 
   it('renders weeks of the month', () => {
-    const month = render({activeMonth: new Date(2015, 5, 15)})
-    const weeks = TestUtils.scryRenderedComponentsWithType(month, Week)
-    const weeksRendered = weeks.map((week) => {
-      return week.props.date
+    const month = render({
+      activeMonth: new Date(2015, 5, 15)
     })
-    assert.deepEqual(weeksRendered,
+    const weeks = TestUtils.scryRenderedComponentsWithType(month, Week)
+      .map((week) => week.props.date)
+    assert.deepEqual(weeks,
       [
         new Date(2015, 5, 1),
         new Date(2015, 5, 8),

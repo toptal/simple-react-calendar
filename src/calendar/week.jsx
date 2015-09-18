@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 
 import Day from './day'
 
@@ -11,6 +12,9 @@ import format from 'date-fns/src/format'
 import isBefore from 'date-fns/src/is_before'
 import isAfter from 'date-fns/src/is_after'
 import isEqual from 'date-fns/src/is_equal'
+import isWeekend from 'date-fns/src/is_weekend'
+import isSameDay from 'date-fns/src/is_same_day'
+import isSameMonth from 'date-fns/src/is_same_month'
 
 const START_WEEK_WITH_SUNDAY = false
 
@@ -47,7 +51,7 @@ export default class Week extends React.Component {
 
   _dateSelected(date) {
     const {selectedMin, selectedMax} = this.props
-    return (selectedMin && selectedMin)
+    return (selectedMin && selectedMax)
       && isWithinRange(
         startOfDay(date),
         startOfDay(selectedMin),
@@ -55,23 +59,37 @@ export default class Week extends React.Component {
       )
   }
 
+  _dateClasses(date, data) {
+    const {today, activeMonth} = this.props
+    const modifiers = (data && data.modifiers) || []
+    const classes = {
+      'is-selected': this._dateSelected(date),
+      'is-today': isSameDay(today, date),
+      'is-current_month': isSameMonth(date, activeMonth),
+      'is-prev_month': (date.getMonth() !== activeMonth.getMonth() && isBefore(date, activeMonth)),
+      'is-next_month': (date.getMonth() !== activeMonth.getMonth() && isAfter(date, activeMonth)),
+      [isWeekend(date) ? 'is-weekend' : 'is-workday']: true,
+      [this._dateSelectable(date) ? 'is-selectable' : 'is-not-selectable']: true
+    }
+    return classnames(classes, modifiers.map((modifier) => `is-${modifier}`))
+  }
+
   _renderDays() {
-    const {date, data, activeMonth, today, onDayClick, onDayMouseMove, selectedMin, selectedMax} = this.props
+    const {date, activeMonth, today, onDayClick, onDayMouseMove, selectedMin, selectedMax} = this.props
     const startDate = startOfWeek(date, START_WEEK_WITH_SUNDAY ? 0 : 1)
     const endDate = endOfWeek(date, START_WEEK_WITH_SUNDAY ? 0 : 1)
     return eachDay(startDate, endDate).map((day) => {
+      const data = this.props.data[format(day, 'YYYY-MM-DD')]
+      const selectable = this._dateSelectable(day)
       return (
         <Day
           key={day.getTime()}
-          ref={'day' + day.getTime()}
           date={day}
-          data={data[format(day, 'YYYY-MM-DD')]}
-          selected={this._dateSelected(day)}
-          selectable={this._dateSelectable(day)}
-          activeMonth={activeMonth}
+          data={data}
+          className={this._dateClasses(day, data)}
           today={today}
-          onClick={onDayClick}
-          onMouseMove={onDayMouseMove}
+          onClick={selectable ? onDayClick : null}
+          onMouseMove={selectable ? onDayMouseMove : null}
         />
       )
     })

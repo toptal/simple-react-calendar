@@ -19,15 +19,21 @@ describe('MonthHeader', () => {
   }
 
   function getTitle(header) {
-    return React.findDOMNode(TestUtils.findRenderedDOMComponentWithClass(header, 'month-title')).textContent
+    return React.findDOMNode(
+      TestUtils.findRenderedDOMComponentWithClass(header, 'month-title')
+    ).textContent
   }
 
   function nextLink(header) {
-    return React.findDOMNode(header.refs.nextMonthLink)
+    return React.findDOMNode(
+      TestUtils.findRenderedDOMComponentWithClass(header, 'next-month')
+    )
   }
 
   function prevLink(header) {
-    return React.findDOMNode(header.refs.prevMonthLink)
+    return React.findDOMNode(
+      TestUtils.findRenderedDOMComponentWithClass(header, 'prev-month')
+    )
   }
 
   function clickNext(header) {

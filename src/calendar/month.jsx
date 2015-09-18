@@ -13,6 +13,9 @@ import isEqual from 'date-fns/src/is_equal'
 import addDays from 'date-fns/src/add_days'
 import isSameDay from 'date-fns/src/is_same_day'
 
+const SINGLE_MODE = 'single'
+const RANGE_MODE = 'range'
+
 export default class Month extends React.Component {
   static propTypes = {
     activeMonth: React.PropTypes.instanceOf(Date).isRequired,
@@ -45,7 +48,7 @@ export default class Month extends React.Component {
 
   _onDayClick = (date) => {
     const {mode} = this.props
-    if (mode === 'range') {
+    if (mode === RANGE_MODE) {
       if (this._selectionInProgress) {
         this._selectionInProgress = false
         this._selectionEnd = date
@@ -54,7 +57,7 @@ export default class Month extends React.Component {
         this._selectionStart = date
         this._selectionEnd = date
       }
-    } else if (mode === 'single') {
+    } else if (mode === SINGLE_MODE) {
       this._selectionInProgress = false
       this._selectionStart = date
       this._selectionEnd = date
@@ -79,7 +82,6 @@ export default class Month extends React.Component {
       return (
         <Week
           key={week.getTime()}
-          ref={'week' + week.getTime()}
           date={week}
           data={data}
           minDate={minDate}

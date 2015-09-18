@@ -1,12 +1,11 @@
 import React from 'react/addons'
+import TestUtils from 'react/lib/ReactTestUtils'
 import assert from 'power-assert'
 import sinon from 'sinon'
 
 import Calendar from '../calendar'
 import Month from '../month'
 import Day from '../day'
-
-const TestUtils = React.addons.TestUtils
 
 describe ('Calendar', () => {
   function render(props = {}) {
@@ -37,7 +36,7 @@ describe ('Calendar', () => {
       activeMonth: date
     })
     const month = TestUtils.findRenderedComponentWithType(calendar, Month)
-    assert(month.props.activeMonth == date)
+    assert.deepEqual(month.props.activeMonth, date)
   })
 
   describe('in single selection mode', () => {
@@ -105,10 +104,11 @@ describe ('Calendar', () => {
     })
 
     it('can select days range across month boundary', () => {
-      clickOnDays(calendar, 5)
-      TestUtils.Simulate.click(
-        React.findDOMNode(calendar.refs.header.refs.nextMonthLink)
+      const nextMonth = React.findDOMNode(
+        TestUtils.findRenderedDOMComponentWithClass(calendar, 'next-month')
       )
+      clickOnDays(calendar, 5)
+      TestUtils.Simulate.click(nextMonth)
       clickOnDays(calendar, 5)
       assert(onSelect.calledWith({
         start: new Date(2015, 5, 6),

@@ -40,24 +40,30 @@ export default class Calendar extends React.Component {
     today: new Date()
   }
 
-  constructor(props) {
-    super(props)
-
-    const {selected, activeMonth, today, mode} = this.props
-
-    const initialMonth = activeMonth
-      || selected && startOfMonth(mode == SINGLE_MODE ? selected : selected.start)
-      || startOfMonth(today)
-
-    this.state = {
-      activeMonth: initialMonth
-    }
+  state = {
+    activeMonth: this._initialMonth()
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isSameMonth(nextProps.activeMonth, this.props.activeMonth)) {
       this.setState({activeMonth: startOfMonth(nextProps.activeMonth)})
     }
+  }
+
+  _initialMonth() {
+    const {selected, activeMonth, today, mode} = this.props
+
+    if (isValid(activeMonth)) {
+      return activeMonth
+    } else {
+      if (selected) {
+        const selectionStart = (mode === SINGLE_MODE ? selected : selected.start)
+        if (isValid(selectionStart)) {
+          return startOfMonth(selectionStart)
+        }
+      }
+    }
+    return startOfMonth(today)
   }
 
   _switchMonth = (date) => {
@@ -73,7 +79,7 @@ export default class Calendar extends React.Component {
 
   _activeMonth() {
     const {onMonthChange, activeMonth} = this.props
-    if (typeof onMonthChange === 'function') {
+    if (onMonthChange) {
       return activeMonth
     } else {
       return this.state.activeMonth
@@ -82,8 +88,8 @@ export default class Calendar extends React.Component {
 
   _selection() {
     const {mode, selected} = this.props
-    const start = (mode == SINGLE_MODE ? selected : (selected && selected.start))
-    const end = (mode == SINGLE_MODE ? selected : (selected && selected.end))
+    const start = (mode === SINGLE_MODE ? selected : (selected && selected.start))
+    const end = (mode === SINGLE_MODE ? selected : (selected && selected.end))
     if (isValid(start) && isValid(end)) {
       return {start, end}
     } else {
@@ -96,8 +102,9 @@ export default class Calendar extends React.Component {
 
   _selectionChanged = (selection) => {
     const {start, end, inProgress} = selection
-    if (typeof this.props.onSelect == 'function') {
-      this.props.onSelect(this.props.mode == SINGLE_MODE ? start : selection)
+    const {mode, onSelect} = this.props
+    if (onSelect) {
+      onSelect(mode === SINGLE_MODE ? start : selection)
     }
   }
 
