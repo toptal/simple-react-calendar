@@ -1,7 +1,11 @@
-const webpack = require('webpack');
-const path = require('path');
+const webpack = require('webpack')
+const path = require('path')
+
+const isTest = process.env.NODE_ENV == 'test'
 
 const config = {
+  plugins: [new webpack.NormalModuleReplacementPlugin(/sinon/, __dirname + '/node_modules/sinon/pkg/sinon.js')],
+
   entry: {
     'simple-calendar': './src/index'
   },
@@ -11,20 +15,24 @@ const config = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel?{"plugins":["espower"]}'
+        loader: 'babel'
       },
       {
         test: /\.json?$/,
         loader: 'json'
       }
+    ],
+    noParse: [
+      /babel-core\/browser-polyfill\.js/,
+      /acorn\/dist\/acorn\.js/,
+      /sinon/
     ]
   },
 
-  // TODO: figure why tests not working with sourcemaps
-  devtool: process.env.NODE_ENV == 'test' ? null : 'inline-source-map',
+  devtool: isTest ? 'inline-source-map' : null,
 
   resolve: {
-    extensions: ['', '.js', '.jsx', '.coffee']
+    extensions: ['', '.js', '.jsx']
   },
 
   output: {
@@ -33,11 +41,11 @@ const config = {
     filename: '[name].js'
   },
 
-  externals: {
+  externals: isTest ? {} : {
     'react': 'React',
-    'react/addons': 'React',
-    'lodash': '_'
+    'react/addons': 'React'
   }
+
 }
 
 module.exports = config;

@@ -1,19 +1,24 @@
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'
 
 module.exports = function(config) {
   config.set({
     frameworks: ['mocha'],
     files: [
-      'node_modules/react/dist/react-with-addons.js',
-      'node_modules/lodash/index.js',
-      'tests/**/*_spec.js'
+      'node_modules/babel-core/browser-polyfill.js',
+      'src/**/*_spec.js{,x}'
     ],
     preprocessors: {
-      'tests/**/*.js': ['webpack', 'sourcemap']
+      '**/*.js{,x}': ['webpack', 'sourcemap']
     },
     webpack: require('./webpack.config.js'),
     webpackMiddleware: {
-      noInfo: true
+      stats: {
+        assets: false,
+        chunks: false,
+        hash: false,
+        timings: false,
+        version: false
+      }
     },
     browsers: ['PhantomJS2']
   });
