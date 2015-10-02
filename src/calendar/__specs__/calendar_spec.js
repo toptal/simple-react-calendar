@@ -1,7 +1,6 @@
 import React from 'react/addons'
 import TestUtils from 'react/lib/ReactTestUtils'
 import assert from 'power-assert'
-import sinon from 'sinon'
 
 import Calendar from '../calendar'
 import Month from '../month'

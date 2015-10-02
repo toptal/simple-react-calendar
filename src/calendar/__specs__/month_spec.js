@@ -1,6 +1,5 @@
 import React from 'react/addons'
 import assert from 'power-assert'
-import sinon from 'sinon'
 
 import Month from '../month'
 import Week from '../week'

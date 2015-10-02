@@ -2,13 +2,12 @@ process.env.NODE_ENV = 'test'
 
 module.exports = function(config) {
   config.set({
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'sinon'],
     files: [
-      'node_modules/babel-core/browser-polyfill.js',
-      'src/**/*_spec.js{,x}'
+      './test.js'
     ],
     preprocessors: {
-      '**/*.js{,x}': ['webpack', 'sourcemap']
+      './test.js': ['webpack', 'sourcemap']
     },
     webpack: require('./webpack.config.js'),
     webpackMiddleware: {
@@ -22,5 +21,5 @@ module.exports = function(config) {
     },
     browsers: ['PhantomJS2'],
     reporters: ['mocha']
-  });
-};
+  })
+}
