@@ -20,6 +20,7 @@ module.exports = function(config) {
         version: false
       }
     },
-    browsers: ['PhantomJS2']
+    browsers: ['PhantomJS2'],
+    reporters: ['mocha']
   });
 };
