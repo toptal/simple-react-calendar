@@ -39,7 +39,7 @@ describe ('Calendar', () => {
     assert.deepEqual(month.props.activeMonth, date)
   })
 
-  describe('in single selection mode', () => {
+  context('in single selection mode', () => {
     let onSelect, calendar
     beforeEach(() => {
       onSelect = sinon.spy()
@@ -56,7 +56,7 @@ describe ('Calendar', () => {
     })
   })
 
-  describe('in range selection mode', () => {
+  context('in range selection mode', () => {
     let onSelect, calendar
     beforeEach(() => {
       onSelect = sinon.spy()
@@ -118,7 +118,7 @@ describe ('Calendar', () => {
     })
   })
 
-  describe('with selection boundaries', () => {
+  context('with selection boundaries', () => {
     let onSelect, calendar
     beforeEach(() => {
       onSelect = sinon.spy()

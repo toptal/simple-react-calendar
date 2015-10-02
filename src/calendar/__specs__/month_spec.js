@@ -54,7 +54,7 @@ describe('Month', () => {
     )
   })
 
-  describe('in single selection mode', () => {
+  context('in single selection mode', () => {
     let onChange, month
     beforeEach(() => {
       onChange = sinon.spy()
@@ -75,7 +75,7 @@ describe('Month', () => {
     })
   })
 
-  describe('in range selection mode', () => {
+  context('in range selection mode', () => {
     let onChange, month
     beforeEach(() => {
       onChange = sinon.spy()
