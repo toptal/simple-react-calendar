@@ -33,7 +33,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack --watch",
-    "karma": "karma start",
+    "test": "karma start",
     "lint": "eslint src/ --ext .js,.jsx"
   }
 }
