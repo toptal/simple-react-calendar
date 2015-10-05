@@ -1,7 +1,6 @@
 import React from 'react'
 import TestUtils from 'react/lib/ReactTestUtils'
 import assert from 'power-assert'
-import sinon from 'sinon'
 
 import Day from '../day'
 

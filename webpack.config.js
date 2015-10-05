@@ -4,8 +4,6 @@ const path = require('path')
 const isTest = process.env.NODE_ENV == 'test'
 
 const config = {
-  plugins: [new webpack.NormalModuleReplacementPlugin(/sinon/, __dirname + '/node_modules/sinon/pkg/sinon.js')],
-
   entry: {
     'simple-calendar': './src/index'
   },
@@ -21,11 +19,6 @@ const config = {
         test: /\.json?$/,
         loader: 'json'
       }
-    ],
-    noParse: [
-      /babel-core\/browser-polyfill\.js/,
-      /acorn\/dist\/acorn\.js/,
-      /sinon/
     ]
   },
 
@@ -45,7 +38,6 @@ const config = {
     'react': 'React',
     'react/addons': 'React'
   }
-
 }
 
-module.exports = config;
+module.exports = config

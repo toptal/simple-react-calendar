@@ -1,6 +1,5 @@
 import React from 'react/addons'
 import assert from 'power-assert'
-import sinon from 'sinon'
 
 import Month from '../month'
 import Week from '../week'
@@ -54,7 +53,7 @@ describe('Month', () => {
     )
   })
 
-  describe('in single selection mode', () => {
+  context('in single selection mode', () => {
     let onChange, month
     beforeEach(() => {
       onChange = sinon.spy()
@@ -75,7 +74,7 @@ describe('Month', () => {
     })
   })
 
-  describe('in range selection mode', () => {
+  context('in range selection mode', () => {
     let onChange, month
     beforeEach(() => {
       onChange = sinon.spy()

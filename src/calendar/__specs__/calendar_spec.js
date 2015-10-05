@@ -1,7 +1,6 @@
 import React from 'react/addons'
 import TestUtils from 'react/lib/ReactTestUtils'
 import assert from 'power-assert'
-import sinon from 'sinon'
 
 import Calendar from '../calendar'
 import Month from '../month'
@@ -39,7 +38,7 @@ describe ('Calendar', () => {
     assert.deepEqual(month.props.activeMonth, date)
   })
 
-  describe('in single selection mode', () => {
+  context('in single selection mode', () => {
     let onSelect, calendar
     beforeEach(() => {
       onSelect = sinon.spy()
@@ -56,7 +55,7 @@ describe ('Calendar', () => {
     })
   })
 
-  describe('in range selection mode', () => {
+  context('in range selection mode', () => {
     let onSelect, calendar
     beforeEach(() => {
       onSelect = sinon.spy()
@@ -118,7 +117,7 @@ describe ('Calendar', () => {
     })
   })
 
-  describe('with selection boundaries', () => {
+  context('with selection boundaries', () => {
     let onSelect, calendar
     beforeEach(() => {
       onSelect = sinon.spy()

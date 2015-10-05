@@ -11,4 +11,4 @@ before_script:
   # Runs virtual desktop to allow Firefox to run
   - sh -e /etc/init.d/xvfb start
 script:
-  - npm run karma -- --single-run --browsers Firefox
+  - npm test -- --single-run --browsers Firefox
