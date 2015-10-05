@@ -36,6 +36,7 @@
     "start": "npm run build -- --watch",
     "test": "karma start",
     "test-ci": "npm test -- --single-run",
+    "test-ci-firefox": "npm run test-ci -- --browsers Firefox",
     "test-tz": "npm run build-tests && ./scripts/test_tz.sh",
     "lint": "eslint src/ --ext .js,.jsx"
   }
