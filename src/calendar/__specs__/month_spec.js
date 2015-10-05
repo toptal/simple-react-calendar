@@ -10,7 +10,7 @@ const TestUtils = React.addons.TestUtils
 describe('Month', () => {
   function render(props = {}) {
     const defaultProps = {
-      today: new Date(2015,7, 17),
+      today: new Date(2015, 7, 17),
       activeMonth: new Date(2015, 7, 17),
       mode: 'range',
       onChange: () => {}

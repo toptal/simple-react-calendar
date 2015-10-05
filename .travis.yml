@@ -16,5 +16,6 @@ before_script:
   # Runs virtual desktop to allow Firefox to run
   - sh -e /etc/init.d/xvfb start
 script:
+  - npm run lint
   - npm run test-ci-firefox
   - npm run test-tz
