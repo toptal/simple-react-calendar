@@ -32,8 +32,11 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "webpack --watch",
+    "build-tests": "env NODE_ENV=test BUILD_TESTS=true npm run build",
+    "start": "npm run build -- --watch",
     "test": "karma start",
+    "test-ci": "npm test -- --single-run",
+    "test-tz": "npm run build-tests && ./scripts/test_tz.sh",
     "lint": "eslint src/ --ext .js,.jsx"
   }
 }
