@@ -17,6 +17,7 @@
     "eslint-plugin-react": "^3.4.1",
     "json-loader": "^0.5.3",
     "karma": "^0.13.10",
+    "karma-browserstack-launcher": "^0.1.5",
     "karma-chrome-launcher": "^0.2.0",
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.2.0",
@@ -32,8 +33,12 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "webpack --watch",
+    "build-tests": "env NODE_ENV=test BUILD_TESTS=true npm run build",
+    "start": "npm run build -- --watch",
     "test": "karma start",
+    "test-ci": "npm test -- --single-run",
+    "test-cross-browser": "env TEST_BROWSERSTACK=true npm run test-ci",
+    "test-tz": "npm run build-tests && ./scripts/test_tz.sh",
     "lint": "eslint src/ --ext .js,.jsx"
   }
 }

@@ -8,9 +8,9 @@ const TestUtils = React.addons.TestUtils
 describe('Week', () => {
   function render(props = {}) {
     const defaultProps = {
-      date: new Date('2015-08-17'),
-      today: new Date('2015-08-17'),
-      activeMonth: new Date('2015-08-17'),
+      date: new Date(2015, 7, 17),
+      today: new Date(2015, 7, 17),
+      activeMonth: new Date(2015, 7, 17),
       onDayClick: () => {},
       onDayMouseMove: () => {}
     }

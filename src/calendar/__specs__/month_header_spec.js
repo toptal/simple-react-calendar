@@ -7,7 +7,7 @@ import MonthHeader from '../month_header'
 describe('MonthHeader', () => {
   function render(props = {}) {
     const defaultProps = {
-      activeMonth: new Date('2015-08-17'),
+      activeMonth: new Date(2015, 7, 17),
       onMonthChange: () => {}
     }
     return TestUtils.renderIntoDocument(
@@ -61,46 +61,46 @@ describe('MonthHeader', () => {
 
     it('triggered after click on next', () => {
       clickNext(header)
-      assert(onMonthChange.calledWith(new Date('2015-09-17')))
+      assert(onMonthChange.calledWith(new Date(2015, 8, 17)))
     })
 
     it('triggered after click on prev', () => {
       clickPrev(header)
-      assert(onMonthChange.calledWith(new Date('2015-07-17')))
+      assert(onMonthChange.calledWith(new Date(2015, 6, 17)))
     })
   })
 
   it('prev link is disabled if current month is minDate', () => {
     const onMonthChange = sinon.spy()
     const header = render({
-      minDate: new Date('2015-08-01'),
+      minDate: new Date(2015, 7, 1),
       onMonthChange
     })
     clickPrev(header)
     assert(prevLink(header).classList.contains('is-disabled'))
     assert(!onMonthChange.called)
     clickNext(header)
-    assert(onMonthChange.calledWith(new Date('2015-09-17')))
+    assert(onMonthChange.calledWith(new Date(2015, 8, 17)))
   })
 
   it('next link is disabled if current month is maxDate', () => {
     const onMonthChange = sinon.spy()
     const header = render({
-      maxDate: new Date('2015-08-01'),
+      maxDate: new Date(2015, 7, 1),
       onMonthChange
     })
     clickNext(header)
     assert(nextLink(header).classList.contains('is-disabled'))
     assert(!onMonthChange.called)
     clickPrev(header)
-    assert(onMonthChange.calledWith(new Date('2015-07-17')))
+    assert(onMonthChange.calledWith(new Date(2015, 6, 17)))
   })
 
   it('next and prev links is disabled if current month is minDate and maxDate', () => {
     const onMonthChange = sinon.spy()
     const header = render({
-      minDate: new Date('2015-08-01'),
-      maxDate: new Date('2015-08-10'),
+      minDate: new Date(2015, 7, 1),
+      maxDate: new Date(2015, 7, 10),
       onMonthChange
     })
     clickNext(header)
