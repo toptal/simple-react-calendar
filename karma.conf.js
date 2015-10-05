@@ -2,6 +2,48 @@ process.env.NODE_ENV = 'test'
 
 var webpackConfig = require('./webpack.config.js')
 
+var browserStackLaunchers = {
+  chrome: {
+    'base': 'BrowserStack',
+    'browser': 'chrome',
+    'browser_version': '44',
+    'os': 'Windows',
+    'os_version': '8.1',
+  },
+
+  firefox: {
+    'base': 'BrowserStack',
+    'browser': 'firefox',
+    'browser_version': '40',
+    'os': 'Windows',
+    'os_version': '8.1',
+  },
+
+  ie10: {
+    'base': 'BrowserStack',
+    'browser': 'ie',
+    'browser_version': '10.0',
+    'os': 'Windows',
+    'os_version': '7'
+  },
+
+  ie11: {
+    'base': 'BrowserStack',
+    'browser': 'ie',
+    'browser_version': '11.0',
+    'os': 'Windows',
+    'os_version': '8.1'
+  },
+
+  edge: {
+    'base': 'BrowserStack',
+    'browser': 'edge',
+    'browser_version': '12.0',
+    'os': 'Windows',
+    'os_version': '10'
+  }
+}
+
 module.exports = function(config) {
   config.set({
     frameworks: ['mocha', 'sinon'],
@@ -25,7 +67,14 @@ module.exports = function(config) {
       output: process.env.TEST_TZ ? 'minimal' : 'full'
     },
 
-    browsers: ['PhantomJS2']
+    // We are limited in the number of parallel VMs in BrowserStack (1)
+    // and Karma don't know how to limit parallel browser instances
+    // so waiting time must be insanely high.
+    browserNoActivityTimeout: process.env.TEST_BROWSERSTACK ? 60 * 60 * 1000 : 10000,
+
+    customLaunchers: process.env.TEST_BROWSERSTACK ? browserStackLaunchers : {},
+    browsers: process.env.TEST_BROWSERSTACK ? Object.keys(browserStackLaunchers) : ['PhantomJS2'],
+    reporters: process.env.TEST_BROWSERSTACK ? ['dots'] : ['mocha']
   })
 }
 
