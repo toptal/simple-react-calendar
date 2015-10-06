@@ -143,7 +143,7 @@ Block class name can be overrided with `blockClassName` prop (see above).
         <ul>
           <li><code>.is-selected</code> - when the date is selected</li>
           <li><code>.is-today</code> - when the date is current one</li>
-          <li><code>.is-current_mont</code> - when the date belongs to the current month</li>
+          <li><code>.is-current_month</code> - when the date belongs to the current month</li>
           <li><code>.is-prev_month</code> - when the date belongs to the previous month</li>
           <li><code>.is-next_month</code> - when the date belongs to the next month</li>
           <li><code>.is-weekend</code> - when the date is the weekend</li>
