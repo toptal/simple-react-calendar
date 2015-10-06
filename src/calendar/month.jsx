@@ -2,6 +2,7 @@ import React from 'react'
 
 import Week from './week'
 import DaysOfWeek from './days_of_week'
+import {BLOCK_CLASS_NAME} from './consts'
 
 import startOfWeek from 'date-fns/src/start_of_week'
 import endOfWeek from 'date-fns/src/end_of_week'
@@ -19,6 +20,7 @@ const RANGE_MODE = 'range'
 export default class Month extends React.Component {
   static propTypes = {
     activeMonth: React.PropTypes.instanceOf(Date).isRequired,
+    blockClassName: React.PropTypes.string,
     data: React.PropTypes.object,
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
@@ -27,6 +29,10 @@ export default class Month extends React.Component {
     selectedMax: React.PropTypes.instanceOf(Date),
     selectedMin: React.PropTypes.instanceOf(Date),
     today: React.PropTypes.instanceOf(Date).isRequired
+  }
+
+  static defaultProps = {
+    blockClassName: BLOCK_CLASS_NAME
   }
 
   _pushUpdate() {
@@ -92,6 +98,7 @@ export default class Month extends React.Component {
           onDayClick={this._onDayClick}
           onDayMouseMove={this._onDayMouseMove}
           today={today}
+          blockClassName={this.props.blockClassName}
         />
       )
     })
@@ -99,8 +106,8 @@ export default class Month extends React.Component {
 
   render() {
     return (
-      <div className='month'>
-        <DaysOfWeek />
+      <div className={`${this.props.blockClassName}-month`}>
+        <DaysOfWeek blockClassName={this.props.blockClassName} />
         {this._renderWeeks()}
       </div>
     )

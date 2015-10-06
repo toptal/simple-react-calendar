@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import Day from './day'
+import {BLOCK_CLASS_NAME} from './consts'
 
 import eachDay from 'date-fns/src/each_day'
 import startOfDay from 'date-fns/src/start_of_day'
@@ -21,6 +22,7 @@ const START_WEEK_WITH_SUNDAY = false
 export default class Week extends React.Component {
   static propTypes = {
     activeMonth: React.PropTypes.instanceOf(Date).isRequired,
+    blockClassName: React.PropTypes.string,
     data: React.PropTypes.object,
     date: React.PropTypes.instanceOf(Date).isRequired,
     maxDate: React.PropTypes.instanceOf(Date),
@@ -33,7 +35,8 @@ export default class Week extends React.Component {
   }
 
   static defaultProps = {
-    data: {}
+    data: {},
+    blockClassName: BLOCK_CLASS_NAME
   }
 
   _dateSelectable(date) {
@@ -61,17 +64,15 @@ export default class Week extends React.Component {
 
   _dateClasses(date, data) {
     const {today, activeMonth} = this.props
-    const modifiers = (data && data.modifiers) || []
-    const classes = {
+    return classnames({
       'is-selected': this._dateSelected(date),
       'is-today': isSameDay(today, date),
       'is-current_month': isSameMonth(date, activeMonth),
       'is-prev_month': (date.getMonth() !== activeMonth.getMonth() && isBefore(date, activeMonth)),
       'is-next_month': (date.getMonth() !== activeMonth.getMonth() && isAfter(date, activeMonth)),
-      [isWeekend(date) ? 'is-weekend' : 'is-workday']: true,
-      [this._dateSelectable(date) ? 'is-selectable' : 'is-not-selectable']: true
-    }
-    return classnames(classes, modifiers.map((modifier) => `is-${modifier}`))
+      [isWeekend(date) ? 'is-weekend' : 'is-working_day']: true,
+      [this._dateSelectable(date) ? 'is-selectable' : 'is-not_selectable']: true
+    })
   }
 
   _renderDays() {
@@ -83,6 +84,7 @@ export default class Week extends React.Component {
       const selectable = this._dateSelectable(day)
       return (
         <Day
+          blockClassName={this.props.blockClassName}
           key={day.getTime()}
           date={day}
           data={data}
@@ -97,7 +99,7 @@ export default class Week extends React.Component {
 
   render() {
     return (
-      <div className='week'>
+      <div className={`${this.props.blockClassName}-week`}>
         {this._renderDays()}
       </div>
     )

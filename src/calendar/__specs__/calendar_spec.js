@@ -103,11 +103,10 @@ describe ('Calendar', () => {
     })
 
     it('can select days range across month boundary', () => {
-      const nextMonth = React.findDOMNode(
-        TestUtils.findRenderedDOMComponentWithClass(calendar, 'next-month')
-      )
+      const calendarEl = React.findDOMNode(calendar)
+      const nextLinkEl = calendarEl.querySelector('.calendar-header_button.is-next')
       clickOnDays(calendar, 5)
-      TestUtils.Simulate.click(nextMonth)
+      TestUtils.Simulate.click(nextLinkEl)
       clickOnDays(calendar, 5)
       assert(onSelect.calledWith({
         start: new Date(2015, 5, 6),
@@ -156,6 +155,22 @@ describe ('Calendar', () => {
         end: new Date(2015, 5, 20),
         inProgress: false
       }))
+    })
+  })
+
+  describe('blockClassName', () => {
+    context('when blockClassName is not defined', () => {
+      it('renders el with .calendar', () => {
+        const el = React.findDOMNode(render())
+        assert(el.classList.contains('calendar'))
+      })
+    })
+
+    context('when blockClassName is defined', () => {
+      it('renders el with passed block class name', () => {
+        const el = React.findDOMNode(render({blockClassName: 'cal'}))
+        assert(el.classList.contains('cal'))
+      })
     })
   })
 })

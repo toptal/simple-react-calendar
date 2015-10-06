@@ -112,4 +112,20 @@ describe('Month', () => {
       }))
     })
   })
+
+  describe('blockClassName', () => {
+    context('when blockClassName is not defined', () => {
+      it('renders el with class name equal .calendar-month', () => {
+        const el = React.findDOMNode(render())
+        assert(el.classList.contains('calendar-month'))
+      })
+    })
+
+    context('when blockClassName is defined', () => {
+      it('renders el with prefixed class name', () => {
+        const el = React.findDOMNode(render({blockClassName: 'cal'}))
+        assert(el.classList.contains('cal-month'))
+      })
+    })
+  })
 })

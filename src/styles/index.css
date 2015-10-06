@@ -1,28 +1,30 @@
-.month {
+.calendar-month {
   width: 300px;
   -webkit-user-select: none;
   display: table;
 }
 
-.month .week {
+.calendar-week,
+.calendar-days_of_week {
   display: table-row;
 }
 
-.month .week .day {
+.calendar-day,
+.calendar-days_of_week_day {
   display: table-cell;
   text-align: center;
   line-height: 30px;
   opacity: 0.5;
 }
 
-.month .week .day.is-selectable {
+.calendar-day.is-selectable {
   cursor: pointer;
 }
 
-.month .week .day.is-current_month {
+.calendar-day.is-current_month {
   opacity: 1;
 }
 
-.month .week .day.is-selected {
+.calendar-day.is-selected {
   background-color: green;
 }
