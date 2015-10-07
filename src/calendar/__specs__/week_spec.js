@@ -25,7 +25,7 @@ describe('Week', () => {
   }
 
   function findDays(element) {
-    return TestUtils.scryRenderedDOMComponentsWithClass(element.component, 'day')
+    return TestUtils.scryRenderedDOMComponentsWithClass(element.component, 'calendar-day')
       .map((day) => React.findDOMNode(day))
   }
 
@@ -75,12 +75,12 @@ describe('Week', () => {
     assert.deepEqual(daysWithClass, [false, true, true, true, true, true, true])
   })
 
-  it('correctly marks the days that falls on workdays', () => {
+  it('correctly marks the days that falls on working days', () => {
     const days = findDays(render({
       date: new Date(2015, 7, 31),
       activeMonth: new Date(2015, 7, 1)
     }))
-    const daysWithClass = days.map((day) => day.classList.contains('is-workday'))
+    const daysWithClass = days.map((day) => day.classList.contains('is-working_day'))
     assert.deepEqual(daysWithClass, [true, true, true, true, true, false, false])
   })
 
@@ -163,22 +163,8 @@ describe('Week', () => {
       minDate: new Date(2015, 5, 30),
       maxDate: new Date(2015, 6, 1)
     }))
-    const daysWithClass = days.map((day) => day.classList.contains('is-not-selectable'))
+    const daysWithClass = days.map((day) => day.classList.contains('is-not_selectable'))
     assert.deepEqual(daysWithClass, [true, false, false, true, true, true, true])
-  })
-
-  it('correctly applies modifiers from data', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29),
-      activeMonth: new Date(2015, 5, 1),
-      data: {
-        '2015-07-02': {
-          modifiers: ['custom_modifier']
-        }
-      }
-    }))
-    const daysWithClass = days.map((day) => day.classList.contains('is-custom_modifier'))
-    assert.deepEqual(daysWithClass, [false, false, false, true, false, false, false])
   })
 
   it('accepts a function to be called when a day element is clicked', () => {
@@ -186,5 +172,21 @@ describe('Week', () => {
     const days = findDays(render({onDayClick}))
     TestUtils.Simulate.click(days[0])
     assert(onDayClick.calledOnce)
+  })
+
+  describe('blockClassName', () => {
+    context('when blockClassName is not defined', () => {
+      it('renders el with class name equal .calendar-week', () => {
+        const weekEl = React.findDOMNode(render())
+        assert(weekEl.classList.contains('calendar-week'))
+      })
+    })
+
+    context('when blockClassName is defined', () => {
+      it('renders el with prefixed class name', () => {
+        const weekEl = React.findDOMNode(render({blockClassName: 'cal'}))
+        assert(weekEl.classList.contains('cal-week'))
+      })
+    })
   })
 })

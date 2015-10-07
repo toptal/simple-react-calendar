@@ -19,20 +19,18 @@ describe('MonthHeader', () => {
 
   function getTitle(header) {
     return React.findDOMNode(
-      TestUtils.findRenderedDOMComponentWithClass(header, 'month-title')
+      TestUtils.findRenderedDOMComponentWithClass(header, 'calendar-month_header_title')
     ).textContent
   }
 
   function nextLink(header) {
-    return React.findDOMNode(
-      TestUtils.findRenderedDOMComponentWithClass(header, 'next-month')
-    )
+    const headerEl = React.findDOMNode(header)
+    return headerEl.querySelector('.calendar-header_button.is-next')
   }
 
   function prevLink(header) {
-    return React.findDOMNode(
-      TestUtils.findRenderedDOMComponentWithClass(header, 'prev-month')
-    )
+    const headerEl = React.findDOMNode(header)
+    return headerEl.querySelector('.calendar-header_button.is-prev')
   }
 
   function clickNext(header) {
@@ -107,5 +105,31 @@ describe('MonthHeader', () => {
     assert(!onMonthChange.called)
     clickPrev(header)
     assert(!onMonthChange.called)
+  })
+
+  describe('blockClassName', () => {
+    context('when blockClassName is not defined', () => {
+      it('renders el with .calendar-month_header', () => {
+        const monthHeaderEl = React.findDOMNode(render())
+        assert(monthHeaderEl.classList.contains('calendar-month_header'))
+      })
+
+      it('renders title el with .calendar-month_header_title', () => {
+        const titleEl = TestUtils.scryRenderedDOMComponentsWithClass(render(), 'calendar-month_header_title')
+        assert(titleEl.length > 0)
+      })
+    })
+
+    context('when blockClassName is defined', () => {
+      it('renders el with prefixed class name', () => {
+        const monthHeaderEl = React.findDOMNode(render({blockClassName: 'cal'}))
+        assert(monthHeaderEl.classList.contains('cal-month_header'))
+      })
+
+      it('renders title el with prefixed class name', () => {
+        const titleEl = TestUtils.scryRenderedDOMComponentsWithClass(render({blockClassName: 'cal'}), 'cal-month_header_title')
+        assert(titleEl.length > 0)
+      })
+    })
   })
 })

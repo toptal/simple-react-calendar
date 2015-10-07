@@ -2,6 +2,7 @@ import React from 'react'
 
 import Month from './month'
 import MonthHeader from './month_header'
+import {BLOCK_CLASS_NAME} from './consts'
 
 import startOfMonth from 'date-fns/src/start_of_month'
 import isSameDay from 'date-fns/src/is_same_day'
@@ -18,6 +19,7 @@ const isValid = function(date) {
 export default class Calendar extends React.Component {
   static propTypes = {
     activeMonth: React.PropTypes.instanceOf(Date),
+    blockClassName: React.PropTypes.string,
     data: React.PropTypes.object,
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
@@ -37,7 +39,8 @@ export default class Calendar extends React.Component {
 
   static defaultProps = {
     mode: SINGLE_MODE,
-    today: new Date()
+    today: new Date(),
+    blockClassName: BLOCK_CLASS_NAME
   }
 
   state = {
@@ -109,18 +112,19 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-    const {mode, data, minDate, maxDate, today} = this.props
+    const {mode, data, minDate, maxDate, today, blockClassName} = this.props
     const activeMonth = isValid(this._activeMonth()) ? this._activeMonth() : startOfMonth(today)
     const selection = this._selection()
 
     return (
-      <div className='calendar'>
+      <div className={blockClassName}>
         <MonthHeader
           ref='header'
           minDate={minDate}
           maxDate={maxDate}
           activeMonth={this._activeMonth()}
           onMonthChange={this._switchMonth}
+          blockClassName={this.props.blockClassName}
         />
         <Month
           mode={mode}
@@ -133,6 +137,7 @@ export default class Calendar extends React.Component {
           selectedMin={selection.start}
           selectedMax={selection.end}
           onChange={this._selectionChanged}
+          blockClassName={this.props.blockClassName}
         />
       </div>
     )
