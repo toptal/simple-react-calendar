@@ -29,26 +29,26 @@ export default class MonthHeader extends React.Component {
   }
 
   render() {
-    const {activeMonth, minDate, maxDate} = this.props
+    const {activeMonth, minDate, maxDate, blockClassName} = this.props
     const prevEnabled = minDate ? isBefore(startOfMonth(minDate), startOfMonth(activeMonth)) : true
     const nextEnabled = maxDate ? isAfter(startOfMonth(maxDate), startOfMonth(activeMonth)) : true
 
     return (
-      <div className={`${this.props.blockClassName}-month_header`}>
+      <div className={`${blockClassName}-month_header`}>
         <HeaderButton
           type='prev'
           enabled={prevEnabled}
           onClick={this._switchMonth.bind(this, -1)}
-          blockClassName={this.props.blockClassName}
+          blockClassName={blockClassName}
         />
-        <div className={`${this.props.blockClassName}-month_header_title`}>
+        <div className={`${blockClassName}-month_header_title`}>
           {formatDate(activeMonth, 'MMMM YYYY')}
         </div>
         <HeaderButton
           type='next'
           enabled={nextEnabled}
           onClick={this._switchMonth.bind(this, 1)}
-          blockClassName={this.props.blockClassName}
+          blockClassName={blockClassName}
         />
       </div>
     )

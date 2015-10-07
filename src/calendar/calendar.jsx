@@ -112,12 +112,12 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-    const {mode, data, minDate, maxDate, today} = this.props
+    const {mode, data, minDate, maxDate, today, blockClassName} = this.props
     const activeMonth = isValid(this._activeMonth()) ? this._activeMonth() : startOfMonth(today)
     const selection = this._selection()
 
     return (
-      <div className={this.props.blockClassName}>
+      <div className={blockClassName}>
         <MonthHeader
           ref='header'
           minDate={minDate}

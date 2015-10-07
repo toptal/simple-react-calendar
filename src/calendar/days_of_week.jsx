@@ -14,12 +14,13 @@ export default class DaysOfWeek extends React.Component {
   }
 
   render() {
+    const {blockClassName} = this.props
     return (
-      <div className={`${this.props.blockClassName}-days_of_week`}>
+      <div className={`${blockClassName}-days_of_week`}>
         {daysOfWeek.map((day) => {
           return (
             <div
-              className={`${this.props.blockClassName}-days_of_week_day`}
+              className={`${blockClassName}-days_of_week_day`}
               key={day}
             >
               {day}

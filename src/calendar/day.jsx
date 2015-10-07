@@ -41,17 +41,14 @@ export default class Day extends React.Component {
   }
 
   render() {
-    const {date} = this.props
+    const {date, className, blockClassName} = this.props
     return (
       <div
-        className={classnames([
-          `${this.props.blockClassName}-day`,
-          this.props.className
-        ])}
+        className={classnames(`${blockClassName}-day`, className)}
         onClick={this._onClick}
         onMouseMove={this._onMouseMove}
       >
-        {formatDate(this.props.date, 'D')}
+        {formatDate(date, 'D')}
       </div>
     )
   }

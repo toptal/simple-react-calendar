@@ -24,14 +24,15 @@ export default class HeaderButton extends React.Component {
   }
 
   render() {
+    const {blockClassName, type, enabled} = this.props
     return (
       <a
         href='#'
         className={classnames(
-          `${this.props.blockClassName}-header_button`,
-          `is-${this.props.type}`,
+          `${blockClassName}-header_button`,
+          `is-${type}`,
           {
-            'is-disabled': !this.props.enabled
+            'is-disabled': !enabled
           }
         )}
         onClick={this._onClick}

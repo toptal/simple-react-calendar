@@ -74,7 +74,7 @@ export default class Month extends React.Component {
   }
 
   _renderWeeks() {
-    const {data, minDate, maxDate, selectedMin, selectedMax, activeMonth, today} = this.props
+    const {data, minDate, maxDate, selectedMin, selectedMax, activeMonth, today, blockClassName} = this.props
 
     const weeks = []
     let date = startOfWeek(startOfMonth(activeMonth), 1)
@@ -98,16 +98,17 @@ export default class Month extends React.Component {
           onDayClick={this._onDayClick}
           onDayMouseMove={this._onDayMouseMove}
           today={today}
-          blockClassName={this.props.blockClassName}
+          blockClassName={blockClassName}
         />
       )
     })
   }
 
   render() {
+    const {blockClassName} = this.props
     return (
-      <div className={`${this.props.blockClassName}-month`}>
-        <DaysOfWeek blockClassName={this.props.blockClassName} />
+      <div className={`${blockClassName}-month`}>
+        <DaysOfWeek blockClassName={blockClassName} />
         {this._renderWeeks()}
       </div>
     )
