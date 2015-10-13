@@ -2,9 +2,6 @@
   "name": "simple-react-calendar",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^0.13.3"
-  },
   "devDependencies": {
     "babel": "^5.8.23",
     "babel-eslint": "^4.1.3",
@@ -40,5 +37,9 @@
     "test-cross-browser": "env TEST_BROWSERSTACK=true npm run test-ci",
     "test-tz": "npm run build-tests && ./scripts/test_tz.sh",
     "lint": "eslint src/ --ext .js,.jsx"
+  },
+  "main": "index.js",
+  "peerDependencies": {
+    "react": "^0.14.0"
   }
 }
