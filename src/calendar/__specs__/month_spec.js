@@ -1,11 +1,11 @@
-import React from 'react/addons'
+import React from 'react'
+import TestUtils from 'react/lib/ReactTestUtils'
+import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
 
 import Month from '../month'
 import Week from '../week'
 import Day from '../day'
-
-const TestUtils = React.addons.TestUtils
 
 describe('Month', () => {
   function render(props = {}) {
@@ -27,7 +27,7 @@ describe('Month', () => {
     const daysToClick = Array.prototype.slice.call(arguments, 1)
 
     const days = TestUtils.scryRenderedComponentsWithType(month, Day)
-      .map((day) => React.findDOMNode(day))
+      .map((day) => findDOMNode(day))
 
     daysToClick.map((day) => TestUtils.Simulate.click(days[day]))
   }
@@ -116,14 +116,14 @@ describe('Month', () => {
   describe('blockClassName', () => {
     context('when blockClassName is not defined', () => {
       it('renders el with class name equal .calendar-month', () => {
-        const el = React.findDOMNode(render())
+        const el = findDOMNode(render())
         assert(el.classList.contains('calendar-month'))
       })
     })
 
     context('when blockClassName is defined', () => {
       it('renders el with prefixed class name', () => {
-        const el = React.findDOMNode(render({blockClassName: 'cal'}))
+        const el = findDOMNode(render({blockClassName: 'cal'}))
         assert(el.classList.contains('cal-month'))
       })
     })

@@ -1,9 +1,9 @@
-import React from 'react/addons'
+import React from 'react'
+import TestUtils from 'react/lib/ReactTestUtils'
+import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
 
 import Week from '../week'
-
-const TestUtils = React.addons.TestUtils
 
 describe('Week', () => {
   function render(props = {}) {
@@ -19,14 +19,14 @@ describe('Week', () => {
         {...Object.assign({}, defaultProps, props)}
       />
     )
-    const element = React.findDOMNode(component)
+    const element = findDOMNode(component)
     element.component = component
     return element
   }
 
   function findDays(element) {
     return TestUtils.scryRenderedDOMComponentsWithClass(element.component, 'calendar-day')
-      .map((day) => React.findDOMNode(day))
+      .map((day) => findDOMNode(day))
   }
 
   it('renders with minimal params', () => {
@@ -177,14 +177,14 @@ describe('Week', () => {
   describe('blockClassName', () => {
     context('when blockClassName is not defined', () => {
       it('renders el with class name equal .calendar-week', () => {
-        const weekEl = React.findDOMNode(render())
+        const weekEl = findDOMNode(render())
         assert(weekEl.classList.contains('calendar-week'))
       })
     })
 
     context('when blockClassName is defined', () => {
       it('renders el with prefixed class name', () => {
-        const weekEl = React.findDOMNode(render({blockClassName: 'cal'}))
+        const weekEl = findDOMNode(render({blockClassName: 'cal'}))
         assert(weekEl.classList.contains('cal-week'))
       })
     })

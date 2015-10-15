@@ -1,5 +1,6 @@
 {
   "name": "simple-react-calendar",
+  "main": "dist/simple-calendar.js",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -25,6 +26,9 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^2.3.2",
     "power-assert": "^1.0.1",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "sinon": "^1.17.1",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.2.0"
   },
@@ -38,7 +42,6 @@
     "test-tz": "npm run build-tests && ./scripts/test_tz.sh",
     "lint": "eslint src/ --ext .js,.jsx"
   },
-  "main": "index.js",
   "peerDependencies": {
     "react": "^0.14.0"
   }
