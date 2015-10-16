@@ -1,5 +1,6 @@
-import React from 'react/addons'
+import React from 'react'
 import TestUtils from 'react/lib/ReactTestUtils'
+import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
 
 import Calendar from '../calendar'
@@ -20,7 +21,7 @@ describe ('Calendar', () => {
     const daysToClick = Array.prototype.slice.call(arguments, 1)
 
     const days = TestUtils.scryRenderedComponentsWithType(calendar, Day)
-      .map((day) => React.findDOMNode(day))
+      .map((day) => findDOMNode(day))
 
     daysToClick.map((day) => TestUtils.Simulate.click(days[day]))
   }
@@ -103,7 +104,7 @@ describe ('Calendar', () => {
     })
 
     it('can select days range across month boundary', () => {
-      const calendarEl = React.findDOMNode(calendar)
+      const calendarEl = findDOMNode(calendar)
       const nextLinkEl = calendarEl.querySelector('.calendar-header_button.is-next')
       clickOnDays(calendar, 5)
       TestUtils.Simulate.click(nextLinkEl)
@@ -161,14 +162,14 @@ describe ('Calendar', () => {
   describe('blockClassName', () => {
     context('when blockClassName is not defined', () => {
       it('renders el with .calendar', () => {
-        const el = React.findDOMNode(render())
+        const el = findDOMNode(render())
         assert(el.classList.contains('calendar'))
       })
     })
 
     context('when blockClassName is defined', () => {
       it('renders el with passed block class name', () => {
-        const el = React.findDOMNode(render({blockClassName: 'cal'}))
+        const el = findDOMNode(render({blockClassName: 'cal'}))
         assert(el.classList.contains('cal'))
       })
     })

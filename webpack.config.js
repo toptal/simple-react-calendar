@@ -30,8 +30,12 @@ module.exports = {
   output: getOutputConfig(),
 
   externals: isTest ? {} : {
-    'react': 'React',
-    'react/addons': 'React'
+    react: {
+      root: 'React',
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react'
+    }
   }
 }
 

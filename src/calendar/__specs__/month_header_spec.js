@@ -1,5 +1,6 @@
 import React from 'react'
 import TestUtils from 'react/lib/ReactTestUtils'
+import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
 
 import MonthHeader from '../month_header'
@@ -18,18 +19,18 @@ describe('MonthHeader', () => {
   }
 
   function getTitle(header) {
-    return React.findDOMNode(
+    return findDOMNode(
       TestUtils.findRenderedDOMComponentWithClass(header, 'calendar-month_header_title')
     ).textContent
   }
 
   function nextLink(header) {
-    const headerEl = React.findDOMNode(header)
+    const headerEl = findDOMNode(header)
     return headerEl.querySelector('.calendar-header_button.is-next')
   }
 
   function prevLink(header) {
-    const headerEl = React.findDOMNode(header)
+    const headerEl = findDOMNode(header)
     return headerEl.querySelector('.calendar-header_button.is-prev')
   }
 
@@ -110,7 +111,7 @@ describe('MonthHeader', () => {
   describe('blockClassName', () => {
     context('when blockClassName is not defined', () => {
       it('renders el with .calendar-month_header', () => {
-        const monthHeaderEl = React.findDOMNode(render())
+        const monthHeaderEl = findDOMNode(render())
         assert(monthHeaderEl.classList.contains('calendar-month_header'))
       })
 
@@ -122,7 +123,7 @@ describe('MonthHeader', () => {
 
     context('when blockClassName is defined', () => {
       it('renders el with prefixed class name', () => {
-        const monthHeaderEl = React.findDOMNode(render({blockClassName: 'cal'}))
+        const monthHeaderEl = findDOMNode(render({blockClassName: 'cal'}))
         assert(monthHeaderEl.classList.contains('cal-month_header'))
       })
 
