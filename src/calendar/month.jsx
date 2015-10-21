@@ -24,6 +24,7 @@ export default class Month extends React.Component {
     data: React.PropTypes.object,
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
+    minNumberOfWeeks: React.PropTypes.number,
     mode: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func.isRequired,
     selectedMax: React.PropTypes.instanceOf(Date),
@@ -74,12 +75,23 @@ export default class Month extends React.Component {
   }
 
   _renderWeeks() {
-    const {data, minDate, maxDate, selectedMin, selectedMax, activeMonth, today, blockClassName} = this.props
+    const {
+      data,
+      minDate,
+      maxDate,
+      selectedMin,
+      selectedMax,
+      activeMonth,
+      today,
+      blockClassName,
+      minNumberOfWeeks
+    } = this.props
 
     const weeks = []
     let date = startOfWeek(startOfMonth(activeMonth), 1)
     const endDate = endOfWeek(endOfMonth(activeMonth), 1)
-    while (isBefore(date, endDate) || isSameDay(date, endDate)) {
+    while ((typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length)
+      || (isBefore(date, endDate) || isSameDay(date, endDate))) {
       weeks.push(date)
       date = addDays(date, 7)
     }
