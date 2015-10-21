@@ -26,6 +26,7 @@ give you a working calendar component.
 * `onMonthChange` - a function that is called whenever user changes the month. If defined then you have to handle month changing by yourself by changing `activeMonth` property
 * `onSelect` - a function that is called whenever user changes selection
 * `blockClassName` - base class name that will be used as a class prefix (see [](#class-names))
+* `minNumberOfWeeks` — minimum number of weeks in a month. Undefined by default.
 
 ## Class Names
 
