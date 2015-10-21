@@ -112,6 +112,9 @@ Block class name can be overrided with `blockClassName` prop (see above).
         <code>.calendar-days_of_week_day</code>
       </td>
       <td>
+        <ul>
+          <li><code>.is-weekend</code> - when the day is the weekend</li>
+        </ul>
       </td>
     </tr>
 
