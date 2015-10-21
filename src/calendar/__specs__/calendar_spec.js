@@ -39,6 +39,20 @@ describe ('Calendar', () => {
     assert.deepEqual(month.props.activeMonth, date)
   })
 
+  it('can change month without activeMonth property', () => {
+    const calendar = render({
+      today: new Date(2015, 6, 1)
+    })
+    const month = TestUtils.findRenderedComponentWithType(calendar, Month)
+    const calendarEl = findDOMNode(calendar)
+    const nextLinkEl = calendarEl.querySelector('.calendar-header_button.is-next')
+    const headerTitleEl = calendarEl.querySelector('.calendar-month_header_title')
+
+    assert(headerTitleEl.textContent === 'July 2015')
+    TestUtils.Simulate.click(nextLinkEl)
+    assert(headerTitleEl.textContent === 'August 2015')
+  })
+
   context('in single selection mode', () => {
     let onSelect, calendar
     beforeEach(() => {

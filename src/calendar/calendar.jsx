@@ -48,7 +48,7 @@ export default class Calendar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!isSameMonth(nextProps.activeMonth, this.props.activeMonth)) {
+    if (nextProps.activeMonth && !isSameMonth(nextProps.activeMonth, this.props.activeMonth)) {
       this.setState({activeMonth: startOfMonth(nextProps.activeMonth)})
     }
   }
