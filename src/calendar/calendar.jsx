@@ -39,7 +39,6 @@ export default class Calendar extends React.Component {
 
   static defaultProps = {
     mode: SINGLE_MODE,
-    today: new Date(),
     blockClassName: BLOCK_CLASS_NAME
   }
 
@@ -54,7 +53,7 @@ export default class Calendar extends React.Component {
   }
 
   _initialMonth() {
-    const {selected, activeMonth, today, mode} = this.props
+    const {selected, activeMonth, mode} = this.props
 
     if (isValid(activeMonth)) {
       return activeMonth
@@ -66,7 +65,7 @@ export default class Calendar extends React.Component {
         }
       }
     }
-    return startOfMonth(today)
+    return startOfMonth(this._today())
   }
 
   _switchMonth = (date) => {
@@ -111,9 +110,13 @@ export default class Calendar extends React.Component {
     }
   }
 
+  _today() {
+    return this.props.today || new Date()
+  }
+
   render() {
-    const {mode, data, minDate, maxDate, today, blockClassName} = this.props
-    const activeMonth = isValid(this._activeMonth()) ? this._activeMonth() : startOfMonth(today)
+    const {mode, data, minDate, maxDate, blockClassName} = this.props
+    const activeMonth = isValid(this._activeMonth()) ? this._activeMonth() : startOfMonth(this._today())
     const selection = this._selection()
 
     return (
@@ -131,7 +134,7 @@ export default class Calendar extends React.Component {
           data={data}
           minDate={minDate}
           maxDate={maxDate}
-          today={today}
+          today={this._today()}
           ref='month'
           activeMonth={this._activeMonth()}
           selectedMin={selection.start}
