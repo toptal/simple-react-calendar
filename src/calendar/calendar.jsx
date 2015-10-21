@@ -26,6 +26,7 @@ export default class Calendar extends React.Component {
     mode: React.PropTypes.oneOf([SINGLE_MODE, RANGE_MODE]),
     onMonthChange: React.PropTypes.func,
     onSelect: React.PropTypes.func,
+    onSelectionProgress: React.PropTypes.func,
     selected: React.PropTypes.oneOfType([
       React.PropTypes.instanceOf(Date),
       React.PropTypes.shape({
@@ -43,7 +44,8 @@ export default class Calendar extends React.Component {
   }
 
   state = {
-    activeMonth: this._initialMonth()
+    activeMonth: this._initialMonth(),
+    selection: null
   }
 
   componentWillReceiveProps(nextProps) {
@@ -89,24 +91,55 @@ export default class Calendar extends React.Component {
   }
 
   _selection() {
-    const {mode, selected} = this.props
-    const start = (mode === SINGLE_MODE ? selected : (selected && selected.start))
-    const end = (mode === SINGLE_MODE ? selected : (selected && selected.end))
+    const start = this._selectionStart()
+    const end = this._selectionEnd()
+
     if (isValid(start) && isValid(end)) {
       return {start, end}
     } else {
-      return {
-        start: null,
-        end: null
-      }
+      return {start: null, end: null}
+    }
+  }
+
+  _selectionStart() {
+    return this._selectionDate('start')
+  }
+
+  _selectionEnd() {
+    return this._selectionDate('end')
+  }
+
+  _selectionDate(dateType) {
+    const {selected, onSelectionProgress} = this.props
+    const {selection} = this.state
+
+    switch (this.props.mode) {
+      case SINGLE_MODE:
+        return selected
+
+      case RANGE_MODE:
+        if (!onSelectionProgress && selection) {
+          return selection[dateType]
+        } else {
+          return selected && selected[dateType]
+        }
     }
   }
 
   _selectionChanged = (selection) => {
     const {start, end, inProgress} = selection
-    const {mode, onSelect} = this.props
-    if (onSelect) {
-      onSelect(mode === SINGLE_MODE ? start : selection)
+    const {mode, onSelect, onSelectionProgress} = this.props
+
+    if (onSelect && (mode !== RANGE_MODE || !inProgress)) {
+      onSelect(mode === SINGLE_MODE ? start : {start, end})
+    }
+
+    if (mode === RANGE_MODE) {
+      if (onSelectionProgress) {
+        onSelectionProgress(selection)
+      } else {
+        this.setState({selection: inProgress ? {start, end} : null})
+      }
     }
   }
 
