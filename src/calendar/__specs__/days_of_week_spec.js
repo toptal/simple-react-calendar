@@ -23,6 +23,17 @@ describe('DaysOfWeek', () => {
     assert.deepEqual(days, ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
   })
 
+  it('adds .is-weekend modifier to weekends', () => {
+    const week = render()
+    const weekendModifiers
+      = TestUtils.scryRenderedDOMComponentsWithClass(week, 'calendar-days_of_week_day')
+        .map((day) => findDOMNode(day).classList.contains('is-weekend'))
+    assert.deepEqual(
+      weekendModifiers,
+      [false, false, false, false, false, true, true]
+    )
+  })
+
   describe('blockClassName', () => {
     context('when blockClassName is not defined', () => {
       it('render el with .calendar-days_of_week', () => {
