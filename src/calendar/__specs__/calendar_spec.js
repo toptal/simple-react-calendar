@@ -53,6 +53,20 @@ describe ('Calendar', () => {
     assert(headerTitleEl.textContent === 'August 2015')
   })
 
+  it('updates default today when date is changed', () => {
+    // Set current date to 2015-07-05
+    let clock = sinon.useFakeTimers(new Date(2015, 6, 5).getTime())
+    const calendar = render({activeMonth: new Date(2015, 6, 1)})
+    const todayText = () => findDOMNode(calendar).querySelector('.calendar-day.is-today').textContent
+    assert(todayText() === '5')
+    // Change current date to 2015-07-17
+    clock.restore()
+    clock = sinon.useFakeTimers(new Date(2015, 6, 17).getTime())
+    calendar.forceUpdate()
+    assert(todayText() === '17')
+    clock.restore()
+  })
+
   context('in single selection mode', () => {
     let onSelect, calendar
     beforeEach(() => {
