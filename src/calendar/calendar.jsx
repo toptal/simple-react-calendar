@@ -23,6 +23,7 @@ export default class Calendar extends React.Component {
     data: React.PropTypes.object,
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
+    minNumberOfWeeks: React.PropTypes.number,
     mode: React.PropTypes.oneOf([SINGLE_MODE, RANGE_MODE]),
     onMonthChange: React.PropTypes.func,
     onSelect: React.PropTypes.func,
@@ -167,6 +168,7 @@ export default class Calendar extends React.Component {
           data={data}
           minDate={minDate}
           maxDate={maxDate}
+          minNumberOfWeeks={this.props.minNumberOfWeeks}
           today={this._today()}
           ref='month'
           activeMonth={this._activeMonth()}
