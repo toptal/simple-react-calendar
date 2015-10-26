@@ -33,9 +33,9 @@
     "webpack-dev-middleware": "^1.2.0"
   },
   "scripts": {
-    "build": "webpack",
-    "build-tests": "env NODE_ENV=test BUILD_TESTS=true npm run build",
-    "start": "npm run build -- --watch",
+    "build": "env NODE_ENV=production webpack",
+    "build-tests": "env NODE_ENV=test BUILD_TESTS=true webpack",
+    "start": "webpack -- --watch",
     "test": "karma start",
     "test-ci": "npm test -- --single-run",
     "test-cross-browser": "env TEST_BROWSERSTACK=true npm run test-ci",

@@ -24,7 +24,11 @@ give you a working calendar component.
 * `maxDate` — latest date available for selection
 * `selected` - selected dates. Can be ether single `Date` object if `mode` is `single`, or object `{start: Date(), end: Date()}` if `mode` is `range`
 * `onMonthChange` - a function that is called whenever user changes the month. If defined then you have to handle month changing by yourself by changing `activeMonth` property
-* `onSelect` - a function that is called whenever user changes selection
+* `onSelect` - a function that is called whenever user
+  selects a date (in `single` mode) or a dates range (`range` mode)
+* `onSelectionProgress` - a function that is called whenever user changes
+  selection. Works only in the `range` mode. When the function is passed then
+  automatic range selection handing will be disabled.
 * `blockClassName` - base class name that will be used as a class prefix (see [](#class-names))
 * `minNumberOfWeeks` — minimum number of weeks in a month. Undefined by default.
 
