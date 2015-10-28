@@ -157,7 +157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var onSelect = _props.onSelect;
 	      var onSelectionProgress = _props.onSelectionProgress;
 	
-	      if (onSelect && (mode != RANGE_MODE || !inProgress)) {
+	      if (onSelect && (mode !== RANGE_MODE || !inProgress)) {
 	        onSelect(mode === SINGLE_MODE ? start : { start: start, end: end });
 	      }
 	
