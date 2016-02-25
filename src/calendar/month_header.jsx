@@ -4,11 +4,11 @@ import classnames from 'classnames'
 import HeaderButton from './header_button'
 import {BLOCK_CLASS_NAME, NEXT_MONTH_TITLE, PREV_MONTH_TITLE} from './consts'
 
-import addMonths from 'date-fns/src/add_months'
-import isBefore from 'date-fns/src/is_before'
-import isAfter from 'date-fns/src/is_after'
-import startOfMonth from 'date-fns/src/start_of_month'
-import formatDate from 'date-fns/src/format'
+import addMonths from 'date-fns/add_months'
+import isBefore from 'date-fns/is_before'
+import isAfter from 'date-fns/is_after'
+import startOfMonth from 'date-fns/start_of_month'
+import formatDate from 'date-fns/format'
 
 export default class MonthHeader extends React.Component {
   static propTypes = {
