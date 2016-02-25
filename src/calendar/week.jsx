@@ -4,20 +4,18 @@ import classnames from 'classnames'
 import Day from './day'
 import {BLOCK_CLASS_NAME} from './consts'
 
-import eachDay from 'date-fns/src/each_day'
-import startOfDay from 'date-fns/src/start_of_day'
-import startOfWeek from 'date-fns/src/start_of_week'
-import endOfWeek from 'date-fns/src/end_of_week'
-import isWithinRange from 'date-fns/src/is_within_range'
-import format from 'date-fns/src/format'
-import isBefore from 'date-fns/src/is_before'
-import isAfter from 'date-fns/src/is_after'
-import isEqual from 'date-fns/src/is_equal'
-import isWeekend from 'date-fns/src/is_weekend'
-import isSameDay from 'date-fns/src/is_same_day'
-import isSameMonth from 'date-fns/src/is_same_month'
-
-const START_WEEK_WITH_SUNDAY = false
+import eachDay from 'date-fns/each_day'
+import startOfDay from 'date-fns/start_of_day'
+import startOfWeek from 'date-fns/start_of_week'
+import endOfWeek from 'date-fns/end_of_week'
+import isWithinRange from 'date-fns/is_within_range'
+import format from 'date-fns/format'
+import isBefore from 'date-fns/is_before'
+import isAfter from 'date-fns/is_after'
+import isEqual from 'date-fns/is_equal'
+import isWeekend from 'date-fns/is_weekend'
+import isSameDay from 'date-fns/is_same_day'
+import isSameMonth from 'date-fns/is_same_month'
 
 export default class Week extends React.Component {
   static propTypes = {
@@ -32,12 +30,12 @@ export default class Week extends React.Component {
     selectedMax: React.PropTypes.instanceOf(Date),
     selectedMin: React.PropTypes.instanceOf(Date),
     today: React.PropTypes.instanceOf(Date).isRequired
-  }
+  };
 
   static defaultProps = {
     data: {},
     blockClassName: BLOCK_CLASS_NAME
-  }
+  };
 
   _dateSelectable(date) {
     const {minDate, maxDate} = this.props
@@ -75,10 +73,18 @@ export default class Week extends React.Component {
     })
   }
 
+  render() {
+    return (
+      <div className={`${this.props.blockClassName}-week`}>
+        {this._renderDays()}
+      </div>
+    )
+  }
+
   _renderDays() {
     const {date, activeMonth, today, onDayClick, onDayMouseMove, selectedMin, selectedMax, blockClassName} = this.props
-    const startDate = startOfWeek(date, START_WEEK_WITH_SUNDAY ? 0 : 1)
-    const endDate = endOfWeek(date, START_WEEK_WITH_SUNDAY ? 0 : 1)
+    const startDate = startOfWeek(date, {weekStartsAt: 1})
+    const endDate = endOfWeek(date, {weekStartsAt: 1})
     return eachDay(startDate, endDate).map((day) => {
       const data = this.props.data[format(day, 'YYYY-MM-DD')]
       const selectable = this._dateSelectable(day)
@@ -95,13 +101,5 @@ export default class Week extends React.Component {
         />
       )
     })
-  }
-
-  render() {
-    return (
-      <div className={`${this.props.blockClassName}-week`}>
-        {this._renderDays()}
-      </div>
-    )
   }
 }

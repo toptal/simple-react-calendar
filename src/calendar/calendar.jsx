@@ -4,16 +4,20 @@ import Month from './month'
 import MonthHeader from './month_header'
 import {BLOCK_CLASS_NAME} from './consts'
 
-import startOfMonth from 'date-fns/src/start_of_month'
-import isSameDay from 'date-fns/src/is_same_day'
-import isSameMonth from 'date-fns/src/is_same_month'
+import startOfMonth from 'date-fns/start_of_month'
+import isSameDay from 'date-fns/is_same_day'
+import isSameMonth from 'date-fns/is_same_month'
+import isValidDate from 'date-fns/is_valid'
 
 const SINGLE_MODE = 'single'
 const RANGE_MODE = 'range'
 
-// TODO: replace this this with function from date-fns after it will be done
 const isValid = function(date) {
-  return !isNaN((new Date(date)).getTime())
+  try {
+    return isValidDate(date)
+  } catch (e) {
+    return false
+  }
 }
 
 export default class Calendar extends React.Component {
@@ -37,17 +41,17 @@ export default class Calendar extends React.Component {
       })
     ]),
     today: React.PropTypes.instanceOf(Date)
-  }
+  };
 
   static defaultProps = {
     mode: SINGLE_MODE,
     blockClassName: BLOCK_CLASS_NAME
-  }
+  };
 
   state = {
     activeMonth: this._initialMonth(),
     selection: null
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.activeMonth && !isSameMonth(nextProps.activeMonth, this.props.activeMonth)) {
@@ -71,7 +75,7 @@ export default class Calendar extends React.Component {
     return startOfMonth(this._today())
   }
 
-  _switchMonth = (date) => {
+  _switchMonth(date) {
     const {onMonthChange} = this.props
     if (typeof onMonthChange === 'function') {
       onMonthChange(date)
@@ -127,7 +131,7 @@ export default class Calendar extends React.Component {
     }
   }
 
-  _selectionChanged = (selection) => {
+  _selectionChanged(selection) {
     const {start, end, inProgress} = selection
     const {mode, onSelect, onSelectionProgress} = this.props
 
@@ -160,7 +164,7 @@ export default class Calendar extends React.Component {
           minDate={minDate}
           maxDate={maxDate}
           activeMonth={this._activeMonth()}
-          onMonthChange={this._switchMonth}
+          onMonthChange={this._switchMonth.bind(this)}
           blockClassName={this.props.blockClassName}
         />
         <Month
@@ -174,7 +178,7 @@ export default class Calendar extends React.Component {
           activeMonth={this._activeMonth()}
           selectedMin={selection.start}
           selectedMax={selection.end}
-          onChange={this._selectionChanged}
+          onChange={this._selectionChanged.bind(this)}
           blockClassName={this.props.blockClassName}
         />
       </div>
