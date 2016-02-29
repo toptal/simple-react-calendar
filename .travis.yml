@@ -13,6 +13,7 @@ before_install:
   - unzip BrowserStackLocal-linux-x64.zip
   - mv BrowserStackLocal "$TRAVIS_BUILD_DIR/tmp/BrowserStackLocal"
   - export BROWSER_STACK_BINARY_BASE_PATH="$TRAVIS_BUILD_DIR/tmp"
+  - $TRAVIS_BUILD_DIR/tmp/BrowserStackLocal $BROWSER_STACK_ACCESS_KEY localhost,9876,0
 before_script:
   # Says which display to use (could be 0.0, 0.1, 1.0 etc.). Generally, 99.0 is not used by any application,
   # so display should not conflict with any other possible displays used by the system. That is why we choose it.
