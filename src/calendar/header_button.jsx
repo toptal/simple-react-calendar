@@ -10,13 +10,13 @@ export default class HeaderButton extends React.Component {
     offset: React.PropTypes.number,
     onClick: React.PropTypes.func.isRequired,
     type: React.PropTypes.oneOf(['prev', 'next']).isRequired
-  }
+  };
 
   static defaultProps = {
     blockClassName: BLOCK_CLASS_NAME
-  }
+  };
 
-  _onClick = (e) => {
+  _onClick(e) {
     const {enabled, onClick} = this.props
     if (enabled) {
       onClick(e)
@@ -35,7 +35,7 @@ export default class HeaderButton extends React.Component {
             'is-disabled': !enabled
           }
         )}
-        onClick={this._onClick}
+        onClick={this._onClick.bind(this)}
       />
     )
   }

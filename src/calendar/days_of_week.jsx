@@ -8,11 +8,11 @@ const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 export default class DaysOfWeek extends React.Component {
   static propTypes = {
     blockClassName: React.PropTypes.string
-  }
+  };
 
   static defaultProps = {
     blockClassName: BLOCK_CLASS_NAME
-  }
+  };
 
   render() {
     const {blockClassName} = this.props

@@ -63,6 +63,7 @@ function getOutputConfig() {
     }
   } else {
     return {
+      library: 'Calendar',
       libraryTarget: 'umd',
       path: path.join(process.cwd(), 'dist'),
       filename: '[name].js'

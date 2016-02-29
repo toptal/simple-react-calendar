@@ -3,37 +3,37 @@ process.env.NODE_ENV = 'test'
 var webpackConfig = require('./webpack.config.js')
 
 var browserStackLaunchers = {
-  chrome: {
-    'base': 'BrowserStack',
-    'browser': 'chrome',
-    'browser_version': '44',
-    'os': 'Windows',
-    'os_version': '8.1',
-  },
+  // chrome: {
+  //   'base': 'BrowserStack',
+  //   'browser': 'chrome',
+  //   'browser_version': '44',
+  //   'os': 'Windows',
+  //   'os_version': '8.1',
+  // },
 
-  firefox: {
-    'base': 'BrowserStack',
-    'browser': 'firefox',
-    'browser_version': '40',
-    'os': 'Windows',
-    'os_version': '8.1',
-  },
+  // firefox: {
+  //   'base': 'BrowserStack',
+  //   'browser': 'firefox',
+  //   'browser_version': '40',
+  //   'os': 'Windows',
+  //   'os_version': '8.1',
+  // },
 
-  ie10: {
-    'base': 'BrowserStack',
-    'browser': 'ie',
-    'browser_version': '10.0',
-    'os': 'Windows',
-    'os_version': '7'
-  },
+  // ie10: {
+  //   'base': 'BrowserStack',
+  //   'browser': 'ie',
+  //   'browser_version': '10.0',
+  //   'os': 'Windows',
+  //   'os_version': '7'
+  // },
 
-  ie11: {
-    'base': 'BrowserStack',
-    'browser': 'ie',
-    'browser_version': '11.0',
-    'os': 'Windows',
-    'os_version': '8.1'
-  },
+  // ie11: {
+  //   'base': 'BrowserStack',
+  //   'browser': 'ie',
+  //   'browser_version': '11.0',
+  //   'os': 'Windows',
+  //   'os_version': '8.1'
+  // },
 
   edge: {
     'base': 'BrowserStack',
@@ -65,6 +65,10 @@ module.exports = function(config) {
     reporters: ['mocha'],
     mochaReporter: {
       output: process.env.TEST_TZ ? 'minimal' : 'full'
+    },
+
+    browserStack: {
+      startTunnel: false
     },
 
     // We are limited in the number of parallel VMs in BrowserStack (1)
