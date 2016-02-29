@@ -67,6 +67,10 @@ module.exports = function(config) {
       output: process.env.TEST_TZ ? 'minimal' : 'full'
     },
 
+    browserStack: {
+      startTunnel: false
+    },
+
     // We are limited in the number of parallel VMs in BrowserStack (1)
     // and Karma don't know how to limit parallel browser instances
     // so waiting time must be insanely high.
