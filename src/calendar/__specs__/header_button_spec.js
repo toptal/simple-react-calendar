@@ -64,4 +64,32 @@ describe('HeaderButton', () => {
       })
     })
   })
+
+  describe('title', () => {
+    context('when title is empty', () => {
+      it('renders button without the title', () => {
+        const el = findDOMNode(render())
+        assert(!el.getAttribute('title'))
+      })
+
+      it('renders button with the title', () => {
+        const el = findDOMNode(render({title: 'testTitle'}))
+        assert(el.getAttribute('title'))
+      })
+    })
+  })
+
+  describe('arrow', () => {
+    context('when arrow is empty', () => {
+      it('renders button without any content', () => {
+        const el = findDOMNode(render())
+        assert(!el.children[0])
+      })
+
+      it('renders button with the arrow dom element', () => {
+        const el = findDOMNode(render({arrow: <i className='icon'>Test</i>}))
+        assert(el.getElementsByClassName('icon'))
+      })
+    })
+  })
 })

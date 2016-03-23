@@ -2,8 +2,8 @@
 <html>
 <head>
   <title></title>
-  <script src="https://fb.me/react-0.13.3.js"></script>
-  <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  <script src="https://fb.me/react-0.14.7.js"></script>
+  <script src="https://fb.me/react-dom-0.14.7.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.9.3/lodash.min.js"></script>
   <script src="dist/simple-calendar.js"></script>
 
@@ -12,7 +12,7 @@
 <body>
   <div id="calendar"></div>
 
-  <script type="text/jsx">
+  <script>
     var sampleData = {
       '2015-06-15': {
         modifiers: ['demoday']
@@ -24,35 +24,26 @@
         ]
       }
     }
-
     var Test = React.createClass({
       getInitialState: function(){
         return {}
       },
-
       onSelect: function(selection) {
         console.log(selection)
         this.setState({selection: selection})
       },
-
       render: function() {
-        return (
-          <Calendar
-            selected={this.state.selection}
-            mode="range"
-            minDate={new Date('2015-06-15')}
-            maxDate={new Date('2015-10-18')}
-            data={sampleData}
-            onSelect={this.onSelect}
-          />
-        )
+        return React.createElement(Calendar, {
+          selected: this.state.selection,
+          mode: 'range',
+          data: sampleData,
+          onSelect: this.onSelect,
+          headerNavIcon: true
+        })
       }
     })
 
-    React.render(
-      <Test />,
-      document.getElementById('calendar')
-    );
+    ReactDOM.render(React.createElement(Test, null), document.getElementById('calendar'))
   </script>
 </body>
 </html>

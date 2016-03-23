@@ -70,7 +70,18 @@ module.exports = function(config) {
     // We are limited in the number of parallel VMs in BrowserStack (1)
     // and Karma don't know how to limit parallel browser instances
     // so waiting time must be insanely high.
-    browserNoActivityTimeout: process.env.TEST_BROWSERSTACK ? 60 * 60 * 1000 : 10000,
+    browserNoActivityTimeout: process.env.TEST_BROWSERSTACK
+      ? 60 * 60 * 1000 /* 1 hour */
+      : 10 * 1000, /* 10 sec */
+    captureTimeout: process.env.TEST_BROWSERSTACK
+      ? 120 * 1000 /* 2 min */
+      : 60 * 1000, /* 1 min */
+
+    // Start the tunnel
+    // See: https://github.com/karma-runner/karma-browserstack-launcher/issues/17#issuecomment-181559755
+    browserStack: {
+      startTunnel: true
+    },
 
     customLaunchers: process.env.TEST_BROWSERSTACK ? browserStackLaunchers : {},
     browsers: process.env.TEST_BROWSERSTACK ? Object.keys(browserStackLaunchers) : ['PhantomJS2'],

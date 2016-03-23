@@ -1,7 +1,7 @@
 {
   "name": "simple-react-calendar",
   "main": "dist/simple-calendar.js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "devDependencies": {
     "babel": "^5.8.23",
@@ -15,7 +15,7 @@
     "eslint-plugin-react": "^3.4.1",
     "json-loader": "^0.5.3",
     "karma": "^0.13.10",
-    "karma-browserstack-launcher": "^0.1.5",
+    "karma-browserstack-launcher": "karma-runner/karma-browserstack-launcher#985e92eec2440f5c993099acad3987d352b1ed57",
     "karma-chrome-launcher": "^0.2.0",
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.2.0",
@@ -26,8 +26,6 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^2.3.2",
     "power-assert": "^1.0.1",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0",
     "sinon": "^1.17.1",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.2.0"
@@ -35,7 +33,7 @@
   "scripts": {
     "build": "env NODE_ENV=production webpack",
     "build-tests": "env NODE_ENV=test BUILD_TESTS=true webpack",
-    "start": "webpack -- --watch",
+    "start": "webpack --watch",
     "test": "karma start",
     "test-ci": "npm test -- --single-run",
     "test-cross-browser": "env TEST_BROWSERSTACK=true npm run test-ci",
@@ -43,6 +41,7 @@
     "lint": "eslint src/ --ext .js,.jsx"
   },
   "peerDependencies": {
-    "react": "^0.14.0"
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   }
 }

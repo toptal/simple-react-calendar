@@ -17,20 +17,24 @@ play around with its various properties.
 All of the properties are optional, just rendering `<Calendar />` will already
 give you a working calendar component.
 
-* `today` — current date (useful when you want to show current date in different time zone). Default is `new Date()`
-* `activeMonth` - any day within the month that you want initially displayed
-* `mode` - selection mode, one of either `range` or `single`. Default is `single`
-* `minDate` — earliest date available for selection
+* `activeMonth` — any day within the month that you want initially displayed
+* `blockClassName` — base class name that will be used as a class prefix (see [](#class-names))
+* `headerNextArrow` — Any kind of react element will be rendered into the next month button `(element)`
+* `headerNextTitle` — Text will be rendered as the title of the next month button `Next month`
+* `headerPrevArrow` — Any kind of react element will be rendered into the previous month button `(element)`
+* `headerPrevTitle` — Text will be rendered as the title of the previous month button, default is `Previous month`
 * `maxDate` — latest date available for selection
-* `selected` - selected dates. Can be ether single `Date` object if `mode` is `single`, or object `{start: Date(), end: Date()}` if `mode` is `range`
-* `onMonthChange` - a function that is called whenever user changes the month. If defined then you have to handle month changing by yourself by changing `activeMonth` property
-* `onSelect` - a function that is called whenever user
-  selects a date (in `single` mode) or a dates range (`range` mode)
+* `minDate` — earliest date available for selection
+* `minNumberOfWeeks` — minimum number of weeks in a month. Undefined by default.
+* `mode` — selection mode, one of either `range` or `single`. Default is `single`
+* `onMonthChange` — a function that is called whenever user changes the month. If defined then you have to handle month changing by yourself by changing `activeMonth` property
+* `onSelect` — a function that is called whenever user
 * `onSelectionProgress` - a function that is called whenever user changes
+* `selected` — selected dates. Can be ether single `Date` object if `mode` is `single`, or object `{start: Date(), end: Date()}` if `mode` is `range`
+* `today` — current date (useful when you want to show current date in different time zone). Default is `new Date()`
+  selects a date (in `single` mode) or a dates range (`range` mode)
   selection. Works only in the `range` mode. When the function is passed then
   automatic range selection handing will be disabled.
-* `blockClassName` - base class name that will be used as a class prefix (see [](#class-names))
-* `minNumberOfWeeks` — minimum number of weeks in a month. Undefined by default.
 
 ## Class Names
 

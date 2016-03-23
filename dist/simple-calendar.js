@@ -79,7 +79,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -263,10 +263,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function render() {
 	      var _props5 = this.props;
 	      var mode = _props5.mode;
-	      var data = _props5.data;
 	      var minDate = _props5.minDate;
 	      var maxDate = _props5.maxDate;
 	      var blockClassName = _props5.blockClassName;
+	      var headerNextArrow = _props5.headerNextArrow;
+	      var headerNextTitle = _props5.headerNextTitle;
+	      var headerPrevArrow = _props5.headerPrevArrow;
+	      var headerPrevTitle = _props5.headerPrevTitle;
 	
 	      var activeMonth = isValid(this._activeMonth()) ? this._activeMonth() : (0, _dateFnsSrcStart_of_month2['default'])(this._today());
 	      var selection = this._selection();
@@ -278,13 +281,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	          ref: 'header',
 	          minDate: minDate,
 	          maxDate: maxDate,
+	          headerPrevArrow: headerPrevArrow,
+	          headerPrevTitle: headerPrevTitle,
+	          headerNextArrow: headerNextArrow,
+	          headerNextTitle: headerNextTitle,
 	          activeMonth: this._activeMonth(),
 	          onMonthChange: this._switchMonth,
 	          blockClassName: this.props.blockClassName
 	        }),
 	        _react2['default'].createElement(_month2['default'], {
 	          mode: mode,
-	          data: data,
 	          minDate: minDate,
 	          maxDate: maxDate,
 	          minNumberOfWeeks: this.props.minNumberOfWeeks,
@@ -303,7 +309,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: {
 	      activeMonth: _react2['default'].PropTypes.instanceOf(Date),
 	      blockClassName: _react2['default'].PropTypes.string,
-	      data: _react2['default'].PropTypes.object,
+	      headerNextArrow: _react2['default'].PropTypes.element,
+	      headerNextTitle: _react2['default'].PropTypes.string,
+	      headerPrevArrow: _react2['default'].PropTypes.element,
+	      headerPrevTitle: _react2['default'].PropTypes.string,
 	      maxDate: _react2['default'].PropTypes.instanceOf(Date),
 	      minDate: _react2['default'].PropTypes.instanceOf(Date),
 	      minNumberOfWeeks: _react2['default'].PropTypes.number,
@@ -352,7 +361,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -470,7 +479,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _this2 = this;
 	
 	      var _props = this.props;
-	      var data = _props.data;
 	      var minDate = _props.minDate;
 	      var maxDate = _props.maxDate;
 	      var selectedMin = _props.selectedMin;
@@ -483,7 +491,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var weeks = [];
 	      var date = (0, _dateFnsSrcStart_of_week2['default'])((0, _dateFnsSrcStart_of_month2['default'])(activeMonth), 1);
 	      var endDate = (0, _dateFnsSrcEnd_of_week2['default'])((0, _dateFnsSrcEnd_of_month2['default'])(activeMonth), 1);
-	      while (typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length || ((0, _dateFnsSrcIs_before2['default'])(date, endDate) || (0, _dateFnsSrcIs_same_day2['default'])(date, endDate))) {
+	      while (typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length || (0, _dateFnsSrcIs_before2['default'])(date, endDate) || (0, _dateFnsSrcIs_same_day2['default'])(date, endDate)) {
 	        weeks.push(date);
 	        date = (0, _dateFnsSrcAdd_days2['default'])(date, 7);
 	      }
@@ -492,7 +500,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return _react2['default'].createElement(_week2['default'], {
 	          key: week.getTime(),
 	          date: week,
-	          data: data,
 	          minDate: minDate,
 	          maxDate: maxDate,
 	          selectedMin: selectedMin,
@@ -522,7 +529,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: {
 	      activeMonth: _react2['default'].PropTypes.instanceOf(Date).isRequired,
 	      blockClassName: _react2['default'].PropTypes.string,
-	      data: _react2['default'].PropTypes.object,
 	      maxDate: _react2['default'].PropTypes.instanceOf(Date),
 	      minDate: _react2['default'].PropTypes.instanceOf(Date),
 	      minNumberOfWeeks: _react2['default'].PropTypes.number,
@@ -559,7 +565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -761,8 +767,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
@@ -774,7 +780,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		var hasOwn = {}.hasOwnProperty;
 	
 		function classNames () {
-			var classes = '';
+			var classes = [];
 	
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -783,28 +789,28 @@ return /******/ (function(modules) { // webpackBootstrap
 				var argType = typeof arg;
 	
 				if (argType === 'string' || argType === 'number') {
-					classes += ' ' + arg;
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
+					classes.push(classNames.apply(null, arg));
 				} else if (argType === 'object') {
 					for (var key in arg) {
 						if (hasOwn.call(arg, key) && arg[key]) {
-							classes += ' ' + key;
+							classes.push(key);
 						}
 					}
 				}
 			}
 	
-			return classes.substr(1);
+			return classes.join(' ');
 		}
 	
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
 		} else if (true) {
 			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
@@ -823,7 +829,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -913,7 +919,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: {
 	      blockClassName: _react2['default'].PropTypes.string,
 	      className: _react2['default'].PropTypes.string,
-	      data: _react2['default'].PropTypes.object,
 	      date: _react2['default'].PropTypes.instanceOf(Date).isRequired,
 	      onClick: _react2['default'].PropTypes.func,
 	      onMouseMove: _react2['default'].PropTypes.func,
@@ -923,7 +928,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'defaultProps',
 	    value: {
-	      data: {},
 	      blockClassName: _consts.BLOCK_CLASS_NAME
 	    },
 	    enumerable: true
@@ -946,6 +950,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	var BLOCK_CLASS_NAME = 'calendar';
 	exports.BLOCK_CLASS_NAME = BLOCK_CLASS_NAME;
+	var NEXT_MONTH_TITLE = 'Next month';
+	exports.NEXT_MONTH_TITLE = NEXT_MONTH_TITLE;
+	var PREV_MONTH_TITLE = 'Previous month';
+	exports.PREV_MONTH_TITLE = PREV_MONTH_TITLE;
 
 /***/ },
 /* 8 */
@@ -1748,7 +1756,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -1934,7 +1942,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -2002,6 +2010,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var minDate = _props2.minDate;
 	      var maxDate = _props2.maxDate;
 	      var blockClassName = _props2.blockClassName;
+	      var headerNextArrow = _props2.headerNextArrow;
+	      var headerNextTitle = _props2.headerNextTitle;
+	      var headerPrevArrow = _props2.headerPrevArrow;
+	      var headerPrevTitle = _props2.headerPrevTitle;
 	
 	      var prevEnabled = minDate ? (0, _dateFnsSrcIs_before2['default'])((0, _dateFnsSrcStart_of_month2['default'])(minDate), (0, _dateFnsSrcStart_of_month2['default'])(activeMonth)) : true;
 	      var nextEnabled = maxDate ? (0, _dateFnsSrcIs_after2['default'])((0, _dateFnsSrcStart_of_month2['default'])(maxDate), (0, _dateFnsSrcStart_of_month2['default'])(activeMonth)) : true;
@@ -2011,6 +2023,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        { className: blockClassName + '-month_header' },
 	        _react2['default'].createElement(_header_button2['default'], {
 	          type: 'prev',
+	          arrow: headerPrevArrow,
+	          title: headerPrevTitle,
 	          enabled: prevEnabled,
 	          onClick: this._switchMonth.bind(this, -1),
 	          blockClassName: blockClassName
@@ -2022,6 +2036,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        ),
 	        _react2['default'].createElement(_header_button2['default'], {
 	          type: 'next',
+	          arrow: headerNextArrow,
+	          title: headerNextTitle,
 	          enabled: nextEnabled,
 	          onClick: this._switchMonth.bind(this, 1),
 	          blockClassName: blockClassName
@@ -2033,6 +2049,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: {
 	      activeMonth: _react2['default'].PropTypes.instanceOf(Date).isRequired,
 	      blockClassName: _react2['default'].PropTypes.string,
+	      headerNextArrow: _react2['default'].PropTypes.element,
+	      headerNextTitle: _react2['default'].PropTypes.string,
+	      headerPrevArrow: _react2['default'].PropTypes.element,
+	      headerPrevTitle: _react2['default'].PropTypes.string,
 	      maxDate: _react2['default'].PropTypes.instanceOf(Date),
 	      minDate: _react2['default'].PropTypes.instanceOf(Date),
 	      onMonthChange: _react2['default'].PropTypes.func.isRequired
@@ -2041,7 +2061,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'defaultProps',
 	    value: {
-	      blockClassName: _consts.BLOCK_CLASS_NAME
+	      blockClassName: _consts.BLOCK_CLASS_NAME,
+	      headerNextTitle: _consts.NEXT_MONTH_TITLE,
+	      headerPrevTitle: _consts.PREV_MONTH_TITLE
 	    },
 	    enumerable: true
 	  }]);
@@ -2064,7 +2086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -2086,46 +2108,54 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _inherits(HeaderButton, _React$Component);
 	
 	  function HeaderButton() {
-	    var _this = this;
-	
 	    _classCallCheck(this, HeaderButton);
 	
 	    _get(Object.getPrototypeOf(HeaderButton.prototype), 'constructor', this).apply(this, arguments);
+	  }
 	
-	    this._onClick = function (e) {
-	      var _props = _this.props;
+	  _createClass(HeaderButton, [{
+	    key: '_onClick',
+	    value: function _onClick(e) {
+	      var _props = this.props;
 	      var enabled = _props.enabled;
 	      var onClick = _props.onClick;
 	
 	      if (enabled) {
 	        onClick(e);
 	      }
-	    };
-	  }
-	
-	  _createClass(HeaderButton, [{
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _props2 = this.props;
+	      var arrow = _props2.arrow;
 	      var blockClassName = _props2.blockClassName;
-	      var type = _props2.type;
 	      var enabled = _props2.enabled;
+	      var type = _props2.type;
+	      var title = _props2.title;
 	
-	      return _react2['default'].createElement('a', {
-	        href: '#',
-	        className: (0, _classnames2['default'])(blockClassName + '-header_button', 'is-' + type, {
-	          'is-disabled': !enabled
-	        }),
-	        onClick: this._onClick
-	      });
+	      return _react2['default'].createElement(
+	        'button',
+	        {
+	          className: (0, _classnames2['default'])(blockClassName + '-header_button', 'is-' + type, {
+	            'is-disabled': !enabled
+	          }),
+	          disabled: !enabled,
+	          title: title,
+	          onClick: this._onClick.bind(this)
+	        },
+	        arrow
+	      );
 	    }
 	  }], [{
 	    key: 'propTypes',
 	    value: {
+	      arrow: _react2['default'].PropTypes.element,
 	      blockClassName: _react2['default'].PropTypes.string,
 	      enabled: _react2['default'].PropTypes.bool,
 	      offset: _react2['default'].PropTypes.number,
 	      onClick: _react2['default'].PropTypes.func.isRequired,
+	      title: _react2['default'].PropTypes.string,
 	      type: _react2['default'].PropTypes.oneOf(['prev', 'next']).isRequired
 	    },
 	    enumerable: true
