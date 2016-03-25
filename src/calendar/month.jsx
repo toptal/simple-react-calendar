@@ -21,7 +21,6 @@ export default class Month extends React.Component {
   static propTypes = {
     activeMonth: React.PropTypes.instanceOf(Date).isRequired,
     blockClassName: React.PropTypes.string,
-    data: React.PropTypes.object,
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
     minNumberOfWeeks: React.PropTypes.number,
@@ -76,7 +75,6 @@ export default class Month extends React.Component {
 
   _renderWeeks() {
     const {
-      data,
       minDate,
       maxDate,
       selectedMin,
@@ -101,7 +99,6 @@ export default class Month extends React.Component {
         <Week
           key={week.getTime()}
           date={week}
-          data={data}
           minDate={minDate}
           maxDate={maxDate}
           selectedMin={selectedMin}

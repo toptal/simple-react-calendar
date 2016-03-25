@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import HeaderButton from './header_button'
-import {BLOCK_CLASS_NAME} from './consts'
+import {BLOCK_CLASS_NAME, NEXT_MONTH_TITLE, PREV_MONTH_TITLE} from './consts'
 
 import addMonths from 'date-fns/src/add_months'
 import isBefore from 'date-fns/src/is_before'
@@ -14,13 +14,19 @@ export default class MonthHeader extends React.Component {
   static propTypes = {
     activeMonth: React.PropTypes.instanceOf(Date).isRequired,
     blockClassName: React.PropTypes.string,
+    headerNextArrow: React.PropTypes.element,
+    headerNextTitle: React.PropTypes.string,
+    headerPrevArrow: React.PropTypes.element,
+    headerPrevTitle: React.PropTypes.string,
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
     onMonthChange: React.PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    blockClassName: BLOCK_CLASS_NAME
+    blockClassName: BLOCK_CLASS_NAME,
+    headerNextTitle: NEXT_MONTH_TITLE,
+    headerPrevTitle: PREV_MONTH_TITLE
   }
 
   _switchMonth(offset) {
@@ -29,7 +35,7 @@ export default class MonthHeader extends React.Component {
   }
 
   render() {
-    const {activeMonth, minDate, maxDate, blockClassName} = this.props
+    const {activeMonth, minDate, maxDate, blockClassName, headerNextArrow, headerNextTitle, headerPrevArrow, headerPrevTitle} = this.props
     const prevEnabled = minDate ? isBefore(startOfMonth(minDate), startOfMonth(activeMonth)) : true
     const nextEnabled = maxDate ? isAfter(startOfMonth(maxDate), startOfMonth(activeMonth)) : true
 
@@ -37,6 +43,8 @@ export default class MonthHeader extends React.Component {
       <div className={`${blockClassName}-month_header`}>
         <HeaderButton
           type='prev'
+          arrow={headerPrevArrow}
+          title={headerPrevTitle}
           enabled={prevEnabled}
           onClick={this._switchMonth.bind(this, -1)}
           blockClassName={blockClassName}
@@ -46,6 +54,8 @@ export default class MonthHeader extends React.Component {
         </div>
         <HeaderButton
           type='next'
+          arrow={headerNextArrow}
+          title={headerNextTitle}
           enabled={nextEnabled}
           onClick={this._switchMonth.bind(this, 1)}
           blockClassName={blockClassName}

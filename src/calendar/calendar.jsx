@@ -20,7 +20,10 @@ export default class Calendar extends React.Component {
   static propTypes = {
     activeMonth: React.PropTypes.instanceOf(Date),
     blockClassName: React.PropTypes.string,
-    data: React.PropTypes.object,
+    headerNextArrow: React.PropTypes.element,
+    headerNextTitle: React.PropTypes.string,
+    headerPrevArrow: React.PropTypes.element,
+    headerPrevTitle: React.PropTypes.string,
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
     minNumberOfWeeks: React.PropTypes.number,
@@ -149,7 +152,7 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-    const {mode, data, minDate, maxDate, blockClassName} = this.props
+    const {mode, minDate, maxDate, blockClassName, headerNextArrow, headerNextTitle, headerPrevArrow, headerPrevTitle} = this.props
     const activeMonth = isValid(this._activeMonth()) ? this._activeMonth() : startOfMonth(this._today())
     const selection = this._selection()
 
@@ -159,13 +162,16 @@ export default class Calendar extends React.Component {
           ref='header'
           minDate={minDate}
           maxDate={maxDate}
+          headerPrevArrow={headerPrevArrow}
+          headerPrevTitle={headerPrevTitle}
+          headerNextArrow={headerNextArrow}
+          headerNextTitle={headerNextTitle}
           activeMonth={this._activeMonth()}
           onMonthChange={this._switchMonth}
           blockClassName={this.props.blockClassName}
         />
         <Month
           mode={mode}
-          data={data}
           minDate={minDate}
           maxDate={maxDate}
           minNumberOfWeeks={this.props.minNumberOfWeeks}

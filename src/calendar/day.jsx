@@ -12,7 +12,6 @@ export default class Day extends React.Component {
   static propTypes = {
     blockClassName: React.PropTypes.string,
     className: React.PropTypes.string,
-    data: React.PropTypes.object,
     date: React.PropTypes.instanceOf(Date).isRequired,
     onClick: React.PropTypes.func,
     onMouseMove: React.PropTypes.func,
@@ -20,7 +19,6 @@ export default class Day extends React.Component {
   }
 
   static defaultProps = {
-    data: {},
     blockClassName: BLOCK_CLASS_NAME
   }
 

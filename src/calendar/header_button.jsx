@@ -5,10 +5,12 @@ import {BLOCK_CLASS_NAME} from './consts'
 
 export default class HeaderButton extends React.Component {
   static propTypes = {
+    arrow: React.PropTypes.element,
     blockClassName: React.PropTypes.string,
     enabled: React.PropTypes.bool,
     offset: React.PropTypes.number,
     onClick: React.PropTypes.func.isRequired,
+    title: React.PropTypes.string,
     type: React.PropTypes.oneOf(['prev', 'next']).isRequired
   }
 
@@ -16,7 +18,7 @@ export default class HeaderButton extends React.Component {
     blockClassName: BLOCK_CLASS_NAME
   }
 
-  _onClick = (e) => {
+  _onClick(e) {
     const {enabled, onClick} = this.props
     if (enabled) {
       onClick(e)
@@ -24,10 +26,10 @@ export default class HeaderButton extends React.Component {
   }
 
   render() {
-    const {blockClassName, type, enabled} = this.props
+    const {arrow, blockClassName, enabled, type, title} = this.props
+
     return (
-      <a
-        href='#'
+      <button
         className={classnames(
           `${blockClassName}-header_button`,
           `is-${type}`,
@@ -35,8 +37,12 @@ export default class HeaderButton extends React.Component {
             'is-disabled': !enabled
           }
         )}
-        onClick={this._onClick}
-      />
+        disabled={!enabled}
+        title={title}
+        onClick={this._onClick.bind(this)}
+        >
+        {arrow}
+      </button>
     )
   }
 }
