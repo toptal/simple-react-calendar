@@ -28,3 +28,11 @@
 .calendar-day.is-selected {
   background-color: green;
 }
+
+.calendar-header_button.is-prev:before {
+  content: '<';
+}
+
+.calendar-header_button.is-next:before {
+  content: '>';
+}

@@ -84,7 +84,7 @@ module.exports = function(config) {
     },
 
     customLaunchers: process.env.TEST_BROWSERSTACK ? browserStackLaunchers : {},
-    browsers: process.env.TEST_BROWSERSTACK ? Object.keys(browserStackLaunchers) : ['PhantomJS2'],
+    browsers: process.env.TEST_BROWSERSTACK ? Object.keys(browserStackLaunchers) : ['PhantomJS'],
     reporters: process.env.TEST_BROWSERSTACK ? ['dots'] : ['mocha']
   })
 }

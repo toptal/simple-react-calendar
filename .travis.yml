@@ -1,22 +1,16 @@
 language: node_js
 node_js:
-  - '0.12'
+  - '4.1'
+sudo: false
 cache:
   directories:
     - node_modules
 before_install:
-  - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
-  - tar -xjf phantomjs-2.0.0-ubuntu-12.04.tar.bz2
-  - mv phantomjs "$TRAVIS_BUILD_DIR/tmp/phantomjs2"
-  - export PHANTOMJS_BIN="$TRAVIS_BUILD_DIR/tmp/phantomjs2"
+  - npm install -g npm@3
 before_script:
-  # Says which display to use (could be 0.0, 0.1, 1.0 etc.). Generally, 99.0 is not used by any application,
-  # so display should not conflict with any other possible displays used by the system. That is why we choose it.
-  - export DISPLAY=:99.0
-  # Runs virtual desktop to allow Firefox to run
-  - sh -e /etc/init.d/xvfb start
+  - npm install react@15 react-dom@15
 script:
   - npm run lint
   - npm run test-ci
   - npm run test-tz
-  - npm run test-cross-browser
+  - npm run test-bs

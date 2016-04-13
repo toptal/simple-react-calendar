@@ -3,10 +3,10 @@ import classnames from 'classnames'
 
 import {BLOCK_CLASS_NAME} from './consts'
 
-import isWeekend from 'date-fns/src/is_weekend'
-import isSameDay from 'date-fns/src/is_same_day'
-import formatDate from 'date-fns/src/format'
-import isSameMonth from 'date-fns/src/is_same_month'
+import isWeekend from 'date-fns/is_weekend'
+import isSameDay from 'date-fns/is_same_day'
+import formatDate from 'date-fns/format'
+import isSameMonth from 'date-fns/is_same_month'
 
 export default class Day extends React.Component {
   static propTypes = {
@@ -22,7 +22,7 @@ export default class Day extends React.Component {
     blockClassName: BLOCK_CLASS_NAME
   }
 
-  _onClick = (e) => {
+  _onClick(e) {
     e.preventDefault()
     const {date, onClick} = this.props
     if (onClick) {
@@ -30,7 +30,7 @@ export default class Day extends React.Component {
     }
   }
 
-  _onMouseMove = (e) => {
+  _onMouseMove(e) {
     e.preventDefault()
     const {date, onMouseMove} = this.props
     if (onMouseMove) {
@@ -43,8 +43,8 @@ export default class Day extends React.Component {
     return (
       <div
         className={classnames(`${blockClassName}-day`, className)}
-        onClick={this._onClick}
-        onMouseMove={this._onMouseMove}
+        onClick={this._onClick.bind(this)}
+        onMouseMove={this._onMouseMove.bind(this)}
       >
         {formatDate(date, 'D')}
       </div>
