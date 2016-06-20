@@ -93,25 +93,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _month2 = _interopRequireDefault(_month);
 	
-	var _month_header = __webpack_require__(32);
+	var _month_header = __webpack_require__(33);
 	
 	var _month_header2 = _interopRequireDefault(_month_header);
 	
 	var _consts = __webpack_require__(7);
 	
-	var _start_of_month = __webpack_require__(29);
+	var _start_of_month = __webpack_require__(30);
 	
 	var _start_of_month2 = _interopRequireDefault(_start_of_month);
 	
-	var _is_same_day = __webpack_require__(10);
+	var _is_same_day = __webpack_require__(11);
 	
 	var _is_same_day2 = _interopRequireDefault(_is_same_day);
 	
-	var _is_same_month = __webpack_require__(21);
+	var _is_same_month = __webpack_require__(22);
 	
 	var _is_same_month2 = _interopRequireDefault(_is_same_month);
 	
-	var _is_valid = __webpack_require__(36);
+	var _is_valid = __webpack_require__(37);
 	
 	var _is_valid2 = _interopRequireDefault(_is_valid);
 	
@@ -382,45 +382,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _week2 = _interopRequireDefault(_week);
 	
-	var _days_of_week = __webpack_require__(28);
+	var _days_of_week = __webpack_require__(29);
 	
 	var _days_of_week2 = _interopRequireDefault(_days_of_week);
 	
 	var _consts = __webpack_require__(7);
 	
-	var _start_of_week = __webpack_require__(20);
+	var _start_of_week = __webpack_require__(19);
 	
 	var _start_of_week2 = _interopRequireDefault(_start_of_week);
 	
-	var _end_of_week = __webpack_require__(23);
+	var _end_of_week = __webpack_require__(24);
 	
 	var _end_of_week2 = _interopRequireDefault(_end_of_week);
 	
-	var _start_of_month = __webpack_require__(29);
+	var _start_of_month = __webpack_require__(30);
 	
 	var _start_of_month2 = _interopRequireDefault(_start_of_month);
 	
-	var _end_of_month = __webpack_require__(30);
+	var _end_of_month = __webpack_require__(31);
 	
 	var _end_of_month2 = _interopRequireDefault(_end_of_month);
 	
-	var _is_before = __webpack_require__(25);
+	var _is_before = __webpack_require__(26);
 	
 	var _is_before2 = _interopRequireDefault(_is_before);
 	
-	var _is_after = __webpack_require__(26);
+	var _is_after = __webpack_require__(27);
 	
 	var _is_after2 = _interopRequireDefault(_is_after);
 	
-	var _is_equal = __webpack_require__(27);
+	var _is_equal = __webpack_require__(28);
 	
 	var _is_equal2 = _interopRequireDefault(_is_equal);
 	
-	var _add_days = __webpack_require__(31);
+	var _add_days = __webpack_require__(32);
 	
 	var _add_days2 = _interopRequireDefault(_add_days);
 	
-	var _is_same_day = __webpack_require__(10);
+	var _is_same_day = __webpack_require__(11);
 	
 	var _is_same_day2 = _interopRequireDefault(_is_same_day);
 	
@@ -514,8 +514,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var minNumberOfWeeks = _props.minNumberOfWeeks;
 	
 	      var weeks = [];
-	      var date = (0, _start_of_week2.default)((0, _start_of_month2.default)(activeMonth), { weekStartsAt: 1 });
-	      var endDate = (0, _end_of_week2.default)((0, _end_of_month2.default)(activeMonth), { weekStartsAt: 1 });
+	      var date = (0, _start_of_week2.default)((0, _start_of_month2.default)(activeMonth), { weekStartsOn: 1 });
+	      var endDate = (0, _end_of_week2.default)((0, _end_of_month2.default)(activeMonth), { weekStartsOn: 1 });
 	      while (typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length || (0, _is_before2.default)(date, endDate) || (0, _is_same_day2.default)(date, endDate)) {
 	        weeks.push(date);
 	        date = (0, _add_days2.default)(date, 7);
@@ -586,39 +586,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _consts = __webpack_require__(7);
 	
-	var _each_day = __webpack_require__(22);
+	var _each_day = __webpack_require__(23);
 	
 	var _each_day2 = _interopRequireDefault(_each_day);
 	
-	var _start_of_day = __webpack_require__(11);
+	var _start_of_day = __webpack_require__(12);
 	
 	var _start_of_day2 = _interopRequireDefault(_start_of_day);
 	
-	var _start_of_week = __webpack_require__(20);
+	var _start_of_week = __webpack_require__(19);
 	
 	var _start_of_week2 = _interopRequireDefault(_start_of_week);
 	
-	var _end_of_week = __webpack_require__(23);
+	var _end_of_week = __webpack_require__(24);
 	
 	var _end_of_week2 = _interopRequireDefault(_end_of_week);
 	
-	var _is_within_range = __webpack_require__(24);
+	var _is_within_range = __webpack_require__(25);
 	
 	var _is_within_range2 = _interopRequireDefault(_is_within_range);
 	
-	var _format = __webpack_require__(12);
+	var _format = __webpack_require__(13);
 	
 	var _format2 = _interopRequireDefault(_format);
 	
-	var _is_before = __webpack_require__(25);
+	var _is_before = __webpack_require__(26);
 	
 	var _is_before2 = _interopRequireDefault(_is_before);
 	
-	var _is_after = __webpack_require__(26);
+	var _is_after = __webpack_require__(27);
 	
 	var _is_after2 = _interopRequireDefault(_is_after);
 	
-	var _is_equal = __webpack_require__(27);
+	var _is_equal = __webpack_require__(28);
 	
 	var _is_equal2 = _interopRequireDefault(_is_equal);
 	
@@ -626,11 +626,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _is_weekend2 = _interopRequireDefault(_is_weekend);
 	
-	var _is_same_day = __webpack_require__(10);
+	var _is_same_day = __webpack_require__(11);
 	
 	var _is_same_day2 = _interopRequireDefault(_is_same_day);
 	
-	var _is_same_month = __webpack_require__(21);
+	var _is_same_month = __webpack_require__(22);
 	
 	var _is_same_month2 = _interopRequireDefault(_is_same_month);
 	
@@ -720,8 +720,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var selectedMax = _props4.selectedMax;
 	      var blockClassName = _props4.blockClassName;
 	
-	      var startDate = (0, _start_of_week2.default)(date, { weekStartsAt: 1 });
-	      var endDate = (0, _end_of_week2.default)(date, { weekStartsAt: 1 });
+	      var startDate = (0, _start_of_week2.default)(date, { weekStartsOn: 1 });
+	      var endDate = (0, _end_of_week2.default)(date, { weekStartsOn: 1 });
 	      return (0, _each_day2.default)(startDate, endDate).map(function (day) {
 	        var data = _this2.props.data[(0, _format2.default)(day, 'YYYY-MM-DD')];
 	        var selectable = _this2._dateSelectable(day);
@@ -842,15 +842,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _is_weekend2 = _interopRequireDefault(_is_weekend);
 	
-	var _is_same_day = __webpack_require__(10);
+	var _is_same_day = __webpack_require__(11);
 	
 	var _is_same_day2 = _interopRequireDefault(_is_same_day);
 	
-	var _format = __webpack_require__(12);
+	var _format = __webpack_require__(13);
 	
 	var _format2 = _interopRequireDefault(_format);
 	
-	var _is_same_month = __webpack_require__(21);
+	var _is_same_month = __webpack_require__(22);
 	
 	var _is_same_month2 = _interopRequireDefault(_is_same_month);
 	
@@ -966,20 +966,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = isWeekend(new Date(2014, 9, 5))
 	 * //=> true
 	 */
-	var isWeekend = function(dirtyDate) {
+	function isWeekend (dirtyDate) {
 	  var date = parse(dirtyDate)
 	  var day = date.getDay()
-	  return day == 0 || day == 6
+	  return day === 0 || day === 6
 	}
 	
 	module.exports = isWeekend
-	
 
 
 /***/ },
 /* 9 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	var isDate = __webpack_require__(10)
+	
 	var MILLISECONDS_IN_HOUR = 3600000
 	var MILLISECONDS_IN_MINUTE = 60000
 	
@@ -1017,15 +1018,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * ISO 8601: http://en.wikipedia.org/wiki/ISO_8601
 	 *
 	 * @param {String} dateString - the ISO 8601 formatted string to parse
-	 * @returns {Date} the parsed date in the local time zone.
+	 * @returns {Date} the parsed date in the local time zone
 	 *
 	 * @example
 	 * // Parse string '2014-02-11T11:30:30':
 	 * var result = parse('2014-02-11T11:30:30')
 	 * //=> Tue Feb 11 2014 11:30:30
 	 */
-	var parse = function(dateString) {
-	  if (dateString instanceof Date) {
+	function parse (dateString) {
+	  if (isDate(dateString)) {
 	    // Prevent the date to lose the milliseconds when passed to new Date() in IE10
 	    return new Date(dateString.getTime())
 	  } else if (typeof dateString !== 'string') {
@@ -1059,7 +1060,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 	
-	var splitDateString = function(dateString) {
+	function splitDateString (dateString) {
 	  var dateStrings = {}
 	  var array = dateString.split(parseTokenDateTimeDelimeter)
 	  var timeString
@@ -1073,8 +1074,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  if (timeString) {
-	    var token
-	    if (token = parseTokenTimezone.exec(timeString)) {
+	    var token = parseTokenTimezone.exec(timeString)
+	    if (token) {
 	      dateStrings.time = timeString.replace(token[1], '')
 	      dateStrings.timezone = token[1]
 	    } else {
@@ -1085,12 +1086,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return dateStrings
 	}
 	
-	var parseDate = function(dateString) {
+	function parseDate (dateString) {
 	  var year
 	  var yearToken
 	
 	  // YYYY or ±YYYYY
-	  if (yearToken = parseTokenYYYY.exec(dateString) || parseTokenYYYYY.exec(dateString)) {
+	  yearToken = parseTokenYYYY.exec(dateString) ||
+	    parseTokenYYYYY.exec(dateString)
+	  if (yearToken) {
 	    var yearString = yearToken[1]
 	    year = parseInt(yearString, 10)
 	    dateString = dateString.slice(yearString.length)
@@ -1101,105 +1104,128 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  var token
+	  var date
+	  var month
+	  var week
 	
 	  // YYYY
 	  if (dateString.length === 0) {
-	    var date = new Date(0)
+	    date = new Date(0)
 	    date.setUTCFullYear(year)
 	    return date
+	  }
 	
 	  // YYYY-MM
-	  } else if (token = parseTokenMM.exec(dateString)) {
-	    var date = new Date(0)
-	    var month = parseInt(token[1], 10) - 1
+	  token = parseTokenMM.exec(dateString)
+	  if (token) {
+	    date = new Date(0)
+	    month = parseInt(token[1], 10) - 1
 	    date.setUTCFullYear(year, month)
 	    return date
+	  }
 	
 	  // YYYY-DDD or YYYYDDD
-	  } else if (token = parseTokenDDD.exec(dateString)) {
-	    var date = new Date(0)
+	  token = parseTokenDDD.exec(dateString)
+	  if (token) {
+	    date = new Date(0)
 	    var dayOfYear = parseInt(token[1], 10)
 	    date.setUTCFullYear(year, 0, dayOfYear)
 	    return date
+	  }
 	
 	  // YYYY-MM-DD or YYYYMMDD
-	  } else if (token = parseTokenMMDD.exec(dateString)) {
-	    var date = new Date(0)
-	    var month = parseInt(token[1], 10) - 1
+	  token = parseTokenMMDD.exec(dateString)
+	  if (token) {
+	    date = new Date(0)
+	    month = parseInt(token[1], 10) - 1
 	    var day = parseInt(token[2], 10)
 	    date.setUTCFullYear(year, month, day)
 	    return date
+	  }
 	
 	  // YYYY-Www or YYYYWww
-	  } else if (token = parseTokenWww.exec(dateString)) {
-	    var week = parseInt(token[1], 10) - 1
+	  token = parseTokenWww.exec(dateString)
+	  if (token) {
+	    week = parseInt(token[1], 10) - 1
 	    return dayOfISOYear(year, week)
+	  }
 	
 	  // YYYY-Www-D or YYYYWwwD
-	  } else if (token = parseTokenWwwD.exec(dateString)) {
-	    var week = parseInt(token[1], 10) - 1
+	  token = parseTokenWwwD.exec(dateString)
+	  if (token) {
+	    week = parseInt(token[1], 10) - 1
 	    var dayOfWeek = parseInt(token[2], 10) - 1
 	    return dayOfISOYear(year, week, dayOfWeek)
+	  }
 	
 	  // Invalid ISO-formatted date
-	  } else {
-	    return null
-	  }
+	  return null
 	}
 	
-	var parseTime = function(timeString) {
+	function parseTime (timeString) {
 	  var token
+	  var hours
+	  var minutes
 	
 	  // hh
-	  if (token = parseTokenHH.exec(timeString)) {
-	    var hours = parseFloat(token[1].replace(',', '.'))
+	  token = parseTokenHH.exec(timeString)
+	  if (token) {
+	    hours = parseFloat(token[1].replace(',', '.'))
 	    return (hours % 24) * MILLISECONDS_IN_HOUR
+	  }
 	
 	  // hh:mm or hhmm
-	  } else if (token = parseTokenHHMM.exec(timeString)) {
-	    var hours = parseInt(token[1], 10)
-	    var minutes = parseFloat(token[2].replace(',', '.'))
-	    return (hours % 24) * MILLISECONDS_IN_HOUR
-	      + minutes * MILLISECONDS_IN_MINUTE
+	  token = parseTokenHHMM.exec(timeString)
+	  if (token) {
+	    hours = parseInt(token[1], 10)
+	    minutes = parseFloat(token[2].replace(',', '.'))
+	    return (hours % 24) * MILLISECONDS_IN_HOUR +
+	      minutes * MILLISECONDS_IN_MINUTE
+	  }
 	
 	  // hh:mm:ss or hhmmss
-	  } else if (token = parseTokenHHMMSS.exec(timeString)) {
-	    var hours = parseInt(token[1], 10)
-	    var minutes = parseInt(token[2], 10)
+	  token = parseTokenHHMMSS.exec(timeString)
+	  if (token) {
+	    hours = parseInt(token[1], 10)
+	    minutes = parseInt(token[2], 10)
 	    var seconds = parseFloat(token[3].replace(',', '.'))
-	    return (hours % 24) * MILLISECONDS_IN_HOUR
-	      + minutes * MILLISECONDS_IN_MINUTE
-	      + seconds * 1000
+	    return (hours % 24) * MILLISECONDS_IN_HOUR +
+	      minutes * MILLISECONDS_IN_MINUTE +
+	      seconds * 1000
+	  }
 	
 	  // Invalid ISO-formatted time
-	  } else {
-	    return null
-	  }
+	  return null
 	}
 	
-	var parseTimezone = function(timezoneString) {
+	function parseTimezone (timezoneString) {
 	  var token
-	  var offset = 0
+	  var absoluteOffset
 	
 	  // Z
-	  if (token = parseTokenTimezoneZ.exec(timezoneString)) {
-	    offset = 0
-	
-	  // ±hh
-	  } else if (token = parseTokenTimezoneHH.exec(timezoneString)) {
-	    var absoluteOffset = parseInt(token[2], 10) * 60
-	    offset = (token[1] == '+') ? - absoluteOffset : absoluteOffset
-	
-	  // ±hh:mm or ±hhmm
-	  } else if (token = parseTokenTimezoneHHMM.exec(timezoneString)) {
-	    var absoluteOffset = parseInt(token[2], 10) * 60 + parseInt(token[3], 10)
-	    offset = (token[1] == '+') ? - absoluteOffset : absoluteOffset
+	  token = parseTokenTimezoneZ.exec(timezoneString)
+	  if (token) {
+	    return 0
 	  }
 	
-	  return offset
+	  // ±hh
+	  token = parseTokenTimezoneHH.exec(timezoneString)
+	  if (token) {
+	    absoluteOffset = parseInt(token[2], 10) * 60
+	    return (token[1] === '+') ? -absoluteOffset : absoluteOffset
+	  }
+	
+	  // ±hh:mm or ±hhmm
+	  token = parseTokenTimezoneHHMM.exec(timezoneString)
+	  if (token) {
+	    absoluteOffset = parseInt(token[2], 10) * 60 + parseInt(token[3], 10)
+	    return (token[1] === '+') ? -absoluteOffset : absoluteOffset
+	  }
+	
+	  return 0
 	}
 	
-	var dayOfISOYear = function(isoYear, week, day) {
+	function dayOfISOYear (isoYear, week, day) {
 	  week = week || 0
 	  day = day || 0
 	  var date = new Date(0)
@@ -1210,14 +1236,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = parse
-	
 
 
 /***/ },
 /* 10 */
+/***/ function(module, exports) {
+
+	/**
+	 * @category Common Helpers
+	 * @summary Is the given argument an instance of Date?
+	 *
+	 * @description
+	 * Is the given argument an instance of Date?
+	 *
+	 * @param {*} argument - the argument to check
+	 * @returns {Boolean} the given argument is an instance of Date
+	 *
+	 * @example
+	 * // Is 'mayonnaise' a Date?
+	 * var result = isDate('mayonnaise')
+	 * //=> false
+	 */
+	function isDate (argument) {
+	  return argument instanceof Date
+	}
+	
+	module.exports = isDate
+
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var startOfDay = __webpack_require__(11)
+	var startOfDay = __webpack_require__(12)
 	
 	/**
 	 * @category Day Helpers
@@ -1238,21 +1289,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * )
 	 * //=> true
 	 */
-	var isSameDay = function(dirtyDateLeft, dirtyDateRight) {
+	function isSameDay (dirtyDateLeft, dirtyDateRight) {
 	  var dateLeftStartOfDay = startOfDay(dirtyDateLeft)
 	  var dateRightStartOfDay = startOfDay(dirtyDateRight)
 	
-	  return(
-	    dateLeftStartOfDay.getTime() == dateRightStartOfDay.getTime()
-	  )
+	  return dateLeftStartOfDay.getTime() === dateRightStartOfDay.getTime()
 	}
 	
 	module.exports = isSameDay
-	
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -1273,23 +1321,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = startOfDay(new Date(2014, 8, 2, 11, 55, 0))
 	 * //=> Tue Sep 02 2014 00:00:00
 	 */
-	var startOfDay = function(dirtyDate) {
+	function startOfDay (dirtyDate) {
 	  var date = parse(dirtyDate)
 	  date.setHours(0, 0, 0, 0)
 	  return date
 	}
 	
 	module.exports = startOfDay
-	
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getDayOfYear = __webpack_require__(13)
-	var getISOWeek = __webpack_require__(16)
-	var getISOYear = __webpack_require__(18)
+	var getDayOfYear = __webpack_require__(14)
+	var getISOWeek = __webpack_require__(17)
+	var getISOYear = __webpack_require__(21)
 	var parse = __webpack_require__(9)
 	
 	/**
@@ -1359,7 +1406,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * )
 	 * //=> '02/11/2014'
 	 */
-	var format = function(dirtyDate, format) {
+	function format (dirtyDate, format) {
 	  var date = parse(dirtyDate)
 	
 	  if (!format) {
@@ -1372,134 +1419,134 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var formats = {
 	  // Month: 1, 2, ..., 12
-	  'M': function() {
+	  'M': function () {
 	    return this.getMonth() + 1
 	  },
 	
 	  // Month: 01, 02, ..., 12
-	  'MM': function() {
+	  'MM': function () {
 	    return addLeadingZeros(this.getMonth() + 1, 2)
 	  },
 	
 	  // Month: Jan, Feb, ..., Dec
-	  'MMM': function() {
+	  'MMM': function () {
 	    return locale.monthsShort[this.getMonth()]
 	  },
 	
 	  // Month: January, February, ..., December
-	  'MMMM': function() {
+	  'MMMM': function () {
 	    return locale.months[this.getMonth()]
 	  },
 	
 	  // Quarter: 1, 2, 3, 4
-	  'Q': function() {
+	  'Q': function () {
 	    return Math.ceil((this.getMonth() + 1) / 3)
 	  },
 	
 	  // Day of month: 1, 2, ..., 31
-	  'D': function() {
+	  'D': function () {
 	    return this.getDate()
 	  },
 	
 	  // Day of month: 01, 02, ..., 31
-	  'DD': function() {
+	  'DD': function () {
 	    return addLeadingZeros(this.getDate(), 2)
 	  },
 	
 	  // Day of year: 1, 2, ..., 366
-	  'DDD': function() {
+	  'DDD': function () {
 	    return getDayOfYear(this)
 	  },
 	
 	  // Day of year: 001, 002, ..., 366
-	  'DDDD': function() {
+	  'DDDD': function () {
 	    return addLeadingZeros(getDayOfYear(this), 3)
 	  },
 	
 	  // Day of week: 0, 1, ..., 6
-	  'd': function() {
+	  'd': function () {
 	    return this.getDay()
 	  },
 	
 	  // Day of week: Su, Mo, ..., Sa
-	  'dd': function() {
+	  'dd': function () {
 	    return locale.dayNamesMin[this.getDay()]
 	  },
 	
 	  // Day of week: Sun, Mon, ..., Sat
-	  'ddd': function() {
+	  'ddd': function () {
 	    return locale.dayNamesShort[this.getDay()]
 	  },
 	
 	  // Day of week: Sunday, Monday, ..., Saturday
-	  'dddd': function() {
+	  'dddd': function () {
 	    return locale.dayNames[this.getDay()]
 	  },
 	
 	  // Day of ISO week: 1, 2, ..., 7
-	  'E': function() {
+	  'E': function () {
 	    return this.getDay() || 7
 	  },
 	
 	  // ISO week: 1, 2, ..., 53
-	  'W': function() {
+	  'W': function () {
 	    return getISOWeek(this)
 	  },
 	
 	  // ISO week: 01, 02, ..., 53
-	  'WW': function() {
+	  'WW': function () {
 	    return addLeadingZeros(getISOWeek(this), 2)
 	  },
 	
 	  // Year: 00, 01, ..., 99
-	  'YY': function() {
+	  'YY': function () {
 	    return String(this.getFullYear()).substr(2)
 	  },
 	
 	  // Year: 1900, 1901, ..., 2099
-	  'YYYY': function() {
+	  'YYYY': function () {
 	    return this.getFullYear()
 	  },
 	
 	  // ISO week-numbering year: 00, 01, ..., 99
-	  'GG': function() {
+	  'GG': function () {
 	    return String(getISOYear(this)).substr(2)
 	  },
 	
 	  // ISO week-numbering year: 1900, 1901, ..., 2099
-	  'GGGG': function() {
+	  'GGGG': function () {
 	    return getISOYear(this)
 	  },
 	
 	  // AM, PM
-	  'A': function() {
+	  'A': function () {
 	    return (this.getHours() / 12) >= 1 ? 'PM' : 'AM'
 	  },
 	
 	  // am, pm
-	  'a': function() {
+	  'a': function () {
 	    return (this.getHours() / 12) >= 1 ? 'pm' : 'am'
 	  },
 	
 	  // a.m., p.m.
-	  'aa': function() {
+	  'aa': function () {
 	    return (this.getHours() / 12) >= 1 ? 'p.m.' : 'a.m.'
 	  },
 	
 	  // Hour: 0, 1, ... 23
-	  'H': function() {
+	  'H': function () {
 	    return this.getHours()
 	  },
 	
 	  // Hour: 00, 01, ..., 23
-	  'HH': function() {
+	  'HH': function () {
 	    return addLeadingZeros(this.getHours(), 2)
 	  },
 	
 	  // Hour: 1, 2, ..., 12
-	  'h': function() {
+	  'h': function () {
 	    var hours = this.getHours()
-	    if (hours == 0) {
+	    if (hours === 0) {
 	      return 12
 	    } else if (hours > 12) {
 	      return hours % 12
@@ -1509,69 +1556,69 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	
 	  // Hour: 01, 02, ..., 12
-	  'hh': function() {
+	  'hh': function () {
 	    return addLeadingZeros(formats['h'].apply(this), 2)
 	  },
 	
 	  // Minute: 0, 1, ..., 59
-	  'm': function() {
+	  'm': function () {
 	    return this.getMinutes()
 	  },
 	
 	  // Minute: 00, 01, ..., 59
-	  'mm': function() {
+	  'mm': function () {
 	    return addLeadingZeros(this.getMinutes(), 2)
 	  },
 	
 	  // Second: 0, 1, ..., 59
-	  's': function() {
+	  's': function () {
 	    return this.getSeconds()
 	  },
 	
 	  // Second: 00, 01, ..., 59
-	  'ss': function() {
+	  'ss': function () {
 	    return addLeadingZeros(this.getSeconds(), 2)
 	  },
 	
 	  // 1/10 of second: 0, 1, ..., 9
-	  'S': function() {
+	  'S': function () {
 	    return Math.floor(this.getMilliseconds() / 100)
 	  },
 	
 	  // 1/100 of second: 00, 01, ..., 99
-	  'SS': function() {
+	  'SS': function () {
 	    return Math.floor(this.getMilliseconds() / 10)
 	  },
 	
 	  // Millisecond: 000, 001, ..., 999
-	  'SSS': function() {
+	  'SSS': function () {
 	    return this.getMilliseconds()
 	  },
 	
 	  // Timezone: -01:00, +00:00, ... +12:00
-	  'Z': function() {
+	  'Z': function () {
 	    return formatTimezone(this.getTimezoneOffset(), ':')
 	  },
 	
 	  // Timezone: -0100, +0000, ... +1200
-	  'ZZ': function() {
+	  'ZZ': function () {
 	    return formatTimezone(this.getTimezoneOffset())
 	  },
 	
 	  // Seconds timestamp: 512969520
-	  'X': function() {
+	  'X': function () {
 	    return Math.floor(this.getTime() / 1000)
 	  },
 	
 	  // Milliseconds timestamp: 512969520900
-	  'x': function() {
+	  'x': function () {
 	    return this.getTime()
 	  }
 	}
 	
 	var ordinalFunctions = ['M', 'D', 'DDD', 'd', 'Q', 'W']
-	ordinalFunctions.forEach(function(functionName) {
-	  formats[functionName + 'o'] = function() {
+	ordinalFunctions.forEach(function (functionName) {
+	  formats[functionName + 'o'] = function () {
 	    return locale.ordinal(formats[functionName].apply(this))
 	  }
 	})
@@ -1581,10 +1628,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  '(\\[[^\\[]*\\])|(\\\\)?' + '(' + formattingTokens.join('|') + '|.)', 'g'
 	)
 	
-	var makeFormatFunction = function(format) {
-	  var array = format.match(formattingTokensRegexp), i, length
+	function makeFormatFunction (format) {
+	  var array = format.match(formattingTokensRegexp)
+	  var length = array.length
 	
-	  for (i = 0, length = array.length; i < length; i++) {
+	  for (var i = 0; i < length; i++) {
 	    if (formats[array[i]]) {
 	      array[i] = formats[array[i]]
 	    } else {
@@ -1592,9 +1640,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 	
-	  return function(mom) {
+	  return function (mom) {
 	    var output = ''
-	    for (i = 0; i < length; i++) {
+	    for (var i = 0; i < length; i++) {
 	      if (array[i] instanceof Function) {
 	        output += array[i].call(mom, format)
 	      } else {
@@ -1605,14 +1653,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 	
-	var removeFormattingTokens = function(input) {
+	function removeFormattingTokens (input) {
 	  if (input.match(/\[[\s\S]/)) {
 	    return input.replace(/^\[|\]$/g, '')
 	  }
 	  return input.replace(/\\/g, '')
 	}
 	
-	var addLeadingZeros = function(number, targetLength) {
+	function addLeadingZeros (number, targetLength) {
 	  var output = String(Math.abs(number))
 	
 	  while (output.length < targetLength) {
@@ -1621,7 +1669,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return output
 	}
 	
-	var formatTimezone = function(offset, delimeter) {
+	function formatTimezone (offset, delimeter) {
 	  delimeter = delimeter || ''
 	  var sign = offset > 0 ? '-' : '+'
 	  var absOffset = Math.abs(offset)
@@ -1631,7 +1679,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	var locale = {
-	  ordinal: function(number) {
+	  ordinal: function (number) {
 	    if (number > 20 || number < 10) {
 	      switch (number % 10) {
 	        case 1:
@@ -1652,20 +1700,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = format
-	
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
-	var startOfYear = __webpack_require__(14)
-	var differenceInCalendarDays = __webpack_require__(15)
+	var startOfYear = __webpack_require__(15)
+	var differenceInCalendarDays = __webpack_require__(16)
 	
 	/**
 	 * @category Day Helpers
-	 * @summary Get the day of the year.
+	 * @summary Get the day of the year of the given date.
 	 *
 	 * @description
 	 * Get the day of the year of the given date.
@@ -1678,7 +1725,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = getDayOfYear(new Date(2014, 6, 2))
 	 * //=> 183
 	 */
-	var getDayOfYear = function(dirtyDate) {
+	function getDayOfYear (dirtyDate) {
 	  var date = parse(dirtyDate)
 	  var diff = differenceInCalendarDays(date, startOfYear(date))
 	  var dayOfYear = diff + 1
@@ -1686,11 +1733,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = getDayOfYear
-	
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -1711,21 +1757,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = startOfYear(new Date(2014, 8, 2, 11, 55, 00))
 	 * //=> Wed Jan 01 2014 00:00:00
 	 */
-	var startOfYear = function(dirtyDate) {
+	function startOfYear (dirtyDate) {
 	  var cleanDate = parse(dirtyDate)
 	  var date = new Date(cleanDate.getFullYear(), 0, 1, 0, 0, 0, 0)
 	  return date
 	}
 	
 	module.exports = startOfYear
-	
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var startOfDay = __webpack_require__(11)
+	var startOfDay = __webpack_require__(12)
 	
 	var MILLISECONDS_IN_MINUTE = 60000
 	var MILLISECONDS_IN_DAY = 86400000
@@ -1750,14 +1795,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * )
 	 * //=> 366
 	 */
-	var differenceInCalendarDays = function(dirtyDateLeft, dirtyDateRight) {
+	function differenceInCalendarDays (dirtyDateLeft, dirtyDateRight) {
 	  var startOfDayLeft = startOfDay(dirtyDateLeft)
 	  var startOfDayRight = startOfDay(dirtyDateRight)
 	
-	  var timestampLeft = startOfDayLeft.getTime()
-	    - startOfDayLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
-	  var timestampRight = startOfDayRight.getTime()
-	    - startOfDayRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
+	  var timestampLeft = startOfDayLeft.getTime() -
+	    startOfDayLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
+	  var timestampRight = startOfDayRight.getTime() -
+	    startOfDayRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
 	
 	  // Round the number of days to the nearest integer
 	  // because the number of milliseconds in a day is not constant
@@ -1766,22 +1811,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = differenceInCalendarDays
-	
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
-	var startOfDay = __webpack_require__(11)
-	var startOfISOYear = __webpack_require__(17)
+	var startOfISOWeek = __webpack_require__(18)
+	var startOfISOYear = __webpack_require__(20)
 	
 	var MILLISECONDS_IN_WEEK = 604800000
 	
 	/**
 	 * @category ISO Week Helpers
-	 * @summary Get the ISO week.
+	 * @summary Get the ISO week of the given date.
 	 *
 	 * @description
 	 * Get the ISO week of the given date.
@@ -1796,22 +1840,100 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = getISOWeek(new Date(2005, 0, 2))
 	 * //=> 53
 	 */
-	var getISOWeek = function(dirtyDate) {
+	function getISOWeek (dirtyDate) {
 	  var date = parse(dirtyDate)
-	  var diff = startOfDay(date).getTime() - startOfISOYear(date).getTime()
-	  return Math.floor(diff / MILLISECONDS_IN_WEEK) + 1
+	  var diff = startOfISOWeek(date).getTime() - startOfISOYear(date).getTime()
+	
+	  // Round the number of days to the nearest integer
+	  // because the number of milliseconds in a week is not constant
+	  // (e.g. it's different in the week of the daylight saving time clock shift)
+	  return Math.round(diff / MILLISECONDS_IN_WEEK) + 1
 	}
 	
 	module.exports = getISOWeek
-	
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getISOYear = __webpack_require__(18)
-	var startOfISOWeek = __webpack_require__(19)
+	var startOfWeek = __webpack_require__(19)
+	
+	/**
+	 * @category ISO Week Helpers
+	 * @summary Return the start of an ISO week for the given date.
+	 *
+	 * @description
+	 * Return the start of an ISO week for the given date.
+	 * The result will be in the local timezone.
+	 *
+	 * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+	 *
+	 * @param {Date|String|Number} date - the original date
+	 * @returns {Date} the start of an ISO week
+	 *
+	 * @example
+	 * // The start of an ISO week for 2 September 2014 11:55:00:
+	 * var result = startOfISOWeek(new Date(2014, 8, 2, 11, 55, 0))
+	 * //=> Mon Sep 01 2014 00:00:00
+	 */
+	function startOfISOWeek (dirtyDate) {
+	  return startOfWeek(dirtyDate, {weekStartsOn: 1})
+	}
+	
+	module.exports = startOfISOWeek
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var parse = __webpack_require__(9)
+	
+	/**
+	 * @category Week Helpers
+	 * @summary Return the start of a week for the given date.
+	 *
+	 * @description
+	 * Return the start of a week for the given date.
+	 * The result will be in the local timezone.
+	 *
+	 * @param {Date|String|Number} date - the original date
+	 * @param {Object} [options] - the object with options
+	 * @param {Number} [options.weekStartsOn=0] - the index of the first day of the week (0 - Sunday)
+	 * @returns {Date} the start of a week
+	 *
+	 * @example
+	 * // The start of a week for 2 September 2014 11:55:00:
+	 * var result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0))
+	 * //=> Sun Aug 31 2014 00:00:00
+	 *
+	 * @example
+	 * // If week starts at Monday, the start of a week for 2 September 2014 11:55:00:
+	 * var result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0), {weekStartsOn: 1})
+	 * //=> Mon Sep 01 2014 00:00:00
+	 */
+	function startOfWeek (dirtyDate, options) {
+	  var weekStartsOn = options ? (options.weekStartsOn || 0) : 0
+	
+	  var date = parse(dirtyDate)
+	  var day = date.getDay()
+	  var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn
+	
+	  date.setDate(date.getDate() - diff)
+	  date.setHours(0, 0, 0, 0)
+	  return date
+	}
+	
+	module.exports = startOfWeek
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getISOYear = __webpack_require__(21)
+	var startOfISOWeek = __webpack_require__(18)
 	
 	/**
 	 * @category ISO Week-Numbering Year Helpers
@@ -1832,26 +1954,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = startOfISOYear(new Date(2005, 6, 2))
 	 * //=> Mon Jan 03 2005 00:00:00
 	 */
-	var startOfISOYear = function(dirtyDate) {
+	function startOfISOYear (dirtyDate) {
 	  var year = getISOYear(dirtyDate)
 	  var date = startOfISOWeek(new Date(year, 0, 4))
 	  return date
 	}
 	
 	module.exports = startOfISOYear
-	
 
 
 /***/ },
-/* 18 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
-	var startOfISOWeek = __webpack_require__(19)
+	var startOfISOWeek = __webpack_require__(18)
 	
 	/**
 	 * @category ISO Week-Numbering Year Helpers
-	 * @summary Get the ISO week-numbering year.
+	 * @summary Get the ISO week-numbering year of the given date.
 	 *
 	 * @description
 	 * Get the ISO week-numbering year of the given date,
@@ -1867,7 +1988,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = getISOYear(new Date(2005, 0, 2))
 	 * //=> 2004
 	 */
-	var getISOYear = function(dirtyDate) {
+	function getISOYear (dirtyDate) {
 	  var date = parse(dirtyDate)
 	  var year = date.getFullYear()
 	  var startOfNextYear = startOfISOWeek(new Date(year + 1, 0, 4))
@@ -1883,88 +2004,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = getISOYear
-	
 
 
 /***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var startOfWeek = __webpack_require__(20)
-	
-	/**
-	 * @category ISO Week Helpers
-	 * @summary Return the start of an ISO week for the given date.
-	 *
-	 * @description
-	 * Return the start of an ISO week for the given date.
-	 * The result will be in the local timezone.
-	 *
-	 * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
-	 *
-	 * @param {Date|String|Number} date - the original date
-	 * @returns {Date} the start of an ISO week
-	 *
-	 * @example
-	 * // The start of an ISO week for 2 September 2014 11:55:00:
-	 * var result = startOfISOWeek(new Date(2014, 8, 2, 11, 55, 0))
-	 * //=> Mon Sep 01 2014 00:00:00
-	 */
-	var startOfISOWeek = function(dirtyDate) {
-	  return startOfWeek(dirtyDate, {weekStartsAt: 1})
-	}
-	
-	module.exports = startOfISOWeek
-	
-
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var parse = __webpack_require__(9)
-	
-	/**
-	 * @category Week Helpers
-	 * @summary Return the start of a week for the given date.
-	 *
-	 * @description
-	 * Return the start of a week for the given date.
-	 * The result will be in the local timezone.
-	 *
-	 * @param {Date|String|Number} date - the original date
-	 * @param {Object} [options] - the object with options
-	 * @param {Number} [options.weekStartsAt=0] - the index of the first day of a week (0 - sunday)
-	 * @returns {Date} the start of a week
-	 *
-	 * @example
-	 * // The start of a week for 2 September 2014 11:55:00:
-	 * var result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0))
-	 * //=> Sun Aug 31 2014 00:00:00
-	 *
-	 * @example
-	 * // If week starts at Monday, the start of a week for 2 September 2014 11:55:00:
-	 * var result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0), {weekStartsAt: 1})
-	 * //=> Mon Sep 01 2014 00:00:00
-	 */
-	var startOfWeek = function(dirtyDate, options) {
-	  var weekStartsAt = options ? (options.weekStartsAt || 0) : 0
-	
-	  var date = parse(dirtyDate)
-	  var day = date.getDay()
-	  var diff = (day < weekStartsAt ? 7 : 0) + day - weekStartsAt
-	
-	  date.setDate(date.getDate() - diff)
-	  date.setHours(0, 0, 0, 0)
-	  return date
-	}
-	
-	module.exports = startOfWeek
-	
-
-
-/***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -1988,21 +2031,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * )
 	 * //=> true
 	 */
-	var isSameMonth = function(dirtyDateLeft, dirtyDateRight) {
+	function isSameMonth (dirtyDateLeft, dirtyDateRight) {
 	  var dateLeft = parse(dirtyDateLeft)
 	  var dateRight = parse(dirtyDateRight)
-	  return(
-	    dateLeft.getFullYear() == dateRight.getFullYear()
-	    && dateLeft.getMonth() == dateRight.getMonth()
-	  )
+	  return dateLeft.getFullYear() === dateRight.getFullYear() &&
+	    dateLeft.getMonth() === dateRight.getMonth()
 	}
 	
 	module.exports = isSameMonth
-	
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -2014,10 +2054,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @description
 	 * Return the array of dates within the specified range.
 	 *
-	 * @param {Date|String|Number} startDate - the start of range
-	 * @param {Date|String|Number} endDate - the end of range
-	 * @returns {Date[]} the array of dates for every day of the range
-	 * @throws {Error} endDate must have a time value greater than a time value of startDate
+	 * @param {Date|String|Number} startDate - the first date
+	 * @param {Date|String|Number} endDate - the last date
+	 * @returns {Date[]} the array with starts of days from the day of startDate to the day of endDate
+	 * @throws {Error} startDate cannot be after endDate
 	 *
 	 * @example
 	 * // Each day between 6 October 2014 and 10 October 2014:
@@ -2033,14 +2073,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * //   Fri Oct 10 2014 00:00:00
 	 * // ]
 	 */
-	var eachDay = function(dirtyStartDate, dirtyEndDate) {
+	function eachDay (dirtyStartDate, dirtyEndDate) {
 	  var startDate = parse(dirtyStartDate)
 	  var endDate = parse(dirtyEndDate)
 	
 	  var endTime = endDate.getTime()
 	
 	  if (startDate.getTime() > endTime) {
-	    throw new Error('The end of range must have a time value greater than a time value of the start of range')
+	    throw new Error('The first date cannot be after the second date')
 	  }
 	
 	  var dates = []
@@ -2057,11 +2097,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = eachDay
-	
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -2076,7 +2115,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @param {Date|String|Number} date - the original date
 	 * @param {Object} [options] - the object with options
-	 * @param {Number} [options.weekStartsAt=0] - the index of the first day of a week (0 - sunday)
+	 * @param {Number} [options.weekStartsOn=0] - the index of the first day of the week (0 - Sunday)
 	 * @returns {Date} the end of a week
 	 *
 	 * @example
@@ -2086,15 +2125,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @example
 	 * // If week starts at Monday, the end of a week for 2 September 2014 11:55:00:
-	 * var result = endOfWeek(new Date(2014, 8, 2, 11, 55, 0), {weekStartsAt: 1})
+	 * var result = endOfWeek(new Date(2014, 8, 2, 11, 55, 0), {weekStartsOn: 1})
 	 * //=> Sun Sep 07 2014 23:59:59.999
 	 */
-	var endOfWeek = function(dirtyDate, options) {
-	  var weekStartsAt = options ? (options.weekStartsAt || 0) : 0
+	function endOfWeek (dirtyDate, options) {
+	  var weekStartsOn = options ? (options.weekStartsOn || 0) : 0
 	
 	  var date = parse(dirtyDate)
 	  var day = date.getDay()
-	  var diff = (day < weekStartsAt ? -7 : 0) + 6 - (day - weekStartsAt)
+	  var diff = (day < weekStartsOn ? -7 : 0) + 6 - (day - weekStartsOn)
 	
 	  date.setDate(date.getDate() + diff)
 	  date.setHours(23, 59, 59, 999)
@@ -2102,11 +2141,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = endOfWeek
-	
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -2122,7 +2160,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Date|String|Number} startDate - the start of range
 	 * @param {Date|String|Number} endDate - the end of range
 	 * @returns {Boolean} the date is within the range
-	 * @throws {Error} endDate must have a time value greater than a time value of startDate
+	 * @throws {Error} startDate cannot be after endDate
 	 *
 	 * @example
 	 * // For the date within the range:
@@ -2138,24 +2176,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * )
 	 * //=> false
 	 */
-	var isWithinRange = function(dirtyDate, dirtyStartDate, dirtyEndDate) {
+	function isWithinRange (dirtyDate, dirtyStartDate, dirtyEndDate) {
 	  var time = parse(dirtyDate).getTime()
 	  var startTime = parse(dirtyStartDate).getTime()
 	  var endTime = parse(dirtyEndDate).getTime()
 	
 	  if (startTime > endTime) {
-	    throw new Error('The end of range must have a time value greater than a time value of the start of range')
+	    throw new Error('The start of the range cannot be after the end of the range')
 	  }
 	
 	  return time >= startTime && time <= endTime
 	}
 	
 	module.exports = isWithinRange
-	
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -2176,18 +2213,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = isBefore(new Date(1989, 6, 10), new Date(1987, 1, 11))
 	 * //=> false
 	 */
-	var isBefore = function(dirtyDateToCompare, dirtyDate) {
+	function isBefore (dirtyDateToCompare, dirtyDate) {
 	  var dateToCompare = parse(dirtyDateToCompare)
 	  var date = parse(dirtyDate)
 	  return dateToCompare.getTime() < date.getTime()
 	}
 	
 	module.exports = isBefore
-	
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -2208,18 +2244,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = isAfter(new Date(1989, 6, 10), new Date(1987, 1, 11))
 	 * //=> true
 	 */
-	var isAfter = function(dirtyDateToCompare, dirtyDate) {
+	function isAfter (dirtyDateToCompare, dirtyDate) {
 	  var dateToCompare = parse(dirtyDateToCompare)
 	  var date = parse(dirtyDate)
 	  return dateToCompare.getTime() > date.getTime()
 	}
 	
 	module.exports = isAfter
-	
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -2243,18 +2278,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * )
 	 * //=> false
 	 */
-	var isEqual = function(dirtyLeftDate, dirtyRightDate) {
+	function isEqual (dirtyLeftDate, dirtyRightDate) {
 	  var dateLeft = parse(dirtyLeftDate)
 	  var dateRight = parse(dirtyRightDate)
-	  return dateLeft.getTime() == dateRight.getTime()
+	  return dateLeft.getTime() === dateRight.getTime()
 	}
 	
 	module.exports = isEqual
-	
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2331,7 +2365,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -2352,7 +2386,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = startOfMonth(new Date(2014, 8, 2, 11, 55, 0))
 	 * //=> Mon Sep 01 2014 00:00:00
 	 */
-	var startOfMonth = function(dirtyDate) {
+	function startOfMonth (dirtyDate) {
 	  var date = parse(dirtyDate)
 	  date.setDate(1)
 	  date.setHours(0, 0, 0, 0)
@@ -2360,11 +2394,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = startOfMonth
-	
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -2385,7 +2418,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = endOfMonth(new Date(2014, 8, 2, 11, 55, 0))
 	 * //=> Tue Sep 30 2014 23:59:59.999
 	 */
-	var endOfMonth = function(dirtyDate) {
+	function endOfMonth (dirtyDate) {
 	  var date = parse(dirtyDate)
 	  var month = date.getMonth()
 	  date.setFullYear(date.getFullYear(), month + 1, 0)
@@ -2394,18 +2427,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = endOfMonth
-	
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
 	
 	/**
 	 * @category Day Helpers
-	 * @summary Get the day of the month.
+	 * @summary Add the specified number of days to the given date.
 	 *
 	 * @description
 	 * Add the specified number of days to the given date.
@@ -2419,18 +2451,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = addDays(new Date(2014, 8, 1), 10)
 	 * //=> Thu Sep 11 2014 00:00:00
 	 */
-	var addDays = function(dirtyDate, amount) {
+	function addDays (dirtyDate, amount) {
 	  var date = parse(dirtyDate)
 	  date.setDate(date.getDate() + amount)
 	  return date
 	}
 	
 	module.exports = addDays
-	
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2449,29 +2480,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _header_button = __webpack_require__(33);
+	var _header_button = __webpack_require__(34);
 	
 	var _header_button2 = _interopRequireDefault(_header_button);
 	
 	var _consts = __webpack_require__(7);
 	
-	var _add_months = __webpack_require__(34);
+	var _add_months = __webpack_require__(35);
 	
 	var _add_months2 = _interopRequireDefault(_add_months);
 	
-	var _is_before = __webpack_require__(25);
+	var _is_before = __webpack_require__(26);
 	
 	var _is_before2 = _interopRequireDefault(_is_before);
 	
-	var _is_after = __webpack_require__(26);
+	var _is_after = __webpack_require__(27);
 	
 	var _is_after2 = _interopRequireDefault(_is_after);
 	
-	var _start_of_month = __webpack_require__(29);
+	var _start_of_month = __webpack_require__(30);
 	
 	var _start_of_month2 = _interopRequireDefault(_start_of_month);
 	
-	var _format = __webpack_require__(12);
+	var _format = __webpack_require__(13);
 	
 	var _format2 = _interopRequireDefault(_format);
 	
@@ -2568,7 +2599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2662,11 +2693,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
-	var getDaysInMonth = __webpack_require__(35)
+	var getDaysInMonth = __webpack_require__(36)
 	
 	/**
 	 * @category Month Helpers
@@ -2684,7 +2715,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = addMonths(new Date(2014, 8, 1), 5)
 	 * //=> Sun Feb 01 2015 00:00:00
 	 */
-	var addMonths = function(dirtyDate, amount) {
+	function addMonths (dirtyDate, amount) {
 	  var date = parse(dirtyDate)
 	  var desiredMonth = date.getMonth() + amount
 	  var daysInMonth = getDaysInMonth(new Date(date.getFullYear(), desiredMonth, 1))
@@ -2695,11 +2726,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = addMonths
-	
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(9)
@@ -2719,7 +2749,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = getDaysInMonth(new Date(2000, 1))
 	 * //=> 29
 	 */
-	var getDaysInMonth = function(dirtyDate) {
+	function getDaysInMonth (dirtyDate) {
 	  var date = parse(dirtyDate)
 	  var year = date.getFullYear()
 	  var monthIndex = date.getMonth()
@@ -2727,13 +2757,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = getDaysInMonth
-	
 
 
 /***/ },
-/* 36 */
-/***/ function(module, exports) {
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
 
+	var isDate = __webpack_require__(10)
+	
 	/**
 	 * @category Common Helpers
 	 * @summary Is the given date valid?
@@ -2758,16 +2789,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * var result = isValid(new Date(''))
 	 * //=> false
 	 */
-	var isValid = function(date) {
-	  if (date instanceof Date) {
-	    return !isNaN((new Date(date)).getTime())
+	function isValid (date) {
+	  if (isDate(date)) {
+	    return !isNaN(date)
 	  } else {
-	    throw new TypeError(toString.call(date) + ' is not a date')
+	    throw new TypeError(toString.call(date) + ' is not an instance of Date')
 	  }
 	}
 	
 	module.exports = isValid
-	
 
 
 /***/ }
