@@ -95,8 +95,8 @@ export default class Month extends React.Component {
       minNumberOfWeeks
     } = this.props
     const weeks = []
-    let date = startOfWeek(startOfMonth(activeMonth), {weekStartsAt: 1})
-    const endDate = endOfWeek(endOfMonth(activeMonth), {weekStartsAt: 1})
+    let date = startOfWeek(startOfMonth(activeMonth), {weekStartsOn: 1})
+    const endDate = endOfWeek(endOfMonth(activeMonth), {weekStartsOn: 1})
     while ((typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length)
       || (isBefore(date, endDate) || isSameDay(date, endDate))) {
       weeks.push(date)
