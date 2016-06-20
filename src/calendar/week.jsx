@@ -83,8 +83,8 @@ export default class Week extends React.Component {
 
   _renderDays() {
     const {date, activeMonth, today, onDayClick, onDayMouseMove, selectedMin, selectedMax, blockClassName} = this.props
-    const startDate = startOfWeek(date, {weekStartsAt: 1})
-    const endDate = endOfWeek(date, {weekStartsAt: 1})
+    const startDate = startOfWeek(date, {weekStartsOn: 1})
+    const endDate = endOfWeek(date, {weekStartsOn: 1})
     return eachDay(startDate, endDate).map((day) => {
       const data = this.props.data[format(day, 'YYYY-MM-DD')]
       const selectable = this._dateSelectable(day)
