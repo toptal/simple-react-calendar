@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/toptal/simple-react-calendar.git"
   },
-  "version": "1.1.0",
+  "version": "1.1.1",
   "scripts": {
     "build": "env NODE_ENV=production webpack",
     "build-lib": "babel ./src --out-dir ./lib --ignore ./src/calendar/__specs__",

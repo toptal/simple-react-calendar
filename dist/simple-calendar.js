@@ -2665,6 +2665,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          className: (0, _classnames2.default)(blockClassName + '-header_button', 'is-' + type, {
 	            'is-disabled': !enabled
 	          }),
+	          type: 'button',
 	          disabled: !enabled,
 	          title: title,
 	          onClick: this._onClick.bind(this)
