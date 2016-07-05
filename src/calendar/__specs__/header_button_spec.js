@@ -17,6 +17,13 @@ describe('HeaderButton', () => {
     )
   }
 
+  describe('button type prop', () => {
+    it('has correct button type', () => {
+      const el = findDOMNode(render())
+      assert(el.getAttribute('type') === 'button')
+    })
+  })
+
   describe('enabled', () => {
     context('when enabled is true', () => {
       it("don't renders el with class name equal .is-disabled", () => {

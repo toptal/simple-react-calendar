@@ -37,6 +37,7 @@ export default class HeaderButton extends React.Component {
             'is-disabled': !enabled
           }
         )}
+        type='button'
         disabled={!enabled}
         title={title}
         onClick={this._onClick.bind(this)}
