@@ -9,10 +9,11 @@ import endOfWeek from 'date-fns/end_of_week'
 import startOfMonth from 'date-fns/start_of_month'
 import endOfMonth from 'date-fns/end_of_month'
 import isBefore from 'date-fns/is_before'
-import isAfter from 'date-fns/is_after'
 import isEqual from 'date-fns/is_equal'
 import addDays from 'date-fns/add_days'
+import subDays from 'date-fns/sub_days'
 import isSameDay from 'date-fns/is_same_day'
+import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
 
 const SINGLE_MODE = 'single'
 const RANGE_MODE = 'range'
@@ -26,6 +27,7 @@ export default class Month extends React.Component {
     minNumberOfWeeks: React.PropTypes.number,
     mode: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func.isRequired,
+    rangeLimit: React.PropTypes.number,
     selectedMax: React.PropTypes.instanceOf(Date),
     selectedMin: React.PropTypes.instanceOf(Date),
     today: React.PropTypes.instanceOf(Date).isRequired
@@ -36,16 +38,36 @@ export default class Month extends React.Component {
   }
 
   _pushUpdate() {
-    this.props.onChange({
-      start: isBefore(this._selectionStart, this._selectionEnd) ? this._selectionStart : this._selectionEnd,
-      end: isAfter(this._selectionStart, this._selectionEnd) ? this._selectionStart : this._selectionEnd,
+    const {onChange, rangeLimit} = this.props
+    let start, end
+
+    if (isBefore(this._selectionStart, this._selectionEnd)) {
+      start = this._selectionStart
+      end = this._selectionEnd
+    } else {
+      start = this._selectionEnd
+      end = this._selectionStart
+    }
+
+    if (rangeLimit && rangeLimit < differenceInCalendarDays(end, start)) {
+      end = addDays(start, rangeLimit)
+    }
+
+    return onChange({
+      start,
+      end,
       inProgress: this._selectionInProgress
     })
   }
 
   _onDayMouseMove(date) {
-    if (this._selectionInProgress) {
-      if (!isEqual(date, this._selectionEnd)) {
+    if (!this._selectionInProgress) return
+
+    const {rangeLimit} = this.props
+    const dateLimit = subDays(this._selectionStart, rangeLimit)
+
+    if (!isEqual(date, this._selectionEnd)) {
+      if (!rangeLimit || rangeLimit && !isBefore(date, dateLimit)) {
         this._selectionEnd = date
         this._pushUpdate()
       }
@@ -85,18 +107,24 @@ export default class Month extends React.Component {
 
   _renderWeeks() {
     const {
-      minDate,
-      maxDate,
       selectedMin,
       selectedMax,
       activeMonth,
       today,
       blockClassName,
-      minNumberOfWeeks
+      minNumberOfWeeks,
+      rangeLimit
     } = this.props
     const weeks = []
+    let {minDate, maxDate} = this.props
     let date = startOfWeek(startOfMonth(activeMonth), {weekStartsOn: 1})
     const endDate = endOfWeek(endOfMonth(activeMonth), {weekStartsOn: 1})
+
+    if (this._selectionInProgress && rangeLimit) {
+      minDate = subDays(this._selectionStart, rangeLimit)
+      maxDate = addDays(this._selectionStart, rangeLimit)
+    }
+
     while ((typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length)
       || (isBefore(date, endDate) || isSameDay(date, endDate))) {
       weeks.push(date)

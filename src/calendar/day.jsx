@@ -3,10 +3,7 @@ import classnames from 'classnames'
 
 import {BLOCK_CLASS_NAME} from './consts'
 
-import isWeekend from 'date-fns/is_weekend'
-import isSameDay from 'date-fns/is_same_day'
 import formatDate from 'date-fns/format'
-import isSameMonth from 'date-fns/is_same_month'
 
 export default class Day extends React.Component {
   static propTypes = {

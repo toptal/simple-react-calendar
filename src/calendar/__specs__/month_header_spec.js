@@ -112,7 +112,7 @@ describe('MonthHeader', () => {
     context('when blockClassName is not defined', () => {
       it('renders el with .calendar-month_header', () => {
         const monthHeaderEl = findDOMNode(render())
-        assert(monthHeaderEl.classList.contains('calendar-month_header'))
+        assert(monthHeaderEl.getElementsByClassName('calendar-month_header'))
       })
 
       it('renders title el with .calendar-month_header_title', () => {
@@ -124,7 +124,7 @@ describe('MonthHeader', () => {
     context('when blockClassName is defined', () => {
       it('renders el with prefixed class name', () => {
         const monthHeaderEl = findDOMNode(render({blockClassName: 'cal'}))
-        assert(monthHeaderEl.classList.contains('cal-month_header'))
+        assert(monthHeaderEl.getElementsByClassName('cal-month_header'))
       })
 
       it('renders title el with prefixed class name', () => {
