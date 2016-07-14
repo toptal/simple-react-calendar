@@ -1,5 +1,4 @@
 import React from 'react'
-import classnames from 'classnames'
 
 import HeaderButton from './header_button'
 import {BLOCK_CLASS_NAME, NEXT_MONTH_TITLE, PREV_MONTH_TITLE} from './consts'
@@ -35,7 +34,17 @@ export default class MonthHeader extends React.Component {
   }
 
   render() {
-    const {activeMonth, minDate, maxDate, blockClassName, headerNextArrow, headerNextTitle, headerPrevArrow, headerPrevTitle} = this.props
+    const {
+      activeMonth,
+      minDate,
+      maxDate,
+      blockClassName,
+      headerNextArrow,
+      headerNextTitle,
+      headerPrevArrow,
+      headerPrevTitle
+    } = this.props
+
     const prevEnabled = minDate ? isBefore(startOfMonth(minDate), startOfMonth(activeMonth)) : true
     const nextEnabled = maxDate ? isAfter(startOfMonth(maxDate), startOfMonth(activeMonth)) : true
 

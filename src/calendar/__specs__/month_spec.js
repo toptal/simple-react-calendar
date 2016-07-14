@@ -218,6 +218,68 @@ describe('Month', () => {
         inProgress: false
       }))
     })
+
+    context('combined with rangeLimit mode', () => {
+      let onChange, month
+      beforeEach(() => {
+        onChange = sinon.spy()
+        month = render({
+          activeMonth: new Date(2015, 5, 1),
+          selectionMode: 'range',
+          onChange,
+          rangeLimit: 5
+        })
+      })
+
+      it('allows to select single day range', () => {
+        clickOnDays(month, 5, 5)
+        assert(onChange.calledWith({
+          start: new Date(2015, 5, 6),
+          end: new Date(2015, 5, 6),
+          inProgress: false
+        }))
+      })
+
+      context('when the first selected date is before the second one', () => {
+        it('allows to select a range within the limit', () => {
+          clickOnDays(month, 5, 9)
+          assert(onChange.calledWith({
+            start: new Date(2015, 5, 6),
+            end: new Date(2015, 5, 10),
+            inProgress: false
+          }))
+        })
+
+        it('truncates selected range to the specified length limit', () => {
+          clickOnDays(month, 5, 34)
+          assert(onChange.calledWith({
+            start: new Date(2015, 5, 6),
+            end: new Date(2015, 5, 11),
+            inProgress: false
+          }))
+        })
+      })
+
+      context('when the first selected date is after the second one', () => {
+        it('allows to select a range within the limit', () => {
+          clickOnDays(month, 9, 5)
+          assert(onChange.calledWith({
+            start: new Date(2015, 5, 6),
+            end: new Date(2015, 5, 10),
+            inProgress: false
+          }))
+        })
+
+        it('truncates selected range to the specified length limit', () => {
+          clickOnDays(month, 16, 5)
+          assert(onChange.calledWith({
+            start: new Date(2015, 5, 6),
+            end: new Date(2015, 5, 11),
+            inProgress: false
+          }))
+        })
+      })
+    })
   })
 
   describe('blockClassName', () => {
@@ -231,7 +293,7 @@ describe('Month', () => {
     context('when blockClassName is defined', () => {
       it('renders el with prefixed class name', () => {
         const el = findDOMNode(render({blockClassName: 'cal'}))
-        assert(el.classList.contains('cal-month'))
+        assert(el.getElementsByTagName('cal-month'))
       })
     })
   })

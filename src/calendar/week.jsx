@@ -60,7 +60,7 @@ export default class Week extends React.Component {
       )
   }
 
-  _dateClasses(date, data) {
+  _dateClasses(date) {
     const {today, activeMonth} = this.props
     return classnames({
       'is-selected': this._dateSelected(date),
@@ -82,7 +82,7 @@ export default class Week extends React.Component {
   }
 
   _renderDays() {
-    const {date, activeMonth, today, onDayClick, onDayMouseMove, selectedMin, selectedMax, blockClassName} = this.props
+    const {date, today, onDayClick, onDayMouseMove, blockClassName} = this.props
     const startDate = startOfWeek(date, {weekStartsOn: 1})
     const endDate = endOfWeek(date, {weekStartsOn: 1})
     return eachDay(startDate, endDate).map((day) => {

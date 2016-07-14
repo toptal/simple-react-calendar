@@ -5,7 +5,6 @@ import MonthHeader from './month_header'
 import {BLOCK_CLASS_NAME} from './consts'
 
 import startOfMonth from 'date-fns/start_of_month'
-import isSameDay from 'date-fns/is_same_day'
 import isSameMonth from 'date-fns/is_same_month'
 import isValidDate from 'date-fns/is_valid'
 
@@ -22,6 +21,7 @@ const isValid = function(date) {
 
 export default class Calendar extends React.Component {
   static propTypes = {
+    MonthHeaderComponent: React.PropTypes.object,
     activeMonth: React.PropTypes.instanceOf(Date),
     blockClassName: React.PropTypes.string,
     headerNextArrow: React.PropTypes.element,
@@ -35,6 +35,7 @@ export default class Calendar extends React.Component {
     onMonthChange: React.PropTypes.func,
     onSelect: React.PropTypes.func,
     onSelectionProgress: React.PropTypes.func,
+    rangeLimit: React.PropTypes.number,
     selected: React.PropTypes.oneOfType([
       React.PropTypes.instanceOf(Date),
       React.PropTypes.shape({
@@ -159,13 +160,24 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-    const {mode, minDate, maxDate, blockClassName, headerNextArrow, headerNextTitle, headerPrevArrow, headerPrevTitle} = this.props
-    const activeMonth = isValid(this._activeMonth()) ? this._activeMonth() : startOfMonth(this._today())
+    const {
+      blockClassName,
+      headerNextArrow,
+      headerNextTitle,
+      headerPrevArrow,
+      headerPrevTitle,
+      maxDate,
+      minDate,
+      minNumberOfWeeks,
+      mode,
+      rangeLimit
+    } = this.props
     const selection = this._selection()
+    const MonthHeaderComponent = this.props.MonthHeaderComponent || MonthHeader
 
     return (
       <div className={blockClassName}>
-        <MonthHeader
+        <MonthHeaderComponent
           ref='header'
           minDate={minDate}
           maxDate={maxDate}
@@ -175,20 +187,21 @@ export default class Calendar extends React.Component {
           headerNextTitle={headerNextTitle}
           activeMonth={this._activeMonth()}
           onMonthChange={this._switchMonth.bind(this)}
-          blockClassName={this.props.blockClassName}
+          blockClassName={blockClassName}
         />
         <Month
           mode={mode}
           minDate={minDate}
           maxDate={maxDate}
-          minNumberOfWeeks={this.props.minNumberOfWeeks}
+          minNumberOfWeeks={minNumberOfWeeks}
+          rangeLimit={rangeLimit}
           today={this._today()}
           ref='month'
           activeMonth={this._activeMonth()}
           selectedMin={selection.start}
           selectedMax={selection.end}
           onChange={this._selectionChanged.bind(this)}
-          blockClassName={this.props.blockClassName}
+          blockClassName={blockClassName}
         />
       </div>
     )

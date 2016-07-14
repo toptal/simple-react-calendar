@@ -53,7 +53,6 @@ describe ('Calendar', () => {
     const calendar = render({
       today: new Date(2015, 6, 1)
     })
-    const month = TestUtils.findRenderedComponentWithType(calendar, Month)
     const calendarEl = findDOMNode(calendar)
     const nextLinkEl = calendarEl.querySelector('.calendar-header_button.is-next')
     const headerTitleEl = calendarEl.querySelector('.calendar-month_header_title')
@@ -416,6 +415,23 @@ describe ('Calendar', () => {
         const el = findDOMNode(render({blockClassName: 'cal'}))
         assert(el.classList.contains('cal'))
       })
+    })
+  })
+
+  describe('monthHeaderComponent', () => {
+    let mockHeader
+
+    beforeEach(() => {
+      mockHeader = React.createClass({
+        render() {
+          return (<div className='fake'>MockHeader</div>)
+        }
+      })
+    })
+
+    it('renders passed component', () => {
+      const el = findDOMNode(render({monthHeaderComponent: mockHeader}))
+      assert(el.getElementsByClassName('fake'))
     })
   })
 })
