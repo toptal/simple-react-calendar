@@ -11,7 +11,7 @@ import formatDate from 'date-fns/format'
 
 export default class MonthHeader extends React.Component {
   static propTypes = {
-    activeMonth: React.PropTypes.instanceOf(Date).isRequired,
+    activeMonth: React.PropTypes.instanceOf(Date),
     blockClassName: React.PropTypes.string,
     headerNextArrow: React.PropTypes.element,
     headerNextTitle: React.PropTypes.string,
@@ -19,7 +19,7 @@ export default class MonthHeader extends React.Component {
     headerPrevTitle: React.PropTypes.string,
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
-    onMonthChange: React.PropTypes.func.isRequired
+    onMonthChange: React.PropTypes.func
   }
 
   static defaultProps = {

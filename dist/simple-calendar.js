@@ -277,6 +277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'render',
 	    value: function render() {
 	      var _props4 = this.props;
+	      var MonthHeader = _props4.MonthHeader;
 	      var blockClassName = _props4.blockClassName;
 	      var headerNextArrow = _props4.headerNextArrow;
 	      var headerNextTitle = _props4.headerNextTitle;
@@ -289,23 +290,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var rangeLimit = _props4.rangeLimit;
 	
 	      var selection = this._selection();
-	      var MonthHeaderComponent = this.props.MonthHeaderComponent || _month_header2.default;
+	
+	      var monthHeader = _react2.default.cloneElement(MonthHeader, {
+	        ref: 'header',
+	        minDate: minDate,
+	        maxDate: maxDate,
+	        headerPrevArrow: headerPrevArrow,
+	        headerPrevTitle: headerPrevTitle,
+	        headerNextArrow: headerNextArrow,
+	        headerNextTitle: headerNextTitle,
+	        blockClassName: blockClassName,
+	        activeMonth: this._activeMonth(),
+	        onMonthChange: this._switchMonth.bind(this)
+	      });
 	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: blockClassName },
-	        _react2.default.createElement(MonthHeaderComponent, {
-	          ref: 'header',
-	          minDate: minDate,
-	          maxDate: maxDate,
-	          headerPrevArrow: headerPrevArrow,
-	          headerPrevTitle: headerPrevTitle,
-	          headerNextArrow: headerNextArrow,
-	          headerNextTitle: headerNextTitle,
-	          activeMonth: this._activeMonth(),
-	          onMonthChange: this._switchMonth.bind(this),
-	          blockClassName: blockClassName
-	        }),
+	        monthHeader,
 	        _react2.default.createElement(_month2.default, {
 	          mode: mode,
 	          minDate: minDate,
@@ -328,7 +330,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 	
 	Calendar.propTypes = {
-	  MonthHeaderComponent: _react2.default.PropTypes.object,
+	  MonthHeader: _react2.default.PropTypes.element,
 	  activeMonth: _react2.default.PropTypes.instanceOf(Date),
 	  blockClassName: _react2.default.PropTypes.string,
 	  headerNextArrow: _react2.default.PropTypes.element,
@@ -352,7 +354,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	Calendar.defaultProps = {
 	  mode: SINGLE_MODE,
-	  blockClassName: _consts.BLOCK_CLASS_NAME
+	  blockClassName: _consts.BLOCK_CLASS_NAME,
+	  MonthHeader: _react2.default.createElement(_month_header2.default, null)
 	};
 	exports.default = Calendar;
 	module.exports = exports['default'];

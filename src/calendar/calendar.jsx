@@ -21,7 +21,7 @@ const isValid = function(date) {
 
 export default class Calendar extends React.Component {
   static propTypes = {
-    MonthHeaderComponent: React.PropTypes.object,
+    monthHeader: React.PropTypes.element,
     activeMonth: React.PropTypes.instanceOf(Date),
     blockClassName: React.PropTypes.string,
     headerNextArrow: React.PropTypes.element,
@@ -49,7 +49,8 @@ export default class Calendar extends React.Component {
 
   static defaultProps = {
     mode: SINGLE_MODE,
-    blockClassName: BLOCK_CLASS_NAME
+    blockClassName: BLOCK_CLASS_NAME,
+    monthHeader: <MonthHeader />
   }
 
   constructor(props) {
@@ -161,6 +162,7 @@ export default class Calendar extends React.Component {
 
   render() {
     const {
+      monthHeader,
       blockClassName,
       headerNextArrow,
       headerNextTitle,
@@ -172,23 +174,25 @@ export default class Calendar extends React.Component {
       mode,
       rangeLimit
     } = this.props
+
     const selection = this._selection()
-    const MonthHeaderComponent = this.props.MonthHeaderComponent || MonthHeader
+
+    const clonedMonthHeader = React.cloneElement(monthHeader, {
+      ref: 'header',
+      minDate,
+      maxDate,
+      headerPrevArrow,
+      headerPrevTitle,
+      headerNextArrow,
+      headerNextTitle,
+      blockClassName,
+      activeMonth: this._activeMonth(),
+      onMonthChange: this._switchMonth.bind(this),
+    })
 
     return (
       <div className={blockClassName}>
-        <MonthHeaderComponent
-          ref='header'
-          minDate={minDate}
-          maxDate={maxDate}
-          headerPrevArrow={headerPrevArrow}
-          headerPrevTitle={headerPrevTitle}
-          headerNextArrow={headerNextArrow}
-          headerNextTitle={headerNextTitle}
-          activeMonth={this._activeMonth()}
-          onMonthChange={this._switchMonth.bind(this)}
-          blockClassName={blockClassName}
-        />
+        {clonedMonthHeader}
         <Month
           mode={mode}
           minDate={minDate}
