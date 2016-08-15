@@ -95,6 +95,30 @@ export default class Month extends React.Component {
     this._pushUpdate()
   }
 
+  _getMinDate() {
+    const {rangeLimit, minDate} = this.props
+    const calcStartDate = subDays(this._selectionStart, rangeLimit)
+
+    if (minDate) {
+      const isCalcStartDayAfter = isBefore(minDate, calcStartDate)
+      return isCalcStartDayAfter ? calcStartDate : minDate
+    } else {
+      return calcStartDate
+    }
+  }
+
+  _getMaxDate() {
+    const {rangeLimit, maxDate} = this.props
+    const calcEndDate = addDays(this._selectionStart, rangeLimit)
+
+    if (maxDate) {
+      const isCalcEndDayBefore = isBefore(calcEndDate, maxDate)
+      return isCalcEndDayBefore ? calcEndDate : maxDate
+    } else {
+      return calcEndDate
+    }
+  }
+
   render() {
     const {blockClassName} = this.props
     return (
@@ -121,8 +145,8 @@ export default class Month extends React.Component {
     const endDate = endOfWeek(endOfMonth(activeMonth), {weekStartsOn: 1})
 
     if (this._selectionInProgress && rangeLimit) {
-      minDate = subDays(this._selectionStart, rangeLimit)
-      maxDate = addDays(this._selectionStart, rangeLimit)
+      minDate = this._getMinDate()
+      maxDate = this._getMaxDate()
     }
 
     while ((typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length)

@@ -517,6 +517,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this._pushUpdate();
 	    }
 	  }, {
+	    key: '_getMinDate',
+	    value: function _getMinDate() {
+	      var _props2 = this.props;
+	      var rangeLimit = _props2.rangeLimit;
+	      var minDate = _props2.minDate;
+	
+	      var calcStartDate = (0, _sub_days2.default)(this._selectionStart, rangeLimit);
+	
+	      if (minDate) {
+	        var isCalcStartDayAfter = (0, _is_before2.default)(minDate, calcStartDate);
+	        return isCalcStartDayAfter ? calcStartDate : minDate;
+	      } else {
+	        return calcStartDate;
+	      }
+	    }
+	  }, {
+	    key: '_getMaxDate',
+	    value: function _getMaxDate() {
+	      var _props3 = this.props;
+	      var rangeLimit = _props3.rangeLimit;
+	      var maxDate = _props3.maxDate;
+	
+	      var calcEndDate = (0, _add_days2.default)(this._selectionStart, rangeLimit);
+	
+	      if (maxDate) {
+	        var isCalcEndDayBefore = (0, _is_before2.default)(calcEndDate, maxDate);
+	        return isCalcEndDayBefore ? calcEndDate : maxDate;
+	      } else {
+	        return calcEndDate;
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var blockClassName = this.props.blockClassName;
@@ -533,26 +565,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function _renderWeeks() {
 	      var _this2 = this;
 	
-	      var _props2 = this.props;
-	      var selectedMin = _props2.selectedMin;
-	      var selectedMax = _props2.selectedMax;
-	      var activeMonth = _props2.activeMonth;
-	      var today = _props2.today;
-	      var blockClassName = _props2.blockClassName;
-	      var minNumberOfWeeks = _props2.minNumberOfWeeks;
-	      var rangeLimit = _props2.rangeLimit;
+	      var _props4 = this.props;
+	      var selectedMin = _props4.selectedMin;
+	      var selectedMax = _props4.selectedMax;
+	      var activeMonth = _props4.activeMonth;
+	      var today = _props4.today;
+	      var blockClassName = _props4.blockClassName;
+	      var minNumberOfWeeks = _props4.minNumberOfWeeks;
+	      var rangeLimit = _props4.rangeLimit;
 	
 	      var weeks = [];
-	      var _props3 = this.props;
-	      var minDate = _props3.minDate;
-	      var maxDate = _props3.maxDate;
+	      var _props5 = this.props;
+	      var minDate = _props5.minDate;
+	      var maxDate = _props5.maxDate;
 	
 	      var date = (0, _start_of_week2.default)((0, _start_of_month2.default)(activeMonth), { weekStartsOn: 1 });
 	      var endDate = (0, _end_of_week2.default)((0, _end_of_month2.default)(activeMonth), { weekStartsOn: 1 });
 	
 	      if (this._selectionInProgress && rangeLimit) {
-	        minDate = (0, _sub_days2.default)(this._selectionStart, rangeLimit);
-	        maxDate = (0, _add_days2.default)(this._selectionStart, rangeLimit);
+	        minDate = this._getMinDate();
+	        maxDate = this._getMaxDate();
 	      }
 	
 	      while (typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length || (0, _is_before2.default)(date, endDate) || (0, _is_same_day2.default)(date, endDate)) {
