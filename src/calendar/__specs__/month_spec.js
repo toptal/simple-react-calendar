@@ -225,7 +225,6 @@ describe('Month', () => {
         onChange = sinon.spy()
         month = render({
           activeMonth: new Date(2015, 5, 1),
-          selectionMode: 'range',
           onChange,
           rangeLimit: 5
         })
@@ -277,6 +276,52 @@ describe('Month', () => {
             end: new Date(2015, 5, 11),
             inProgress: false
           }))
+        })
+      })
+
+      context('combined with minDate and maxDate', () => {
+        context('when rangeLimit exceeds the min and maxDate', () => {
+          beforeEach(() => {
+            month = render({
+              minDate: new Date(2015, 7, 12),
+              maxDate: new Date(2015, 7, 23),
+              rangeLimit: 10
+            })
+            const day = findDOMNode(month).getElementsByClassName('is-current_month is-working_day')[10]
+            TestUtils.Simulate.click(day)
+          })
+
+          it('renders day before properly', () => {
+            const el = findDOMNode(month).getElementsByClassName('is-current_month is-working_day')[6]
+            assert(el.classList.contains('is-not_selectable'))
+          })
+
+          it('renders day after properly', () => {
+            const el = findDOMNode(month).getElementsByClassName('is-current_month is-working_day')[15]
+            assert(el.classList.contains('is-not_selectable'))
+          })
+        })
+
+        context('when min and maxDate exceeds the rangeLimit', () => {
+          beforeEach(() => {
+            month = render({
+              minDate: new Date(2015, 7, 1),
+              maxDate: new Date(2015, 7, 31),
+              rangeLimit: 10
+            })
+            const day = findDOMNode(month).getElementsByClassName('is-current_month is-working_day')[10]
+            TestUtils.Simulate.click(day)
+          })
+
+          it('renders day before properly', () => {
+            const el = findDOMNode(month).getElementsByClassName('is-current_month is-working_day')[6]
+            assert(el.classList.contains('is-selectable'))
+          })
+
+          it('renders day after properly', () => {
+            const el = findDOMNode(month).getElementsByClassName('is-current_month is-working_day')[15]
+            assert(el.classList.contains('is-selectable'))
+          })
         })
       })
     })
