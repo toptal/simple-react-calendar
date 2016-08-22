@@ -21,7 +21,10 @@ const isValid = function(date) {
 
 export default class Calendar extends React.Component {
   static propTypes = {
-    MonthHeaderComponent: React.PropTypes.object,
+    MonthHeaderComponent: React.PropTypes.oneOfType([
+      React.PropTypes.object,
+      React.PropTypes.func
+    ]),
     activeMonth: React.PropTypes.instanceOf(Date),
     blockClassName: React.PropTypes.string,
     headerNextArrow: React.PropTypes.element,

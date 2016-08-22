@@ -2,7 +2,7 @@ import React from 'react'
 import TestUtils from 'react/lib/ReactTestUtils'
 import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
-
+import {mockComponent} from './mocks'
 import Calendar from '../calendar'
 import Month from '../month'
 import Day from '../day'
@@ -419,18 +419,18 @@ describe ('Calendar', () => {
   })
 
   describe('monthHeaderComponent', () => {
-    let mockHeader
-
-    beforeEach(() => {
-      mockHeader = React.createClass({
+    it('renders passed component as Object', () => {
+      const mockHeader = React.createClass({
         render() {
-          return (<div className='fake'>MockHeader</div>)
+          return <div className='fake'>MockHeader</div>
         }
       })
+      const el = findDOMNode(render({monthHeaderComponent: mockHeader}))
+      assert(el.getElementsByClassName('fake'))
     })
 
-    it('renders passed component', () => {
-      const el = findDOMNode(render({monthHeaderComponent: mockHeader}))
+    it('renders passed component as Function', () => {
+      const el = findDOMNode(render({monthHeaderComponent: mockComponent}))
       assert(el.getElementsByClassName('fake'))
     })
   })
