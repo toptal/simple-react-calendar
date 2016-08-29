@@ -27,7 +27,7 @@ give you a working calendar component.
 * `minDate` — earliest date available for selection
 * `minNumberOfWeeks` — minimum number of weeks in a month. Undefined by default.
 * `mode` — selection mode, one of either `range` or `single`. Default is `single`
-* `MonthHeaderComponent` — replace the month header of the component with this node `object`
+* `MonthHeaderComponent` — replace the month header of the component with this node `object` or `class function`
 * `onMonthChange` — a function that is called whenever user changes the month. If defined then you have to handle month changing by yourself by changing `activeMonth` property
 * `onSelect` — a function that is called whenever user
 * `onSelectionProgress` - a function that is called whenever user changes
