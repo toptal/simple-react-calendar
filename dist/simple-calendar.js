@@ -328,7 +328,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 	
 	Calendar.propTypes = {
-	  MonthHeaderComponent: _react2.default.PropTypes.object,
+	  MonthHeaderComponent: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.object, _react2.default.PropTypes.func]),
 	  activeMonth: _react2.default.PropTypes.instanceOf(Date),
 	  blockClassName: _react2.default.PropTypes.string,
 	  headerNextArrow: _react2.default.PropTypes.element,
@@ -759,11 +759,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _props3 = this.props;
 	      var today = _props3.today;
 	      var activeMonth = _props3.activeMonth;
+	      var selectedMax = _props3.selectedMax;
+	      var selectedMin = _props3.selectedMin;
+	
 	
 	      return (0, _classnames3.default)((_classnames = {
 	        'is-selected': this._dateSelected(date),
 	        'is-today': (0, _is_same_day2.default)(today, date),
 	        'is-current_month': (0, _is_same_month2.default)(date, activeMonth),
+	        'is-start_selection': (0, _is_same_day2.default)(selectedMin, date),
+	        'is-end_selection': (0, _is_same_day2.default)(selectedMax, date),
 	        'is-prev_month': date.getMonth() !== activeMonth.getMonth() && (0, _is_before2.default)(date, activeMonth),
 	        'is-next_month': date.getMonth() !== activeMonth.getMonth() && (0, _is_after2.default)(date, activeMonth)
 	      }, _defineProperty(_classnames, (0, _is_weekend2.default)(date) ? 'is-weekend' : 'is-working_day', true), _defineProperty(_classnames, this._dateSelectable(date) ? 'is-selectable' : 'is-not_selectable', true), _classnames));

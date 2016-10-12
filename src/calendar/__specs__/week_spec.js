@@ -189,4 +189,26 @@ describe('Week', () => {
       })
     })
   })
+
+  it('correctly marks the start of the selection', () => {
+    const days = findDays(render({
+      date: new Date(2015, 5, 29, 21, 0),
+      activeMonth: new Date(2015, 5, 1),
+      selectedMin: new Date(2015, 5, 30, 10, 0),
+      selectedMax: new Date(2015, 6, 2, 5, 0)
+    }))
+    const daysWithStartClass = days.map((day) => day.classList.contains('is-start_selection'))
+    assert.deepEqual(daysWithStartClass, [false, true, false, false, false, false, false])
+  })
+
+  it('correctly marks the end of the selection', () => {
+    const days = findDays(render({
+      date: new Date(2015, 5, 29, 21, 0),
+      activeMonth: new Date(2015, 5, 1),
+      selectedMin: new Date(2015, 5, 30, 10, 0),
+      selectedMax: new Date(2015, 6, 2, 5, 0)
+    }))
+    const daysWithEndClass = days.map((day) => day.classList.contains('is-end_selection'))
+    assert.deepEqual(daysWithEndClass, [false, false, false, true, false, false, false])
+  })
 })

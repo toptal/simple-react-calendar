@@ -61,11 +61,14 @@ export default class Week extends React.Component {
   }
 
   _dateClasses(date) {
-    const {today, activeMonth} = this.props
+    const {today, activeMonth, selectedMax, selectedMin} = this.props
+
     return classnames({
       'is-selected': this._dateSelected(date),
       'is-today': isSameDay(today, date),
       'is-current_month': isSameMonth(date, activeMonth),
+      'is-start_selection': selectedMin && isSameDay(selectedMin, date),
+      'is-end_selection': selectedMax && isSameDay(selectedMax, date),
       'is-prev_month': (date.getMonth() !== activeMonth.getMonth() && isBefore(date, activeMonth)),
       'is-next_month': (date.getMonth() !== activeMonth.getMonth() && isAfter(date, activeMonth)),
       [isWeekend(date) ? 'is-weekend' : 'is-working_day']: true,
