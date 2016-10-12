@@ -29,6 +29,14 @@
   background-color: green;
 }
 
+.calendar-day.is-selected.is-start_selection {
+  background-color: red;
+}
+
+.calendar-day.is-selected.is-end_selection {
+  background-color: blue;
+}
+
 .calendar-header_button.is-prev:before {
   content: '<';
 }
