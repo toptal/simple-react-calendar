@@ -103,6 +103,18 @@ describe('Week', () => {
     assert.deepEqual(daysWithClass, [false, false, true, false, false, false, false])
   })
 
+  it('correctly marks the highlighted days', () => {
+    const days = findDays(render({
+      date: new Date(2015, 5, 29),
+      today: new Date(2015, 5, 31),
+      activeMonth: new Date(2015, 5, 1),
+      highlightedStart: new Date(2015, 5, 29),
+      highlightedEnd: new Date(2015, 6, 1)
+    }))
+    const daysWithClass = days.map((day) => day.classList.contains('is-highlighted'))
+    assert.deepEqual(daysWithClass, [true, true, true, false, false, false, false])
+  })
+
   it('correctly marks the selected days', () => {
     const days = findDays(render({
       date: new Date(2015, 5, 29, 21, 0),

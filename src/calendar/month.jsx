@@ -22,6 +22,8 @@ export default class Month extends React.Component {
   static propTypes = {
     activeMonth: React.PropTypes.instanceOf(Date).isRequired,
     blockClassName: React.PropTypes.string,
+    highlightedEnd: React.PropTypes.instanceOf(Date),
+    highlightedStart: React.PropTypes.instanceOf(Date),
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
     minNumberOfWeeks: React.PropTypes.number,
@@ -139,6 +141,8 @@ export default class Month extends React.Component {
     const {
       selectedMin,
       selectedMax,
+      highlightedStart,
+      highlightedEnd,
       activeMonth,
       today,
       blockClassName,
@@ -171,6 +175,8 @@ export default class Month extends React.Component {
           maxDate={maxDate}
           selectedMin={selectedMin}
           selectedMax={selectedMax}
+          highlightedStart={highlightedStart}
+          highlightedEnd={highlightedEnd}
           activeMonth={activeMonth}
           onDayHover={onDayHover}
           onDayClick={this._onDayClick.bind(this)}

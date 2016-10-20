@@ -34,6 +34,7 @@ give you a working calendar component.
 * `onDayHover` - a function that is called on mouseMove on days
 * `rangeLimit` — limit number of days for selection (`number`)
 * `selected` — selected dates. Can be ether single `Date` object if `mode` is `single`, or object `{start: Date(), end: Date()}` if `mode` is `range`
+* `highlighted` — highlighted dates. Object `{start: Date(), end: Date()}`. Undefined by default
 * `today` — current date (useful when you want to show current date in different time zone). Default is `new Date()`
   selects a date (in `single` mode) or a dates range (`range` mode)
   selection. Works only in the `range` mode. When the function is passed then
@@ -157,6 +158,7 @@ Block class name can be overrided with `blockClassName` prop (see above).
       <td>
         <ul>
           <li><code>.is-selected</code> - when the date is selected</li>
+          <li><code>.is-highlighted</code> - when the date is highlighted</li>
           <li><code>.is-today</code> - when the date is current one</li>
           <li><code>.is-start_selection</code> - when the date is start day of selection</li>
           <li><code>.is-end_selection</code> - when the date is end day of selection</li>

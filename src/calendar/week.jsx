@@ -23,6 +23,8 @@ export default class Week extends React.Component {
     blockClassName: React.PropTypes.string,
     data: React.PropTypes.object,
     date: React.PropTypes.instanceOf(Date).isRequired,
+    highlightedEnd: React.PropTypes.instanceOf(Date),
+    highlightedStart: React.PropTypes.instanceOf(Date),
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
     onDayClick: React.PropTypes.func.isRequired,
@@ -60,11 +62,23 @@ export default class Week extends React.Component {
       )
   }
 
+  _dateHighlighted(date) {
+    const {highlightedStart, highlightedEnd} = this.props
+    if (!highlightedStart || !highlightedEnd) return false
+
+    return isWithinRange(
+      startOfDay(date),
+      startOfDay(highlightedStart),
+      startOfDay(highlightedEnd)
+    )
+  }
+
   _dateClasses(date) {
     const {today, activeMonth, selectedMax, selectedMin} = this.props
 
     return classnames({
       'is-selected': this._dateSelected(date),
+      'is-highlighted': this._dateHighlighted(date),
       'is-today': isSameDay(today, date),
       'is-current_month': isSameMonth(date, activeMonth),
       'is-start_selection': selectedMin && isSameDay(selectedMin, date),
