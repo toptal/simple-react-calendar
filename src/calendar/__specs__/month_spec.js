@@ -32,6 +32,10 @@ describe('Month', () => {
     daysToClick.map((day) => TestUtils.Simulate.click(days[day]))
   }
 
+  function mouseMoveOnDay(day) {
+    TestUtils.Simulate.mouseMove(findDOMNode(day))
+  }
+
   it('renders with minimal params', () => {
     assert(render())
   })
@@ -339,6 +343,35 @@ describe('Month', () => {
       it('renders el with prefixed class name', () => {
         const el = findDOMNode(render({blockClassName: 'cal'}))
         assert(el.getElementsByTagName('cal-month'))
+      })
+    })
+  })
+
+  describe('onDayHover', () => {
+    context('when mouseMove on active day', () => {
+      it('called with day date', () => {
+        const onDayHover = sinon.spy()
+        const month = render({
+          activeMonth: new Date(2015, 5, 1),
+          onDayHover
+        })
+        const day = TestUtils.scryRenderedComponentsWithType(month, Day)[3]
+        mouseMoveOnDay(day)
+        assert(onDayHover.calledWith(new Date(2015, 5, 4)))
+      })
+    })
+
+    context('when mouseMove on disabled day', () => {
+      it('called with day date', () => {
+        const onDayHover = sinon.spy()
+        const month = render({
+          minDate: new Date(2015, 5, 15),
+          activeMonth: new Date(2015, 5, 1),
+          onDayHover
+        })
+        const day = TestUtils.scryRenderedComponentsWithType(month, Day)[3]
+        mouseMoveOnDay(day)
+        assert(onDayHover.notCalled)
       })
     })
   })

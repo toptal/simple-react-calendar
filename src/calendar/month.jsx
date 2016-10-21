@@ -27,6 +27,7 @@ export default class Month extends React.Component {
     minNumberOfWeeks: React.PropTypes.number,
     mode: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func.isRequired,
+    onDayHover: React.PropTypes.func,
     rangeLimit: React.PropTypes.number,
     selectedMax: React.PropTypes.instanceOf(Date),
     selectedMin: React.PropTypes.instanceOf(Date),
@@ -61,6 +62,11 @@ export default class Month extends React.Component {
   }
 
   _onDayMouseMove(date) {
+    const {onDayHover} = this.props
+    if (onDayHover) {
+      onDayHover(date)
+    }
+
     if (!this._selectionInProgress) return
 
     const {rangeLimit} = this.props
@@ -137,7 +143,8 @@ export default class Month extends React.Component {
       today,
       blockClassName,
       minNumberOfWeeks,
-      rangeLimit
+      rangeLimit,
+      onDayHover
     } = this.props
     const weeks = []
     let {minDate, maxDate} = this.props
@@ -165,6 +172,7 @@ export default class Month extends React.Component {
           selectedMin={selectedMin}
           selectedMax={selectedMax}
           activeMonth={activeMonth}
+          onDayHover={onDayHover}
           onDayClick={this._onDayClick.bind(this)}
           onDayMouseMove={this._onDayMouseMove.bind(this)}
           today={today}

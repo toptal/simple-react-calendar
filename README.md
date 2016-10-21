@@ -31,6 +31,7 @@ give you a working calendar component.
 * `onMonthChange` — a function that is called whenever user changes the month. If defined then you have to handle month changing by yourself by changing `activeMonth` property
 * `onSelect` — a function that is called whenever user
 * `onSelectionProgress` - a function that is called whenever user changes
+* `onDayHover` - a function that is called on mouseMove on days
 * `rangeLimit` — limit number of days for selection (`number`)
 * `selected` — selected dates. Can be ether single `Date` object if `mode` is `single`, or object `{start: Date(), end: Date()}` if `mode` is `range`
 * `today` — current date (useful when you want to show current date in different time zone). Default is `new Date()`
