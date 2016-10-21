@@ -35,6 +35,7 @@ export default class Calendar extends React.Component {
     minDate: React.PropTypes.instanceOf(Date),
     minNumberOfWeeks: React.PropTypes.number,
     mode: React.PropTypes.oneOf([SINGLE_MODE, RANGE_MODE]),
+    onDayHover: React.PropTypes.func,
     onMonthChange: React.PropTypes.func,
     onSelect: React.PropTypes.func,
     onSelectionProgress: React.PropTypes.func,
@@ -173,6 +174,7 @@ export default class Calendar extends React.Component {
       minDate,
       minNumberOfWeeks,
       mode,
+      onDayHover,
       rangeLimit
     } = this.props
     const selection = this._selection()
@@ -203,6 +205,7 @@ export default class Calendar extends React.Component {
           activeMonth={this._activeMonth()}
           selectedMin={selection.start}
           selectedMax={selection.end}
+          onDayHover={onDayHover}
           onChange={this._selectionChanged.bind(this)}
           blockClassName={blockClassName}
         />

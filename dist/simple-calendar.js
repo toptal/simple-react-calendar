@@ -93,21 +93,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _month2 = _interopRequireDefault(_month);
 	
-	var _month_header = __webpack_require__(34);
+	var _month_header = __webpack_require__(38);
 	
 	var _month_header2 = _interopRequireDefault(_month_header);
 	
 	var _consts = __webpack_require__(7);
 	
-	var _start_of_month = __webpack_require__(30);
+	var _start_of_month = __webpack_require__(34);
 	
 	var _start_of_month2 = _interopRequireDefault(_start_of_month);
 	
-	var _is_same_month = __webpack_require__(28);
+	var _is_same_month = __webpack_require__(32);
 	
 	var _is_same_month2 = _interopRequireDefault(_is_same_month);
 	
-	var _is_valid = __webpack_require__(38);
+	var _is_valid = __webpack_require__(42);
 	
 	var _is_valid2 = _interopRequireDefault(_is_valid);
 	
@@ -136,7 +136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Calendar(props) {
 	    _classCallCheck(this, Calendar);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Calendar).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Calendar.__proto__ || Object.getPrototypeOf(Calendar)).call(this, props));
 	
 	    _this.state = {
 	      activeMonth: _this._initialMonth(props),
@@ -286,6 +286,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var minDate = _props4.minDate;
 	      var minNumberOfWeeks = _props4.minNumberOfWeeks;
 	      var mode = _props4.mode;
+	      var onDayHover = _props4.onDayHover;
 	      var rangeLimit = _props4.rangeLimit;
 	
 	      var selection = this._selection();
@@ -317,6 +318,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          activeMonth: this._activeMonth(),
 	          selectedMin: selection.start,
 	          selectedMax: selection.end,
+	          onDayHover: onDayHover,
 	          onChange: this._selectionChanged.bind(this),
 	          blockClassName: blockClassName
 	        })
@@ -339,6 +341,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  minDate: _react2.default.PropTypes.instanceOf(Date),
 	  minNumberOfWeeks: _react2.default.PropTypes.number,
 	  mode: _react2.default.PropTypes.oneOf([SINGLE_MODE, RANGE_MODE]),
+	  onDayHover: _react2.default.PropTypes.func,
 	  onMonthChange: _react2.default.PropTypes.func,
 	  onSelect: _react2.default.PropTypes.func,
 	  onSelectionProgress: _react2.default.PropTypes.func,
@@ -383,7 +386,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _week2 = _interopRequireDefault(_week);
 	
-	var _days_of_week = __webpack_require__(29);
+	var _days_of_week = __webpack_require__(33);
 	
 	var _days_of_week2 = _interopRequireDefault(_days_of_week);
 	
@@ -393,35 +396,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _start_of_week2 = _interopRequireDefault(_start_of_week);
 	
-	var _end_of_week = __webpack_require__(21);
+	var _end_of_week = __webpack_require__(25);
 	
 	var _end_of_week2 = _interopRequireDefault(_end_of_week);
 	
-	var _start_of_month = __webpack_require__(30);
+	var _start_of_month = __webpack_require__(34);
 	
 	var _start_of_month2 = _interopRequireDefault(_start_of_month);
 	
-	var _end_of_month = __webpack_require__(31);
+	var _end_of_month = __webpack_require__(35);
 	
 	var _end_of_month2 = _interopRequireDefault(_end_of_month);
 	
-	var _is_before = __webpack_require__(23);
+	var _is_before = __webpack_require__(27);
 	
 	var _is_before2 = _interopRequireDefault(_is_before);
 	
-	var _is_equal = __webpack_require__(25);
+	var _is_equal = __webpack_require__(29);
 	
 	var _is_equal2 = _interopRequireDefault(_is_equal);
 	
-	var _add_days = __webpack_require__(32);
+	var _add_days = __webpack_require__(36);
 	
 	var _add_days2 = _interopRequireDefault(_add_days);
 	
-	var _sub_days = __webpack_require__(33);
+	var _sub_days = __webpack_require__(37);
 	
 	var _sub_days2 = _interopRequireDefault(_sub_days);
 	
-	var _is_same_day = __webpack_require__(27);
+	var _is_same_day = __webpack_require__(31);
 	
 	var _is_same_day2 = _interopRequireDefault(_is_same_day);
 	
@@ -446,7 +449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Month() {
 	    _classCallCheck(this, Month);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Month).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (Month.__proto__ || Object.getPrototypeOf(Month)).apply(this, arguments));
 	  }
 	
 	  _createClass(Month, [{
@@ -480,6 +483,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: '_onDayMouseMove',
 	    value: function _onDayMouseMove(date) {
+	      var onDayHover = this.props.onDayHover;
+	
+	      if (onDayHover) {
+	        onDayHover(date);
+	      }
+	
 	      if (!this._selectionInProgress) return;
 	
 	      var rangeLimit = this.props.rangeLimit;
@@ -573,6 +582,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var blockClassName = _props4.blockClassName;
 	      var minNumberOfWeeks = _props4.minNumberOfWeeks;
 	      var rangeLimit = _props4.rangeLimit;
+	      var onDayHover = _props4.onDayHover;
 	
 	      var weeks = [];
 	      var _props5 = this.props;
@@ -601,6 +611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          selectedMin: selectedMin,
 	          selectedMax: selectedMax,
 	          activeMonth: activeMonth,
+	          onDayHover: onDayHover,
 	          onDayClick: _this2._onDayClick.bind(_this2),
 	          onDayMouseMove: _this2._onDayMouseMove.bind(_this2),
 	          today: today,
@@ -621,6 +632,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  minNumberOfWeeks: _react2.default.PropTypes.number,
 	  mode: _react2.default.PropTypes.string.isRequired,
 	  onChange: _react2.default.PropTypes.func.isRequired,
+	  onDayHover: _react2.default.PropTypes.func,
 	  rangeLimit: _react2.default.PropTypes.number,
 	  selectedMax: _react2.default.PropTypes.instanceOf(Date),
 	  selectedMin: _react2.default.PropTypes.instanceOf(Date),
@@ -658,7 +670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _consts = __webpack_require__(7);
 	
-	var _each_day = __webpack_require__(20);
+	var _each_day = __webpack_require__(24);
 	
 	var _each_day2 = _interopRequireDefault(_each_day);
 	
@@ -670,11 +682,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _start_of_week2 = _interopRequireDefault(_start_of_week);
 	
-	var _end_of_week = __webpack_require__(21);
+	var _end_of_week = __webpack_require__(25);
 	
 	var _end_of_week2 = _interopRequireDefault(_end_of_week);
 	
-	var _is_within_range = __webpack_require__(22);
+	var _is_within_range = __webpack_require__(26);
 	
 	var _is_within_range2 = _interopRequireDefault(_is_within_range);
 	
@@ -682,27 +694,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _format2 = _interopRequireDefault(_format);
 	
-	var _is_before = __webpack_require__(23);
+	var _is_before = __webpack_require__(27);
 	
 	var _is_before2 = _interopRequireDefault(_is_before);
 	
-	var _is_after = __webpack_require__(24);
+	var _is_after = __webpack_require__(28);
 	
 	var _is_after2 = _interopRequireDefault(_is_after);
 	
-	var _is_equal = __webpack_require__(25);
+	var _is_equal = __webpack_require__(29);
 	
 	var _is_equal2 = _interopRequireDefault(_is_equal);
 	
-	var _is_weekend = __webpack_require__(26);
+	var _is_weekend = __webpack_require__(30);
 	
 	var _is_weekend2 = _interopRequireDefault(_is_weekend);
 	
-	var _is_same_day = __webpack_require__(27);
+	var _is_same_day = __webpack_require__(31);
 	
 	var _is_same_day2 = _interopRequireDefault(_is_same_day);
 	
-	var _is_same_month = __webpack_require__(28);
+	var _is_same_month = __webpack_require__(32);
 	
 	var _is_same_month2 = _interopRequireDefault(_is_same_month);
 	
@@ -722,7 +734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Week() {
 	    _classCallCheck(this, Week);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Week).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (Week.__proto__ || Object.getPrototypeOf(Week)).apply(this, arguments));
 	  }
 	
 	  _createClass(Week, [{
@@ -767,8 +779,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'is-selected': this._dateSelected(date),
 	        'is-today': (0, _is_same_day2.default)(today, date),
 	        'is-current_month': (0, _is_same_month2.default)(date, activeMonth),
-	        'is-start_selection': (0, _is_same_day2.default)(selectedMin, date),
-	        'is-end_selection': (0, _is_same_day2.default)(selectedMax, date),
+	        'is-start_selection': selectedMin && (0, _is_same_day2.default)(selectedMin, date),
+	        'is-end_selection': selectedMax && (0, _is_same_day2.default)(selectedMax, date),
 	        'is-prev_month': date.getMonth() !== activeMonth.getMonth() && (0, _is_before2.default)(date, activeMonth),
 	        'is-next_month': date.getMonth() !== activeMonth.getMonth() && (0, _is_after2.default)(date, activeMonth)
 	      }, _defineProperty(_classnames, (0, _is_weekend2.default)(date) ? 'is-weekend' : 'is-working_day', true), _defineProperty(_classnames, this._dateSelectable(date) ? 'is-selectable' : 'is-not_selectable', true), _classnames));
@@ -930,7 +942,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Day() {
 	    _classCallCheck(this, Day);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Day).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (Day.__proto__ || Object.getPrototypeOf(Day)).apply(this, arguments));
 	  }
 	
 	  _createClass(Day, [{
@@ -1015,6 +1027,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var getISOWeek = __webpack_require__(15)
 	var getISOYear = __webpack_require__(19)
 	var parse = __webpack_require__(10)
+	var enLocale = __webpack_require__(20)
 	
 	/**
 	 * @category Common Helpers
@@ -1071,9 +1084,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * | Seconds timestamp       | X     | 512969520                        |
 	 * | Milliseconds timestamp  | x     | 512969520900                     |
 	 *
+	 * The characters wrapped in square brackets are escaped.
+	 *
+	 * The result may vary by locale.
+	 *
 	 * @param {Date|String|Number} date - the original date
 	 * @param {String} [format='YYYY-MM-DDTHH:mm:ss.SSSZ'] - the string of tokens
 	 * @returns {String} the formatted date string
+	 * @param {Object} [options] - the object with options
+	 * @param {Object} [options.locale=enLocale] - the locale object
 	 *
 	 * @example
 	 * // Represent 11 February 2014 in middle-endian format:
@@ -1082,147 +1101,119 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   'MM/DD/YYYY'
 	 * )
 	 * //=> '02/11/2014'
+	 *
+	 * @example
+	 * // Represent 2 July 2014 in Esperanto:
+	 * var eoLocale = require('date-fns/locale/eo')
+	 * var result = format(
+	 *   new Date(2014, 6, 2),
+	 *   'Do [de] MMMM YYYY',
+	 *   {locale: eoLocale}
+	 * )
+	 * //=> '2-a de julio 2014'
 	 */
-	function format (dirtyDate, format) {
+	function format (dirtyDate, formatStr, options) {
+	  formatStr = formatStr || 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+	  options = options || {}
+	
+	  var locale = options.locale || enLocale
+	  var formatLocale = locale.format
+	
 	  var date = parse(dirtyDate)
+	  var formatFn = buildFormatFn(formatStr, formatLocale)
 	
-	  if (!format) {
-	    format = 'YYYY-MM-DDTHH:mm:ss.SSSZ'
-	  }
-	
-	  var formatFunction = makeFormatFunction(format)
-	  return formatFunction(date)
+	  return formatFn(date)
 	}
 	
-	var formats = {
+	var formatters = {
 	  // Month: 1, 2, ..., 12
-	  'M': function () {
-	    return this.getMonth() + 1
+	  'M': function (date) {
+	    return date.getMonth() + 1
 	  },
 	
 	  // Month: 01, 02, ..., 12
-	  'MM': function () {
-	    return addLeadingZeros(this.getMonth() + 1, 2)
-	  },
-	
-	  // Month: Jan, Feb, ..., Dec
-	  'MMM': function () {
-	    return locale.monthsShort[this.getMonth()]
-	  },
-	
-	  // Month: January, February, ..., December
-	  'MMMM': function () {
-	    return locale.months[this.getMonth()]
+	  'MM': function (date) {
+	    return addLeadingZeros(date.getMonth() + 1, 2)
 	  },
 	
 	  // Quarter: 1, 2, 3, 4
-	  'Q': function () {
-	    return Math.ceil((this.getMonth() + 1) / 3)
+	  'Q': function (date) {
+	    return Math.ceil((date.getMonth() + 1) / 3)
 	  },
 	
 	  // Day of month: 1, 2, ..., 31
-	  'D': function () {
-	    return this.getDate()
+	  'D': function (date) {
+	    return date.getDate()
 	  },
 	
 	  // Day of month: 01, 02, ..., 31
-	  'DD': function () {
-	    return addLeadingZeros(this.getDate(), 2)
+	  'DD': function (date) {
+	    return addLeadingZeros(date.getDate(), 2)
 	  },
 	
 	  // Day of year: 1, 2, ..., 366
-	  'DDD': function () {
-	    return getDayOfYear(this)
+	  'DDD': function (date) {
+	    return getDayOfYear(date)
 	  },
 	
 	  // Day of year: 001, 002, ..., 366
-	  'DDDD': function () {
-	    return addLeadingZeros(getDayOfYear(this), 3)
+	  'DDDD': function (date) {
+	    return addLeadingZeros(getDayOfYear(date), 3)
 	  },
 	
 	  // Day of week: 0, 1, ..., 6
-	  'd': function () {
-	    return this.getDay()
-	  },
-	
-	  // Day of week: Su, Mo, ..., Sa
-	  'dd': function () {
-	    return locale.dayNamesMin[this.getDay()]
-	  },
-	
-	  // Day of week: Sun, Mon, ..., Sat
-	  'ddd': function () {
-	    return locale.dayNamesShort[this.getDay()]
-	  },
-	
-	  // Day of week: Sunday, Monday, ..., Saturday
-	  'dddd': function () {
-	    return locale.dayNames[this.getDay()]
+	  'd': function (date) {
+	    return date.getDay()
 	  },
 	
 	  // Day of ISO week: 1, 2, ..., 7
-	  'E': function () {
-	    return this.getDay() || 7
+	  'E': function (date) {
+	    return date.getDay() || 7
 	  },
 	
 	  // ISO week: 1, 2, ..., 53
-	  'W': function () {
-	    return getISOWeek(this)
+	  'W': function (date) {
+	    return getISOWeek(date)
 	  },
 	
 	  // ISO week: 01, 02, ..., 53
-	  'WW': function () {
-	    return addLeadingZeros(getISOWeek(this), 2)
+	  'WW': function (date) {
+	    return addLeadingZeros(getISOWeek(date), 2)
 	  },
 	
 	  // Year: 00, 01, ..., 99
-	  'YY': function () {
-	    return String(this.getFullYear()).substr(2)
+	  'YY': function (date) {
+	    return addLeadingZeros(date.getFullYear(), 4).substr(2)
 	  },
 	
 	  // Year: 1900, 1901, ..., 2099
-	  'YYYY': function () {
-	    return this.getFullYear()
+	  'YYYY': function (date) {
+	    return addLeadingZeros(date.getFullYear(), 4)
 	  },
 	
 	  // ISO week-numbering year: 00, 01, ..., 99
-	  'GG': function () {
-	    return String(getISOYear(this)).substr(2)
+	  'GG': function (date) {
+	    return String(getISOYear(date)).substr(2)
 	  },
 	
 	  // ISO week-numbering year: 1900, 1901, ..., 2099
-	  'GGGG': function () {
-	    return getISOYear(this)
-	  },
-	
-	  // AM, PM
-	  'A': function () {
-	    return (this.getHours() / 12) >= 1 ? 'PM' : 'AM'
-	  },
-	
-	  // am, pm
-	  'a': function () {
-	    return (this.getHours() / 12) >= 1 ? 'pm' : 'am'
-	  },
-	
-	  // a.m., p.m.
-	  'aa': function () {
-	    return (this.getHours() / 12) >= 1 ? 'p.m.' : 'a.m.'
+	  'GGGG': function (date) {
+	    return getISOYear(date)
 	  },
 	
 	  // Hour: 0, 1, ... 23
-	  'H': function () {
-	    return this.getHours()
+	  'H': function (date) {
+	    return date.getHours()
 	  },
 	
 	  // Hour: 00, 01, ..., 23
-	  'HH': function () {
-	    return addLeadingZeros(this.getHours(), 2)
+	  'HH': function (date) {
+	    return addLeadingZeros(date.getHours(), 2)
 	  },
 	
 	  // Hour: 1, 2, ..., 12
-	  'h': function () {
-	    var hours = this.getHours()
+	  'h': function (date) {
+	    var hours = date.getHours()
 	    if (hours === 0) {
 	      return 12
 	    } else if (hours > 12) {
@@ -1233,95 +1224,86 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	
 	  // Hour: 01, 02, ..., 12
-	  'hh': function () {
-	    return addLeadingZeros(formats['h'].apply(this), 2)
+	  'hh': function (date) {
+	    return addLeadingZeros(formatters['h'](date), 2)
 	  },
 	
 	  // Minute: 0, 1, ..., 59
-	  'm': function () {
-	    return this.getMinutes()
+	  'm': function (date) {
+	    return date.getMinutes()
 	  },
 	
 	  // Minute: 00, 01, ..., 59
-	  'mm': function () {
-	    return addLeadingZeros(this.getMinutes(), 2)
+	  'mm': function (date) {
+	    return addLeadingZeros(date.getMinutes(), 2)
 	  },
 	
 	  // Second: 0, 1, ..., 59
-	  's': function () {
-	    return this.getSeconds()
+	  's': function (date) {
+	    return date.getSeconds()
 	  },
 	
 	  // Second: 00, 01, ..., 59
-	  'ss': function () {
-	    return addLeadingZeros(this.getSeconds(), 2)
+	  'ss': function (date) {
+	    return addLeadingZeros(date.getSeconds(), 2)
 	  },
 	
 	  // 1/10 of second: 0, 1, ..., 9
-	  'S': function () {
-	    return Math.floor(this.getMilliseconds() / 100)
+	  'S': function (date) {
+	    return Math.floor(date.getMilliseconds() / 100)
 	  },
 	
 	  // 1/100 of second: 00, 01, ..., 99
-	  'SS': function () {
-	    return Math.floor(this.getMilliseconds() / 10)
+	  'SS': function (date) {
+	    return Math.floor(date.getMilliseconds() / 10)
 	  },
 	
 	  // Millisecond: 000, 001, ..., 999
-	  'SSS': function () {
-	    return this.getMilliseconds()
+	  'SSS': function (date) {
+	    return date.getMilliseconds()
 	  },
 	
 	  // Timezone: -01:00, +00:00, ... +12:00
-	  'Z': function () {
-	    return formatTimezone(this.getTimezoneOffset(), ':')
+	  'Z': function (date) {
+	    return formatTimezone(date.getTimezoneOffset(), ':')
 	  },
 	
 	  // Timezone: -0100, +0000, ... +1200
-	  'ZZ': function () {
-	    return formatTimezone(this.getTimezoneOffset())
+	  'ZZ': function (date) {
+	    return formatTimezone(date.getTimezoneOffset())
 	  },
 	
 	  // Seconds timestamp: 512969520
-	  'X': function () {
-	    return Math.floor(this.getTime() / 1000)
+	  'X': function (date) {
+	    return Math.floor(date.getTime() / 1000)
 	  },
 	
 	  // Milliseconds timestamp: 512969520900
-	  'x': function () {
-	    return this.getTime()
+	  'x': function (date) {
+	    return date.getTime()
 	  }
 	}
 	
-	var ordinalFunctions = ['M', 'D', 'DDD', 'd', 'Q', 'W']
-	ordinalFunctions.forEach(function (functionName) {
-	  formats[functionName + 'o'] = function () {
-	    return locale.ordinal(formats[functionName].apply(this))
-	  }
-	})
-	
-	var formattingTokens = Object.keys(formats).sort().reverse()
-	var formattingTokensRegexp = new RegExp(
-	  '(\\[[^\\[]*\\])|(\\\\)?' + '(' + formattingTokens.join('|') + '|.)', 'g'
-	)
-	
-	function makeFormatFunction (format) {
-	  var array = format.match(formattingTokensRegexp)
+	function buildFormatFn (formatStr, formatLocale) {
+	  var array = formatStr.match(formatLocale.formattingTokensRegExp)
 	  var length = array.length
 	
-	  for (var i = 0; i < length; i++) {
-	    if (formats[array[i]]) {
-	      array[i] = formats[array[i]]
+	  var i
+	  var formatter
+	  for (i = 0; i < length; i++) {
+	    formatter = formatLocale.formatters[array[i]] || formatters[array[i]]
+	    if (formatter) {
+	      array[i] = formatter
 	    } else {
 	      array[i] = removeFormattingTokens(array[i])
 	    }
 	  }
 	
-	  return function (mom) {
+	  return function (date) {
 	    var output = ''
 	    for (var i = 0; i < length; i++) {
 	      if (array[i] instanceof Function) {
-	        output += array[i].call(mom, format)
+	        output += array[i](date, formatters)
 	      } else {
 	        output += array[i]
 	      }
@@ -1337,15 +1319,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return input.replace(/\\/g, '')
 	}
 	
-	function addLeadingZeros (number, targetLength) {
-	  var output = String(Math.abs(number))
-	
-	  while (output.length < targetLength) {
-	    output = '0' + output
-	  }
-	  return output
-	}
-	
 	function formatTimezone (offset, delimeter) {
 	  delimeter = delimeter || ''
 	  var sign = offset > 0 ? '-' : '+'
@@ -1355,25 +1328,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return sign + addLeadingZeros(hours, 2) + delimeter + addLeadingZeros(minutes, 2)
 	}
 	
-	var locale = {
-	  ordinal: function (number) {
-	    if (number > 20 || number < 10) {
-	      switch (number % 10) {
-	        case 1:
-	          return number + 'st'
-	        case 2:
-	          return number + 'nd'
-	        case 3:
-	          return number + 'rd'
-	      }
-	    }
-	    return number + 'th'
-	  },
-	  months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-	  monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-	  dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-	  dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-	  dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+	function addLeadingZeros (number, targetLength) {
+	  var output = Math.abs(number).toString()
+	  while (output.length < targetLength) {
+	    output = '0' + output
+	  }
+	  return output
 	}
 	
 	module.exports = format
@@ -2007,6 +1967,226 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var buildDistanceInWordsLocale = __webpack_require__(21)
+	var buildFormatLocale = __webpack_require__(22)
+	
+	module.exports = {
+	  distanceInWords: buildDistanceInWordsLocale(),
+	  format: buildFormatLocale()
+	}
+
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	function buildDistanceInWordsLocale () {
+	  var distanceInWordsLocale = {
+	    lessThanXSeconds: {
+	      one: 'less than a second',
+	      other: 'less than {{count}} seconds'
+	    },
+	
+	    halfAMinute: 'half a minute',
+	
+	    lessThanXMinutes: {
+	      one: 'less than a minute',
+	      other: 'less than {{count}} minutes'
+	    },
+	
+	    xMinutes: {
+	      one: '1 minute',
+	      other: '{{count}} minutes'
+	    },
+	
+	    aboutXHours: {
+	      one: 'about 1 hour',
+	      other: 'about {{count}} hours'
+	    },
+	
+	    xDays: {
+	      one: '1 day',
+	      other: '{{count}} days'
+	    },
+	
+	    aboutXMonths: {
+	      one: 'about 1 month',
+	      other: 'about {{count}} months'
+	    },
+	
+	    xMonths: {
+	      one: '1 month',
+	      other: '{{count}} months'
+	    },
+	
+	    aboutXYears: {
+	      one: 'about 1 year',
+	      other: 'about {{count}} years'
+	    },
+	
+	    overXYears: {
+	      one: 'over 1 year',
+	      other: 'over {{count}} years'
+	    },
+	
+	    almostXYears: {
+	      one: 'almost 1 year',
+	      other: 'almost {{count}} years'
+	    }
+	  }
+	
+	  function localize (token, count, options) {
+	    options = options || {}
+	
+	    var result
+	    if (typeof distanceInWordsLocale[token] === 'string') {
+	      result = distanceInWordsLocale[token]
+	    } else if (count === 1) {
+	      result = distanceInWordsLocale[token].one
+	    } else {
+	      result = distanceInWordsLocale[token].other.replace('{{count}}', count)
+	    }
+	
+	    if (options.addSuffix) {
+	      if (options.comparison > 0) {
+	        return 'in ' + result
+	      } else {
+	        return result + ' ago'
+	      }
+	    }
+	
+	    return result
+	  }
+	
+	  return {
+	    localize: localize
+	  }
+	}
+	
+	module.exports = buildDistanceInWordsLocale
+
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var buildFormattingTokensRegExp = __webpack_require__(23)
+	
+	function buildFormatLocale () {
+	  var months3char = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	  var monthsFull = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+	  var weekdays2char = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+	  var weekdays3char = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+	  var weekdaysFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+	  var meridiemUppercase = ['AM', 'PM']
+	  var meridiemLowercase = ['am', 'pm']
+	  var meridiemFull = ['a.m.', 'p.m.']
+	
+	  var formatters = {
+	    // Month: Jan, Feb, ..., Dec
+	    'MMM': function (date) {
+	      return months3char[date.getMonth()]
+	    },
+	
+	    // Month: January, February, ..., December
+	    'MMMM': function (date) {
+	      return monthsFull[date.getMonth()]
+	    },
+	
+	    // Day of week: Su, Mo, ..., Sa
+	    'dd': function (date) {
+	      return weekdays2char[date.getDay()]
+	    },
+	
+	    // Day of week: Sun, Mon, ..., Sat
+	    'ddd': function (date) {
+	      return weekdays3char[date.getDay()]
+	    },
+	
+	    // Day of week: Sunday, Monday, ..., Saturday
+	    'dddd': function (date) {
+	      return weekdaysFull[date.getDay()]
+	    },
+	
+	    // AM, PM
+	    'A': function (date) {
+	      return (date.getHours() / 12) >= 1 ? meridiemUppercase[1] : meridiemUppercase[0]
+	    },
+	
+	    // am, pm
+	    'a': function (date) {
+	      return (date.getHours() / 12) >= 1 ? meridiemLowercase[1] : meridiemLowercase[0]
+	    },
+	
+	    // a.m., p.m.
+	    'aa': function (date) {
+	      return (date.getHours() / 12) >= 1 ? meridiemFull[1] : meridiemFull[0]
+	    }
+	  }
+	
+	  // Generate ordinal version of formatters: M -> Mo, D -> Do, etc.
+	  var ordinalFormatters = ['M', 'D', 'DDD', 'd', 'Q', 'W']
+	  ordinalFormatters.forEach(function (formatterToken) {
+	    formatters[formatterToken + 'o'] = function (date, formatters) {
+	      return ordinal(formatters[formatterToken](date))
+	    }
+	  })
+	
+	  return {
+	    formatters: formatters,
+	    formattingTokensRegExp: buildFormattingTokensRegExp(formatters)
+	  }
+	}
+	
+	function ordinal (number) {
+	  var rem100 = number % 100
+	  if (rem100 > 20 || rem100 < 10) {
+	    switch (rem100 % 10) {
+	      case 1:
+	        return number + 'st'
+	      case 2:
+	        return number + 'nd'
+	      case 3:
+	        return number + 'rd'
+	    }
+	  }
+	  return number + 'th'
+	}
+	
+	module.exports = buildFormatLocale
+
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	var commonFormatterKeys = [
+	  'M', 'MM', 'Q', 'D', 'DD', 'DDD', 'DDDD', 'd',
+	  'E', 'W', 'WW', 'YY', 'YYYY', 'GG', 'GGGG',
+	  'H', 'HH', 'h', 'hh', 'm', 'mm',
+	  's', 'ss', 'S', 'SS', 'SSS',
+	  'Z', 'ZZ', 'X', 'x'
+	]
+	
+	function buildFormattingTokensRegExp (formatters) {
+	  var formattingTokens = commonFormatterKeys
+	    .concat(Object.keys(formatters))
+	    .sort()
+	    .reverse()
+	  var formattingTokensRegExp = new RegExp(
+	    '(\\[[^\\[]*\\])|(\\\\)?' + '(' + formattingTokens.join('|') + '|.)', 'g'
+	  )
+	
+	  return formattingTokensRegExp
+	}
+	
+	module.exports = buildFormattingTokensRegExp
+
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var parse = __webpack_require__(10)
 	
 	/**
@@ -2062,7 +2242,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 21 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2106,7 +2286,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 22 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2154,7 +2334,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 23 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2185,7 +2365,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 24 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2216,7 +2396,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 25 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2250,7 +2430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 26 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2280,7 +2460,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 27 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var startOfDay = __webpack_require__(14)
@@ -2315,7 +2495,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 28 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2350,7 +2530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2387,7 +2567,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function DaysOfWeek() {
 	    _classCallCheck(this, DaysOfWeek);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DaysOfWeek).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (DaysOfWeek.__proto__ || Object.getPrototypeOf(DaysOfWeek)).apply(this, arguments));
 	  }
 	
 	  _createClass(DaysOfWeek, [{
@@ -2427,7 +2607,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 30 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2459,7 +2639,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 31 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2492,7 +2672,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 32 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2523,10 +2703,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addDays = __webpack_require__(32)
+	var addDays = __webpack_require__(36)
 	
 	/**
 	 * @category Day Helpers
@@ -2552,7 +2732,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2567,25 +2747,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _header_button = __webpack_require__(35);
+	var _header_button = __webpack_require__(39);
 	
 	var _header_button2 = _interopRequireDefault(_header_button);
 	
 	var _consts = __webpack_require__(7);
 	
-	var _add_months = __webpack_require__(36);
+	var _add_months = __webpack_require__(40);
 	
 	var _add_months2 = _interopRequireDefault(_add_months);
 	
-	var _is_before = __webpack_require__(23);
+	var _is_before = __webpack_require__(27);
 	
 	var _is_before2 = _interopRequireDefault(_is_before);
 	
-	var _is_after = __webpack_require__(24);
+	var _is_after = __webpack_require__(28);
 	
 	var _is_after2 = _interopRequireDefault(_is_after);
 	
-	var _start_of_month = __webpack_require__(30);
+	var _start_of_month = __webpack_require__(34);
 	
 	var _start_of_month2 = _interopRequireDefault(_start_of_month);
 	
@@ -2607,7 +2787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function MonthHeader() {
 	    _classCallCheck(this, MonthHeader);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(MonthHeader).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (MonthHeader.__proto__ || Object.getPrototypeOf(MonthHeader)).apply(this, arguments));
 	  }
 	
 	  _createClass(MonthHeader, [{
@@ -2687,7 +2867,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 35 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2722,7 +2902,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function HeaderButton() {
 	    _classCallCheck(this, HeaderButton);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(HeaderButton).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (HeaderButton.__proto__ || Object.getPrototypeOf(HeaderButton)).apply(this, arguments));
 	  }
 	
 	  _createClass(HeaderButton, [{
@@ -2782,11 +2962,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 36 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
-	var getDaysInMonth = __webpack_require__(37)
+	var getDaysInMonth = __webpack_require__(41)
 	
 	/**
 	 * @category Month Helpers
@@ -2818,7 +2998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 37 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parse = __webpack_require__(10)
@@ -2849,7 +3029,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 38 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isDate = __webpack_require__(11)
