@@ -22,6 +22,7 @@ export default class Month extends React.Component {
   static propTypes = {
     activeMonth: React.PropTypes.instanceOf(Date).isRequired,
     blockClassName: React.PropTypes.string,
+    disableDaysOfWeek: React.PropTypes.bool,
     highlightedEnd: React.PropTypes.instanceOf(Date),
     highlightedStart: React.PropTypes.instanceOf(Date),
     maxDate: React.PropTypes.instanceOf(Date),
@@ -131,10 +132,17 @@ export default class Month extends React.Component {
     const {blockClassName} = this.props
     return (
       <div className={`${blockClassName}-month`}>
-        <DaysOfWeek blockClassName={blockClassName} />
+        {this._renderWeekDays()}
         {this._renderWeeks()}
       </div>
     )
+  }
+
+  _renderWeekDays() {
+    const {blockClassName, disableDaysOfWeek} = this.props
+    if (disableDaysOfWeek) return null
+
+    return <DaysOfWeek blockClassName={blockClassName} />
   }
 
   _renderWeeks() {

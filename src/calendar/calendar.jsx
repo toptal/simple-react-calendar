@@ -27,6 +27,7 @@ export default class Calendar extends React.Component {
     ]),
     activeMonth: React.PropTypes.instanceOf(Date),
     blockClassName: React.PropTypes.string,
+    disableDaysOfWeek: React.PropTypes.bool,
     headerNextArrow: React.PropTypes.element,
     headerNextTitle: React.PropTypes.string,
     headerPrevArrow: React.PropTypes.element,
@@ -183,6 +184,7 @@ export default class Calendar extends React.Component {
   render() {
     const {
       blockClassName,
+      disableDaysOfWeek,
       headerNextArrow,
       headerNextTitle,
       headerPrevArrow,
@@ -224,6 +226,7 @@ export default class Calendar extends React.Component {
           activeMonth={this._activeMonth()}
           selectedMin={selection.start}
           selectedMax={selection.end}
+          disableDaysOfWeek={disableDaysOfWeek}
           onDayHover={onDayHover}
           highlightedStart={highlight.start}
           highlightedEnd={highlight.end}

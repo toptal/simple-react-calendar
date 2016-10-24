@@ -295,6 +295,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function render() {
 	      var _props4 = this.props;
 	      var blockClassName = _props4.blockClassName;
+	      var disableDaysOfWeek = _props4.disableDaysOfWeek;
 	      var headerNextArrow = _props4.headerNextArrow;
 	      var headerNextTitle = _props4.headerNextTitle;
 	      var headerPrevArrow = _props4.headerPrevArrow;
@@ -337,6 +338,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          activeMonth: this._activeMonth(),
 	          selectedMin: selection.start,
 	          selectedMax: selection.end,
+	          disableDaysOfWeek: disableDaysOfWeek,
 	          onDayHover: onDayHover,
 	          highlightedStart: highlight.start,
 	          highlightedEnd: highlight.end,
@@ -354,6 +356,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  MonthHeaderComponent: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.object, _react2.default.PropTypes.func]),
 	  activeMonth: _react2.default.PropTypes.instanceOf(Date),
 	  blockClassName: _react2.default.PropTypes.string,
+	  disableDaysOfWeek: _react2.default.PropTypes.bool,
 	  headerNextArrow: _react2.default.PropTypes.element,
 	  headerNextTitle: _react2.default.PropTypes.string,
 	  headerPrevArrow: _react2.default.PropTypes.element,
@@ -590,31 +593,42 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return _react2.default.createElement(
 	        'div',
 	        { className: blockClassName + '-month' },
-	        _react2.default.createElement(_days_of_week2.default, { blockClassName: blockClassName }),
+	        this._renderWeekDays(),
 	        this._renderWeeks()
 	      );
+	    }
+	  }, {
+	    key: '_renderWeekDays',
+	    value: function _renderWeekDays() {
+	      var _props4 = this.props;
+	      var blockClassName = _props4.blockClassName;
+	      var disableDaysOfWeek = _props4.disableDaysOfWeek;
+	
+	      if (disableDaysOfWeek) return null;
+	
+	      return _react2.default.createElement(_days_of_week2.default, { blockClassName: blockClassName });
 	    }
 	  }, {
 	    key: '_renderWeeks',
 	    value: function _renderWeeks() {
 	      var _this2 = this;
 	
-	      var _props4 = this.props;
-	      var selectedMin = _props4.selectedMin;
-	      var selectedMax = _props4.selectedMax;
-	      var highlightedStart = _props4.highlightedStart;
-	      var highlightedEnd = _props4.highlightedEnd;
-	      var activeMonth = _props4.activeMonth;
-	      var today = _props4.today;
-	      var blockClassName = _props4.blockClassName;
-	      var minNumberOfWeeks = _props4.minNumberOfWeeks;
-	      var rangeLimit = _props4.rangeLimit;
-	      var onDayHover = _props4.onDayHover;
+	      var _props5 = this.props;
+	      var selectedMin = _props5.selectedMin;
+	      var selectedMax = _props5.selectedMax;
+	      var highlightedStart = _props5.highlightedStart;
+	      var highlightedEnd = _props5.highlightedEnd;
+	      var activeMonth = _props5.activeMonth;
+	      var today = _props5.today;
+	      var blockClassName = _props5.blockClassName;
+	      var minNumberOfWeeks = _props5.minNumberOfWeeks;
+	      var rangeLimit = _props5.rangeLimit;
+	      var onDayHover = _props5.onDayHover;
 	
 	      var weeks = [];
-	      var _props5 = this.props;
-	      var minDate = _props5.minDate;
-	      var maxDate = _props5.maxDate;
+	      var _props6 = this.props;
+	      var minDate = _props6.minDate;
+	      var maxDate = _props6.maxDate;
 	
 	      var date = (0, _start_of_week2.default)((0, _start_of_month2.default)(activeMonth), { weekStartsOn: 1 });
 	      var endDate = (0, _end_of_week2.default)((0, _end_of_month2.default)(activeMonth), { weekStartsOn: 1 });
@@ -656,6 +670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Month.propTypes = {
 	  activeMonth: _react2.default.PropTypes.instanceOf(Date).isRequired,
 	  blockClassName: _react2.default.PropTypes.string,
+	  disableDaysOfWeek: _react2.default.PropTypes.bool,
 	  highlightedEnd: _react2.default.PropTypes.instanceOf(Date),
 	  highlightedStart: _react2.default.PropTypes.instanceOf(Date),
 	  maxDate: _react2.default.PropTypes.instanceOf(Date),

@@ -6,6 +6,7 @@ import assert from 'power-assert'
 import Month from '../month'
 import Week from '../week'
 import Day from '../day'
+import DaysOfWeek from '../days_of_week'
 
 describe('Month', () => {
   function render(props = {}) {
@@ -372,6 +373,26 @@ describe('Month', () => {
         const day = TestUtils.scryRenderedComponentsWithType(month, Day)[3]
         mouseMoveOnDay(day)
         assert(onDayHover.notCalled)
+      })
+    })
+  })
+
+  describe('disableDaysOfWeek', () => {
+    context('when disableDaysOfWeek is not defined', () => {
+      it('renders DaysOfWeek component', () => {
+        const month = render()
+        const weekDays = TestUtils.scryRenderedComponentsWithType(month, DaysOfWeek)
+        assert(weekDays.length !== 0)
+      })
+    })
+
+    context('when disableDaysOfWeek is defined', () => {
+      it('doesn\'t render DaysOfWeek component', () => {
+        const month = render({
+          disableDaysOfWeek: true
+        })
+        const weekDays = TestUtils.scryRenderedComponentsWithType(month, DaysOfWeek)
+        assert(weekDays.length === 0)
       })
     })
   })

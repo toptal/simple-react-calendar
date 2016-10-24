@@ -19,6 +19,7 @@ give you a working calendar component.
 
 * `activeMonth` — any day within the month that you want initially displayed
 * `blockClassName` — base class name that will be used as a class prefix (see [](#class-names))
+* `disableDaysOfWeek` — disable rendering days of the week
 * `headerNextArrow` — any kind of react element will be rendered into the next month button `(element)`
 * `headerNextTitle` — text will be rendered as the title of the next month button `Next month`
 * `headerPrevArrow` — any kind of react element will be rendered into the previous month button `(element)`
