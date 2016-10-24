@@ -36,6 +36,12 @@ describe ('Calendar', () => {
       .map((day) => day.props.date)
   }
 
+  function getHighlightedDays(calendar) {
+    return TestUtils.scryRenderedComponentsWithType(calendar, Day)
+      .filter((day) => findDOMNode(day).classList.contains('is-highlighted'))
+      .map((day) => day.props.date)
+  }
+
   it('renders with minimal params', () => {
     assert(render())
   })
@@ -432,6 +438,63 @@ describe ('Calendar', () => {
     it('renders passed component as Function', () => {
       const el = findDOMNode(render({monthHeaderComponent: mockComponent}))
       assert(el.getElementsByClassName('fake'))
+    })
+  })
+
+  describe('highlighted', () => {
+    it('does not have any highlighted days by default', () => {
+      const calendar = render({
+        activeMonth: new Date(2015, 5, 1),
+        mode: 'single'
+      })
+      const highlightedDays = getHighlightedDays(calendar)
+      assert(highlightedDays.length === 0)
+    })
+
+    it('does not have any highlighted if data is incorrect', () => {
+      const calendar = render({
+        activeMonth: new Date(2015, 5, 1),
+        highlighted: {start: 'string', end: null}
+      })
+      const highlightedDays = getHighlightedDays(calendar)
+      assert(highlightedDays.length === 0)
+    })
+
+    it('renders highlighted days', () => {
+      const calendar = render({
+        activeMonth: new Date(2015, 5, 1),
+        mode: 'single',
+        highlighted: {start: new Date(2015, 4, 25), end: new Date(2015, 5, 2)},
+      })
+      const highlightedDays = getHighlightedDays(calendar)
+      assert.deepEqual(
+        highlightedDays,
+        [
+          new Date(2015, 5, 1),
+          new Date(2015, 5, 2)
+        ]
+      )
+    })
+
+    it('renders highlighted days on range mode', () => {
+      const calendar = render({
+        activeMonth: new Date(2015, 4, 1),
+        mode: 'range',
+        highlighted: {start: new Date(2015, 4, 25), end: new Date(2015, 5, 2)},
+      })
+      const highlightedDays = getHighlightedDays(calendar)
+      assert.deepEqual(
+        highlightedDays,
+        [
+          new Date(2015, 4, 25),
+          new Date(2015, 4, 26),
+          new Date(2015, 4, 27),
+          new Date(2015, 4, 28),
+          new Date(2015, 4, 29),
+          new Date(2015, 4, 30),
+          new Date(2015, 4, 31)
+        ]
+      )
     })
   })
 })

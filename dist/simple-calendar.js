@@ -202,6 +202,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 	  }, {
+	    key: '_highlight',
+	    value: function _highlight() {
+	      var highlighted = this.props.highlighted;
+	
+	      if (!highlighted) return { start: null, end: null };
+	
+	      var start = highlighted.start;
+	      var end = highlighted.end;
+	
+	
+	      if (isValid(start) && isValid(end)) {
+	        return { start: start, end: end };
+	      } else {
+	        return { start: null, end: null };
+	      }
+	    }
+	  }, {
 	    key: '_selection',
 	    value: function _selection() {
 	      var start = this._selectionStart();
@@ -282,6 +299,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var headerNextTitle = _props4.headerNextTitle;
 	      var headerPrevArrow = _props4.headerPrevArrow;
 	      var headerPrevTitle = _props4.headerPrevTitle;
+	      var highlighted = _props4.highlighted;
 	      var maxDate = _props4.maxDate;
 	      var minDate = _props4.minDate;
 	      var minNumberOfWeeks = _props4.minNumberOfWeeks;
@@ -290,6 +308,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var rangeLimit = _props4.rangeLimit;
 	
 	      var selection = this._selection();
+	      var highlight = this._highlight();
 	      var MonthHeaderComponent = this.props.MonthHeaderComponent || _month_header2.default;
 	
 	      return _react2.default.createElement(
@@ -319,6 +338,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          selectedMin: selection.start,
 	          selectedMax: selection.end,
 	          onDayHover: onDayHover,
+	          highlightedStart: highlight.start,
+	          highlightedEnd: highlight.end,
 	          onChange: this._selectionChanged.bind(this),
 	          blockClassName: blockClassName
 	        })
@@ -337,6 +358,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  headerNextTitle: _react2.default.PropTypes.string,
 	  headerPrevArrow: _react2.default.PropTypes.element,
 	  headerPrevTitle: _react2.default.PropTypes.string,
+	  highlighted: _react2.default.PropTypes.shape({
+	    start: _react2.default.PropTypes.instanceOf(Date).isRequired,
+	    end: _react2.default.PropTypes.instanceOf(Date).isRequired
+	  }),
 	  maxDate: _react2.default.PropTypes.instanceOf(Date),
 	  minDate: _react2.default.PropTypes.instanceOf(Date),
 	  minNumberOfWeeks: _react2.default.PropTypes.number,
@@ -577,6 +602,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _props4 = this.props;
 	      var selectedMin = _props4.selectedMin;
 	      var selectedMax = _props4.selectedMax;
+	      var highlightedStart = _props4.highlightedStart;
+	      var highlightedEnd = _props4.highlightedEnd;
 	      var activeMonth = _props4.activeMonth;
 	      var today = _props4.today;
 	      var blockClassName = _props4.blockClassName;
@@ -610,6 +637,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          maxDate: maxDate,
 	          selectedMin: selectedMin,
 	          selectedMax: selectedMax,
+	          highlightedStart: highlightedStart,
+	          highlightedEnd: highlightedEnd,
 	          activeMonth: activeMonth,
 	          onDayHover: onDayHover,
 	          onDayClick: _this2._onDayClick.bind(_this2),
@@ -627,6 +656,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	Month.propTypes = {
 	  activeMonth: _react2.default.PropTypes.instanceOf(Date).isRequired,
 	  blockClassName: _react2.default.PropTypes.string,
+	  highlightedEnd: _react2.default.PropTypes.instanceOf(Date),
+	  highlightedStart: _react2.default.PropTypes.instanceOf(Date),
 	  maxDate: _react2.default.PropTypes.instanceOf(Date),
 	  minDate: _react2.default.PropTypes.instanceOf(Date),
 	  minNumberOfWeeks: _react2.default.PropTypes.number,
@@ -764,19 +795,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return selectedMin && selectedMax && (0, _is_within_range2.default)((0, _start_of_day2.default)(date), (0, _start_of_day2.default)(selectedMin), (0, _start_of_day2.default)(selectedMax));
 	    }
 	  }, {
+	    key: '_dateHighlighted',
+	    value: function _dateHighlighted(date) {
+	      var _props3 = this.props;
+	      var highlightedStart = _props3.highlightedStart;
+	      var highlightedEnd = _props3.highlightedEnd;
+	
+	      if (!highlightedStart || !highlightedEnd) return false;
+	
+	      return (0, _is_within_range2.default)((0, _start_of_day2.default)(date), (0, _start_of_day2.default)(highlightedStart), (0, _start_of_day2.default)(highlightedEnd));
+	    }
+	  }, {
 	    key: '_dateClasses',
 	    value: function _dateClasses(date) {
 	      var _classnames;
 	
-	      var _props3 = this.props;
-	      var today = _props3.today;
-	      var activeMonth = _props3.activeMonth;
-	      var selectedMax = _props3.selectedMax;
-	      var selectedMin = _props3.selectedMin;
+	      var _props4 = this.props;
+	      var today = _props4.today;
+	      var activeMonth = _props4.activeMonth;
+	      var selectedMax = _props4.selectedMax;
+	      var selectedMin = _props4.selectedMin;
 	
 	
 	      return (0, _classnames3.default)((_classnames = {
 	        'is-selected': this._dateSelected(date),
+	        'is-highlighted': this._dateHighlighted(date),
 	        'is-today': (0, _is_same_day2.default)(today, date),
 	        'is-current_month': (0, _is_same_month2.default)(date, activeMonth),
 	        'is-start_selection': selectedMin && (0, _is_same_day2.default)(selectedMin, date),
@@ -799,12 +842,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function _renderDays() {
 	      var _this2 = this;
 	
-	      var _props4 = this.props;
-	      var date = _props4.date;
-	      var today = _props4.today;
-	      var onDayClick = _props4.onDayClick;
-	      var onDayMouseMove = _props4.onDayMouseMove;
-	      var blockClassName = _props4.blockClassName;
+	      var _props5 = this.props;
+	      var date = _props5.date;
+	      var today = _props5.today;
+	      var onDayClick = _props5.onDayClick;
+	      var onDayMouseMove = _props5.onDayMouseMove;
+	      var blockClassName = _props5.blockClassName;
 	
 	      var startDate = (0, _start_of_week2.default)(date, { weekStartsOn: 1 });
 	      var endDate = (0, _end_of_week2.default)(date, { weekStartsOn: 1 });
@@ -833,6 +876,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  blockClassName: _react2.default.PropTypes.string,
 	  data: _react2.default.PropTypes.object,
 	  date: _react2.default.PropTypes.instanceOf(Date).isRequired,
+	  highlightedEnd: _react2.default.PropTypes.instanceOf(Date),
+	  highlightedStart: _react2.default.PropTypes.instanceOf(Date),
 	  maxDate: _react2.default.PropTypes.instanceOf(Date),
 	  minDate: _react2.default.PropTypes.instanceOf(Date),
 	  onDayClick: _react2.default.PropTypes.func.isRequired,

@@ -31,6 +31,10 @@ export default class Calendar extends React.Component {
     headerNextTitle: React.PropTypes.string,
     headerPrevArrow: React.PropTypes.element,
     headerPrevTitle: React.PropTypes.string,
+    highlighted: React.PropTypes.shape({
+      start: React.PropTypes.instanceOf(Date).isRequired,
+      end: React.PropTypes.instanceOf(Date).isRequired,
+    }),
     maxDate: React.PropTypes.instanceOf(Date),
     minDate: React.PropTypes.instanceOf(Date),
     minNumberOfWeeks: React.PropTypes.number,
@@ -106,6 +110,19 @@ export default class Calendar extends React.Component {
     }
   }
 
+  _highlight() {
+    const {highlighted} = this.props
+    if (!highlighted) return {start: null, end: null}
+
+    const {start, end} = highlighted
+
+    if (isValid(start) && isValid(end)) {
+      return {start, end}
+    } else {
+      return {start: null, end: null}
+    }
+  }
+
   _selection() {
     const start = this._selectionStart()
     const end = this._selectionEnd()
@@ -170,6 +187,7 @@ export default class Calendar extends React.Component {
       headerNextTitle,
       headerPrevArrow,
       headerPrevTitle,
+      highlighted,
       maxDate,
       minDate,
       minNumberOfWeeks,
@@ -178,6 +196,7 @@ export default class Calendar extends React.Component {
       rangeLimit
     } = this.props
     const selection = this._selection()
+    const highlight = this._highlight()
     const MonthHeaderComponent = this.props.MonthHeaderComponent || MonthHeader
 
     return (
@@ -206,6 +225,8 @@ export default class Calendar extends React.Component {
           selectedMin={selection.start}
           selectedMax={selection.end}
           onDayHover={onDayHover}
+          highlightedStart={highlight.start}
+          highlightedEnd={highlight.end}
           onChange={this._selectionChanged.bind(this)}
           blockClassName={blockClassName}
         />
