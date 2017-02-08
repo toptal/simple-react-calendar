@@ -1,19 +1,21 @@
 import React from 'react'
-import TestUtils from 'react/lib/ReactTestUtils'
+import TestUtils from 'react-addons-test-utils'
 import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
-
+import {shallow} from 'enzyme'
 import Week from '../week'
 
 describe('Week', () => {
+  const defaultProps = {
+    date: new Date(2015, 7, 17),
+    today: new Date(2015, 7, 17),
+    activeMonth: new Date(2015, 7, 17),
+    onDayClick: () => {},
+    onDayMouseMove: () => {},
+    onDisabledDayClick: () => {}
+  }
+
   function render(props = {}) {
-    const defaultProps = {
-      date: new Date(2015, 7, 17),
-      today: new Date(2015, 7, 17),
-      activeMonth: new Date(2015, 7, 17),
-      onDayClick: () => {},
-      onDayMouseMove: () => {}
-    }
     const component = TestUtils.renderIntoDocument(
       <Week
         {...Object.assign({}, defaultProps, props)}
@@ -222,5 +224,39 @@ describe('Week', () => {
     }))
     const daysWithEndClass = days.map((day) => day.classList.contains('is-end_selection'))
     assert.deepEqual(daysWithEndClass, [false, false, false, true, false, false, false])
+  })
+
+  describe('disabledIntervals prop', () => {
+    const disabledIntervals = [
+      {
+        start: new Date(2015, 7, 21),
+        end: new Date(2015, 7, 23)
+      }
+    ]
+
+    it('marks the disabled dates as .is-disabled', () => {
+      const wrapper = shallow(<Week {...defaultProps} disabledIntervals={disabledIntervals} />)
+      const disabledDays = wrapper.find('Day').map((day) => day.is('.is-disabled'))
+      assert.deepEqual(disabledDays, [false, false, false, false, true, true, true])
+    })
+
+    it('marks the disabled dates as .is-not_selectable', () => {
+      const wrapper = shallow(<Week {...defaultProps} disabledIntervals={disabledIntervals} />)
+      const disabledDays = wrapper.find('Day').map((day) => day.is('.is-not_selectable'))
+      assert.deepEqual(disabledDays, [false, false, false, false, true, true, true])
+    })
+
+    context('when a day is disabled', () => {
+      it('passes onDisabledDayClick to the Day', () => {
+        const onDisabledDayClick = () => {}
+        const wrapper = shallow(
+        <Week {...defaultProps} 
+        disabledIntervals={disabledIntervals} 
+        onDisabledDayClick={onDisabledDayClick} />
+        )
+        const disabledDay = wrapper.find('Day').last()
+        assert(disabledDay.prop('onClick') === onDisabledDayClick)
+      })
+    })
   })
 })

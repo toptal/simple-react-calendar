@@ -2,7 +2,9 @@ import React from 'react'
 
 import Month from './month'
 import MonthHeader from './month_header'
+import Notice from './notice'
 import {BLOCK_CLASS_NAME} from './consts'
+import {datePropType} from './_lib'
 
 import startOfMonth from 'date-fns/start_of_month'
 import isSameMonth from 'date-fns/is_same_month'
@@ -25,19 +27,27 @@ export default class Calendar extends React.Component {
       React.PropTypes.object,
       React.PropTypes.func
     ]),
-    activeMonth: React.PropTypes.instanceOf(Date),
+    NoticeComponent: React.PropTypes.oneOfType([
+      React.PropTypes.object,
+      React.PropTypes.func
+    ]),
+    activeMonth: datePropType,
     blockClassName: React.PropTypes.string,
     disableDaysOfWeek: React.PropTypes.bool,
+    disabledIntervals: React.PropTypes.arrayOf(React.PropTypes.shape({
+      start: datePropType.isRequired,
+      end: datePropType.isRequired
+    })),
     headerNextArrow: React.PropTypes.element,
     headerNextTitle: React.PropTypes.string,
     headerPrevArrow: React.PropTypes.element,
     headerPrevTitle: React.PropTypes.string,
     highlighted: React.PropTypes.shape({
-      start: React.PropTypes.instanceOf(Date).isRequired,
-      end: React.PropTypes.instanceOf(Date).isRequired,
+      start: datePropType.isRequired,
+      end: datePropType.isRequired,
     }),
-    maxDate: React.PropTypes.instanceOf(Date),
-    minDate: React.PropTypes.instanceOf(Date),
+    maxDate: datePropType,
+    minDate: datePropType,
     minNumberOfWeeks: React.PropTypes.number,
     mode: React.PropTypes.oneOf([SINGLE_MODE, RANGE_MODE]),
     onDayHover: React.PropTypes.func,
@@ -46,14 +56,14 @@ export default class Calendar extends React.Component {
     onSelectionProgress: React.PropTypes.func,
     rangeLimit: React.PropTypes.number,
     selected: React.PropTypes.oneOfType([
-      React.PropTypes.instanceOf(Date),
+      datePropType,
       React.PropTypes.shape({
-        start: React.PropTypes.instanceOf(Date).isRequired,
-        end: React.PropTypes.instanceOf(Date).isRequired,
+        start: datePropType.isRequired,
+        end: datePropType.isRequired,
         inProgress: React.PropTypes.bool
       })
     ]),
-    today: React.PropTypes.instanceOf(Date)
+    today: datePropType
   }
 
   static defaultProps = {
@@ -65,7 +75,8 @@ export default class Calendar extends React.Component {
     super(props)
     this.state = {
       activeMonth: this._initialMonth(props),
-      selection: null
+      selection: null,
+      shownNoticeType: null
     }
   }
 
@@ -164,7 +175,7 @@ export default class Calendar extends React.Component {
     const {start, end, inProgress} = selection
     const {mode, onSelect, onSelectionProgress} = this.props
 
-    if (onSelect && (mode !== RANGE_MODE || !inProgress)) {
+    if (onSelect && start && (mode !== RANGE_MODE || !inProgress)) {
       onSelect(mode === SINGLE_MODE ? start : {start, end})
     }
 
@@ -175,6 +186,10 @@ export default class Calendar extends React.Component {
         this.setState({selection: inProgress ? {start, end} : null})
       }
     }
+  }
+
+  _noticeChanged(shownNoticeType) {
+    this.setState({shownNoticeType})
   }
 
   _today() {
@@ -195,6 +210,7 @@ export default class Calendar extends React.Component {
       minNumberOfWeeks,
       mode,
       onDayHover,
+      disabledIntervals,
       rangeLimit
     } = this.props
     const selection = this._selection()
@@ -203,6 +219,8 @@ export default class Calendar extends React.Component {
 
     return (
       <div className={blockClassName}>
+        {this._renderNotice()}
+
         <MonthHeaderComponent
           ref='header'
           minDate={minDate}
@@ -231,9 +249,21 @@ export default class Calendar extends React.Component {
           highlightedStart={highlight.start}
           highlightedEnd={highlight.end}
           onChange={this._selectionChanged.bind(this)}
+          onNoticeChange={this._noticeChanged.bind(this)}
           blockClassName={blockClassName}
+          disabledIntervals={disabledIntervals}
         />
       </div>
     )
+  }
+
+  _renderNotice() {
+    const {shownNoticeType} = this.state
+    const {blockClassName} = this.props
+    const NoticeComponent = this.props.NoticeComponent || Notice
+    return shownNoticeType && <NoticeComponent
+      blockClassName={blockClassName}
+      type={shownNoticeType}
+    />
   }
 }
