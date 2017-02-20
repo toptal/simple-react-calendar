@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react/lib/ReactTestUtils'
+import TestUtils from 'react-addons-test-utils'
 import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
 

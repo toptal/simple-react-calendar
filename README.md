@@ -40,6 +40,8 @@ give you a working calendar component.
   selects a date (in `single` mode) or a dates range (`range` mode)
   selection. Works only in the `range` mode. When the function is passed then
   automatic range selection handing will be disabled.
+* `disabledIntervals` - disabled intervals of dates. Array of objects `[{start: Date(), end: Date()}]`. 
+  When user try to select disabled date or date range which consist disabled date(s) inside, `Notice` will appear.
 
 ## Class Names
 
@@ -171,6 +173,17 @@ Block class name can be overrided with `blockClassName` prop (see above).
           <li><code>.is-selectable</code> - when the date can be selected</li>
           <li><code>.is-not_selectable</code> - when the date can't be selected</li>
         </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Calendar notice (notice element)
+      </td>
+      <td>
+        <code>.calendar-notice</code>
+      </td>
+      <td>
       </td>
     </tr>
   <tbody>

@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import Day from './day'
 import {BLOCK_CLASS_NAME} from './consts'
+import {datePropType} from './_lib'
 
 import eachDay from 'date-fns/each_day'
 import startOfDay from 'date-fns/start_of_day'
@@ -19,19 +20,24 @@ import isSameMonth from 'date-fns/is_same_month'
 
 export default class Week extends React.Component {
   static propTypes = {
-    activeMonth: React.PropTypes.instanceOf(Date).isRequired,
+    activeMonth: datePropType.isRequired,
     blockClassName: React.PropTypes.string,
     data: React.PropTypes.object,
-    date: React.PropTypes.instanceOf(Date).isRequired,
-    highlightedEnd: React.PropTypes.instanceOf(Date),
-    highlightedStart: React.PropTypes.instanceOf(Date),
-    maxDate: React.PropTypes.instanceOf(Date),
-    minDate: React.PropTypes.instanceOf(Date),
+    date: datePropType.isRequired,
+    disabledIntervals: React.PropTypes.arrayOf(React.PropTypes.shape({
+      start: datePropType.isRequired,
+      end: datePropType.isRequired,
+    })),
+    highlightedEnd: datePropType,
+    highlightedStart: datePropType,
+    maxDate: datePropType,
+    minDate: datePropType,
     onDayClick: React.PropTypes.func.isRequired,
     onDayMouseMove: React.PropTypes.func.isRequired,
-    selectedMax: React.PropTypes.instanceOf(Date),
-    selectedMin: React.PropTypes.instanceOf(Date),
-    today: React.PropTypes.instanceOf(Date).isRequired
+    onDisabledDayClick: React.PropTypes.func.isRequired,
+    selectedMax: datePropType,
+    selectedMin: datePropType,
+    today: datePropType.isRequired
   }
 
   static defaultProps = {
@@ -41,6 +47,11 @@ export default class Week extends React.Component {
 
   _dateSelectable(date) {
     const {minDate, maxDate} = this.props
+
+    if (this._dateDisabled(date)) {
+      return false
+    }
+
     if (minDate && maxDate) {
       return isWithinRange(date, minDate, maxDate)
     } else if (minDate && !maxDate) {
@@ -73,12 +84,31 @@ export default class Week extends React.Component {
     )
   }
 
+  _dateDisabled(date) {
+    let dateDisabled
+    const {disabledIntervals} = this.props
+    if (!disabledIntervals) return false
+
+    for (let i = 0; i < disabledIntervals.length; i++) {
+      const {start, end} = disabledIntervals[i]
+
+      dateDisabled = isWithinRange(startOfDay(date), startOfDay(start), startOfDay(end))
+
+      if (dateDisabled) {
+        return dateDisabled
+      }
+    }
+
+    return false
+  }
+
   _dateClasses(date) {
     const {today, activeMonth, selectedMax, selectedMin} = this.props
 
     return classnames({
       'is-selected': this._dateSelected(date),
       'is-highlighted': this._dateHighlighted(date),
+      'is-disabled': this._dateDisabled(date),
       'is-today': isSameDay(today, date),
       'is-current_month': isSameMonth(date, activeMonth),
       'is-start_selection': selectedMin && isSameDay(selectedMin, date),
@@ -99,12 +129,21 @@ export default class Week extends React.Component {
   }
 
   _renderDays() {
-    const {date, today, onDayClick, onDayMouseMove, blockClassName} = this.props
-    const startDate = startOfWeek(date, {weekStartsOn: 1})
-    const endDate = endOfWeek(date, {weekStartsOn: 1})
-    return eachDay(startDate, endDate).map((day) => {
+    const {date, today, onDayClick, onDisabledDayClick, onDayMouseMove, blockClassName} = this.props
+    const start = startOfWeek(date, {weekStartsOn: 1})
+    const end = endOfWeek(date, {weekStartsOn: 1})
+    return eachDay(start, end).map((day) => {
       const data = this.props.data[format(day, 'YYYY-MM-DD')]
       const selectable = this._dateSelectable(day)
+      const disabled = this._dateDisabled(day)
+
+      let onClick
+      if (selectable) {
+        onClick = onDayClick
+      } else if (disabled) {
+        onClick = onDisabledDayClick
+      }
+
       return (
         <Day
           blockClassName={blockClassName}
@@ -113,7 +152,7 @@ export default class Week extends React.Component {
           data={data}
           className={this._dateClasses(day, data)}
           today={today}
-          onClick={selectable ? onDayClick : null}
+          onClick={onClick}
           onMouseMove={selectable ? onDayMouseMove : null}
         />
       )

@@ -1,7 +1,8 @@
 import React from 'react'
-import TestUtils from 'react/lib/ReactTestUtils'
+import TestUtils from 'react-addons-test-utils'
 import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
+import {shallow} from 'enzyme'
 import {mockComponent} from './mocks'
 import Calendar from '../calendar'
 import Month from '../month'
@@ -223,6 +224,16 @@ describe ('Calendar', () => {
             start: new Date(2015, 5, 6),
             end: new Date(2015, 6, 4)
           }))
+        })
+      })
+
+      context('when user clears the selection (e.g. by selecting an overlapping interval)', () => {
+        it('does not call onSelect', () => {
+          const onSelect = sinon.spy()
+          const wrapper = shallow(<Calendar mode='range' onSelect={onSelect} />)
+          const onChange = wrapper.find('Month').prop('onChange')
+          onChange({start: null, end: null, inProgress: false})
+          assert(!onSelect.called)
         })
       })
     })
@@ -495,6 +506,50 @@ describe ('Calendar', () => {
           new Date(2015, 4, 31)
         ]
       )
+    })
+  })
+
+  describe('NoticeComponent', () => {
+    it('passes onNoticeChange to the Month component', () => {
+      const wrapper = shallow(<Calendar mode='range' />)
+      const onNoticeChange = wrapper.find('Month').prop('onNoticeChange')
+      assert(typeof onNoticeChange === 'function')
+    })
+
+    context('when there is no notice', () => {
+      it('do not render Notice', () => {
+        const wrapper = shallow(<Calendar mode='range' />)
+        assert(wrapper.find('Notice').length === 0)
+      })
+    })
+
+    context('when there is a notice', () => {
+      it('renders Notice with blockClassName and type props', () => {
+        const wrapper = shallow(<Calendar mode='range' />)
+        const onNoticeChange = wrapper.find('Month').prop('onNoticeChange')
+        onNoticeChange('disabled_day_click')
+        const notice = wrapper.find('Notice')
+        assert(notice.length)
+        assert(notice.prop('type') === 'disabled_day_click')
+        assert(notice.prop('blockClassName') === 'calendar')
+      })
+
+      it('allows to pass custom notice component', () => {
+        const Whatever = () => ''
+        Whatever.displayName = 'Whatever'
+        const wrapper = shallow(
+        <Calendar 
+        mode='range' 
+        NoticeComponent={Whatever} 
+        blockClassName='Cal' />
+        )
+        const onNoticeChange = wrapper.find('Month').prop('onNoticeChange')
+        onNoticeChange('disabled_day_click')
+        const customNotice = wrapper.find('Whatever')
+        assert(customNotice.length)
+        assert(customNotice.prop('type') === 'disabled_day_click')
+        assert(customNotice.prop('blockClassName') === 'Cal')
+      })
     })
   })
 })

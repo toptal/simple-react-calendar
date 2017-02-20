@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import {BLOCK_CLASS_NAME} from './consts'
+import {datePropType} from './_lib'
 
 import formatDate from 'date-fns/format'
 
@@ -9,10 +10,10 @@ export default class Day extends React.Component {
   static propTypes = {
     blockClassName: React.PropTypes.string,
     className: React.PropTypes.string,
-    date: React.PropTypes.instanceOf(Date).isRequired,
+    date: datePropType.isRequired,
     onClick: React.PropTypes.func,
     onMouseMove: React.PropTypes.func,
-    today: React.PropTypes.instanceOf(Date).isRequired
+    today: datePropType.isRequired
   }
 
   static defaultProps = {

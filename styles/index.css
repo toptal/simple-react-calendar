@@ -21,6 +21,10 @@
   cursor: pointer;
 }
 
+.calendar-day.is-disabled {
+  background-color: #f5f5f5;
+}
+
 .calendar-day.is-current_month {
   opacity: 1;
 }

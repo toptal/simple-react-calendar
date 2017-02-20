@@ -1,21 +1,23 @@
 import React from 'react'
-import TestUtils from 'react/lib/ReactTestUtils'
+import TestUtils from 'react-addons-test-utils'
 import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
-
+import {shallow} from 'enzyme'
 import Month from '../month'
 import Week from '../week'
 import Day from '../day'
 import DaysOfWeek from '../days_of_week'
 
 describe('Month', () => {
+  const defaultProps = {
+    today: new Date(2015, 7, 17),
+    activeMonth: new Date(2015, 7, 17),
+    mode: 'range',
+    onChange: () => {},
+    onNoticeChange: () => {}
+  }
+
   function render(props = {}) {
-    const defaultProps = {
-      today: new Date(2015, 7, 17),
-      activeMonth: new Date(2015, 7, 17),
-      mode: 'range',
-      onChange: () => {}
-    }
     return TestUtils.renderIntoDocument(
       <Month
         {...Object.assign({}, defaultProps, props)}
@@ -42,6 +44,14 @@ describe('Month', () => {
   })
 
   describe('weeks rendering', () => {
+    it('passes disabledIntervals prop', () => {
+      const disabledIntervals = []
+      const wrapper = shallow(<Month {...defaultProps} disabledIntervals={disabledIntervals} />)
+      const weeks = wrapper.find('Week')
+      assert(weeks.length === 6)
+      weeks.forEach((week) => assert(week.prop('disabledIntervals') === disabledIntervals))
+    })
+
     context('when minNumberOfWeeks is not specified', () => {
       context('when the month has 4 weeks', () => {
         it('renders 4 weeks of the month', () => {
@@ -393,6 +403,64 @@ describe('Month', () => {
         })
         const weekDays = TestUtils.scryRenderedComponentsWithType(month, DaysOfWeek)
         assert(weekDays.length === 0)
+      })
+    })
+  })
+
+  describe('disabledIntervals prop', () => {
+    const disabledIntervals = [
+      {
+        start: new Date(2015, 7, 21),
+        end: new Date(2015, 7, 23)
+      }
+    ]
+
+    context('when user selects an overlapping interval', () => {
+      it('resets the selection', () => {
+        const onChange = sinon.spy()
+        const wrapper = shallow(
+        <Month 
+        {...defaultProps} 
+        onChange={onChange} 
+        disabledIntervals={disabledIntervals} />
+        )
+        const onDayClick = wrapper.find('Week').first().prop('onDayClick')
+        onDayClick(new Date(2015, 7, 20))
+        onDayClick(new Date(2015, 7, 24))
+        assert(onChange.called)
+        assert(onChange.calledWith(sinon.match({start: new Date(2015, 7, 20), end: new Date(2015, 7, 20), inProgress: true})))
+        assert(onChange.calledWith(sinon.match({start: undefined, end: undefined, inProgress: false})))
+      })
+
+      it('pushes notice update with "overlapping_with_disabled"', () => {
+        const onNoticeChange = sinon.spy()
+        const wrapper = shallow(
+        <Month 
+        {...defaultProps} 
+        onNoticeChange={onNoticeChange} 
+        disabledIntervals={disabledIntervals} />
+        )
+        const onDayClick = wrapper.find('Week').first().prop('onDayClick')
+        onDayClick(new Date(2015, 7, 20))
+        onDayClick(new Date(2015, 7, 24))
+        assert(onNoticeChange.called)
+        assert(onNoticeChange.calledWith('overlapping_with_disabled'))
+      })
+    })
+
+    context('when user clicks a disabled day', () => {
+      it('pushes notice update with "disabled_day_click"', () => {
+        const onNoticeChange = sinon.spy()
+        const wrapper = shallow(
+        <Month 
+        {...defaultProps} 
+        onNoticeChange={onNoticeChange} 
+        disabledIntervals={disabledIntervals} />
+        )
+        const onDisabledDayClick = wrapper.find('Week').first().prop('onDisabledDayClick')
+        onDisabledDayClick()
+        assert(onNoticeChange.called)
+        assert(onNoticeChange.calledWith('disabled_day_click'))
       })
     })
   })

@@ -3,9 +3,13 @@ import React from 'react'
 import Week from './week'
 import DaysOfWeek from './days_of_week'
 import {BLOCK_CLASS_NAME} from './consts'
+import {datePropType} from './_lib'
 
 import startOfWeek from 'date-fns/start_of_week'
 import endOfWeek from 'date-fns/end_of_week'
+import isWithinRange from 'date-fns/is_within_range'
+import eachDay from 'date-fns/each_day'
+import areRangesOverlapping from 'date-fns/are_ranges_overlapping'
 import startOfMonth from 'date-fns/start_of_month'
 import endOfMonth from 'date-fns/end_of_month'
 import isBefore from 'date-fns/is_before'
@@ -20,21 +24,26 @@ const RANGE_MODE = 'range'
 
 export default class Month extends React.Component {
   static propTypes = {
-    activeMonth: React.PropTypes.instanceOf(Date).isRequired,
+    activeMonth: datePropType.isRequired,
     blockClassName: React.PropTypes.string,
     disableDaysOfWeek: React.PropTypes.bool,
-    highlightedEnd: React.PropTypes.instanceOf(Date),
-    highlightedStart: React.PropTypes.instanceOf(Date),
-    maxDate: React.PropTypes.instanceOf(Date),
-    minDate: React.PropTypes.instanceOf(Date),
+    disabledIntervals: React.PropTypes.arrayOf(React.PropTypes.shape({
+      start: datePropType.isRequired,
+      end: datePropType.isRequired,
+    })),
+    highlightedEnd: datePropType,
+    highlightedStart: datePropType,
+    maxDate: datePropType,
+    minDate: datePropType,
     minNumberOfWeeks: React.PropTypes.number,
     mode: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func.isRequired,
     onDayHover: React.PropTypes.func,
+    onNoticeChange: React.PropTypes.func.isRequired,
     rangeLimit: React.PropTypes.number,
-    selectedMax: React.PropTypes.instanceOf(Date),
-    selectedMin: React.PropTypes.instanceOf(Date),
-    today: React.PropTypes.instanceOf(Date).isRequired
+    selectedMax: datePropType,
+    selectedMin: datePropType,
+    today: datePropType.isRequired
   }
 
   static defaultProps = {
@@ -45,16 +54,18 @@ export default class Month extends React.Component {
     const {onChange, rangeLimit} = this.props
     let start, end
 
-    if (isBefore(this._selectionStart, this._selectionEnd)) {
-      start = this._selectionStart
-      end = this._selectionEnd
-    } else {
-      start = this._selectionEnd
-      end = this._selectionStart
-    }
+    if (this._selectionStart && this._selectionEnd) {
+      if (isBefore(this._selectionStart, this._selectionEnd)) {
+        start = this._selectionStart
+        end = this._selectionEnd
+      } else {
+        start = this._selectionEnd
+        end = this._selectionStart
+      }
 
-    if (rangeLimit && rangeLimit < differenceInCalendarDays(end, start)) {
-      end = addDays(start, rangeLimit)
+      if (rangeLimit && rangeLimit < differenceInCalendarDays(end, start)) {
+        end = addDays(start, rangeLimit)
+      }
     }
 
     return onChange({
@@ -62,6 +73,28 @@ export default class Month extends React.Component {
       end,
       inProgress: this._selectionInProgress
     })
+  }
+
+  _pushNoticeUpdate(noticeType) {
+    const {onNoticeChange} = this.props
+    return onNoticeChange(noticeType)
+  }
+
+  _getDisabledRange(interval) {
+    const {start, end} = interval
+    const {disabledIntervals} = this.props
+
+    if (!disabledIntervals) return true
+
+    for (let i = 0; i < disabledIntervals.length; i++) {
+      const {start: intervalStart, end: intervalEnd} = disabledIntervals[i]
+
+      if (areRangesOverlapping(start, end, intervalStart, intervalEnd)) {
+        return
+      }
+    }
+
+    return true
   }
 
   _onDayMouseMove(date) {
@@ -72,8 +105,17 @@ export default class Month extends React.Component {
 
     if (!this._selectionInProgress) return
 
-    const {rangeLimit} = this.props
+    const {rangeLimit, disabledIntervals} = this.props
     const dateLimit = subDays(this._selectionStart, rangeLimit)
+
+    const isDisabledWithin = this._getDisabledRange({
+      start: isBefore(this._selectionStart, date) ? this._selectionStart : date,
+      end: !isBefore(this._selectionStart, date) ? this._selectionStart : date
+    })
+
+    if (!isDisabledWithin) {
+      return
+    }
 
     if (!isEqual(date, this._selectionEnd)) {
       if (!rangeLimit || rangeLimit && !isBefore(date, dateLimit)) {
@@ -85,8 +127,23 @@ export default class Month extends React.Component {
 
   _onDayClick(date) {
     const {mode} = this.props
+
     if (mode === RANGE_MODE) {
       if (this._selectionInProgress) {
+        const isDisabledWithin = this._getDisabledRange({
+          start: isBefore(this._selectionStart, date) ? this._selectionStart : date,
+          end: !isBefore(this._selectionStart, date) ? this._selectionStart : date
+        })
+
+        if (!isDisabledWithin) {
+          this._selectionInProgress = false
+          this._selectionStart = null
+          this._selectionEnd = null
+          this._pushUpdate()
+          this._pushNoticeUpdate('overlapping_with_disabled')
+          return
+        }
+
         this._selectionInProgress = false
         this._selectionEnd = date
       } else {
@@ -101,7 +158,14 @@ export default class Month extends React.Component {
     } else {
       return
     }
+
     this._pushUpdate()
+    this._pushNoticeUpdate(null)
+  }
+
+  _onDisabledDayClick() {
+    const {onNoticeChange} = this.props
+    onNoticeChange('disabled_day_click')
   }
 
   _getMinDate() {
@@ -151,6 +215,7 @@ export default class Month extends React.Component {
       selectedMax,
       highlightedStart,
       highlightedEnd,
+      disabledIntervals,
       activeMonth,
       today,
       blockClassName,
@@ -161,7 +226,7 @@ export default class Month extends React.Component {
     const weeks = []
     let {minDate, maxDate} = this.props
     let date = startOfWeek(startOfMonth(activeMonth), {weekStartsOn: 1})
-    const endDate = endOfWeek(endOfMonth(activeMonth), {weekStartsOn: 1})
+    const end = endOfWeek(endOfMonth(activeMonth), {weekStartsOn: 1})
 
     if (this._selectionInProgress && rangeLimit) {
       minDate = this._getMinDate()
@@ -169,7 +234,7 @@ export default class Month extends React.Component {
     }
 
     while ((typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length)
-      || (isBefore(date, endDate) || isSameDay(date, endDate))) {
+      || (isBefore(date, end) || isSameDay(date, end))) {
       weeks.push(date)
       date = addDays(date, 7)
     }
@@ -185,9 +250,11 @@ export default class Month extends React.Component {
           selectedMax={selectedMax}
           highlightedStart={highlightedStart}
           highlightedEnd={highlightedEnd}
+          disabledIntervals={disabledIntervals}
           activeMonth={activeMonth}
           onDayHover={onDayHover}
           onDayClick={this._onDayClick.bind(this)}
+          onDisabledDayClick={this._onDisabledDayClick.bind(this)}
           onDayMouseMove={this._onDayMouseMove.bind(this)}
           today={today}
           blockClassName={blockClassName}
