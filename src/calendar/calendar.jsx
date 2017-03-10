@@ -4,6 +4,7 @@ import Month from './month'
 import MonthHeader from './month_header'
 import Notice from './notice'
 import {BLOCK_CLASS_NAME} from './consts'
+import {DAYS_IN_WEEK} from './consts'
 import {datePropType} from './_lib'
 
 import startOfMonth from 'date-fns/start_of_month'
@@ -63,10 +64,12 @@ export default class Calendar extends React.Component {
         inProgress: React.PropTypes.bool
       })
     ]),
-    today: datePropType
+    today: datePropType,
+    weekStartsOn: React.PropTypes.oneOf(DAYS_IN_WEEK)
   }
 
   static defaultProps = {
+    weekStartsOn: 1,
     mode: SINGLE_MODE,
     blockClassName: BLOCK_CLASS_NAME
   }
@@ -211,7 +214,8 @@ export default class Calendar extends React.Component {
       mode,
       onDayHover,
       disabledIntervals,
-      rangeLimit
+      rangeLimit,
+      weekStartsOn
     } = this.props
     const selection = this._selection()
     const highlight = this._highlight()
@@ -252,6 +256,7 @@ export default class Calendar extends React.Component {
           onNoticeChange={this._noticeChanged.bind(this)}
           blockClassName={blockClassName}
           disabledIntervals={disabledIntervals}
+          weekStartsOn={weekStartsOn}
         />
       </div>
     )

@@ -10,6 +10,7 @@ describe('Week', () => {
     date: new Date(2015, 7, 17),
     today: new Date(2015, 7, 17),
     activeMonth: new Date(2015, 7, 17),
+    weekStartsOn: 1,
     onDayClick: () => {},
     onDayMouseMove: () => {},
     onDisabledDayClick: () => {}
