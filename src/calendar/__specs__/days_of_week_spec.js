@@ -1,5 +1,6 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
+import {shallow} from 'enzyme'
 import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
 
@@ -32,6 +33,18 @@ describe('DaysOfWeek', () => {
       weekendModifiers,
       [false, false, false, false, false, true, true]
     )
+  })
+
+  describe('weekStartsOn', () => {
+    it('renders sorted days of week depending on weekStartsOn prop', () => {
+      const wrapper = shallow(<DaysOfWeek weekStartsOn={2} />)
+      const days = wrapper.find('.calendar-days_of_week_day').map((day) => day.text())
+
+      assert.deepEqual(
+        days,
+        ['Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon']
+      )
+    })
   })
 
   describe('blockClassName', () => {

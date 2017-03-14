@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import Day from './day'
 import {BLOCK_CLASS_NAME} from './consts'
+import {DAYS_IN_WEEK} from './consts'
 import {datePropType} from './_lib'
 
 import eachDay from 'date-fns/each_day'
@@ -37,7 +38,8 @@ export default class Week extends React.Component {
     onDisabledDayClick: React.PropTypes.func.isRequired,
     selectedMax: datePropType,
     selectedMin: datePropType,
-    today: datePropType.isRequired
+    today: datePropType.isRequired,
+    weekStartsOn: React.PropTypes.oneOf(DAYS_IN_WEEK)
   }
 
   static defaultProps = {
@@ -129,9 +131,9 @@ export default class Week extends React.Component {
   }
 
   _renderDays() {
-    const {date, today, onDayClick, onDisabledDayClick, onDayMouseMove, blockClassName} = this.props
-    const start = startOfWeek(date, {weekStartsOn: 1})
-    const end = endOfWeek(date, {weekStartsOn: 1})
+    const {date, today, onDayClick, onDisabledDayClick, onDayMouseMove, blockClassName, weekStartsOn} = this.props
+    const start = startOfWeek(date, {weekStartsOn})
+    const end = endOfWeek(date, {weekStartsOn})
     return eachDay(start, end).map((day) => {
       const data = this.props.data[format(day, 'YYYY-MM-DD')]
       const selectable = this._dateSelectable(day)

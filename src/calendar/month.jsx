@@ -3,6 +3,7 @@ import React from 'react'
 import Week from './week'
 import DaysOfWeek from './days_of_week'
 import {BLOCK_CLASS_NAME} from './consts'
+import {DAYS_IN_WEEK} from './consts'
 import {datePropType} from './_lib'
 
 import startOfWeek from 'date-fns/start_of_week'
@@ -43,7 +44,8 @@ export default class Month extends React.Component {
     rangeLimit: React.PropTypes.number,
     selectedMax: datePropType,
     selectedMin: datePropType,
-    today: datePropType.isRequired
+    today: datePropType.isRequired,
+    weekStartsOn: React.PropTypes.oneOf(DAYS_IN_WEEK)
   }
 
   static defaultProps = {
@@ -203,10 +205,10 @@ export default class Month extends React.Component {
   }
 
   _renderWeekDays() {
-    const {blockClassName, disableDaysOfWeek} = this.props
+    const {blockClassName, disableDaysOfWeek, weekStartsOn} = this.props
     if (disableDaysOfWeek) return null
 
-    return <DaysOfWeek blockClassName={blockClassName} />
+    return <DaysOfWeek blockClassName={blockClassName} weekStartsOn={weekStartsOn} />
   }
 
   _renderWeeks() {
@@ -221,12 +223,13 @@ export default class Month extends React.Component {
       blockClassName,
       minNumberOfWeeks,
       rangeLimit,
-      onDayHover
+      onDayHover,
+      weekStartsOn
     } = this.props
     const weeks = []
     let {minDate, maxDate} = this.props
-    let date = startOfWeek(startOfMonth(activeMonth), {weekStartsOn: 1})
-    const end = endOfWeek(endOfMonth(activeMonth), {weekStartsOn: 1})
+    let date = startOfWeek(startOfMonth(activeMonth), {weekStartsOn})
+    const end = endOfWeek(endOfMonth(activeMonth), {weekStartsOn})
 
     if (this._selectionInProgress && rangeLimit) {
       minDate = this._getMinDate()
@@ -258,6 +261,7 @@ export default class Month extends React.Component {
           onDayMouseMove={this._onDayMouseMove.bind(this)}
           today={today}
           blockClassName={blockClassName}
+          weekStartsOn={weekStartsOn}
         />
       )
     })

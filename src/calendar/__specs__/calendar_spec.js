@@ -7,6 +7,7 @@ import {mockComponent} from './mocks'
 import Calendar from '../calendar'
 import Month from '../month'
 import Day from '../day'
+import DaysOfWeek from '../days_of_week'
 
 describe ('Calendar', () => {
   function render(props = {}) {
@@ -550,6 +551,17 @@ describe ('Calendar', () => {
         assert(customNotice.prop('type') === 'disabled_day_click')
         assert(customNotice.prop('blockClassName') === 'Cal')
       })
+    })
+  })
+
+  describe('weekStartsOn', () => {
+    it('render days from correct starting day', () => {
+      const calendar = render({
+        weekStartsOn: 2
+      })
+      const daysOfWeek = TestUtils.findRenderedComponentWithType(calendar, DaysOfWeek)
+
+      assert.deepEqual(daysOfWeek.props.weekStartsOn, 2)
     })
   })
 })

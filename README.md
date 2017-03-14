@@ -42,6 +42,7 @@ give you a working calendar component.
   automatic range selection handing will be disabled.
 * `disabledIntervals` - disabled intervals of dates. Array of objects `[{start: Date(), end: Date()}]`. 
   When user try to select disabled date or date range which consist disabled date(s) inside, `Notice` will appear.
+* `weekStartsOn` - the index of the first day of the week (0 - Sunday). Default is 0.
 
 ## Class Names
 
