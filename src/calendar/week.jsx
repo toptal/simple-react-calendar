@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import classnames from 'classnames'
 
 import Day from './day'
@@ -22,10 +24,10 @@ import isSameMonth from 'date-fns/is_same_month'
 export default class Week extends React.Component {
   static propTypes = {
     activeMonth: datePropType.isRequired,
-    blockClassName: React.PropTypes.string,
-    data: React.PropTypes.object,
+    blockClassName: PropTypes.string,
+    data: PropTypes.object,
     date: datePropType.isRequired,
-    disabledIntervals: React.PropTypes.arrayOf(React.PropTypes.shape({
+    disabledIntervals: PropTypes.arrayOf(PropTypes.shape({
       start: datePropType.isRequired,
       end: datePropType.isRequired,
     })),
@@ -33,13 +35,13 @@ export default class Week extends React.Component {
     highlightedStart: datePropType,
     maxDate: datePropType,
     minDate: datePropType,
-    onDayClick: React.PropTypes.func.isRequired,
-    onDayMouseMove: React.PropTypes.func.isRequired,
-    onDisabledDayClick: React.PropTypes.func.isRequired,
+    onDayClick: PropTypes.func.isRequired,
+    onDayMouseMove: PropTypes.func.isRequired,
+    onDisabledDayClick: PropTypes.func.isRequired,
     selectedMax: datePropType,
     selectedMin: datePropType,
     today: datePropType.isRequired,
-    weekStartsOn: React.PropTypes.oneOf(DAYS_IN_WEEK)
+    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK)
   }
 
   static defaultProps = {

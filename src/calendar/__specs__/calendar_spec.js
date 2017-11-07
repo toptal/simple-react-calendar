@@ -1,5 +1,6 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+
+import TestUtils from 'react-dom/test-utils'
 import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
 import {shallow} from 'enzyme'
@@ -9,7 +10,7 @@ import Month from '../month'
 import Day from '../day'
 import DaysOfWeek from '../days_of_week'
 
-describe ('Calendar', () => {
+describe('Calendar', () => {
   function render(props = {}) {
     return TestUtils.renderIntoDocument(
       <Calendar
@@ -438,7 +439,7 @@ describe ('Calendar', () => {
 
   describe('monthHeaderComponent', () => {
     it('renders passed component as Object', () => {
-      const mockHeader = React.createClass({
+      const mockHeader = React.Component({
         render() {
           return <div className='fake'>MockHeader</div>
         }
@@ -527,8 +528,7 @@ describe ('Calendar', () => {
     context('when there is a notice', () => {
       it('renders Notice with blockClassName and type props', () => {
         const wrapper = shallow(<Calendar mode='range' />)
-        const onNoticeChange = wrapper.find('Month').prop('onNoticeChange')
-        onNoticeChange('disabled_day_click')
+        wrapper.setState({shownNoticeType: 'disabled_day_click'})
         const notice = wrapper.find('Notice')
         assert(notice.length)
         assert(notice.prop('type') === 'disabled_day_click')
@@ -539,13 +539,13 @@ describe ('Calendar', () => {
         const Whatever = () => ''
         Whatever.displayName = 'Whatever'
         const wrapper = shallow(
-        <Calendar 
-        mode='range' 
-        NoticeComponent={Whatever} 
-        blockClassName='Cal' />
+          <Calendar
+            mode='range'
+            NoticeComponent={Whatever}
+            blockClassName='Cal'
+          />
         )
-        const onNoticeChange = wrapper.find('Month').prop('onNoticeChange')
-        onNoticeChange('disabled_day_click')
+        wrapper.setState({shownNoticeType: 'disabled_day_click'})
         const customNotice = wrapper.find('Whatever')
         assert(customNotice.length)
         assert(customNotice.prop('type') === 'disabled_day_click')
