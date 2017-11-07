@@ -1,5 +1,23 @@
 # simple-react-calendar
 
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![npm download][download-image]][download-url]
+[![BCH comliance][bch-image]][bch-url]
+
+[npm-image]: http://img.shields.io/npm/v/simple-react-calendar.svg
+[npm-url]: http://npmjs.org/package/simple-react-calendar
+[travis-image]: https://travis-ci.org/toptal/simple-react-calendar.svg?branch=master
+[travis-url]: https://travis-ci.org/toptal/simple-react-calendar?branch=master
+[node-image]: https://img.shields.io/badge/node.js-%3E=_0.10-green.svg
+[node-url]: http://nodejs.org/download/
+[download-image]: https://img.shields.io/npm/dm/simple-react-calendar.svg
+[download-url]: https://npmjs.org/package/simple-react-calendar
+[bch-image]: https://bettercodehub.com/edge/badge/toptal/simple-react-calendar?branch=master
+[bch-url]: https://bettercodehub.com/
+
+* * *
+
 A simple calendar component for React based applications.
 
 A component that is easy to start using, yet flexible when you need customization.
@@ -40,7 +58,7 @@ give you a working calendar component.
   selects a date (in `single` mode) or a dates range (`range` mode)
   selection. Works only in the `range` mode. When the function is passed then
   automatic range selection handing will be disabled.
-* `disabledIntervals` - disabled intervals of dates. Array of objects `[{start: Date(), end: Date()}]`. 
+* `disabledIntervals` - disabled intervals of dates. Array of objects `[{start: Date(), end: Date()}]`.
   When user try to select disabled date or date range which consist disabled date(s) inside, `Notice` will appear.
 * `weekStartsOn` - the index of the first day of the week (0 - Sunday). Default is 0.
 
