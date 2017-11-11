@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import HeaderButton from './header_button'
 import {BLOCK_CLASS_NAME, NEXT_MONTH_TITLE, PREV_MONTH_TITLE} from './consts'
@@ -13,14 +14,14 @@ import formatDate from 'date-fns/format'
 export default class MonthHeader extends React.Component {
   static propTypes = {
     activeMonth: datePropType.isRequired,
-    blockClassName: React.PropTypes.string,
-    headerNextArrow: React.PropTypes.element,
-    headerNextTitle: React.PropTypes.string,
-    headerPrevArrow: React.PropTypes.element,
-    headerPrevTitle: React.PropTypes.string,
+    blockClassName: PropTypes.string,
+    headerNextArrow: PropTypes.element,
+    headerNextTitle: PropTypes.string,
+    headerPrevArrow: PropTypes.element,
+    headerPrevTitle: PropTypes.string,
     maxDate: datePropType,
     minDate: datePropType,
-    onMonthChange: React.PropTypes.func.isRequired
+    onMonthChange: PropTypes.func.isRequired
   }
 
   static defaultProps = {

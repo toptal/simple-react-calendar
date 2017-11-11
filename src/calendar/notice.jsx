@@ -1,9 +1,11 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+
 import {BLOCK_CLASS_NAME} from './consts'
 
 export default class Notice extends React.Component {
   static propTypes = {
-    blockClassName: React.PropTypes.string.isRequired,
+    blockClassName: PropTypes.string.isRequired,
     type: PropTypes.oneOf([
       'overlapping_with_disabled',
       'disabled_day_click'

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Month from './month'
 import MonthHeader from './month_header'
@@ -24,48 +25,48 @@ const isValid = function(date) {
 
 export default class Calendar extends React.Component {
   static propTypes = {
-    MonthHeaderComponent: React.PropTypes.oneOfType([
-      React.PropTypes.object,
-      React.PropTypes.func
+    MonthHeaderComponent: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.func
     ]),
-    NoticeComponent: React.PropTypes.oneOfType([
-      React.PropTypes.object,
-      React.PropTypes.func
+    NoticeComponent: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.func
     ]),
     activeMonth: datePropType,
-    blockClassName: React.PropTypes.string,
-    disableDaysOfWeek: React.PropTypes.bool,
-    disabledIntervals: React.PropTypes.arrayOf(React.PropTypes.shape({
+    blockClassName: PropTypes.string,
+    disableDaysOfWeek: PropTypes.bool,
+    disabledIntervals: PropTypes.arrayOf(PropTypes.shape({
       start: datePropType.isRequired,
       end: datePropType.isRequired
     })),
-    headerNextArrow: React.PropTypes.element,
-    headerNextTitle: React.PropTypes.string,
-    headerPrevArrow: React.PropTypes.element,
-    headerPrevTitle: React.PropTypes.string,
-    highlighted: React.PropTypes.shape({
+    headerNextArrow: PropTypes.element,
+    headerNextTitle: PropTypes.string,
+    headerPrevArrow: PropTypes.element,
+    headerPrevTitle: PropTypes.string,
+    highlighted: PropTypes.shape({
       start: datePropType.isRequired,
       end: datePropType.isRequired,
     }),
     maxDate: datePropType,
     minDate: datePropType,
-    minNumberOfWeeks: React.PropTypes.number,
-    mode: React.PropTypes.oneOf([SINGLE_MODE, RANGE_MODE]),
-    onDayHover: React.PropTypes.func,
-    onMonthChange: React.PropTypes.func,
-    onSelect: React.PropTypes.func,
-    onSelectionProgress: React.PropTypes.func,
-    rangeLimit: React.PropTypes.number,
-    selected: React.PropTypes.oneOfType([
+    minNumberOfWeeks: PropTypes.number,
+    mode: PropTypes.oneOf([SINGLE_MODE, RANGE_MODE]),
+    onDayHover: PropTypes.func,
+    onMonthChange: PropTypes.func,
+    onSelect: PropTypes.func,
+    onSelectionProgress: PropTypes.func,
+    rangeLimit: PropTypes.number,
+    selected: PropTypes.oneOfType([
       datePropType,
-      React.PropTypes.shape({
+      PropTypes.shape({
         start: datePropType.isRequired,
         end: datePropType.isRequired,
-        inProgress: React.PropTypes.bool
+        inProgress: PropTypes.bool
       })
     ]),
     today: datePropType,
-    weekStartsOn: React.PropTypes.oneOf(DAYS_IN_WEEK)
+    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK)
   }
 
   static defaultProps = {
@@ -266,6 +267,7 @@ export default class Calendar extends React.Component {
     const {shownNoticeType} = this.state
     const {blockClassName} = this.props
     const NoticeComponent = this.props.NoticeComponent || Notice
+
     return shownNoticeType && <NoticeComponent
       blockClassName={blockClassName}
       type={shownNoticeType}

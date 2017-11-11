@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Week from './week'
 import DaysOfWeek from './days_of_week'
@@ -8,8 +9,6 @@ import {datePropType} from './_lib'
 
 import startOfWeek from 'date-fns/start_of_week'
 import endOfWeek from 'date-fns/end_of_week'
-import isWithinRange from 'date-fns/is_within_range'
-import eachDay from 'date-fns/each_day'
 import areRangesOverlapping from 'date-fns/are_ranges_overlapping'
 import startOfMonth from 'date-fns/start_of_month'
 import endOfMonth from 'date-fns/end_of_month'
@@ -26,9 +25,9 @@ const RANGE_MODE = 'range'
 export default class Month extends React.Component {
   static propTypes = {
     activeMonth: datePropType.isRequired,
-    blockClassName: React.PropTypes.string,
-    disableDaysOfWeek: React.PropTypes.bool,
-    disabledIntervals: React.PropTypes.arrayOf(React.PropTypes.shape({
+    blockClassName: PropTypes.string,
+    disableDaysOfWeek: PropTypes.bool,
+    disabledIntervals: PropTypes.arrayOf(PropTypes.shape({
       start: datePropType.isRequired,
       end: datePropType.isRequired,
     })),
@@ -36,16 +35,16 @@ export default class Month extends React.Component {
     highlightedStart: datePropType,
     maxDate: datePropType,
     minDate: datePropType,
-    minNumberOfWeeks: React.PropTypes.number,
-    mode: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    onDayHover: React.PropTypes.func,
-    onNoticeChange: React.PropTypes.func.isRequired,
-    rangeLimit: React.PropTypes.number,
+    minNumberOfWeeks: PropTypes.number,
+    mode: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onDayHover: PropTypes.func,
+    onNoticeChange: PropTypes.func.isRequired,
+    rangeLimit: PropTypes.number,
     selectedMax: datePropType,
     selectedMin: datePropType,
     today: datePropType.isRequired,
-    weekStartsOn: React.PropTypes.oneOf(DAYS_IN_WEEK)
+    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK)
   }
 
   static defaultProps = {

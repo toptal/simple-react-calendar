@@ -1,8 +1,8 @@
 process.env.NODE_ENV = 'test'
 
-var webpackConfig = require('./webpack.config.js')
+const webpackConfig = require('./webpack.config.js')
 
-var browserStackLaunchers = {
+const browserStackLaunchers = {
   chrome: {
     'base': 'BrowserStack',
     'browser': 'chrome',
@@ -62,7 +62,6 @@ module.exports = function(config) {
       }
     },
 
-    reporters: ['mocha'],
     mochaReporter: {
       output: process.env.TEST_TZ ? 'minimal' : 'full'
     },

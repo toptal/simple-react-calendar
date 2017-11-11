@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import TestUtils from 'react-dom/test-utils'
 import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
 import {shallow} from 'enzyme'
@@ -251,8 +251,8 @@ describe('Week', () => {
       it('passes onDisabledDayClick to the Day', () => {
         const onDisabledDayClick = () => {}
         const wrapper = shallow(
-        <Week {...defaultProps} 
-        disabledIntervals={disabledIntervals} 
+        <Week {...defaultProps}
+        disabledIntervals={disabledIntervals}
         onDisabledDayClick={onDisabledDayClick} />
         )
         const disabledDay = wrapper.find('Day').last()

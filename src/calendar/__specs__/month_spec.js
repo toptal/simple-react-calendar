@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import TestUtils from 'react-dom/test-utils'
 import {findDOMNode} from 'react-dom'
 import assert from 'power-assert'
 import {shallow} from 'enzyme'
@@ -420,9 +420,9 @@ describe('Month', () => {
       it('resets the selection', () => {
         const onChange = sinon.spy()
         const wrapper = shallow(
-        <Month 
-        {...defaultProps} 
-        onChange={onChange} 
+        <Month
+        {...defaultProps}
+        onChange={onChange}
         disabledIntervals={disabledIntervals} />
         )
         const onDayClick = wrapper.find('Week').first().prop('onDayClick')
@@ -436,9 +436,9 @@ describe('Month', () => {
       it('pushes notice update with "overlapping_with_disabled"', () => {
         const onNoticeChange = sinon.spy()
         const wrapper = shallow(
-        <Month 
-        {...defaultProps} 
-        onNoticeChange={onNoticeChange} 
+        <Month
+        {...defaultProps}
+        onNoticeChange={onNoticeChange}
         disabledIntervals={disabledIntervals} />
         )
         const onDayClick = wrapper.find('Week').first().prop('onDayClick')
@@ -453,9 +453,9 @@ describe('Month', () => {
       it('pushes notice update with "disabled_day_click"', () => {
         const onNoticeChange = sinon.spy()
         const wrapper = shallow(
-        <Month 
-        {...defaultProps} 
-        onNoticeChange={onNoticeChange} 
+        <Month
+        {...defaultProps}
+        onNoticeChange={onNoticeChange}
         disabledIntervals={disabledIntervals} />
         )
         const onDisabledDayClick = wrapper.find('Week').first().prop('onDisabledDayClick')

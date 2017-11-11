@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import classnames from 'classnames'
 
 import {BLOCK_CLASS_NAME} from './consts'
@@ -8,8 +10,8 @@ const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 export default class DaysOfWeek extends React.Component {
   static propTypes = {
-    blockClassName: React.PropTypes.string,
-    weekStartsOn: React.PropTypes.oneOf(DAYS_IN_WEEK)
+    blockClassName: PropTypes.string,
+    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK)
   }
 
   static defaultProps = {
