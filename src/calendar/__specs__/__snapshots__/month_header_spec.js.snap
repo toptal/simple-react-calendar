@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthHeader #render renders <MonthHeader /> 1`] = `
+<div
+  className="calendar-month_header"
+>
+  <button
+    className="calendar-header_button is-prev"
+    disabled={false}
+    onClick={[Function]}
+    title="Previous month"
+    type="button"
+  />
+  <div
+    className="calendar-month_header_title"
+  >
+    August 2015
+  </div>
+  <button
+    className="calendar-header_button is-next is-disabled"
+    disabled={true}
+    onClick={[Function]}
+    title="Next month"
+    type="button"
+  />
+</div>
+`
+
+exports[`MonthHeader #render when prop \`blockClassName\` is defined renders <MonthHeader /> 1`] = `
+<div
+  className="cal-month_header"
+>
+  <button
+    className="cal-header_button is-prev"
+    disabled={false}
+    onClick={[Function]}
+    title="Previous month"
+    type="button"
+  />
+  <div
+    className="cal-month_header_title"
+  >
+    August 2015
+  </div>
+  <button
+    className="cal-header_button is-next is-disabled"
+    disabled={true}
+    onClick={[Function]}
+    title="Next month"
+    type="button"
+  />
+</div>
+`
+
+exports[`MonthHeader #render when prop \`maxDate\` is before prop \`activeMonth\` renders <MonthHeader /> 1`] = `
+<div
+  className="cal-month_header"
+>
+  <button
+    className="cal-header_button is-prev is-disabled"
+    disabled={true}
+    onClick={[Function]}
+    title="Previous month"
+    type="button"
+  />
+  <div
+    className="cal-month_header_title"
+  >
+    August 2015
+  </div>
+  <button
+    className="cal-header_button is-next is-disabled"
+    disabled={true}
+    onClick={[Function]}
+    title="Next month"
+    type="button"
+  />
+</div>
+`
+
+exports[`MonthHeader #render when prop \`minDate\` is after prop \`activeMonth\` renders <MonthHeader /> 1`] = `
+<div
+  className="cal-month_header"
+>
+  <button
+    className="cal-header_button is-prev is-disabled"
+    disabled={true}
+    onClick={[Function]}
+    title="Previous month"
+    type="button"
+  />
+  <div
+    className="cal-month_header_title"
+  >
+    August 2015
+  </div>
+  <button
+    className="cal-header_button is-next is-disabled"
+    disabled={true}
+    onClick={[Function]}
+    title="Next month"
+    type="button"
+  />
+</div>
+`

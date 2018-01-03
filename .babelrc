@@ -9,8 +9,13 @@
   ],
   "env": {
     "test": {
+      "presets": [
+        "es2015",
+        "react"
+      ],
       "plugins": [
-        "espower"
+        "add-module-exports",
+        "transform-class-properties"
       ]
     }
   }

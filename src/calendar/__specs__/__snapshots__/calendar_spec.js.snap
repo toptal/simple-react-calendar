@@ -1,0 +1,339 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Calendar #render renders <Calendar /> 1`] = `
+<div
+  className="calendar"
+>
+  <div
+    className="calendar-month_header"
+  >
+    <button
+      className="calendar-header_button is-prev"
+      disabled={false}
+      onClick={[Function]}
+      title="Previous month"
+      type="button"
+    />
+    <div
+      className="calendar-month_header_title"
+    >
+      July 2015
+    </div>
+    <button
+      className="calendar-header_button is-next"
+      disabled={false}
+      onClick={[Function]}
+      title="Next month"
+      type="button"
+    />
+  </div>
+  <div
+    className="calendar-month"
+  >
+    <div
+      className="calendar-days_of_week"
+    >
+      <div
+        className="calendar-days_of_week_day"
+      >
+        Mon
+      </div>
+      <div
+        className="calendar-days_of_week_day"
+      >
+        Tue
+      </div>
+      <div
+        className="calendar-days_of_week_day"
+      >
+        Wed
+      </div>
+      <div
+        className="calendar-days_of_week_day"
+      >
+        Thu
+      </div>
+      <div
+        className="calendar-days_of_week_day"
+      >
+        Fri
+      </div>
+      <div
+        className="calendar-days_of_week_day is-weekend"
+      >
+        Sat
+      </div>
+      <div
+        className="calendar-days_of_week_day is-weekend"
+      >
+        Sun
+      </div>
+    </div>
+    <div
+      className="calendar-week"
+    >
+      <div
+        className="calendar-day is-prev_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        29
+      </div>
+      <div
+        className="calendar-day is-prev_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        30
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        1
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        2
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        3
+      </div>
+      <div
+        className="calendar-day is-current_month is-weekend is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        4
+      </div>
+      <div
+        className="calendar-day is-current_month is-weekend is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        5
+      </div>
+    </div>
+    <div
+      className="calendar-week"
+    >
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        6
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        7
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        8
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        9
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        10
+      </div>
+      <div
+        className="calendar-day is-current_month is-weekend is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        11
+      </div>
+      <div
+        className="calendar-day is-current_month is-weekend is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        12
+      </div>
+    </div>
+    <div
+      className="calendar-week"
+    >
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        13
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        14
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        15
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        16
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        17
+      </div>
+      <div
+        className="calendar-day is-current_month is-weekend is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        18
+      </div>
+      <div
+        className="calendar-day is-current_month is-weekend is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        19
+      </div>
+    </div>
+    <div
+      className="calendar-week"
+    >
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        20
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        21
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        22
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        23
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        24
+      </div>
+      <div
+        className="calendar-day is-current_month is-weekend is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        25
+      </div>
+      <div
+        className="calendar-day is-current_month is-weekend is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        26
+      </div>
+    </div>
+    <div
+      className="calendar-week"
+    >
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        27
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        28
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        29
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        30
+      </div>
+      <div
+        className="calendar-day is-current_month is-working_day is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        31
+      </div>
+      <div
+        className="calendar-day is-next_month is-weekend is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        1
+      </div>
+      <div
+        className="calendar-day is-next_month is-weekend is-selectable"
+        onClick={[Function]}
+        onMouseMove={[Function]}
+      >
+        2
+      </div>
+    </div>
+  </div>
+</div>
+`

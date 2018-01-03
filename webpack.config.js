@@ -1,8 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 
-const isTest = process.env.NODE_ENV == 'test'
-const isProduction = process.env.NODE_ENV == 'production'
+const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
   entry: getEntryConfig(),
@@ -56,10 +55,6 @@ function getOutputConfig() {
     return {
       path: path.join(process.cwd(), 'tmp'),
       filename: '[name].js'
-    }
-  } else if (process.env.NODE_ENV == 'test') {
-    return {
-      path: '/'
     }
   } else {
     return {

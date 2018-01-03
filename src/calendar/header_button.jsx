@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import {BLOCK_CLASS_NAME} from './consts'
@@ -20,15 +20,8 @@ export default class HeaderButton extends React.Component {
     blockClassName: BLOCK_CLASS_NAME,
   }
 
-  _onClick(e) {
-    const {enabled, onClick} = this.props
-    if (enabled) {
-      onClick(e)
-    }
-  }
-
   render() {
-    const {arrow, blockClassName, enabled, type, title} = this.props
+    const {arrow, blockClassName, enabled, type, title, onClick} = this.props
 
     return (
       <button
@@ -38,7 +31,7 @@ export default class HeaderButton extends React.Component {
         type="button"
         disabled={!enabled}
         title={title}
-        onClick={this._onClick.bind(this)}
+        onClick={onClick}
       >
         {arrow}
       </button>

@@ -1,29 +1,32 @@
 import React from 'react'
-import {shallow} from 'enzyme'
-import assert from 'power-assert'
+
+import ReactTestRenderer from 'react-test-renderer'
 import Notice from '../notice'
 
 describe('Notice', () => {
-  it('renders div with a proper className', () => {
-    const wrapper = shallow(<Notice type="overlapping_with_disabled" />)
-    assert(wrapper.is('.calendar-notice'))
-  })
+  let tree
 
-  it('renders div with a custom block class name', () => {
-    const wrapper = shallow(<Notice blockClassName="Whatever" type="overlapping_with_disabled" />)
-    assert(!wrapper.is('.calendar-notice'))
-    assert(wrapper.is('.Whatever-notice'))
-  })
+  context('when prop `type` is "overlapping_with_disabled"', () => {
+    it('renders <Notice />', () => {
+      tree = ReactTestRenderer.create(<Notice type="overlapping_with_disabled" />).toJSON()
 
-  describe('the message', () => {
-    it('renders proper text for "overlapping_with_disabled" type', () => {
-      const wrapper = shallow(<Notice type="overlapping_with_disabled" />)
-      assert(wrapper.text().includes('Selected range must not overlap with disabled dates.'))
+      expect(tree).toMatchSnapshot()
     })
 
-    it('renders proper text for "disabled_day_click" type', () => {
-      const wrapper = shallow(<Notice type="disabled_day_click" />)
-      assert(wrapper.text().includes('Selected range must not overlap with disabled dates.'))
+    context('when prop `blockClassName` is "Whatever"', () => {
+      it('renders div with a custom block class name', () => {
+        tree = ReactTestRenderer.create(<Notice blockClassName="Whatever" type="overlapping_with_disabled" />).toJSON()
+
+        expect(tree).toMatchSnapshot()
+      })
+    })
+  })
+
+  context('when prop `type` is "disabled_day_click"', () => {
+    it('renders <Notice />', () => {
+      tree = ReactTestRenderer.create(<Notice type="disabled_day_click" />).toJSON()
+
+      expect(tree).toMatchSnapshot()
     })
   })
 })

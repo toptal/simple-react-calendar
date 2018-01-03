@@ -1,557 +1,338 @@
 import React from 'react'
 
-import TestUtils from 'react-dom/test-utils'
-import {findDOMNode} from 'react-dom'
-import assert from 'power-assert'
-import {shallow} from 'enzyme'
-import {mockComponent} from './mocks'
+import ReactTestRenderer from 'react-test-renderer'
 import Calendar from '../calendar'
-import Month from '../month'
-import Day from '../day'
-import DaysOfWeek from '../days_of_week'
+
+import {shallow} from 'enzyme'
 
 describe('Calendar', () => {
-  function render(props = {}) {
-    return TestUtils.renderIntoDocument(<Calendar {...props} />)
-  }
+  let wrapper, props, instance
+  const date = new Date(2015, 6, 1)
 
-  function clickOnDays(calendar, ...daysToClick) {
-    const days = TestUtils.scryRenderedComponentsWithType(calendar, Day).map((day) => findDOMNode(day))
+  describe('#componentWillReceiveProps', () => {
+    context('when nextProps `activeMonth` is defined', () => {
+      context('when nextProps `activeMonth` and prop `activeMonth` is different', () => {
+        it('sets state `activeMonth`', () => {
+          props = {activeMonth: date}
+          wrapper = shallow(<Calendar />)
+          wrapper.setProps({activeMonth: new Date(2015, 9, 1)})
 
-    daysToClick.map((day) => TestUtils.Simulate.click(days[day]))
-  }
-
-  function hoverOnDay(calendar, dayToHover) {
-    const day = findDOMNode(TestUtils.scryRenderedComponentsWithType(calendar, Day)[dayToHover])
-    TestUtils.Simulate.mouseMove(day)
-  }
-
-  function getSelectedDays(calendar) {
-    return TestUtils.scryRenderedComponentsWithType(calendar, Day)
-      .filter((day) => findDOMNode(day).classList.contains('is-selected'))
-      .map((day) => day.props.date)
-  }
-
-  function getHighlightedDays(calendar) {
-    return TestUtils.scryRenderedComponentsWithType(calendar, Day)
-      .filter((day) => findDOMNode(day).classList.contains('is-highlighted'))
-      .map((day) => day.props.date)
-  }
-
-  it('renders with minimal params', () => {
-    assert(render())
-  })
-
-  it('renders month with selected date', () => {
-    const date = new Date(2015, 6, 1)
-    const calendar = render({
-      activeMonth: date,
+          expect(wrapper.state('activeMonth')).toEqual(new Date(2015, 9, 1))
+        })
+      })
     })
-    const month = TestUtils.findRenderedComponentWithType(calendar, Month)
-    assert.deepEqual(month.props.activeMonth, date)
-  })
 
-  it('can change month without activeMonth property', () => {
-    const calendar = render({
-      today: new Date(2015, 6, 1),
+    context('when nextProps `activeMonth` is `undefined`', () => {
+      it("doesn't set state", () => {
+        props = {activeMonth: date}
+        wrapper = shallow(<Calendar />)
+        wrapper.setProps({disableDaysOfWeek: false})
+
+        expect(wrapper.state('activeMonth')).not.toEqual(new Date(2015, 9, 1))
+      })
     })
-    const calendarEl = findDOMNode(calendar)
-    const nextLinkEl = calendarEl.querySelector('.calendar-header_button.is-next')
-    const headerTitleEl = calendarEl.querySelector('.calendar-month_header_title')
-
-    assert(headerTitleEl.textContent === 'July 2015')
-    TestUtils.Simulate.click(nextLinkEl)
-    assert(headerTitleEl.textContent === 'August 2015')
   })
 
-  it('updates default today when date is changed', () => {
-    // Set current date to 2015-07-05
-    let clock = sinon.useFakeTimers(new Date(2015, 6, 5).getTime())
-    const calendar = render({activeMonth: new Date(2015, 6, 1)})
-    const todayText = () => findDOMNode(calendar).querySelector('.calendar-day.is-today').textContent
-    assert(todayText() === '5')
-    // Change current date to 2015-07-17
-    clock.restore()
-    clock = sinon.useFakeTimers(new Date(2015, 6, 17).getTime())
-    calendar.forceUpdate()
-    assert(todayText() === '17')
-    clock.restore()
+  describe('#_initialMonth', () => {
+    context('when prop `activeMonth` is valid date', () => {
+      it('returns `activeMonth`', () => {
+        wrapper = shallow(<Calendar activeMonth={date} />)
+
+        expect(wrapper.instance()._initialMonth()).toEqual(date)
+      })
+    })
+
+    context('when prop `activeMonth` is invalid date', () => {
+      it('returns `activeMonth`', () => {
+        props = {
+          activeMonth: '2017-01-01',
+          selected: 'abc',
+          today: date,
+        }
+        wrapper = shallow(<Calendar {...props} />)
+
+        expect(wrapper.instance()._initialMonth()).toEqual(props.today)
+      })
+    })
   })
 
-  context('in single selection mode', () => {
-    let onSelect, calendar
+  describe('#_switchMonth', () => {
+    context('when prop `onMonthChange` is defined', () => {
+      it('calls prop #onMonthChange', () => {
+        props = {onMonthChange: jest.fn(), activeMonth: date}
+        wrapper = shallow(<Calendar {...props} />)
+
+        wrapper.instance()._switchMonth('2017-01-01')
+
+        expect(props.onMonthChange).toHaveBeenCalledTimes(1)
+        expect(props.onMonthChange).toHaveBeenCalledWith('2017-01-01')
+      })
+    })
+
+    context('when prop `onMonthChange` is `undefined`', () => {
+      it('sets `activeMonth` state', () => {
+        props = {activeMonth: date}
+        wrapper = shallow(<Calendar {...props} />)
+
+        wrapper.instance()._switchMonth('2017-01-01')
+
+        expect(wrapper.state('activeMonth')).toBe('2017-01-01')
+      })
+    })
+  })
+
+  describe('#_activeMonth', () => {
+    context('when prop `onMonthChange` is defined', () => {
+      it('returns prop `activeMonth`', () => {
+        props = {onMonthChange: jest.fn(), activeMonth: date}
+        wrapper = shallow(<Calendar {...props} />)
+
+        expect(wrapper.instance()._activeMonth()).toBe(props.activeMonth)
+      })
+    })
+
+    context('when prop `onMonthChange` is `undefined`', () => {
+      it('returns state `activeMonth`', () => {
+        wrapper = shallow(<Calendar activeMonth={date} />)
+        wrapper.setState({activeMonth: '2015-01-01'})
+
+        expect(wrapper.instance()._activeMonth()).toBe('2015-01-01')
+      })
+    })
+  })
+
+  describe('#_highlight', () => {
+    context('when prop `highlighted` is `undefined`', () => {
+      it('returns object', () => {
+        wrapper = shallow(<Calendar />)
+
+        expect(wrapper.instance()._highlight()).toEqual({start: null, end: null})
+      })
+    })
+
+    context('when prop `highlighted` is defined', () => {
+      it('returns object', () => {
+        props = {
+          highlighted: {
+            start: date,
+            end: new Date(2015, 7, 1),
+          },
+        }
+        wrapper = shallow(<Calendar {...props} />)
+
+        expect(wrapper.instance()._highlight()).toEqual(props.highlighted)
+      })
+
+      context('when prop `highlighted.start` is invalid date', () => {
+        it('returns object', () => {
+          props = {
+            highlighted: {
+              start: 'abc',
+              end: new Date(2015, 7, 1),
+            },
+          }
+          wrapper = shallow(<Calendar {...props} />)
+
+          expect(wrapper.instance()._highlight()).toEqual({start: null, end: null})
+        })
+      })
+
+      context('when prop `highlighted.end` is invalid date', () => {
+        it('returns object', () => {
+          props = {
+            highlighted: {
+              start: date,
+              end: 'abc',
+            },
+          }
+          wrapper = shallow(<Calendar {...props} />)
+
+          expect(wrapper.instance()._highlight()).toEqual({start: null, end: null})
+        })
+      })
+    })
+  })
+
+  describe('#_selection', () => {
+    let instance
+
     beforeEach(() => {
-      onSelect = sinon.spy()
-      calendar = render({
-        activeMonth: new Date(2015, 5, 1),
-        mode: 'single',
-        onSelect,
+      wrapper = shallow(<Calendar />)
+      instance = wrapper.instance()
+    })
+
+    context('when #_selectionStart and #_selectionEnd returns valid date', () => {
+      it('returns object', () => {
+        const start = date
+        const end = new Date(2015, 7, 1)
+        instance._selectionStart = () => start
+        instance._selectionEnd = () => end
+
+        expect(instance._selection()).toEqual({start, end})
       })
     })
 
-    it('can select single day', () => {
-      clickOnDays(calendar, 5)
-      assert(onSelect.calledWith(new Date(2015, 5, 6)))
+    context('when #_selectionStart and #_selectionEnd returns invalid date', () => {
+      it('returns object', () => {
+        instance._selectionStart = () => date
+        instance._selectionEnd = () => 'abc'
+
+        expect(instance._selection()).toEqual({start: null, end: null})
+      })
     })
   })
 
-  describe('range selection mode', () => {
-    context('when onSelectionProgress is not passed', () => {
-      let onSelect, calendar
-      beforeEach(() => {
-        onSelect = sinon.spy()
-        calendar = render({
-          activeMonth: new Date(2015, 5, 1),
-          selected: {start: new Date(2015, 5, 1), end: new Date(2015, 5, 3)},
-          mode: 'range',
-          onSelect,
-        })
+  describe('#_selectionDate', () => {
+    context("when prop `mode` is 'single'", () => {
+      it('returns prop `selected', () => {
+        props = {selected: date}
+        wrapper = shallow(<Calendar {...props} />)
+
+        expect(wrapper.instance()._selectionDate('end')).toBe(props.selected)
       })
+    })
 
-      context('when the only one date is selected', () => {
+    context("when prop `mode` is 'range'", () => {
+      const selected = {start: date, end: new Date(2015, 7, 1)}
+      const selection = {start: new Date(2017, 6, 1), end: new Date(2017, 7, 1)}
+
+      context('when prop `onSelectionProgress` is `undefined`', () => {
         beforeEach(() => {
-          clickOnDays(calendar, 5)
+          props = {selected, mode: 'range'}
+          wrapper = shallow(<Calendar {...props} />)
+          instance = wrapper.instance()
         })
 
-        it('does not call onSelect', () => {
-          assert(!onSelect.called)
-        })
+        context('when state `selection` is `defined`', () => {
+          it('returns state `selection.start`', () => {
+            wrapper.setState({selection})
 
-        context('when user hovers over the chosen day', () => {
-          it('sets selection to the only chosen day', () => {
-            hoverOnDay(calendar, 5)
-            const selection = getSelectedDays(calendar)
-            assert.deepEqual(selection, [new Date(2015, 5, 6)])
+            expect(instance._selectionDate('start')).toBe(selection.start)
           })
         })
 
-        context('when user hovers over a day before the chosen day', () => {
-          it('sets selection from the hovered day to the chosen one', () => {
-            hoverOnDay(calendar, 3)
-            const selection = getSelectedDays(calendar)
-            assert.deepEqual(selection, [new Date(2015, 5, 4), new Date(2015, 5, 5), new Date(2015, 5, 6)])
-          })
-        })
-
-        context('when user hovers over a day after the chosen day', () => {
-          it('sets selection from the chosen day to the hovered one', () => {
-            hoverOnDay(calendar, 7)
-            const selection = getSelectedDays(calendar)
-            assert.deepEqual(selection, [new Date(2015, 5, 6), new Date(2015, 5, 7), new Date(2015, 5, 8)])
-          })
-        })
-
-        context('when user hover over a day in the different month', () => {
-          it('sets selection from the hovered day to the end of the month', () => {
-            const calendarEl = findDOMNode(calendar)
-            const prevLink = calendarEl.querySelector('.calendar-header_button.is-prev')
-            TestUtils.Simulate.click(prevLink)
-
-            hoverOnDay(calendar, 33)
-            const selection = getSelectedDays(calendar)
-            assert.deepEqual(selection, [new Date(2015, 4, 30), new Date(2015, 4, 31)])
-          })
+        it('returns prop `selected.start`', () => {
+          expect(instance._selectionDate('start')).toBe(props.selected.start)
         })
       })
 
-      context('when both dates are selected', () => {
-        beforeEach(() => {
-          clickOnDays(calendar, 5, 15)
-        })
+      context('when prop `onSelectionProgress` is defined', () => {
+        it('returns prop `selected.start`', () => {
+          props = {selected, mode: 'range', onSelectionProgress: () => {}}
+          wrapper = shallow(<Calendar {...props} />)
+          wrapper.setState({selection})
 
-        it('calls onSelect', () => {
-          assert(
-            onSelect.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 5, 16),
-            })
-          )
-        })
-      })
-
-      context('when the end date is before the start date', () => {
-        beforeEach(() => {
-          clickOnDays(calendar, 15, 5)
-        })
-
-        it('calls onSelect with swapped dates', () => {
-          assert(
-            onSelect.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 5, 16),
-            })
-          )
-        })
-      })
-
-      context('when the same date is chosen for the start and for the end of the range', () => {
-        beforeEach(() => {
-          clickOnDays(calendar, 5, 5)
-        })
-
-        it('calls onSelect with the same value for the start and the end dates', () => {
-          assert(
-            onSelect.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 5, 6),
-            })
-          )
-        })
-      })
-
-      context('when user switches the month', () => {
-        beforeEach(() => {
-          const calendarEl = findDOMNode(calendar)
-          const nextLinkEl = calendarEl.querySelector('.calendar-header_button.is-next')
-          clickOnDays(calendar, 5)
-          TestUtils.Simulate.click(nextLinkEl)
-          clickOnDays(calendar, 5)
-        })
-
-        it('calls onSelect with the correct dates', () => {
-          assert(
-            onSelect.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 6, 4),
-            })
-          )
-        })
-      })
-
-      context('when user clears the selection (e.g. by selecting an overlapping interval)', () => {
-        it('does not call onSelect', () => {
-          const onSelect = sinon.spy()
-          const wrapper = shallow(<Calendar mode="range" onSelect={onSelect} />)
-          const onChange = wrapper.find('Month').prop('onChange')
-          onChange({start: null, end: null, inProgress: false})
-          assert(!onSelect.called)
+          expect(wrapper.instance()._selectionDate('start')).toBe(props.selected.start)
         })
       })
     })
+  })
 
-    context('when onSelectionProgress is passed', () => {
-      let onSelect, calendar, onSelectionProgress
-      beforeEach(() => {
-        onSelect = sinon.spy()
-        onSelectionProgress = sinon.spy()
-        calendar = render({
-          activeMonth: new Date(2015, 5, 1),
-          selected: {start: new Date(2015, 5, 1), end: new Date(2015, 5, 3)},
-          mode: 'range',
-          onSelect,
-          onSelectionProgress,
-        })
-      })
+  describe('#_selectionChanged', () => {
+    const selection = {start: date, end: new Date(2015, 7, 1)}
 
-      context('when the only one date is selected', () => {
-        beforeEach(() => {
-          clickOnDays(calendar, 5)
-        })
+    context("when prop `mode` is 'single'", () => {
+      context('when prop `onSelect` is defined', () => {
+        context('when selection `start` is defined', () => {
+          it('calls prop #onSelect', () => {
+            props = {onSelect: jest.fn()}
+            wrapper = shallow(<Calendar {...props} />)
 
-        it('calls onSelectionProgress with isProgress equal true', () => {
-          assert(
-            onSelectionProgress.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 5, 6),
-              inProgress: true,
-            })
-          )
-        })
+            wrapper.instance()._selectionChanged(selection)
 
-        it('does not call onSelect', () => {
-          assert(!onSelect.called)
-        })
-
-        it('preserves the current selection', () => {
-          const selected = getSelectedDays(calendar)
-          assert.deepEqual(selected, [new Date(2015, 5, 1), new Date(2015, 5, 2), new Date(2015, 5, 3)])
-        })
-
-        context('when user hovers over a day', () => {
-          it('preserves the current selection', () => {
-            hoverOnDay(calendar, 10)
-            const selected = getSelectedDays(calendar)
-            assert.deepEqual(selected, [new Date(2015, 5, 1), new Date(2015, 5, 2), new Date(2015, 5, 3)])
+            expect(props.onSelect).toHaveBeenCalledTimes(1)
+            expect(props.onSelect).toHaveBeenCalledWith(selection.start)
           })
         })
       })
+    })
 
-      context('when both dates are selected', () => {
+    context("when prop `mode` is 'range'", () => {
+      context('when prop `onSelect` is defined', () => {
+        it('calls prop #onSelect', () => {
+          props = {mode: 'range', onSelect: jest.fn()}
+          wrapper = shallow(<Calendar {...props} />)
+
+          wrapper.instance()._selectionChanged(selection)
+
+          expect(props.onSelect).toHaveBeenCalledTimes(1)
+          expect(props.onSelect).toHaveBeenCalledWith(selection)
+        })
+      })
+
+      context('when prop `onSelectionProgress` is defined', () => {
+        it('calls prop #onSelectionProgress', () => {
+          props = {mode: 'range', onSelectionProgress: jest.fn()}
+          wrapper = shallow(<Calendar {...props} />)
+
+          wrapper.instance()._selectionChanged(Object.assign(selection, {inProgress: true}))
+
+          expect(props.onSelectionProgress).toHaveBeenCalledTimes(1)
+          expect(props.onSelectionProgress).toHaveBeenCalledWith(Object.assign(selection, {inProgress: true}))
+        })
+      })
+
+      context('when prop `onSelectionProgress` is `undefined`', () => {
         beforeEach(() => {
-          clickOnDays(calendar, 5, 15)
+          props = {mode: 'range'}
+          wrapper = shallow(<Calendar {...props} />)
+          instance = wrapper.instance()
         })
 
-        it('calls onSelectionProgress with inProgress equal to false', () => {
-          assert(
-            onSelectionProgress.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 5, 16),
-              inProgress: false,
-            })
-          )
+        context('when selection `inProgress` is `true`', () => {
+          it('sets state `selection`', () => {
+            instance._selectionChanged(Object.assign(selection, {inProgress: true}))
+
+            expect(wrapper.state('selection')).toEqual({start: date, end: new Date(2015, 7, 1)})
+          })
         })
 
-        it('calls onSelect', () => {
-          assert(
-            onSelect.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 5, 16),
-            })
-          )
-        })
-      })
+        context('when selection `inProgress` is `false`', () => {
+          it('sets state `selection`', () => {
+            instance._selectionChanged(Object.assign(selection, {inProgress: false}))
 
-      context('when the end date is before the start date', () => {
-        beforeEach(() => {
-          clickOnDays(calendar, 15, 5)
-        })
-
-        it('calls onSelectionProgress with swapped dates', () => {
-          assert(
-            onSelectionProgress.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 5, 16),
-              inProgress: false,
-            })
-          )
-        })
-
-        it('calls onSelect with swapped dates', () => {
-          assert(
-            onSelect.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 5, 16),
-            })
-          )
-        })
-      })
-
-      context('when the same date is chosen for the start and for the end of the range', () => {
-        beforeEach(() => {
-          clickOnDays(calendar, 5, 5)
-        })
-
-        it('calls onSelectionProgress with the same value for the start and the end dates', () => {
-          assert(
-            onSelectionProgress.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 5, 6),
-              inProgress: false,
-            })
-          )
-        })
-
-        it('calls onSelect with the same value for the start and the end dates', () => {
-          assert(
-            onSelect.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 5, 6),
-            })
-          )
-        })
-      })
-
-      context('when user switches the month', () => {
-        beforeEach(() => {
-          const calendarEl = findDOMNode(calendar)
-          const nextLinkEl = calendarEl.querySelector('.calendar-header_button.is-next')
-          clickOnDays(calendar, 5)
-          TestUtils.Simulate.click(nextLinkEl)
-          clickOnDays(calendar, 5)
-        })
-
-        it('calls onSelectionProgress with the correct dates', () => {
-          assert(
-            onSelectionProgress.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 6, 4),
-              inProgress: false,
-            })
-          )
-        })
-
-        it('calls onSelect with the correct dates', () => {
-          assert(
-            onSelect.calledWith({
-              start: new Date(2015, 5, 6),
-              end: new Date(2015, 6, 4),
-            })
-          )
+            expect(wrapper.state('selection')).toBe(null)
+          })
         })
       })
     })
   })
 
-  describe('selection boundaries', () => {
-    let onSelect, calendar
-    beforeEach(() => {
-      onSelect = sinon.spy()
-      calendar = render({
-        activeMonth: new Date(2015, 5, 1),
-        mode: 'range',
-        minDate: new Date(2015, 5, 10),
-        maxDate: new Date(2015, 5, 20),
-        onSelect,
-      })
-    })
+  describe('#_noticeChanged', () => {
+    it('sets state', () => {
+      wrapper = shallow(<Calendar />)
 
-    it('can select days range inside boundaries', () => {
-      clickOnDays(calendar, 9, 19)
-      assert(
-        onSelect.calledWith({
-          start: new Date(2015, 5, 10),
-          end: new Date(2015, 5, 20),
-        })
-      )
-    })
+      expect(wrapper.state('shownNoticeType')).toBe(null)
 
-    it('cant select days earlier than min boundary', () => {
-      clickOnDays(calendar, 1, 8)
-      assert(!onSelect.called)
-    })
+      wrapper.instance()._noticeChanged('disabled_day_click')
 
-    it('cant select days later than max boundary', () => {
-      clickOnDays(calendar, 20, 25)
-      assert(!onSelect.called)
-    })
-
-    it('can select days range after failing to select day outside boundaries', () => {
-      clickOnDays(calendar, 14, 25, 19)
-      assert(
-        onSelect.calledWith({
-          start: new Date(2015, 5, 15),
-          end: new Date(2015, 5, 20),
-        })
-      )
+      expect(wrapper.state('shownNoticeType')).toBe('disabled_day_click')
     })
   })
 
-  describe('blockClassName', () => {
-    context('when blockClassName is not defined', () => {
-      it('renders el with .calendar', () => {
-        const el = findDOMNode(render())
-        assert(el.classList.contains('calendar'))
+  describe('#_today', () => {
+    context('when prop `today` is defined', () => {
+      it('returns date', () => {
+        wrapper = shallow(<Calendar today={date} />)
+
+        expect(wrapper.instance()._today()).toBe(date)
       })
     })
 
-    context('when blockClassName is defined', () => {
-      it('renders el with passed block class name', () => {
-        const el = findDOMNode(render({blockClassName: 'cal'}))
-        assert(el.classList.contains('cal'))
+    context('when prop `today` is `undefined`', () => {
+      it('returns date', () => {
+        wrapper = shallow(<Calendar />)
+
+        expect(wrapper.instance()._today()).toEqual(new Date(2000, 0, 1))
       })
     })
   })
 
-  describe('monthHeaderComponent', () => {
-    it('renders passed component as Object', () => {
-      const mockHeader = React.Component({
-        render() {
-          return <div className="fake">MockHeader</div>
-        },
-      })
-      const el = findDOMNode(render({monthHeaderComponent: mockHeader}))
-      assert(el.getElementsByClassName('fake'))
-    })
+  describe('#render', () => {
+    it('renders <Calendar />', () => {
+      const tree = ReactTestRenderer.create(<Calendar activeMonth={date} onMonthChange={() => {}} />).toJSON()
 
-    it('renders passed component as Function', () => {
-      const el = findDOMNode(render({monthHeaderComponent: mockComponent}))
-      assert(el.getElementsByClassName('fake'))
-    })
-  })
-
-  describe('highlighted', () => {
-    it('does not have any highlighted days by default', () => {
-      const calendar = render({
-        activeMonth: new Date(2015, 5, 1),
-        mode: 'single',
-      })
-      const highlightedDays = getHighlightedDays(calendar)
-      assert(highlightedDays.length === 0)
-    })
-
-    it('does not have any highlighted if data is incorrect', () => {
-      const calendar = render({
-        activeMonth: new Date(2015, 5, 1),
-        highlighted: {start: 'string', end: null},
-      })
-      const highlightedDays = getHighlightedDays(calendar)
-      assert(highlightedDays.length === 0)
-    })
-
-    it('renders highlighted days', () => {
-      const calendar = render({
-        activeMonth: new Date(2015, 5, 1),
-        mode: 'single',
-        highlighted: {start: new Date(2015, 4, 25), end: new Date(2015, 5, 2)},
-      })
-      const highlightedDays = getHighlightedDays(calendar)
-      assert.deepEqual(highlightedDays, [new Date(2015, 5, 1), new Date(2015, 5, 2)])
-    })
-
-    it('renders highlighted days on range mode', () => {
-      const calendar = render({
-        activeMonth: new Date(2015, 4, 1),
-        mode: 'range',
-        highlighted: {start: new Date(2015, 4, 25), end: new Date(2015, 5, 2)},
-      })
-      const highlightedDays = getHighlightedDays(calendar)
-      assert.deepEqual(highlightedDays, [
-        new Date(2015, 4, 25),
-        new Date(2015, 4, 26),
-        new Date(2015, 4, 27),
-        new Date(2015, 4, 28),
-        new Date(2015, 4, 29),
-        new Date(2015, 4, 30),
-        new Date(2015, 4, 31),
-      ])
-    })
-  })
-
-  describe('NoticeComponent', () => {
-    it('passes onNoticeChange to the Month component', () => {
-      const wrapper = shallow(<Calendar mode="range" />)
-      const onNoticeChange = wrapper.find('Month').prop('onNoticeChange')
-      assert(typeof onNoticeChange === 'function')
-    })
-
-    context('when there is no notice', () => {
-      it('do not render Notice', () => {
-        const wrapper = shallow(<Calendar mode="range" />)
-        assert(wrapper.find('Notice').length === 0)
-      })
-    })
-
-    context('when there is a notice', () => {
-      it('renders Notice with blockClassName and type props', () => {
-        const wrapper = shallow(<Calendar mode="range" />)
-        wrapper.setState({shownNoticeType: 'disabled_day_click'})
-        const notice = wrapper.find('Notice')
-        assert(notice.length)
-        assert(notice.prop('type') === 'disabled_day_click')
-        assert(notice.prop('blockClassName') === 'calendar')
-      })
-
-      it('allows to pass custom notice component', () => {
-        const Whatever = () => ''
-        Whatever.displayName = 'Whatever'
-        const wrapper = shallow(<Calendar mode="range" NoticeComponent={Whatever} blockClassName="Cal" />)
-        wrapper.setState({shownNoticeType: 'disabled_day_click'})
-        const customNotice = wrapper.find('Whatever')
-        assert(customNotice.length)
-        assert(customNotice.prop('type') === 'disabled_day_click')
-        assert(customNotice.prop('blockClassName') === 'Cal')
-      })
-    })
-  })
-
-  describe('weekStartsOn', () => {
-    it('render days from correct starting day', () => {
-      const calendar = render({
-        weekStartsOn: 2,
-      })
-      const daysOfWeek = TestUtils.findRenderedComponentWithType(calendar, DaysOfWeek)
-
-      assert.deepEqual(daysOfWeek.props.weekStartsOn, 2)
+      expect(tree).toMatchSnapshot()
     })
   })
 })

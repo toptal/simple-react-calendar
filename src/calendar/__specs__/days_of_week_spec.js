@@ -1,71 +1,28 @@
 import React from 'react'
-import TestUtils from 'react-dom/test-utils'
-import {shallow} from 'enzyme'
-import {findDOMNode} from 'react-dom'
-import assert from 'power-assert'
 
 import DaysOfWeek from '../days_of_week'
 
+import ReactTestRenderer from 'react-test-renderer'
+import {shallow} from 'enzyme'
+
 describe('DaysOfWeek', () => {
-  function render(props = {}) {
-    return TestUtils.renderIntoDocument(<DaysOfWeek {...props} />)
-  }
+  let wrapper, tree
 
-  it('renders', () => {
-    assert(render())
-  })
+  describe('#_getDaysOfWeek', () => {
+    it('return days of week', () => {
+      wrapper = shallow(<DaysOfWeek weekStartsOn={2} />)
 
-  it('renders days of week', () => {
-    const week = render()
-    const days = TestUtils.scryRenderedDOMComponentsWithClass(week, 'calendar-days_of_week_day').map(
-      (day) => findDOMNode(day).textContent
-    )
-    assert.deepEqual(days, ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
-  })
+      const daysOfWeek = wrapper.instance()._getDaysOfWeek(3)
 
-  it('adds .is-weekend modifier to weekends', () => {
-    const week = render()
-    const weekendModifiers = TestUtils.scryRenderedDOMComponentsWithClass(week, 'calendar-days_of_week_day').map(
-      (day) => findDOMNode(day).classList.contains('is-weekend')
-    )
-    assert.deepEqual(weekendModifiers, [false, false, false, false, false, true, true])
-  })
-
-  describe('weekStartsOn', () => {
-    it('renders sorted days of week depending on weekStartsOn prop', () => {
-      const wrapper = shallow(<DaysOfWeek weekStartsOn={2} />)
-      const days = wrapper.find('.calendar-days_of_week_day').map((day) => day.text())
-
-      assert.deepEqual(days, ['Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon'])
+      expect(daysOfWeek).toEqual(['Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue'])
     })
   })
 
-  describe('blockClassName', () => {
-    context('when blockClassName is not defined', () => {
-      it('render el with .calendar-days_of_week', () => {
-        const daysOfWeekEl = findDOMNode(render())
-        assert(daysOfWeekEl.classList.contains('calendar-days_of_week'))
-      })
+  describe('#render', () => {
+    it('renders <DaysOfWeek />', () => {
+      tree = ReactTestRenderer.create(<DaysOfWeek weekStartsOn={2} blockClassName="test-class" />).toJSON()
 
-      it('renders day el with .calendar-days_of_week_day', () => {
-        const dayEls = TestUtils.scryRenderedDOMComponentsWithClass(render(), 'calendar-days_of_week_day')
-        assert(dayEls.length > 0)
-      })
-    })
-
-    context('when blockClassName is defined', () => {
-      it('renders el with prefixed class name', () => {
-        const daysOfWeekEl = findDOMNode(render({blockClassName: 'cal'}))
-        assert(daysOfWeekEl.classList.contains('cal-days_of_week'))
-      })
-
-      it('renders day el with prefixed class name', () => {
-        const dayEls = TestUtils.scryRenderedDOMComponentsWithClass(
-          render({blockClassName: 'cal'}),
-          'cal-days_of_week_day'
-        )
-        assert(dayEls.length > 0)
-      })
+      expect(tree).toMatchSnapshot()
     })
   })
 })

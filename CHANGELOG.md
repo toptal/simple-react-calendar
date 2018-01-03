@@ -1,5 +1,11 @@
 # Changelog `simple-react-calendar`
 
+## Unreleased
+
+### Features
+
+* Integrate `Jest` for unit testing
+
 ## 1.7.0
 
 ### Fixes
