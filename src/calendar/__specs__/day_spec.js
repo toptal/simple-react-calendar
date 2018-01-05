@@ -12,13 +12,9 @@ describe('Day', () => {
       today: new Date(2015, 7, 17),
       activeMonth: new Date(2015, 7, 17),
       onClick: () => {},
-      onMouseMove: () => {}
+      onMouseMove: () => {},
     }
-    return TestUtils.renderIntoDocument(
-      <Day
-        {...Object.assign({}, defaultProps, props)}
-      />
-    )
+    return TestUtils.renderIntoDocument(<Day {...Object.assign({}, defaultProps, props)} />)
   }
 
   it('renders with minimal params', () => {

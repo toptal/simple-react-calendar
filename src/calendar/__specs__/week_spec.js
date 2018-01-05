@@ -13,23 +13,20 @@ describe('Week', () => {
     weekStartsOn: 1,
     onDayClick: () => {},
     onDayMouseMove: () => {},
-    onDisabledDayClick: () => {}
+    onDisabledDayClick: () => {},
   }
 
   function render(props = {}) {
-    const component = TestUtils.renderIntoDocument(
-      <Week
-        {...Object.assign({}, defaultProps, props)}
-      />
-    )
+    const component = TestUtils.renderIntoDocument(<Week {...Object.assign({}, defaultProps, props)} />)
     const element = findDOMNode(component)
     element.component = component
     return element
   }
 
   function findDays(element) {
-    return TestUtils.scryRenderedDOMComponentsWithClass(element.component, 'calendar-day')
-      .map((day) => findDOMNode(day))
+    return TestUtils.scryRenderedDOMComponentsWithClass(element.component, 'calendar-day').map((day) =>
+      findDOMNode(day)
+    )
   }
 
   it('renders with minimal params', () => {
@@ -43,141 +40,169 @@ describe('Week', () => {
   })
 
   it('correctly marks the days that falls in the active month', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29),
-      activeMonth: new Date(2015, 5, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29),
+        activeMonth: new Date(2015, 5, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-current_month'))
     assert.deepEqual(daysWithClass, [true, true, false, false, false, false, false])
   })
 
   it('correctly marks the days that falls in the active month', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29),
-      activeMonth: new Date(2015, 5, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29),
+        activeMonth: new Date(2015, 5, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-current_month'))
     assert.deepEqual(daysWithClass, [true, true, false, false, false, false, false])
   })
 
   it('correctly marks the days that falls in the previous month', () => {
-    const days = findDays(render({
-      date: new Date(2015, 6, 27),
-      activeMonth: new Date(2015, 7, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 6, 27),
+        activeMonth: new Date(2015, 7, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-prev_month'))
     assert.deepEqual(daysWithClass, [true, true, true, true, true, false, false])
   })
 
   it('correctly marks the days that falls in the next month', () => {
-    const days = findDays(render({
-      date: new Date(2015, 7, 31),
-      activeMonth: new Date(2015, 7, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 7, 31),
+        activeMonth: new Date(2015, 7, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-next_month'))
     assert.deepEqual(daysWithClass, [false, true, true, true, true, true, true])
   })
 
   it('correctly marks the days that falls on working days', () => {
-    const days = findDays(render({
-      date: new Date(2015, 7, 31),
-      activeMonth: new Date(2015, 7, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 7, 31),
+        activeMonth: new Date(2015, 7, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-working_day'))
     assert.deepEqual(daysWithClass, [true, true, true, true, true, false, false])
   })
 
   it('correctly marks the days that falls on weekends', () => {
-    const days = findDays(render({
-      date: new Date(2015, 7, 31),
-      activeMonth: new Date(2015, 7, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 7, 31),
+        activeMonth: new Date(2015, 7, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-weekend'))
     assert.deepEqual(daysWithClass, [false, false, false, false, false, true, true])
   })
 
   it('correctly marks the days that falls on today', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29),
-      today: new Date(2015, 5, 31),
-      activeMonth: new Date(2015, 5, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29),
+        today: new Date(2015, 5, 31),
+        activeMonth: new Date(2015, 5, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-today'))
     assert.deepEqual(daysWithClass, [false, false, true, false, false, false, false])
   })
 
   it('correctly marks the highlighted days', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29),
-      today: new Date(2015, 5, 31),
-      activeMonth: new Date(2015, 5, 1),
-      highlightedStart: new Date(2015, 5, 29),
-      highlightedEnd: new Date(2015, 6, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29),
+        today: new Date(2015, 5, 31),
+        activeMonth: new Date(2015, 5, 1),
+        highlightedStart: new Date(2015, 5, 29),
+        highlightedEnd: new Date(2015, 6, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-highlighted'))
     assert.deepEqual(daysWithClass, [true, true, true, false, false, false, false])
   })
 
   it('correctly marks the selected days', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29, 21, 0),
-      activeMonth: new Date(2015, 5, 1),
-      selectedMin: new Date(2015, 5, 30, 10, 0),
-      selectedMax: new Date(2015, 6, 2, 5, 0)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29, 21, 0),
+        activeMonth: new Date(2015, 5, 1),
+        selectedMin: new Date(2015, 5, 30, 10, 0),
+        selectedMax: new Date(2015, 6, 2, 5, 0),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-selected'))
     assert.deepEqual(daysWithClass, [false, true, true, true, false, false, false])
   })
 
   it('correctly marks the single selected day', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29),
-      activeMonth: new Date(2015, 5, 1),
-      selectedMin: new Date(2015, 5, 30),
-      selectedMax: new Date(2015, 5, 30)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29),
+        activeMonth: new Date(2015, 5, 1),
+        selectedMin: new Date(2015, 5, 30),
+        selectedMax: new Date(2015, 5, 30),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-selected'))
     assert.deepEqual(daysWithClass, [false, true, false, false, false, false, false])
   })
 
   it('correctly marks the days inside boundaries with minDate', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29),
-      activeMonth: new Date(2015, 5, 1),
-      minDate: new Date(2015, 5, 30)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29),
+        activeMonth: new Date(2015, 5, 1),
+        minDate: new Date(2015, 5, 30),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-selectable'))
     assert.deepEqual(daysWithClass, [false, true, true, true, true, true, true])
   })
 
   it('correctly marks the days inside boundaries with maxDate', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29),
-      activeMonth: new Date(2015, 5, 1),
-      maxDate: new Date(2015, 6, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29),
+        activeMonth: new Date(2015, 5, 1),
+        maxDate: new Date(2015, 6, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-selectable'))
     assert.deepEqual(daysWithClass, [true, true, true, false, false, false, false])
   })
 
   it('correctly marks the days inside boundaries with both ends', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29),
-      activeMonth: new Date(2015, 5, 1),
-      minDate: new Date(2015, 5, 30),
-      maxDate: new Date(2015, 6, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29),
+        activeMonth: new Date(2015, 5, 1),
+        minDate: new Date(2015, 5, 30),
+        maxDate: new Date(2015, 6, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-selectable'))
     assert.deepEqual(daysWithClass, [false, true, true, false, false, false, false])
   })
 
   it('correctly marks the days outside boundaries', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29),
-      activeMonth: new Date(2015, 5, 1),
-      minDate: new Date(2015, 5, 30),
-      maxDate: new Date(2015, 6, 1)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29),
+        activeMonth: new Date(2015, 5, 1),
+        minDate: new Date(2015, 5, 30),
+        maxDate: new Date(2015, 6, 1),
+      })
+    )
     const daysWithClass = days.map((day) => day.classList.contains('is-not_selectable'))
     assert.deepEqual(daysWithClass, [true, false, false, true, true, true, true])
   })
@@ -206,23 +231,27 @@ describe('Week', () => {
   })
 
   it('correctly marks the start of the selection', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29, 21, 0),
-      activeMonth: new Date(2015, 5, 1),
-      selectedMin: new Date(2015, 5, 30, 10, 0),
-      selectedMax: new Date(2015, 6, 2, 5, 0)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29, 21, 0),
+        activeMonth: new Date(2015, 5, 1),
+        selectedMin: new Date(2015, 5, 30, 10, 0),
+        selectedMax: new Date(2015, 6, 2, 5, 0),
+      })
+    )
     const daysWithStartClass = days.map((day) => day.classList.contains('is-start_selection'))
     assert.deepEqual(daysWithStartClass, [false, true, false, false, false, false, false])
   })
 
   it('correctly marks the end of the selection', () => {
-    const days = findDays(render({
-      date: new Date(2015, 5, 29, 21, 0),
-      activeMonth: new Date(2015, 5, 1),
-      selectedMin: new Date(2015, 5, 30, 10, 0),
-      selectedMax: new Date(2015, 6, 2, 5, 0)
-    }))
+    const days = findDays(
+      render({
+        date: new Date(2015, 5, 29, 21, 0),
+        activeMonth: new Date(2015, 5, 1),
+        selectedMin: new Date(2015, 5, 30, 10, 0),
+        selectedMax: new Date(2015, 6, 2, 5, 0),
+      })
+    )
     const daysWithEndClass = days.map((day) => day.classList.contains('is-end_selection'))
     assert.deepEqual(daysWithEndClass, [false, false, false, true, false, false, false])
   })
@@ -231,8 +260,8 @@ describe('Week', () => {
     const disabledIntervals = [
       {
         start: new Date(2015, 7, 21),
-        end: new Date(2015, 7, 23)
-      }
+        end: new Date(2015, 7, 23),
+      },
     ]
 
     it('marks the disabled dates as .is-disabled', () => {
@@ -251,9 +280,7 @@ describe('Week', () => {
       it('passes onDisabledDayClick to the Day', () => {
         const onDisabledDayClick = () => {}
         const wrapper = shallow(
-        <Week {...defaultProps}
-        disabledIntervals={disabledIntervals}
-        onDisabledDayClick={onDisabledDayClick} />
+          <Week {...defaultProps} disabledIntervals={disabledIntervals} onDisabledDayClick={onDisabledDayClick} />
         )
         const disabledDay = wrapper.find('Day').last()
         assert(disabledDay.prop('onClick') === onDisabledDayClick)

@@ -15,11 +15,11 @@ export default class Day extends React.Component {
     date: datePropType.isRequired,
     onClick: PropTypes.func,
     onMouseMove: PropTypes.func,
-    today: datePropType.isRequired
+    today: datePropType.isRequired,
   }
 
   static defaultProps = {
-    blockClassName: BLOCK_CLASS_NAME
+    blockClassName: BLOCK_CLASS_NAME,
   }
 
   _onClick(e) {

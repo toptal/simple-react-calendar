@@ -21,13 +21,13 @@ export default class MonthHeader extends React.Component {
     headerPrevTitle: PropTypes.string,
     maxDate: datePropType,
     minDate: datePropType,
-    onMonthChange: PropTypes.func.isRequired
+    onMonthChange: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     blockClassName: BLOCK_CLASS_NAME,
     headerNextTitle: NEXT_MONTH_TITLE,
-    headerPrevTitle: PREV_MONTH_TITLE
+    headerPrevTitle: PREV_MONTH_TITLE,
   }
 
   _switchMonth(offset) {
@@ -44,7 +44,7 @@ export default class MonthHeader extends React.Component {
       headerNextArrow,
       headerNextTitle,
       headerPrevArrow,
-      headerPrevTitle
+      headerPrevTitle,
     } = this.props
 
     const prevEnabled = minDate ? isBefore(startOfMonth(minDate), startOfMonth(activeMonth)) : true
@@ -53,18 +53,16 @@ export default class MonthHeader extends React.Component {
     return (
       <div className={`${blockClassName}-month_header`}>
         <HeaderButton
-          type='prev'
+          type="prev"
           arrow={headerPrevArrow}
           title={headerPrevTitle}
           enabled={prevEnabled}
           onClick={this._switchMonth.bind(this, -1)}
           blockClassName={blockClassName}
         />
-        <div className={`${blockClassName}-month_header_title`}>
-          {formatDate(activeMonth, 'MMMM YYYY')}
-        </div>
+        <div className={`${blockClassName}-month_header_title`}>{formatDate(activeMonth, 'MMMM YYYY')}</div>
         <HeaderButton
-          type='next'
+          type="next"
           arrow={headerNextArrow}
           title={headerNextTitle}
           enabled={nextEnabled}

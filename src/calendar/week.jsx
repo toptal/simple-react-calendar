@@ -27,10 +27,12 @@ export default class Week extends React.Component {
     blockClassName: PropTypes.string,
     data: PropTypes.object,
     date: datePropType.isRequired,
-    disabledIntervals: PropTypes.arrayOf(PropTypes.shape({
-      start: datePropType.isRequired,
-      end: datePropType.isRequired,
-    })),
+    disabledIntervals: PropTypes.arrayOf(
+      PropTypes.shape({
+        start: datePropType.isRequired,
+        end: datePropType.isRequired,
+      })
+    ),
     highlightedEnd: datePropType,
     highlightedStart: datePropType,
     maxDate: datePropType,
@@ -41,12 +43,12 @@ export default class Week extends React.Component {
     selectedMax: datePropType,
     selectedMin: datePropType,
     today: datePropType.isRequired,
-    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK)
+    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
   }
 
   static defaultProps = {
     data: {},
-    blockClassName: BLOCK_CLASS_NAME
+    blockClassName: BLOCK_CLASS_NAME,
   }
 
   _dateSelectable(date) {
@@ -69,23 +71,16 @@ export default class Week extends React.Component {
 
   _dateSelected(date) {
     const {selectedMin, selectedMax} = this.props
-    return (selectedMin && selectedMax)
-      && isWithinRange(
-        startOfDay(date),
-        startOfDay(selectedMin),
-        startOfDay(selectedMax)
-      )
+    return (
+      selectedMin && selectedMax && isWithinRange(startOfDay(date), startOfDay(selectedMin), startOfDay(selectedMax))
+    )
   }
 
   _dateHighlighted(date) {
     const {highlightedStart, highlightedEnd} = this.props
     if (!highlightedStart || !highlightedEnd) return false
 
-    return isWithinRange(
-      startOfDay(date),
-      startOfDay(highlightedStart),
-      startOfDay(highlightedEnd)
-    )
+    return isWithinRange(startOfDay(date), startOfDay(highlightedStart), startOfDay(highlightedEnd))
   }
 
   _dateDisabled(date) {
@@ -117,19 +112,15 @@ export default class Week extends React.Component {
       'is-current_month': isSameMonth(date, activeMonth),
       'is-start_selection': selectedMin && isSameDay(selectedMin, date),
       'is-end_selection': selectedMax && isSameDay(selectedMax, date),
-      'is-prev_month': (date.getMonth() !== activeMonth.getMonth() && isBefore(date, activeMonth)),
-      'is-next_month': (date.getMonth() !== activeMonth.getMonth() && isAfter(date, activeMonth)),
+      'is-prev_month': date.getMonth() !== activeMonth.getMonth() && isBefore(date, activeMonth),
+      'is-next_month': date.getMonth() !== activeMonth.getMonth() && isAfter(date, activeMonth),
       [isWeekend(date) ? 'is-weekend' : 'is-working_day']: true,
-      [this._dateSelectable(date) ? 'is-selectable' : 'is-not_selectable']: true
+      [this._dateSelectable(date) ? 'is-selectable' : 'is-not_selectable']: true,
     })
   }
 
   render() {
-    return (
-      <div className={`${this.props.blockClassName}-week`}>
-        {this._renderDays()}
-      </div>
-    )
+    return <div className={`${this.props.blockClassName}-week`}>{this._renderDays()}</div>
   }
 
   _renderDays() {

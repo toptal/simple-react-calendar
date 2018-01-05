@@ -11,12 +11,12 @@ const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 export default class DaysOfWeek extends React.Component {
   static propTypes = {
     blockClassName: PropTypes.string,
-    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK)
+    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
   }
 
   static defaultProps = {
     weekStartsOn: 1,
-    blockClassName: BLOCK_CLASS_NAME
+    blockClassName: BLOCK_CLASS_NAME,
   }
 
   _getDaysOfWeek(day) {
@@ -33,7 +33,7 @@ export default class DaysOfWeek extends React.Component {
           return (
             <div
               className={classnames(`${blockClassName}-days_of_week_day`, {
-                'is-weekend': index > 4 // 4 is an index of Friday
+                'is-weekend': index > 4, // 4 is an index of Friday
               })}
               key={day}
             >

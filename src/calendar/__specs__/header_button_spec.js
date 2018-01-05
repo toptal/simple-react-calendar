@@ -10,11 +10,9 @@ describe('HeaderButton', () => {
     const defaultProps = {
       type: 'prev',
       enabled: true,
-      onClick: () => {}
+      onClick: () => {},
     }
-    return TestUtils.renderIntoDocument(
-      <HeaderButton {...Object.assign({}, defaultProps, props)} />
-    )
+    return TestUtils.renderIntoDocument(<HeaderButton {...Object.assign({}, defaultProps, props)} />)
   }
 
   describe('button type prop', () => {
@@ -94,7 +92,7 @@ describe('HeaderButton', () => {
       })
 
       it('renders button with the arrow dom element', () => {
-        const el = findDOMNode(render({arrow: <i className='icon'>Test</i>}))
+        const el = findDOMNode(render({arrow: <i className="icon">Test</i>}))
         assert(el.getElementsByClassName('icon'))
       })
     })

@@ -8,9 +8,7 @@ import DaysOfWeek from '../days_of_week'
 
 describe('DaysOfWeek', () => {
   function render(props = {}) {
-    return TestUtils.renderIntoDocument(
-      <DaysOfWeek {...props} />
-    )
+    return TestUtils.renderIntoDocument(<DaysOfWeek {...props} />)
   }
 
   it('renders', () => {
@@ -19,20 +17,18 @@ describe('DaysOfWeek', () => {
 
   it('renders days of week', () => {
     const week = render()
-    const days = TestUtils.scryRenderedDOMComponentsWithClass(week, 'calendar-days_of_week_day')
-      .map((day) => findDOMNode(day).textContent)
+    const days = TestUtils.scryRenderedDOMComponentsWithClass(week, 'calendar-days_of_week_day').map(
+      (day) => findDOMNode(day).textContent
+    )
     assert.deepEqual(days, ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
   })
 
   it('adds .is-weekend modifier to weekends', () => {
     const week = render()
-    const weekendModifiers
-      = TestUtils.scryRenderedDOMComponentsWithClass(week, 'calendar-days_of_week_day')
-        .map((day) => findDOMNode(day).classList.contains('is-weekend'))
-    assert.deepEqual(
-      weekendModifiers,
-      [false, false, false, false, false, true, true]
+    const weekendModifiers = TestUtils.scryRenderedDOMComponentsWithClass(week, 'calendar-days_of_week_day').map(
+      (day) => findDOMNode(day).classList.contains('is-weekend')
     )
+    assert.deepEqual(weekendModifiers, [false, false, false, false, false, true, true])
   })
 
   describe('weekStartsOn', () => {
@@ -40,10 +36,7 @@ describe('DaysOfWeek', () => {
       const wrapper = shallow(<DaysOfWeek weekStartsOn={2} />)
       const days = wrapper.find('.calendar-days_of_week_day').map((day) => day.text())
 
-      assert.deepEqual(
-        days,
-        ['Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon']
-      )
+      assert.deepEqual(days, ['Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon'])
     })
   })
 
@@ -67,7 +60,10 @@ describe('DaysOfWeek', () => {
       })
 
       it('renders day el with prefixed class name', () => {
-        const dayEls = TestUtils.scryRenderedDOMComponentsWithClass(render({blockClassName: 'cal'}), 'cal-days_of_week_day')
+        const dayEls = TestUtils.scryRenderedDOMComponentsWithClass(
+          render({blockClassName: 'cal'}),
+          'cal-days_of_week_day'
+        )
         assert(dayEls.length > 0)
       })
     })

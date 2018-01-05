@@ -13,11 +13,11 @@ export default class HeaderButton extends React.Component {
     offset: PropTypes.number,
     onClick: PropTypes.func.isRequired,
     title: PropTypes.string,
-    type: PropTypes.oneOf(['prev', 'next']).isRequired
+    type: PropTypes.oneOf(['prev', 'next']).isRequired,
   }
 
   static defaultProps = {
-    blockClassName: BLOCK_CLASS_NAME
+    blockClassName: BLOCK_CLASS_NAME,
   }
 
   _onClick(e) {
@@ -32,18 +32,14 @@ export default class HeaderButton extends React.Component {
 
     return (
       <button
-        className={classnames(
-          `${blockClassName}-header_button`,
-          `is-${type}`,
-          {
-            'is-disabled': !enabled
-          }
-        )}
-        type='button'
+        className={classnames(`${blockClassName}-header_button`, `is-${type}`, {
+          'is-disabled': !enabled,
+        })}
+        type="button"
         disabled={!enabled}
         title={title}
         onClick={this._onClick.bind(this)}
-        >
+      >
         {arrow}
       </button>
     )
