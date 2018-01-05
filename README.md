@@ -16,7 +16,7 @@
 [bch-image]: https://bettercodehub.com/edge/badge/toptal/simple-react-calendar?branch=master
 [bch-url]: https://bettercodehub.com/
 
-* * *
+---
 
 A simple calendar component for React based applications.
 
@@ -205,5 +205,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
       <td>
       </td>
     </tr>
+
   <tbody>
 </table>
