@@ -91,7 +91,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
       <td>
       </td>
     </tr>
-
     <tr>
       <td>
         Calendar month header
@@ -102,7 +101,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
       <td>
       </td>
     </tr>
-
     <tr>
       <td>
         Calendar month header title (month name)
@@ -113,7 +111,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
       <td>
       </td>
     </tr>
-
     <tr>
       <td>
         Calendar header button (month switcher)
@@ -129,7 +126,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
         </ul>
       </td>
     </tr>
-
     <tr>
       <td>
         Calendar week header (week days)
@@ -140,7 +136,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
       <td>
       </td>
     </tr>
-
     <tr>
       <td>
         Calendar week header day (week day)
@@ -154,7 +149,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
         </ul>
       </td>
     </tr>
-
     <tr>
       <td>
         Calendar month (weeks wrapper element)
@@ -165,7 +159,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
       <td>
       </td>
     </tr>
-
     <tr>
       <td>
         Calendar week (days wrapper element)
@@ -176,7 +169,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
       <td>
       </td>
     </tr>
-
     <tr>
       <td>Calendar day</td>
       <td><code>.calendar-day</code></td>
@@ -197,7 +189,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
         </ul>
       </td>
     </tr>
-
     <tr>
       <td>
         Calendar notice (notice element)
