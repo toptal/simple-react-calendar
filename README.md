@@ -4,6 +4,7 @@
 [![build status][travis-image]][travis-url]
 [![npm download][download-image]][download-url]
 [![BCH comliance][bch-image]][bch-url]
+[![styled with prettier][prettier-image]][prettier-url]
 
 [npm-image]: http://img.shields.io/npm/v/simple-react-calendar.svg
 [npm-url]: http://npmjs.org/package/simple-react-calendar
@@ -15,8 +16,10 @@
 [download-url]: https://npmjs.org/package/simple-react-calendar
 [bch-image]: https://bettercodehub.com/edge/badge/toptal/simple-react-calendar?branch=master
 [bch-url]: https://bettercodehub.com/
+[prettier-image]: https://img.shields.io/badge/styled_with-prettier-ff69b4.svg
+[prettier-url]: https://github.com/prettier/prettier
 
-* * *
+---
 
 A simple calendar component for React based applications.
 
@@ -205,5 +208,6 @@ Block class name can be overrided with `blockClassName` prop (see above).
       <td>
       </td>
     </tr>
+
   <tbody>
 </table>

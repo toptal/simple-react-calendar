@@ -12,24 +12,17 @@ import DaysOfWeek from '../days_of_week'
 
 describe('Calendar', () => {
   function render(props = {}) {
-    return TestUtils.renderIntoDocument(
-      <Calendar
-        {...props}
-      />
-    )
+    return TestUtils.renderIntoDocument(<Calendar {...props} />)
   }
 
   function clickOnDays(calendar, ...daysToClick) {
-    const days = TestUtils.scryRenderedComponentsWithType(calendar, Day)
-      .map((day) => findDOMNode(day))
+    const days = TestUtils.scryRenderedComponentsWithType(calendar, Day).map((day) => findDOMNode(day))
 
     daysToClick.map((day) => TestUtils.Simulate.click(days[day]))
   }
 
   function hoverOnDay(calendar, dayToHover) {
-    const day = findDOMNode(
-      TestUtils.scryRenderedComponentsWithType(calendar, Day)[dayToHover]
-    )
+    const day = findDOMNode(TestUtils.scryRenderedComponentsWithType(calendar, Day)[dayToHover])
     TestUtils.Simulate.mouseMove(day)
   }
 
@@ -52,7 +45,7 @@ describe('Calendar', () => {
   it('renders month with selected date', () => {
     const date = new Date(2015, 6, 1)
     const calendar = render({
-      activeMonth: date
+      activeMonth: date,
     })
     const month = TestUtils.findRenderedComponentWithType(calendar, Month)
     assert.deepEqual(month.props.activeMonth, date)
@@ -60,7 +53,7 @@ describe('Calendar', () => {
 
   it('can change month without activeMonth property', () => {
     const calendar = render({
-      today: new Date(2015, 6, 1)
+      today: new Date(2015, 6, 1),
     })
     const calendarEl = findDOMNode(calendar)
     const nextLinkEl = calendarEl.querySelector('.calendar-header_button.is-next')
@@ -92,7 +85,7 @@ describe('Calendar', () => {
       calendar = render({
         activeMonth: new Date(2015, 5, 1),
         mode: 'single',
-        onSelect
+        onSelect,
       })
     })
 
@@ -111,7 +104,7 @@ describe('Calendar', () => {
           activeMonth: new Date(2015, 5, 1),
           selected: {start: new Date(2015, 5, 1), end: new Date(2015, 5, 3)},
           mode: 'range',
-          onSelect
+          onSelect,
         })
       })
 
@@ -128,10 +121,7 @@ describe('Calendar', () => {
           it('sets selection to the only chosen day', () => {
             hoverOnDay(calendar, 5)
             const selection = getSelectedDays(calendar)
-            assert.deepEqual(
-              selection,
-              [new Date(2015, 5, 6)]
-            )
+            assert.deepEqual(selection, [new Date(2015, 5, 6)])
           })
         })
 
@@ -139,10 +129,7 @@ describe('Calendar', () => {
           it('sets selection from the hovered day to the chosen one', () => {
             hoverOnDay(calendar, 3)
             const selection = getSelectedDays(calendar)
-            assert.deepEqual(
-              selection,
-              [new Date(2015, 5, 4), new Date(2015, 5, 5), new Date(2015, 5, 6)]
-            )
+            assert.deepEqual(selection, [new Date(2015, 5, 4), new Date(2015, 5, 5), new Date(2015, 5, 6)])
           })
         })
 
@@ -150,10 +137,7 @@ describe('Calendar', () => {
           it('sets selection from the chosen day to the hovered one', () => {
             hoverOnDay(calendar, 7)
             const selection = getSelectedDays(calendar)
-            assert.deepEqual(
-              selection,
-              [new Date(2015, 5, 6), new Date(2015, 5, 7), new Date(2015, 5, 8)]
-            )
+            assert.deepEqual(selection, [new Date(2015, 5, 6), new Date(2015, 5, 7), new Date(2015, 5, 8)])
           })
         })
 
@@ -165,10 +149,7 @@ describe('Calendar', () => {
 
             hoverOnDay(calendar, 33)
             const selection = getSelectedDays(calendar)
-            assert.deepEqual(
-              selection,
-              [new Date(2015, 4, 30), new Date(2015, 4, 31)]
-            )
+            assert.deepEqual(selection, [new Date(2015, 4, 30), new Date(2015, 4, 31)])
           })
         })
       })
@@ -179,10 +160,12 @@ describe('Calendar', () => {
         })
 
         it('calls onSelect', () => {
-          assert(onSelect.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 16)
-          }))
+          assert(
+            onSelect.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 16),
+            })
+          )
         })
       })
 
@@ -192,10 +175,12 @@ describe('Calendar', () => {
         })
 
         it('calls onSelect with swapped dates', () => {
-          assert(onSelect.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 16)
-          }))
+          assert(
+            onSelect.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 16),
+            })
+          )
         })
       })
 
@@ -205,10 +190,12 @@ describe('Calendar', () => {
         })
 
         it('calls onSelect with the same value for the start and the end dates', () => {
-          assert(onSelect.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 6)
-          }))
+          assert(
+            onSelect.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 6),
+            })
+          )
         })
       })
 
@@ -222,17 +209,19 @@ describe('Calendar', () => {
         })
 
         it('calls onSelect with the correct dates', () => {
-          assert(onSelect.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 6, 4)
-          }))
+          assert(
+            onSelect.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 6, 4),
+            })
+          )
         })
       })
 
       context('when user clears the selection (e.g. by selecting an overlapping interval)', () => {
         it('does not call onSelect', () => {
           const onSelect = sinon.spy()
-          const wrapper = shallow(<Calendar mode='range' onSelect={onSelect} />)
+          const wrapper = shallow(<Calendar mode="range" onSelect={onSelect} />)
           const onChange = wrapper.find('Month').prop('onChange')
           onChange({start: null, end: null, inProgress: false})
           assert(!onSelect.called)
@@ -250,7 +239,7 @@ describe('Calendar', () => {
           selected: {start: new Date(2015, 5, 1), end: new Date(2015, 5, 3)},
           mode: 'range',
           onSelect,
-          onSelectionProgress
+          onSelectionProgress,
         })
       })
 
@@ -260,11 +249,13 @@ describe('Calendar', () => {
         })
 
         it('calls onSelectionProgress with isProgress equal true', () => {
-          assert(onSelectionProgress.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 6),
-            inProgress: true
-          }))
+          assert(
+            onSelectionProgress.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 6),
+              inProgress: true,
+            })
+          )
         })
 
         it('does not call onSelect', () => {
@@ -273,20 +264,14 @@ describe('Calendar', () => {
 
         it('preserves the current selection', () => {
           const selected = getSelectedDays(calendar)
-          assert.deepEqual(
-            selected,
-            [new Date(2015, 5, 1), new Date(2015, 5, 2), new Date(2015, 5, 3)]
-          )
+          assert.deepEqual(selected, [new Date(2015, 5, 1), new Date(2015, 5, 2), new Date(2015, 5, 3)])
         })
 
         context('when user hovers over a day', () => {
           it('preserves the current selection', () => {
             hoverOnDay(calendar, 10)
             const selected = getSelectedDays(calendar)
-            assert.deepEqual(
-              selected,
-              [new Date(2015, 5, 1), new Date(2015, 5, 2), new Date(2015, 5, 3)]
-            )
+            assert.deepEqual(selected, [new Date(2015, 5, 1), new Date(2015, 5, 2), new Date(2015, 5, 3)])
           })
         })
       })
@@ -297,18 +282,22 @@ describe('Calendar', () => {
         })
 
         it('calls onSelectionProgress with inProgress equal to false', () => {
-          assert(onSelectionProgress.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 16),
-            inProgress: false
-          }))
+          assert(
+            onSelectionProgress.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 16),
+              inProgress: false,
+            })
+          )
         })
 
         it('calls onSelect', () => {
-          assert(onSelect.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 16)
-          }))
+          assert(
+            onSelect.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 16),
+            })
+          )
         })
       })
 
@@ -318,18 +307,22 @@ describe('Calendar', () => {
         })
 
         it('calls onSelectionProgress with swapped dates', () => {
-          assert(onSelectionProgress.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 16),
-            inProgress: false
-          }))
+          assert(
+            onSelectionProgress.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 16),
+              inProgress: false,
+            })
+          )
         })
 
         it('calls onSelect with swapped dates', () => {
-          assert(onSelect.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 16)
-          }))
+          assert(
+            onSelect.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 16),
+            })
+          )
         })
       })
 
@@ -339,18 +332,22 @@ describe('Calendar', () => {
         })
 
         it('calls onSelectionProgress with the same value for the start and the end dates', () => {
-          assert(onSelectionProgress.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 6),
-            inProgress: false
-          }))
+          assert(
+            onSelectionProgress.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 6),
+              inProgress: false,
+            })
+          )
         })
 
         it('calls onSelect with the same value for the start and the end dates', () => {
-          assert(onSelect.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 6)
-          }))
+          assert(
+            onSelect.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 6),
+            })
+          )
         })
       })
 
@@ -364,18 +361,22 @@ describe('Calendar', () => {
         })
 
         it('calls onSelectionProgress with the correct dates', () => {
-          assert(onSelectionProgress.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 6, 4),
-            inProgress: false
-          }))
+          assert(
+            onSelectionProgress.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 6, 4),
+              inProgress: false,
+            })
+          )
         })
 
         it('calls onSelect with the correct dates', () => {
-          assert(onSelect.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 6, 4)
-          }))
+          assert(
+            onSelect.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 6, 4),
+            })
+          )
         })
       })
     })
@@ -390,16 +391,18 @@ describe('Calendar', () => {
         mode: 'range',
         minDate: new Date(2015, 5, 10),
         maxDate: new Date(2015, 5, 20),
-        onSelect
+        onSelect,
       })
     })
 
     it('can select days range inside boundaries', () => {
       clickOnDays(calendar, 9, 19)
-      assert(onSelect.calledWith({
-        start: new Date(2015, 5, 10),
-        end: new Date(2015, 5, 20)
-      }))
+      assert(
+        onSelect.calledWith({
+          start: new Date(2015, 5, 10),
+          end: new Date(2015, 5, 20),
+        })
+      )
     })
 
     it('cant select days earlier than min boundary', () => {
@@ -414,10 +417,12 @@ describe('Calendar', () => {
 
     it('can select days range after failing to select day outside boundaries', () => {
       clickOnDays(calendar, 14, 25, 19)
-      assert(onSelect.calledWith({
-        start: new Date(2015, 5, 15),
-        end: new Date(2015, 5, 20)
-      }))
+      assert(
+        onSelect.calledWith({
+          start: new Date(2015, 5, 15),
+          end: new Date(2015, 5, 20),
+        })
+      )
     })
   })
 
@@ -441,8 +446,8 @@ describe('Calendar', () => {
     it('renders passed component as Object', () => {
       const mockHeader = React.Component({
         render() {
-          return <div className='fake'>MockHeader</div>
-        }
+          return <div className="fake">MockHeader</div>
+        },
       })
       const el = findDOMNode(render({monthHeaderComponent: mockHeader}))
       assert(el.getElementsByClassName('fake'))
@@ -458,7 +463,7 @@ describe('Calendar', () => {
     it('does not have any highlighted days by default', () => {
       const calendar = render({
         activeMonth: new Date(2015, 5, 1),
-        mode: 'single'
+        mode: 'single',
       })
       const highlightedDays = getHighlightedDays(calendar)
       assert(highlightedDays.length === 0)
@@ -467,7 +472,7 @@ describe('Calendar', () => {
     it('does not have any highlighted if data is incorrect', () => {
       const calendar = render({
         activeMonth: new Date(2015, 5, 1),
-        highlighted: {start: 'string', end: null}
+        highlighted: {start: 'string', end: null},
       })
       const highlightedDays = getHighlightedDays(calendar)
       assert(highlightedDays.length === 0)
@@ -480,13 +485,7 @@ describe('Calendar', () => {
         highlighted: {start: new Date(2015, 4, 25), end: new Date(2015, 5, 2)},
       })
       const highlightedDays = getHighlightedDays(calendar)
-      assert.deepEqual(
-        highlightedDays,
-        [
-          new Date(2015, 5, 1),
-          new Date(2015, 5, 2)
-        ]
-      )
+      assert.deepEqual(highlightedDays, [new Date(2015, 5, 1), new Date(2015, 5, 2)])
     })
 
     it('renders highlighted days on range mode', () => {
@@ -496,38 +495,35 @@ describe('Calendar', () => {
         highlighted: {start: new Date(2015, 4, 25), end: new Date(2015, 5, 2)},
       })
       const highlightedDays = getHighlightedDays(calendar)
-      assert.deepEqual(
-        highlightedDays,
-        [
-          new Date(2015, 4, 25),
-          new Date(2015, 4, 26),
-          new Date(2015, 4, 27),
-          new Date(2015, 4, 28),
-          new Date(2015, 4, 29),
-          new Date(2015, 4, 30),
-          new Date(2015, 4, 31)
-        ]
-      )
+      assert.deepEqual(highlightedDays, [
+        new Date(2015, 4, 25),
+        new Date(2015, 4, 26),
+        new Date(2015, 4, 27),
+        new Date(2015, 4, 28),
+        new Date(2015, 4, 29),
+        new Date(2015, 4, 30),
+        new Date(2015, 4, 31),
+      ])
     })
   })
 
   describe('NoticeComponent', () => {
     it('passes onNoticeChange to the Month component', () => {
-      const wrapper = shallow(<Calendar mode='range' />)
+      const wrapper = shallow(<Calendar mode="range" />)
       const onNoticeChange = wrapper.find('Month').prop('onNoticeChange')
       assert(typeof onNoticeChange === 'function')
     })
 
     context('when there is no notice', () => {
       it('do not render Notice', () => {
-        const wrapper = shallow(<Calendar mode='range' />)
+        const wrapper = shallow(<Calendar mode="range" />)
         assert(wrapper.find('Notice').length === 0)
       })
     })
 
     context('when there is a notice', () => {
       it('renders Notice with blockClassName and type props', () => {
-        const wrapper = shallow(<Calendar mode='range' />)
+        const wrapper = shallow(<Calendar mode="range" />)
         wrapper.setState({shownNoticeType: 'disabled_day_click'})
         const notice = wrapper.find('Notice')
         assert(notice.length)
@@ -538,13 +534,7 @@ describe('Calendar', () => {
       it('allows to pass custom notice component', () => {
         const Whatever = () => ''
         Whatever.displayName = 'Whatever'
-        const wrapper = shallow(
-          <Calendar
-            mode='range'
-            NoticeComponent={Whatever}
-            blockClassName='Cal'
-          />
-        )
+        const wrapper = shallow(<Calendar mode="range" NoticeComponent={Whatever} blockClassName="Cal" />)
         wrapper.setState({shownNoticeType: 'disabled_day_click'})
         const customNotice = wrapper.find('Whatever')
         assert(customNotice.length)
@@ -557,7 +547,7 @@ describe('Calendar', () => {
   describe('weekStartsOn', () => {
     it('render days from correct starting day', () => {
       const calendar = render({
-        weekStartsOn: 2
+        weekStartsOn: 2,
       })
       const daysOfWeek = TestUtils.findRenderedComponentWithType(calendar, DaysOfWeek)
 

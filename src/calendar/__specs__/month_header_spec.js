@@ -9,19 +9,13 @@ describe('MonthHeader', () => {
   function render(props = {}) {
     const defaultProps = {
       activeMonth: new Date(2015, 7, 17),
-      onMonthChange: () => {}
+      onMonthChange: () => {},
     }
-    return TestUtils.renderIntoDocument(
-      <MonthHeader
-        {...Object.assign({}, defaultProps, props)}
-      />
-    )
+    return TestUtils.renderIntoDocument(<MonthHeader {...Object.assign({}, defaultProps, props)} />)
   }
 
   function getTitle(header) {
-    return findDOMNode(
-      TestUtils.findRenderedDOMComponentWithClass(header, 'calendar-month_header_title')
-    ).textContent
+    return findDOMNode(TestUtils.findRenderedDOMComponentWithClass(header, 'calendar-month_header_title')).textContent
   }
 
   function nextLink(header) {
@@ -73,7 +67,7 @@ describe('MonthHeader', () => {
     const onMonthChange = sinon.spy()
     const header = render({
       minDate: new Date(2015, 7, 1),
-      onMonthChange
+      onMonthChange,
     })
     clickPrev(header)
     assert(prevLink(header).classList.contains('is-disabled'))
@@ -86,7 +80,7 @@ describe('MonthHeader', () => {
     const onMonthChange = sinon.spy()
     const header = render({
       maxDate: new Date(2015, 7, 1),
-      onMonthChange
+      onMonthChange,
     })
     clickNext(header)
     assert(nextLink(header).classList.contains('is-disabled'))
@@ -100,7 +94,7 @@ describe('MonthHeader', () => {
     const header = render({
       minDate: new Date(2015, 7, 1),
       maxDate: new Date(2015, 7, 10),
-      onMonthChange
+      onMonthChange,
     })
     clickNext(header)
     assert(!onMonthChange.called)
@@ -128,7 +122,10 @@ describe('MonthHeader', () => {
       })
 
       it('renders title el with prefixed class name', () => {
-        const titleEl = TestUtils.scryRenderedDOMComponentsWithClass(render({blockClassName: 'cal'}), 'cal-month_header_title')
+        const titleEl = TestUtils.scryRenderedDOMComponentsWithClass(
+          render({blockClassName: 'cal'}),
+          'cal-month_header_title'
+        )
         assert(titleEl.length > 0)
       })
     })

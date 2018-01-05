@@ -15,23 +15,18 @@ describe('Month', () => {
     mode: 'range',
     weekStartsOn: 1,
     onChange: () => {},
-    onNoticeChange: () => {}
+    onNoticeChange: () => {},
   }
 
   function render(props = {}) {
-    return TestUtils.renderIntoDocument(
-      <Month
-        {...Object.assign({}, defaultProps, props)}
-      />
-    )
+    return TestUtils.renderIntoDocument(<Month {...Object.assign({}, defaultProps, props)} />)
   }
 
   function clickOnDays() {
     const month = arguments[0]
     const daysToClick = Array.prototype.slice.call(arguments, 1)
 
-    const days = TestUtils.scryRenderedComponentsWithType(month, Day)
-      .map((day) => findDOMNode(day))
+    const days = TestUtils.scryRenderedComponentsWithType(month, Day).map((day) => findDOMNode(day))
 
     daysToClick.map((day) => TestUtils.Simulate.click(days[day]))
   }
@@ -57,57 +52,48 @@ describe('Month', () => {
       context('when the month has 4 weeks', () => {
         it('renders 4 weeks of the month', () => {
           const month = render({
-            activeMonth: new Date(2010, 1, 15)
+            activeMonth: new Date(2010, 1, 15),
           })
-          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week)
-            .map((week) => week.props.date)
-          assert.deepEqual(weeks,
-            [
-              new Date(2010, 1, 1),
-              new Date(2010, 1, 8),
-              new Date(2010, 1, 15),
-              new Date(2010, 1, 22)
-            ]
-          )
+          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week).map((week) => week.props.date)
+          assert.deepEqual(weeks, [
+            new Date(2010, 1, 1),
+            new Date(2010, 1, 8),
+            new Date(2010, 1, 15),
+            new Date(2010, 1, 22),
+          ])
         })
       })
 
       context('when the month has 5 weeks', () => {
         it('renders 5 weeks of the month', () => {
           const month = render({
-            activeMonth: new Date(2015, 5, 15)
+            activeMonth: new Date(2015, 5, 15),
           })
-          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week)
-            .map((week) => week.props.date)
-          assert.deepEqual(weeks,
-            [
-              new Date(2015, 5, 1),
-              new Date(2015, 5, 8),
-              new Date(2015, 5, 15),
-              new Date(2015, 5, 22),
-              new Date(2015, 5, 29)
-            ]
-          )
+          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week).map((week) => week.props.date)
+          assert.deepEqual(weeks, [
+            new Date(2015, 5, 1),
+            new Date(2015, 5, 8),
+            new Date(2015, 5, 15),
+            new Date(2015, 5, 22),
+            new Date(2015, 5, 29),
+          ])
         })
       })
 
       context('when the month has 6 weeks', () => {
         it('renders 6 weeks of the month', () => {
           const month = render({
-            activeMonth: new Date(2015, 7, 15)
+            activeMonth: new Date(2015, 7, 15),
           })
-          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week)
-            .map((week) => week.props.date)
-          assert.deepEqual(weeks,
-            [
-              new Date(2015, 6, 27),
-              new Date(2015, 7, 3),
-              new Date(2015, 7, 10),
-              new Date(2015, 7, 17),
-              new Date(2015, 7, 24),
-              new Date(2015, 7, 31)
-            ]
-          )
+          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week).map((week) => week.props.date)
+          assert.deepEqual(weeks, [
+            new Date(2015, 6, 27),
+            new Date(2015, 7, 3),
+            new Date(2015, 7, 10),
+            new Date(2015, 7, 17),
+            new Date(2015, 7, 24),
+            new Date(2015, 7, 31),
+          ])
         })
       })
     })
@@ -117,19 +103,16 @@ describe('Month', () => {
         it('renders specified number of weeks', () => {
           const month = render({
             activeMonth: new Date(2010, 1, 15),
-            minNumberOfWeeks: 5
+            minNumberOfWeeks: 5,
           })
-          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week)
-            .map((week) => week.props.date)
-          assert.deepEqual(weeks,
-            [
-              new Date(2010, 1, 1),
-              new Date(2010, 1, 8),
-              new Date(2010, 1, 15),
-              new Date(2010, 1, 22),
-              new Date(2010, 2, 1)
-            ]
-          )
+          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week).map((week) => week.props.date)
+          assert.deepEqual(weeks, [
+            new Date(2010, 1, 1),
+            new Date(2010, 1, 8),
+            new Date(2010, 1, 15),
+            new Date(2010, 1, 22),
+            new Date(2010, 2, 1),
+          ])
         })
       })
 
@@ -137,19 +120,16 @@ describe('Month', () => {
         it('renders specified weeks of the month', () => {
           const month = render({
             activeMonth: new Date(2015, 5, 15),
-            minNumberOfWeeks: 5
+            minNumberOfWeeks: 5,
           })
-          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week)
-            .map((week) => week.props.date)
-          assert.deepEqual(weeks,
-            [
-              new Date(2015, 5, 1),
-              new Date(2015, 5, 8),
-              new Date(2015, 5, 15),
-              new Date(2015, 5, 22),
-              new Date(2015, 5, 29)
-            ]
-          )
+          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week).map((week) => week.props.date)
+          assert.deepEqual(weeks, [
+            new Date(2015, 5, 1),
+            new Date(2015, 5, 8),
+            new Date(2015, 5, 15),
+            new Date(2015, 5, 22),
+            new Date(2015, 5, 29),
+          ])
         })
       })
 
@@ -157,20 +137,17 @@ describe('Month', () => {
         it('renders all the weeks of the month', () => {
           const month = render({
             activeMonth: new Date(2015, 7, 15),
-            minNumberOfWeeks: 5
+            minNumberOfWeeks: 5,
           })
-          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week)
-            .map((week) => week.props.date)
-          assert.deepEqual(weeks,
-            [
-              new Date(2015, 6, 27),
-              new Date(2015, 7, 3),
-              new Date(2015, 7, 10),
-              new Date(2015, 7, 17),
-              new Date(2015, 7, 24),
-              new Date(2015, 7, 31)
-            ]
-          )
+          const weeks = TestUtils.scryRenderedComponentsWithType(month, Week).map((week) => week.props.date)
+          assert.deepEqual(weeks, [
+            new Date(2015, 6, 27),
+            new Date(2015, 7, 3),
+            new Date(2015, 7, 10),
+            new Date(2015, 7, 17),
+            new Date(2015, 7, 24),
+            new Date(2015, 7, 31),
+          ])
         })
       })
     })
@@ -183,17 +160,19 @@ describe('Month', () => {
       month = render({
         activeMonth: new Date(2015, 5, 1),
         mode: 'single',
-        onChange
+        onChange,
       })
     })
 
     it('can select single day', () => {
       clickOnDays(month, 5)
-      assert(onChange.calledWith({
-        start: new Date(2015, 5, 6),
-        end: new Date(2015, 5, 6),
-        inProgress: false
-      }))
+      assert(
+        onChange.calledWith({
+          start: new Date(2015, 5, 6),
+          end: new Date(2015, 5, 6),
+          inProgress: false,
+        })
+      )
     })
   })
 
@@ -204,35 +183,41 @@ describe('Month', () => {
       month = render({
         activeMonth: new Date(2015, 5, 1),
         selectionMode: 'range',
-        onChange
+        onChange,
       })
     })
 
     it('can select single day range', () => {
       clickOnDays(month, 5, 5)
-      assert(onChange.calledWith({
-        start: new Date(2015, 5, 6),
-        end: new Date(2015, 5, 6),
-        inProgress: false
-      }))
+      assert(
+        onChange.calledWith({
+          start: new Date(2015, 5, 6),
+          end: new Date(2015, 5, 6),
+          inProgress: false,
+        })
+      )
     })
 
     it('can select days range', () => {
       clickOnDays(month, 5, 15)
-      assert(onChange.calledWith({
-        start: new Date(2015, 5, 6),
-        end: new Date(2015, 5, 16),
-        inProgress: false
-      }))
+      assert(
+        onChange.calledWith({
+          start: new Date(2015, 5, 6),
+          end: new Date(2015, 5, 16),
+          inProgress: false,
+        })
+      )
     })
 
     it('can select days range in inverted order', () => {
       clickOnDays(month, 15, 5)
-      assert(onChange.calledWith({
-        start: new Date(2015, 5, 6),
-        end: new Date(2015, 5, 16),
-        inProgress: false
-      }))
+      assert(
+        onChange.calledWith({
+          start: new Date(2015, 5, 6),
+          end: new Date(2015, 5, 16),
+          inProgress: false,
+        })
+      )
     })
 
     context('combined with rangeLimit mode', () => {
@@ -242,56 +227,66 @@ describe('Month', () => {
         month = render({
           activeMonth: new Date(2015, 5, 1),
           onChange,
-          rangeLimit: 5
+          rangeLimit: 5,
         })
       })
 
       it('allows to select single day range', () => {
         clickOnDays(month, 5, 5)
-        assert(onChange.calledWith({
-          start: new Date(2015, 5, 6),
-          end: new Date(2015, 5, 6),
-          inProgress: false
-        }))
+        assert(
+          onChange.calledWith({
+            start: new Date(2015, 5, 6),
+            end: new Date(2015, 5, 6),
+            inProgress: false,
+          })
+        )
       })
 
       context('when the first selected date is before the second one', () => {
         it('allows to select a range within the limit', () => {
           clickOnDays(month, 5, 9)
-          assert(onChange.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 10),
-            inProgress: false
-          }))
+          assert(
+            onChange.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 10),
+              inProgress: false,
+            })
+          )
         })
 
         it('truncates selected range to the specified length limit', () => {
           clickOnDays(month, 5, 34)
-          assert(onChange.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 11),
-            inProgress: false
-          }))
+          assert(
+            onChange.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 11),
+              inProgress: false,
+            })
+          )
         })
       })
 
       context('when the first selected date is after the second one', () => {
         it('allows to select a range within the limit', () => {
           clickOnDays(month, 9, 5)
-          assert(onChange.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 10),
-            inProgress: false
-          }))
+          assert(
+            onChange.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 10),
+              inProgress: false,
+            })
+          )
         })
 
         it('truncates selected range to the specified length limit', () => {
           clickOnDays(month, 16, 5)
-          assert(onChange.calledWith({
-            start: new Date(2015, 5, 6),
-            end: new Date(2015, 5, 11),
-            inProgress: false
-          }))
+          assert(
+            onChange.calledWith({
+              start: new Date(2015, 5, 6),
+              end: new Date(2015, 5, 11),
+              inProgress: false,
+            })
+          )
         })
       })
 
@@ -301,7 +296,7 @@ describe('Month', () => {
             month = render({
               minDate: new Date(2015, 7, 12),
               maxDate: new Date(2015, 7, 23),
-              rangeLimit: 10
+              rangeLimit: 10,
             })
             const day = findDOMNode(month).getElementsByClassName('is-current_month is-working_day')[10]
             TestUtils.Simulate.click(day)
@@ -323,7 +318,7 @@ describe('Month', () => {
             month = render({
               minDate: new Date(2015, 7, 1),
               maxDate: new Date(2015, 7, 31),
-              rangeLimit: 10
+              rangeLimit: 10,
             })
             const day = findDOMNode(month).getElementsByClassName('is-current_month is-working_day')[10]
             TestUtils.Simulate.click(day)
@@ -365,7 +360,7 @@ describe('Month', () => {
         const onDayHover = sinon.spy()
         const month = render({
           activeMonth: new Date(2015, 5, 1),
-          onDayHover
+          onDayHover,
         })
         const day = TestUtils.scryRenderedComponentsWithType(month, Day)[3]
         mouseMoveOnDay(day)
@@ -379,7 +374,7 @@ describe('Month', () => {
         const month = render({
           minDate: new Date(2015, 5, 15),
           activeMonth: new Date(2015, 5, 1),
-          onDayHover
+          onDayHover,
         })
         const day = TestUtils.scryRenderedComponentsWithType(month, Day)[3]
         mouseMoveOnDay(day)
@@ -398,9 +393,9 @@ describe('Month', () => {
     })
 
     context('when disableDaysOfWeek is defined', () => {
-      it('doesn\'t render DaysOfWeek component', () => {
+      it("doesn't render DaysOfWeek component", () => {
         const month = render({
-          disableDaysOfWeek: true
+          disableDaysOfWeek: true,
         })
         const weekDays = TestUtils.scryRenderedComponentsWithType(month, DaysOfWeek)
         assert(weekDays.length === 0)
@@ -412,36 +407,36 @@ describe('Month', () => {
     const disabledIntervals = [
       {
         start: new Date(2015, 7, 21),
-        end: new Date(2015, 7, 23)
-      }
+        end: new Date(2015, 7, 23),
+      },
     ]
 
     context('when user selects an overlapping interval', () => {
       it('resets the selection', () => {
         const onChange = sinon.spy()
-        const wrapper = shallow(
-        <Month
-        {...defaultProps}
-        onChange={onChange}
-        disabledIntervals={disabledIntervals} />
-        )
-        const onDayClick = wrapper.find('Week').first().prop('onDayClick')
+        const wrapper = shallow(<Month {...defaultProps} onChange={onChange} disabledIntervals={disabledIntervals} />)
+        const onDayClick = wrapper
+          .find('Week')
+          .first()
+          .prop('onDayClick')
         onDayClick(new Date(2015, 7, 20))
         onDayClick(new Date(2015, 7, 24))
         assert(onChange.called)
-        assert(onChange.calledWith(sinon.match({start: new Date(2015, 7, 20), end: new Date(2015, 7, 20), inProgress: true})))
+        assert(
+          onChange.calledWith(sinon.match({start: new Date(2015, 7, 20), end: new Date(2015, 7, 20), inProgress: true}))
+        )
         assert(onChange.calledWith(sinon.match({start: undefined, end: undefined, inProgress: false})))
       })
 
       it('pushes notice update with "overlapping_with_disabled"', () => {
         const onNoticeChange = sinon.spy()
         const wrapper = shallow(
-        <Month
-        {...defaultProps}
-        onNoticeChange={onNoticeChange}
-        disabledIntervals={disabledIntervals} />
+          <Month {...defaultProps} onNoticeChange={onNoticeChange} disabledIntervals={disabledIntervals} />
         )
-        const onDayClick = wrapper.find('Week').first().prop('onDayClick')
+        const onDayClick = wrapper
+          .find('Week')
+          .first()
+          .prop('onDayClick')
         onDayClick(new Date(2015, 7, 20))
         onDayClick(new Date(2015, 7, 24))
         assert(onNoticeChange.called)
@@ -453,12 +448,12 @@ describe('Month', () => {
       it('pushes notice update with "disabled_day_click"', () => {
         const onNoticeChange = sinon.spy()
         const wrapper = shallow(
-        <Month
-        {...defaultProps}
-        onNoticeChange={onNoticeChange}
-        disabledIntervals={disabledIntervals} />
+          <Month {...defaultProps} onNoticeChange={onNoticeChange} disabledIntervals={disabledIntervals} />
         )
-        const onDisabledDayClick = wrapper.find('Week').first().prop('onDisabledDayClick')
+        const onDisabledDayClick = wrapper
+          .find('Week')
+          .first()
+          .prop('onDisabledDayClick')
         onDisabledDayClick()
         assert(onNoticeChange.called)
         assert(onNoticeChange.calledWith('disabled_day_click'))

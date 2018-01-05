@@ -19,7 +19,10 @@
     "test-ci": "npm test -- --single-run",
     "test-bs": "env TEST_BROWSERSTACK=true npm run test-ci",
     "test-tz": "npm run build-tests && ./scripts/test_tz.sh",
-    "lint": "eslint src/ --ext .js,.jsx"
+    "lint": "eslint src/ --ext .js,.jsx",
+    "format:js": "prettier \"+(src)/**/*.+(js*)\" --write",
+    "format:md": "prettier \"*.+(md)\" --write",
+    "precommit": "lint-staged"
   },
   "bugs": {
     "url": "https://github.com/toptal/simple-react-calendar/issues"
@@ -40,8 +43,8 @@
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.4",
     "eslint": "2.7.0",
-    "eslint-config-toptal": "^0.2.0",
     "eslint-plugin-react": "^4.3.0",
+    "husky": "^0.14.3",
     "json-loader": "^0.5.4",
     "karma": "^0.13.22",
     "karma-browserstack-launcher": "^0.1.11",
@@ -53,9 +56,11 @@
     "karma-sinon": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
+    "lint-staged": "^6.0.0",
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",
     "power-assert": "^1.3.1",
+    "prettier": "^1.9.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-prop-types": "^0.4.0",
@@ -68,5 +73,9 @@
     "date-fns": ">= 1 < 2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
+  },
+  "lint-staged": {
+    "*.js*": ["prettier --write", "git add"],
+    "*.md": ["prettier --write", "git add"]
   }
 }

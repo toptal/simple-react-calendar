@@ -27,10 +27,12 @@ export default class Month extends React.Component {
     activeMonth: datePropType.isRequired,
     blockClassName: PropTypes.string,
     disableDaysOfWeek: PropTypes.bool,
-    disabledIntervals: PropTypes.arrayOf(PropTypes.shape({
-      start: datePropType.isRequired,
-      end: datePropType.isRequired,
-    })),
+    disabledIntervals: PropTypes.arrayOf(
+      PropTypes.shape({
+        start: datePropType.isRequired,
+        end: datePropType.isRequired,
+      })
+    ),
     highlightedEnd: datePropType,
     highlightedStart: datePropType,
     maxDate: datePropType,
@@ -44,11 +46,11 @@ export default class Month extends React.Component {
     selectedMax: datePropType,
     selectedMin: datePropType,
     today: datePropType.isRequired,
-    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK)
+    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
   }
 
   static defaultProps = {
-    blockClassName: BLOCK_CLASS_NAME
+    blockClassName: BLOCK_CLASS_NAME,
   }
 
   _pushUpdate() {
@@ -72,7 +74,7 @@ export default class Month extends React.Component {
     return onChange({
       start,
       end,
-      inProgress: this._selectionInProgress
+      inProgress: this._selectionInProgress,
     })
   }
 
@@ -111,7 +113,7 @@ export default class Month extends React.Component {
 
     const isDisabledWithin = this._getDisabledRange({
       start: isBefore(this._selectionStart, date) ? this._selectionStart : date,
-      end: !isBefore(this._selectionStart, date) ? this._selectionStart : date
+      end: !isBefore(this._selectionStart, date) ? this._selectionStart : date,
     })
 
     if (!isDisabledWithin) {
@@ -119,7 +121,7 @@ export default class Month extends React.Component {
     }
 
     if (!isEqual(date, this._selectionEnd)) {
-      if (!rangeLimit || rangeLimit && !isBefore(date, dateLimit)) {
+      if (!rangeLimit || (rangeLimit && !isBefore(date, dateLimit))) {
         this._selectionEnd = date
         this._pushUpdate()
       }
@@ -133,7 +135,7 @@ export default class Month extends React.Component {
       if (this._selectionInProgress) {
         const isDisabledWithin = this._getDisabledRange({
           start: isBefore(this._selectionStart, date) ? this._selectionStart : date,
-          end: !isBefore(this._selectionStart, date) ? this._selectionStart : date
+          end: !isBefore(this._selectionStart, date) ? this._selectionStart : date,
         })
 
         if (!isDisabledWithin) {
@@ -223,7 +225,7 @@ export default class Month extends React.Component {
       minNumberOfWeeks,
       rangeLimit,
       onDayHover,
-      weekStartsOn
+      weekStartsOn,
     } = this.props
     const weeks = []
     let {minDate, maxDate} = this.props
@@ -235,8 +237,10 @@ export default class Month extends React.Component {
       maxDate = this._getMaxDate()
     }
 
-    while ((typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length)
-      || (isBefore(date, end) || isSameDay(date, end))) {
+    while (
+      (typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length) ||
+      (isBefore(date, end) || isSameDay(date, end))
+    ) {
       weeks.push(date)
       date = addDays(date, 7)
     }

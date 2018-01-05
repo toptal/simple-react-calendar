@@ -25,21 +25,17 @@ const isValid = function(date) {
 
 export default class Calendar extends React.Component {
   static propTypes = {
-    MonthHeaderComponent: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.func
-    ]),
-    NoticeComponent: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.func
-    ]),
+    MonthHeaderComponent: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    NoticeComponent: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     activeMonth: datePropType,
     blockClassName: PropTypes.string,
     disableDaysOfWeek: PropTypes.bool,
-    disabledIntervals: PropTypes.arrayOf(PropTypes.shape({
-      start: datePropType.isRequired,
-      end: datePropType.isRequired
-    })),
+    disabledIntervals: PropTypes.arrayOf(
+      PropTypes.shape({
+        start: datePropType.isRequired,
+        end: datePropType.isRequired,
+      })
+    ),
     headerNextArrow: PropTypes.element,
     headerNextTitle: PropTypes.string,
     headerPrevArrow: PropTypes.element,
@@ -62,17 +58,17 @@ export default class Calendar extends React.Component {
       PropTypes.shape({
         start: datePropType.isRequired,
         end: datePropType.isRequired,
-        inProgress: PropTypes.bool
-      })
+        inProgress: PropTypes.bool,
+      }),
     ]),
     today: datePropType,
-    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK)
+    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
   }
 
   static defaultProps = {
     weekStartsOn: 1,
     mode: SINGLE_MODE,
-    blockClassName: BLOCK_CLASS_NAME
+    blockClassName: BLOCK_CLASS_NAME,
   }
 
   constructor(props) {
@@ -80,7 +76,7 @@ export default class Calendar extends React.Component {
     this.state = {
       activeMonth: this._initialMonth(props),
       selection: null,
-      shownNoticeType: null
+      shownNoticeType: null,
     }
   }
 
@@ -97,7 +93,7 @@ export default class Calendar extends React.Component {
       return activeMonth
     } else {
       if (selected) {
-        const selectionStart = (mode === SINGLE_MODE ? selected : selected.start)
+        const selectionStart = mode === SINGLE_MODE ? selected : selected.start
         if (isValid(selectionStart)) {
           return startOfMonth(selectionStart)
         }
@@ -112,7 +108,7 @@ export default class Calendar extends React.Component {
       onMonthChange(date)
     } else {
       this.setState({
-        activeMonth: date
+        activeMonth: date,
       })
     }
   }
@@ -216,7 +212,7 @@ export default class Calendar extends React.Component {
       onDayHover,
       disabledIntervals,
       rangeLimit,
-      weekStartsOn
+      weekStartsOn,
     } = this.props
     const selection = this._selection()
     const highlight = this._highlight()
@@ -227,7 +223,7 @@ export default class Calendar extends React.Component {
         {this._renderNotice()}
 
         <MonthHeaderComponent
-          ref='header'
+          ref="header"
           minDate={minDate}
           maxDate={maxDate}
           headerPrevArrow={headerPrevArrow}
@@ -245,7 +241,7 @@ export default class Calendar extends React.Component {
           minNumberOfWeeks={minNumberOfWeeks}
           rangeLimit={rangeLimit}
           today={this._today()}
-          ref='month'
+          ref="month"
           activeMonth={this._activeMonth()}
           selectedMin={selection.start}
           selectedMax={selection.end}
@@ -268,9 +264,6 @@ export default class Calendar extends React.Component {
     const {blockClassName} = this.props
     const NoticeComponent = this.props.NoticeComponent || Notice
 
-    return shownNoticeType && <NoticeComponent
-      blockClassName={blockClassName}
-      type={shownNoticeType}
-    />
+    return shownNoticeType && <NoticeComponent blockClassName={blockClassName} type={shownNoticeType} />
   }
 }
