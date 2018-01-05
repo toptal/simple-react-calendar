@@ -21,6 +21,9 @@
     "test-tz": "npm run build-tests && ./scripts/test_tz.sh",
     "lint": "eslint src/ --ext .js,.jsx"
   },
+  "bugs": {
+    "url": "https://github.com/toptal/simple-react-calendar/issues"
+  },
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.7.5",
