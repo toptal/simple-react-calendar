@@ -375,10 +375,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      var NoticeComponent = this.props.NoticeComponent || _notice2.default;
 	
-	      return shownNoticeType && _react2.default.createElement(NoticeComponent, {
-	        blockClassName: blockClassName,
-	        type: shownNoticeType
-	      });
+	      return shownNoticeType && _react2.default.createElement(NoticeComponent, { blockClassName: blockClassName, type: shownNoticeType });
 	    }
 	  }]);
 	

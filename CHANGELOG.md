@@ -1,6 +1,6 @@
 # Changelog `simple-react-calendar`
 
-## Unreleased
+## 1.7.0
 
 ### Fixes
 
@@ -13,6 +13,6 @@
 * Add Changelog
 * Add `Prettier`
 
-## < 2.0.0
+## < 1.7.0
 
 * See commit history for changes in previous versions of `simple-react-calendar`.
