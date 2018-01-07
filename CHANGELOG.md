@@ -4,6 +4,8 @@
 
 ### Fixes
 
+* Fix `Readme.md` syntax
+
 ### Features
 
 * Add React 16 support
