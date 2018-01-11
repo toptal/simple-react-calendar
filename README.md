@@ -6,6 +6,9 @@
 [![BCH comliance][bch-image]][bch-url]
 [![CodeFactor][cf-image]][cf-url]
 [![styled with prettier][prettier-image]][prettier-url]
+[![codecov.io][codecov-image]][codecov-url]
+[![Tested with Jest][jest-image]][jest-url]
+
 [![npm badge][npm-badge-png]][package-url]
 
 ---
@@ -90,3 +93,7 @@ Block class name can be overrided with `blockClassName` prop (see above).
 [cf-url]: https://www.codefactor.io/repository/github/toptal/simple-react-calendar
 [prettier-image]: https://img.shields.io/badge/styled_with-prettier-ff69b4.svg
 [prettier-url]: https://github.com/prettier/prettier
+[jest-image]: https://img.shields.io/badge/Tested_with-Jest-%2399424f.svg
+[jest-url]: https://facebook.github.io/jest/
+[codecov-image]: https://codecov.io/gh/toptal/simple-react-calendar/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/toptal/simple-react-calendar

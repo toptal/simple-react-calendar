@@ -108,7 +108,7 @@ export default class Month extends React.Component {
 
     if (!this._selectionInProgress) return
 
-    const {rangeLimit, disabledIntervals} = this.props
+    const {rangeLimit} = this.props
     const dateLimit = subDays(this._selectionStart, rangeLimit)
 
     const isDisabledWithin = this._getDisabledRange({
@@ -116,9 +116,7 @@ export default class Month extends React.Component {
       end: !isBefore(this._selectionStart, date) ? this._selectionStart : date,
     })
 
-    if (!isDisabledWithin) {
-      return
-    }
+    if (!isDisabledWithin) return
 
     if (!isEqual(date, this._selectionEnd)) {
       if (!rangeLimit || (rangeLimit && !isBefore(date, dateLimit))) {
@@ -154,12 +152,10 @@ export default class Month extends React.Component {
         this._selectionStart = date
         this._selectionEnd = date
       }
-    } else if (mode === SINGLE_MODE) {
+    } else {
       this._selectionInProgress = false
       this._selectionStart = date
       this._selectionEnd = date
-    } else {
-      return
     }
 
     this._pushUpdate()

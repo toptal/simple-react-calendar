@@ -204,7 +204,6 @@ export default class Calendar extends React.Component {
       headerNextTitle,
       headerPrevArrow,
       headerPrevTitle,
-      highlighted,
       maxDate,
       minDate,
       minNumberOfWeeks,

@@ -3,11 +3,13 @@ language: node_js
 node_js:
   - 6
 
+install:
+  - npm install -g codecov
+
 script:
-  - npm run lint
-  - npm run test-ci
-  - npm run test-tz
-  - npm run test-bs
+  - yarn
+  - yarn lint
+  - yarn jest && codecov
 
 cache:
   yarn: true
