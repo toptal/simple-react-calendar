@@ -1,67 +1,43 @@
-const webpack = require('webpack')
 const path = require('path')
+const env = process.env.NODE_ENV
 
-const isProduction = process.env.NODE_ENV === 'production'
+const reactExternal = {
+  root: 'React',
+  commonjs2: 'react',
+  commonjs: 'react',
+  amd: 'react',
+}
 
-module.exports = {
-  entry: getEntryConfig(),
-
+const config = {
+  externals: {
+    react: reactExternal,
+  },
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel'
+        loader: 'babel',
       },
       {
         test: /\.json?$/,
-        loader: 'json'
-      }
-    ]
+        loader: 'json',
+      },
+    ],
   },
-
-  devtool: isProduction ? 'source-map' : 'inline-source-map',
-
+  entry: {
+    'simple-calendar': path.join(__dirname, 'src'),
+  },
+  output: {
+    library: 'Calendar',
+    libraryTarget: 'umd',
+    path: path.join(process.cwd(), 'dist'),
+    filename: '[name].js',
+  },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
   },
-
-  output: getOutputConfig(),
-
-  externals: isTest ? {} : {
-    react: {
-      root: 'React',
-      commonjs: 'react',
-      commonjs2: 'react',
-      amd: 'react'
-    }
-  }
+  devtool: env === 'production' ? 'source-map' : 'inline-source-map',
 }
 
-function getEntryConfig() {
-  if (process.env.BUILD_TESTS) {
-    return {
-      'tests': './test.js'
-    }
-  } else {
-    return {
-      'simple-calendar': './src/index'
-    }
-  }
-}
-
-function getOutputConfig() {
-  if (process.env.BUILD_TESTS) {
-    return {
-      path: path.join(process.cwd(), 'tmp'),
-      filename: '[name].js'
-    }
-  } else {
-    return {
-      library: 'Calendar',
-      libraryTarget: 'umd',
-      path: path.join(process.cwd(), 'dist'),
-      filename: '[name].js'
-    }
-  }
-}
+module.exports = config

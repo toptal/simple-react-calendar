@@ -314,7 +314,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          headerNextTitle = _props4.headerNextTitle,
 	          headerPrevArrow = _props4.headerPrevArrow,
 	          headerPrevTitle = _props4.headerPrevTitle,
-	          highlighted = _props4.highlighted,
 	          maxDate = _props4.maxDate,
 	          minDate = _props4.minDate,
 	          minNumberOfWeeks = _props4.minNumberOfWeeks,
@@ -1780,9 +1779,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      if (!this._selectionInProgress) return;
 	
-	      var _props2 = this.props,
-	          rangeLimit = _props2.rangeLimit,
-	          disabledIntervals = _props2.disabledIntervals;
+	      var rangeLimit = this.props.rangeLimit;
 	
 	      var dateLimit = (0, _sub_days2.default)(this._selectionStart, rangeLimit);
 	
@@ -1791,9 +1788,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        end: !(0, _is_before2.default)(this._selectionStart, date) ? this._selectionStart : date
 	      });
 	
-	      if (!isDisabledWithin) {
-	        return;
-	      }
+	      if (!isDisabledWithin) return;
 	
 	      if (!(0, _is_equal2.default)(date, this._selectionEnd)) {
 	        if (!rangeLimit || rangeLimit && !(0, _is_before2.default)(date, dateLimit)) {
@@ -1831,12 +1826,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	          this._selectionStart = date;
 	          this._selectionEnd = date;
 	        }
-	      } else if (mode === SINGLE_MODE) {
+	      } else {
 	        this._selectionInProgress = false;
 	        this._selectionStart = date;
 	        this._selectionEnd = date;
-	      } else {
-	        return;
 	      }
 	
 	      this._pushUpdate();
@@ -1852,9 +1845,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: '_getMinDate',
 	    value: function _getMinDate() {
-	      var _props3 = this.props,
-	          rangeLimit = _props3.rangeLimit,
-	          minDate = _props3.minDate;
+	      var _props2 = this.props,
+	          rangeLimit = _props2.rangeLimit,
+	          minDate = _props2.minDate;
 	
 	      var calcStartDate = (0, _sub_days2.default)(this._selectionStart, rangeLimit);
 	
@@ -1868,9 +1861,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: '_getMaxDate',
 	    value: function _getMaxDate() {
-	      var _props4 = this.props,
-	          rangeLimit = _props4.rangeLimit,
-	          maxDate = _props4.maxDate;
+	      var _props3 = this.props,
+	          rangeLimit = _props3.rangeLimit,
+	          maxDate = _props3.maxDate;
 	
 	      var calcEndDate = (0, _add_days2.default)(this._selectionStart, rangeLimit);
 	
@@ -1896,10 +1889,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: '_renderWeekDays',
 	    value: function _renderWeekDays() {
-	      var _props5 = this.props,
-	          blockClassName = _props5.blockClassName,
-	          disableDaysOfWeek = _props5.disableDaysOfWeek,
-	          weekStartsOn = _props5.weekStartsOn;
+	      var _props4 = this.props,
+	          blockClassName = _props4.blockClassName,
+	          disableDaysOfWeek = _props4.disableDaysOfWeek,
+	          weekStartsOn = _props4.weekStartsOn;
 	
 	      if (disableDaysOfWeek) return null;
 	
@@ -1910,24 +1903,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function _renderWeeks() {
 	      var _this2 = this;
 	
-	      var _props6 = this.props,
-	          selectedMin = _props6.selectedMin,
-	          selectedMax = _props6.selectedMax,
-	          highlightedStart = _props6.highlightedStart,
-	          highlightedEnd = _props6.highlightedEnd,
-	          disabledIntervals = _props6.disabledIntervals,
-	          activeMonth = _props6.activeMonth,
-	          today = _props6.today,
-	          blockClassName = _props6.blockClassName,
-	          minNumberOfWeeks = _props6.minNumberOfWeeks,
-	          rangeLimit = _props6.rangeLimit,
-	          onDayHover = _props6.onDayHover,
-	          weekStartsOn = _props6.weekStartsOn;
+	      var _props5 = this.props,
+	          selectedMin = _props5.selectedMin,
+	          selectedMax = _props5.selectedMax,
+	          highlightedStart = _props5.highlightedStart,
+	          highlightedEnd = _props5.highlightedEnd,
+	          disabledIntervals = _props5.disabledIntervals,
+	          activeMonth = _props5.activeMonth,
+	          today = _props5.today,
+	          blockClassName = _props5.blockClassName,
+	          minNumberOfWeeks = _props5.minNumberOfWeeks,
+	          rangeLimit = _props5.rangeLimit,
+	          onDayHover = _props5.onDayHover,
+	          weekStartsOn = _props5.weekStartsOn;
 	
 	      var weeks = [];
-	      var _props7 = this.props,
-	          minDate = _props7.minDate,
-	          maxDate = _props7.maxDate;
+	      var _props6 = this.props,
+	          minDate = _props6.minDate,
+	          maxDate = _props6.maxDate;
 	
 	      var date = (0, _start_of_week2.default)((0, _start_of_month2.default)(activeMonth), { weekStartsOn: weekStartsOn });
 	      var end = (0, _end_of_week2.default)((0, _end_of_month2.default)(activeMonth), { weekStartsOn: weekStartsOn });
@@ -4586,25 +4579,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  _createClass(HeaderButton, [{
-	    key: '_onClick',
-	    value: function _onClick(e) {
-	      var _props = this.props,
-	          enabled = _props.enabled,
-	          onClick = _props.onClick;
-	
-	      if (enabled) {
-	        onClick(e);
-	      }
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props2 = this.props,
-	          arrow = _props2.arrow,
-	          blockClassName = _props2.blockClassName,
-	          enabled = _props2.enabled,
-	          type = _props2.type,
-	          title = _props2.title;
+	      var _props = this.props,
+	          arrow = _props.arrow,
+	          blockClassName = _props.blockClassName,
+	          enabled = _props.enabled,
+	          type = _props.type,
+	          title = _props.title,
+	          onClick = _props.onClick;
 	
 	
 	      return _react2.default.createElement(
@@ -4616,7 +4599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          type: 'button',
 	          disabled: !enabled,
 	          title: title,
-	          onClick: this._onClick.bind(this)
+	          onClick: onClick
 	        },
 	        arrow
 	      );

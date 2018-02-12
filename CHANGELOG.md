@@ -6,6 +6,10 @@
 
 * Integrate `Jest` for unit testing
 
+### Fix
+
+* Remove `Test` build settings from webpack
+
 ## 1.7.0
 
 ### Fixes
