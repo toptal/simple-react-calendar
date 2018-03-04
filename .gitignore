@@ -4,3 +4,6 @@ tmp
 lib
 .idea/
 coverage/**/*
+
+## Yarn error
+yarn-error.log

@@ -1,22 +1,10 @@
 {
   "presets": [
-    "es2015",
+    "env",
     "react"
   ],
   "plugins": [
     "add-module-exports",
     "transform-class-properties"
-  ],
-  "env": {
-    "test": {
-      "presets": [
-        "es2015",
-        "react"
-      ],
-      "plugins": [
-        "add-module-exports",
-        "transform-class-properties"
-      ]
-    }
-  }
+  ]
 }

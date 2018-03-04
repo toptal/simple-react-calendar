@@ -5,6 +5,7 @@
 ### Features
 
 * Integrate `Jest` for unit testing
+* Update `Webpack` and `Babel`
 
 ### Fix
 

@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const path = require('path')
 const env = process.env.NODE_ENV
 
@@ -13,15 +14,11 @@ const config = {
     react: reactExternal,
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
-      },
-      {
-        test: /\.json?$/,
-        loader: 'json',
+        exclude: /node_modules/,
+        use: ['babel-loader'],
       },
     ],
   },
@@ -35,8 +32,13 @@ const config = {
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env),
+    }),
+  ],
   devtool: env === 'production' ? 'source-map' : 'inline-source-map',
 }
 
