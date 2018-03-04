@@ -10,6 +10,7 @@
 ### Fix
 
 * Remove `Test` build settings from webpack
+* Update `jest-context` to get rid of installation warning
 
 ## 1.7.0
 

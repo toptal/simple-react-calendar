@@ -9,7 +9,7 @@ install:
 script:
   - yarn
   - yarn lint
-  - yarn jest && codecov
+  - yarn test:ci && codecov
 
 cache:
   yarn: true
