@@ -6,6 +6,7 @@
 
 * Integrate `Jest` for unit testing
 * Update `Webpack` and `Babel`
+* Add `Storybook` for demo page
 
 ### Fix
 

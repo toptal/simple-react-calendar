@@ -8,6 +8,7 @@
 [![styled with prettier][prettier-image]][prettier-url]
 [![codecov.io][codecov-image]][codecov-url]
 [![Tested with Jest][jest-image]][jest-url]
+[![storybook provided][storybook-image]][storybook-url]
 
 [![npm badge][npm-badge-png]][package-url]
 
@@ -19,9 +20,43 @@ A component that is easy to start using, yet flexible when you need customizatio
 
 ## Usage
 
-You can find a simple usage example in the included [index.html](./index.html) file.
+You can find the component's online demo [here](./docs/index.html).
 
-Since a compiled version is included in the dist folder, if you clone the repo and open index.html in your browser you will be able to try out the component. We encourage you to modify index.html to play around with its various properties.
+## Screen
+
+![Alt text](./simple_react_calendar.png?raw=true "Simple React Calendar")
+
+### Install
+
+#### Using npm
+
+```
+npm install simple-react-calendar
+```
+
+#### Using yarn
+
+```
+yarn add simple-react-calendar
+```
+
+### Usage
+
+```
+import React, {Component} from 'react'
+
+import SimpleReactCalendar from 'simple-react-calendar'
+
+class MyApp extends Component {
+  render() {
+    return (
+      <SimpleReactCalendar
+        activeMonth={new Date()}
+      />
+    )
+  }
+}
+```
 
 ## Available component properties
 
@@ -97,3 +132,5 @@ Block class name can be overrided with `blockClassName` prop (see above).
 [jest-url]: https://facebook.github.io/jest/
 [codecov-image]: https://codecov.io/gh/toptal/simple-react-calendar/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/toptal/simple-react-calendar
+[storybook-image]: https://img.shields.io/badge/Storybook-provided-f1618c.svg
+[storybook-url]: https://storybook.js.org/

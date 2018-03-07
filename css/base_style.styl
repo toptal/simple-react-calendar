@@ -1,0 +1,52 @@
+.calendar
+  border-radius 5px
+  padding 30px
+
+  &-month
+    width 300px
+    -webkit-user-select none
+    display table
+
+    &_header
+      display flex
+      justify-content space-between
+      margin-bottom 30px
+
+  &-week,
+  &-days_of_week
+    display table-row
+
+  &-day,
+  &-days_of_week_day
+    display table-cell
+    text-align center
+    line-height 30px
+    opacity .5
+
+  &-day
+
+    &.is-selectable
+      cursor: pointer
+
+    &.is-disabled
+      background: #f5f5f5
+
+    &.is-current_month
+      opacity: 1
+
+    &.is-selected
+      background green
+
+      &.is-start_selection
+        background red
+
+      &.is-end_selection
+        background blue
+
+  &-header_button
+
+    &.is-prev:before
+      content: '<'
+
+    &.is-next:before
+      content: '>'
