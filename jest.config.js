@@ -5,5 +5,5 @@ module.exports = {
   collectCoverage: true,
   testMatch: ['**/__specs__/**/*.js'],
   testPathIgnorePatterns: ['/node_modules/', '/fixtures/', '/dist'],
-  setupFiles: ['./test.js', 'jest-context/setup'],
+  setupFiles: ['./test.js', 'jest-plugin-context/setup'],
 }
