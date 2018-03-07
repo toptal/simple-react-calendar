@@ -1,5 +1,6 @@
 {
   "name": "simple-react-calendar",
+  "npmName": "simple-react-calendar",
   "description": "A simple calendar component for React based applications.",
   "main": "lib/index.js",
   "license": "MIT",
@@ -10,8 +11,8 @@
   "version": "1.7.0",
   "scripts": {
     "build": "env NODE_ENV=production webpack --mode development",
-    "build-lib": "babel ./src --out-dir ./lib --ignore ./src/calendar/__specs__",
-    "prepublish": "npm run build-lib",
+    "build:lib": "yarn babel ./src --out-dir ./lib --ignore ./src/calendar/__specs__",
+    "prepublish": "yarn build:lib",
     "clean": "rm -rf ./lib",
     "start": "webpack --watch",
     "test": "jest",
@@ -21,12 +22,20 @@
     "lint": "eslint src/ --ext .js,.jsx",
     "format:js": "prettier \"+(src)/**/*.+(js*)\" --write",
     "format:md": "prettier \"*.+(md)\" --write",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "storybook": "start-storybook -p 6006",
+    "storybook:build": "build-storybook -c .storybook -o docs",
+    "storybook:deploy": "storybook-to-ghpages -s public -o docs"
   },
   "bugs": {
     "url": "https://github.com/toptal/simple-react-calendar/issues"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.3.14",
+    "@storybook/addon-knobs": "^3.3.14",
+    "@storybook/addons": "^3.3.14",
+    "@storybook/react": "^3.3.14",
+    "@storybook/storybook-deployer": "^2.3.0",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -36,8 +45,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "classnames": "^2.2.5",
-    "date-fns": "^1.27.2",
+    "css-loader": "^0.28.10",
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.4",
     "enzyme-to-json": "^3.2.2",
@@ -50,10 +58,10 @@
     "lint-staged": "^6.0.0",
     "mockdate": "^2.0.2",
     "prettier": "^1.9.2",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-prop-types": "^0.4.0",
     "react-test-renderer": "^16.1.0",
+    "style-loader": "^0.20.2",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.10",
     "webpack-dev-middleware": "^3.0.0"
@@ -71,12 +79,24 @@
     ]
   },
   "dependencies": {
-    "codecov": "^3.0.0"
+    "classnames": "^2.2.5",
+    "date-fns": "^1.27.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-prop-types": "^0.4.0"
   },
   "keywords": [
     "react",
     "reactjs",
     "simple",
-    "calendar"
+    "calendar",
+    "react-component",
+    "calendar",
+    "full calendar"
+  ],
+  "files": [
+    "README.md",
+    "lib",
+    "dist"
   ]
 }
