@@ -334,5 +334,15 @@ describe('Calendar', () => {
 
       expect(tree).toMatchSnapshot()
     })
+
+    context('when prop `timeZone` is defined', () => {
+      it('renders <Calendar />', () => {
+        const tree = ReactTestRenderer.create(
+          <Calendar activeMonth={date} onMonthChange={() => {}} timeZone="Etc/GMT+12" />
+        ).toJSON()
+
+        expect(tree).toMatchSnapshot()
+      })
+    })
   })
 })

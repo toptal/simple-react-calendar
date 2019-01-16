@@ -61,6 +61,7 @@ export default class Calendar extends React.Component {
         inProgress: PropTypes.bool,
       }),
     ]),
+    timeZone: PropTypes.string,
     today: datePropType,
     weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
   }
@@ -212,6 +213,7 @@ export default class Calendar extends React.Component {
       disabledIntervals,
       rangeLimit,
       weekStartsOn,
+      timeZone,
     } = this.props
     const selection = this._selection()
     const highlight = this._highlight()
@@ -253,6 +255,7 @@ export default class Calendar extends React.Component {
           blockClassName={blockClassName}
           disabledIntervals={disabledIntervals}
           weekStartsOn={weekStartsOn}
+          timeZone={timeZone}
         />
       </div>
     )

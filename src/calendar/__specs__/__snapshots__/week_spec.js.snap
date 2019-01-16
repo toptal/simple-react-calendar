@@ -54,7 +54,7 @@ exports[`Week #render renders <Week /> 1`] = `
     23
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`blockClassName\` is defined renders el with prefixed class name 1`] = `
 <div
@@ -110,7 +110,7 @@ exports[`Week #render when prop \`blockClassName\` is defined renders el with pr
     5
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <Week /> 1`] = `
 <div
@@ -166,7 +166,7 @@ exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <
     5
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`date\` falls in the previous month renders <Week /> 1`] = `
 <div
@@ -222,7 +222,7 @@ exports[`Week #render when prop \`date\` falls in the previous month renders <We
     2
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`date\` is different month renders <Week /> 1`] = `
 <div
@@ -278,7 +278,7 @@ exports[`Week #render when prop \`date\` is different month renders <Week /> 1`]
     5
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
 <div
@@ -334,7 +334,7 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
     5
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /> 1`] = `
 <div
@@ -390,7 +390,7 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     5
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are defined renders <Week /> 1`] = `
 <div
@@ -446,7 +446,7 @@ exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are 
     5
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
 <div
@@ -502,7 +502,7 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
     5
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
 <div
@@ -558,7 +558,7 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
     5
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined renders <Week /> 1`] = `
 <div
@@ -614,7 +614,7 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     5
   </div>
 </div>
-`
+`;
 
 exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined renders <Week /> 2`] = `
 <div
@@ -670,11 +670,9 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     5
   </div>
 </div>
-`
+`;
 
-exports[
-  `Week #render when prop \`selectedMin\` and \`selectedMax\` are defined when prop \`selectedMin\` and \`selectedMax\` are the same day renders <Week /> 1`
-] = `
+exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined when prop \`selectedMin\` and \`selectedMax\` are the same day renders <Week /> 1`] = `
 <div
   className="calendar-week"
 >
@@ -728,4 +726,60 @@ exports[
     5
   </div>
 </div>
-`
+`;
+
+exports[`Week #render when prop \`timeZone\` renders <Week /> 1`] = `
+<div
+  className="cal-week"
+>
+  <div
+    className="cal-day is-highlighted is-current_month is-working_day is-not_selectable"
+    onClick={[Function]}
+    onMouseMove={[Function]}
+  >
+    28
+  </div>
+  <div
+    className="cal-day is-selected is-highlighted is-current_month is-start_selection is-end_selection is-working_day is-selectable"
+    onClick={[Function]}
+    onMouseMove={[Function]}
+  >
+    29
+  </div>
+  <div
+    className="cal-day is-highlighted is-today is-next_month is-working_day is-selectable"
+    onClick={[Function]}
+    onMouseMove={[Function]}
+  >
+    30
+  </div>
+  <div
+    className="cal-day is-next_month is-working_day is-not_selectable"
+    onClick={[Function]}
+    onMouseMove={[Function]}
+  >
+    1
+  </div>
+  <div
+    className="cal-day is-next_month is-working_day is-not_selectable"
+    onClick={[Function]}
+    onMouseMove={[Function]}
+  >
+    2
+  </div>
+  <div
+    className="cal-day is-next_month is-weekend is-not_selectable"
+    onClick={[Function]}
+    onMouseMove={[Function]}
+  >
+    3
+  </div>
+  <div
+    className="cal-day is-next_month is-weekend is-not_selectable"
+    onClick={[Function]}
+    onMouseMove={[Function]}
+  >
+    4
+  </div>
+</div>
+`;

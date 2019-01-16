@@ -1,12 +1,13 @@
 # Changelog `simple-react-calendar`
 
-## Unreleased
+## 1.8.0
 
 ### Features
 
 * Integrate `Jest` for unit testing
 * Update `Webpack` and `Babel`
 * Add `Storybook` for demo page
+* Add `TimeZone` support
 
 ### Fix
 

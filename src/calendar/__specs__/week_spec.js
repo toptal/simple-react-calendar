@@ -179,5 +179,14 @@ describe.only('Week', () => {
         expect(tree).toMatchSnapshot()
       })
     })
+
+    context('when prop `timeZone`', () => {
+      it('renders <Week />', () => {
+        props = Object.assign(defaultProps, {timeZone: 'Etc/GMT+12'})
+        tree = ReactTestRenderer.create(<Week {...props} />).toJSON()
+
+        expect(tree).toMatchSnapshot()
+      })
+    })
   })
 })

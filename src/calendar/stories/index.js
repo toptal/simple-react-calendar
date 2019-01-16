@@ -64,6 +64,9 @@ stories
     const selectedDefaultValue = {start: new Date('2018-01-08'), end: new Date('2018-01-12')}
     const selected = object(selectedLabel, selectedDefaultValue)
 
+    // TimeZone
+    const timeZone = text('timeZone', '')
+
     // today
     const todayLabel = 'Today'
     const todayDefaultValue = new Date('2018-01-15')
@@ -95,6 +98,7 @@ stories
         minNumberOfWeeks={minNumberOfWeeks}
         rangeLimit={rangeLimit}
         selected={selected}
+        timeZone={timeZone}
         today={today}
         weekStartsOn={weekStartsOn}
       />

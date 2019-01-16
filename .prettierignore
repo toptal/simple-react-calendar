@@ -2,3 +2,5 @@ package.json
 package-lock.json
 dist
 docs
+coverage
+__snapshots__

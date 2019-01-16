@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import {BLOCK_CLASS_NAME} from './consts'
 import {datePropType} from './_lib'
 
+import {formatToTimeZone} from 'date-fns-timezone/dist/formatToTimeZone'
 import formatDate from 'date-fns/format'
 
 export default class Day extends React.Component {
@@ -15,6 +16,7 @@ export default class Day extends React.Component {
     date: datePropType.isRequired,
     onClick: PropTypes.func,
     onMouseMove: PropTypes.func,
+    timeZone: PropTypes.string,
     today: datePropType.isRequired,
   }
 
@@ -39,14 +41,14 @@ export default class Day extends React.Component {
   }
 
   render() {
-    const {date, className, blockClassName} = this.props
+    const {date, className, blockClassName, timeZone} = this.props
     return (
       <div
         className={classnames(`${blockClassName}-day`, className)}
         onClick={this._onClick.bind(this)}
         onMouseMove={this._onMouseMove.bind(this)}
       >
-        {formatDate(date, 'D')}
+        {timeZone ? formatToTimeZone(date, 'D', {timeZone}) : formatDate(date, 'D')}
       </div>
     )
   }

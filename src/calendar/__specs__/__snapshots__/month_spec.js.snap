@@ -362,7 +362,7 @@ exports[`Month #render renders <Month /> 1`] = `
     </div>
   </div>
 </div>
-`
+`;
 
 exports[`Month #render when prop \`blockClassName\` is defined renders <Month /> 1`] = `
 <div
@@ -726,7 +726,7 @@ exports[`Month #render when prop \`blockClassName\` is defined renders <Month />
     </div>
   </div>
 </div>
-`
+`;
 
 exports[`Month #render when prop \`disableDaysOfWeek\` is defined renders <Month /> 1`] = `
 <div
@@ -1051,7 +1051,7 @@ exports[`Month #render when prop \`disableDaysOfWeek\` is defined renders <Month
     </div>
   </div>
 </div>
-`
+`;
 
 exports[`Month #render when prop \`disabledIntervals\` is \`[]\` renders <Month /> 1`] = `
 <div
@@ -1415,17 +1415,22 @@ exports[`Month #render when prop \`disabledIntervals\` is \`[]\` renders <Month 
     </div>
   </div>
 </div>
-`
+`;
 
-exports[
-  `Month #render when prop \`minDate\` and \`maxDate\` are defined when prop \`rangeLimit\` doesn't exceed \`minDate\` and \`maxDate\` renders <Month /> 1`
-] = `
+exports[`Month #render when prop \`minDate\` and \`maxDate\` are defined when prop \`rangeLimit\` doesn't exceed \`minDate\` and \`maxDate\` renders <Month /> 1`] = `
 <div
   className="cal-month"
 >
   <div
     className="cal-week"
   >
+    <div
+      className="cal-day is-prev_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      26
+    </div>
     <div
       className="cal-day is-prev_month is-working_day is-not_selectable"
       onClick={[Function]}
@@ -1455,7 +1460,7 @@ exports[
       30
     </div>
     <div
-      className="cal-day is-prev_month is-working_day is-not_selectable"
+      className="cal-day is-current_month is-weekend is-not_selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1468,17 +1473,17 @@ exports[
     >
       1
     </div>
+  </div>
+  <div
+    className="cal-week"
+  >
     <div
-      className="cal-day is-current_month is-weekend is-not_selectable"
+      className="cal-day is-current_month is-working_day is-not_selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
       2
     </div>
-  </div>
-  <div
-    className="cal-week"
-  >
     <div
       className="cal-day is-current_month is-working_day is-not_selectable"
       onClick={[Function]}
@@ -1508,7 +1513,7 @@ exports[
       6
     </div>
     <div
-      className="cal-day is-current_month is-working_day is-not_selectable"
+      className="cal-day is-current_month is-weekend is-not_selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1521,13 +1526,6 @@ exports[
     >
       8
     </div>
-    <div
-      className="cal-day is-current_month is-weekend is-not_selectable"
-      onClick={[Function]}
-      onMouseMove={[Function]}
-    >
-      9
-    </div>
   </div>
   <div
     className="cal-week"
@@ -1537,10 +1535,17 @@ exports[
       onClick={[Function]}
       onMouseMove={[Function]}
     >
-      10
+      9
     </div>
     <div
       className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      10
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1561,7 +1566,7 @@ exports[
       13
     </div>
     <div
-      className="cal-day is-current_month is-working_day is-selectable"
+      className="cal-day is-current_month is-weekend is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1574,19 +1579,19 @@ exports[
     >
       15
     </div>
-    <div
-      className="cal-day is-current_month is-weekend is-selectable"
-      onClick={[Function]}
-      onMouseMove={[Function]}
-    >
-      16
-    </div>
   </div>
   <div
     className="cal-week"
   >
     <div
       className="cal-day is-today is-current_month is-working_day is-selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      16
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1614,7 +1619,7 @@ exports[
       20
     </div>
     <div
-      className="cal-day is-current_month is-working_day is-selectable"
+      className="cal-day is-current_month is-weekend is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1627,17 +1632,17 @@ exports[
     >
       22
     </div>
+  </div>
+  <div
+    className="cal-week"
+  >
     <div
-      className="cal-day is-current_month is-weekend is-selectable"
+      className="cal-day is-current_month is-working_day is-not_selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
       23
     </div>
-  </div>
-  <div
-    className="cal-week"
-  >
     <div
       className="cal-day is-current_month is-working_day is-not_selectable"
       onClick={[Function]}
@@ -1667,7 +1672,7 @@ exports[
       27
     </div>
     <div
-      className="cal-day is-current_month is-working_day is-not_selectable"
+      className="cal-day is-current_month is-weekend is-not_selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1680,19 +1685,19 @@ exports[
     >
       29
     </div>
-    <div
-      className="cal-day is-current_month is-weekend is-not_selectable"
-      onClick={[Function]}
-      onMouseMove={[Function]}
-    >
-      30
-    </div>
   </div>
   <div
     className="cal-week"
   >
     <div
       className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      30
+    </div>
+    <div
+      className="cal-day is-next_month is-working_day is-not_selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1720,7 +1725,7 @@ exports[
       3
     </div>
     <div
-      className="cal-day is-next_month is-working_day is-not_selectable"
+      className="cal-day is-next_month is-weekend is-not_selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1733,26 +1738,24 @@ exports[
     >
       5
     </div>
-    <div
-      className="cal-day is-next_month is-weekend is-not_selectable"
-      onClick={[Function]}
-      onMouseMove={[Function]}
-    >
-      6
-    </div>
   </div>
 </div>
-`
+`;
 
-exports[
-  `Month #render when prop \`minDate\` and \`maxDate\` are defined when prop \`rangeLimit\` exceed \`minDate\` and \`maxDate\` renders <Month /> 1`
-] = `
+exports[`Month #render when prop \`minDate\` and \`maxDate\` are defined when prop \`rangeLimit\` exceed \`minDate\` and \`maxDate\` renders <Month /> 1`] = `
 <div
   className="cal-month"
 >
   <div
     className="cal-week"
   >
+    <div
+      className="cal-day is-prev_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      26
+    </div>
     <div
       className="cal-day is-prev_month is-working_day is-not_selectable"
       onClick={[Function]}
@@ -1782,7 +1785,7 @@ exports[
       30
     </div>
     <div
-      className="cal-day is-prev_month is-working_day is-not_selectable"
+      className="cal-day is-current_month is-weekend is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1795,17 +1798,17 @@ exports[
     >
       1
     </div>
+  </div>
+  <div
+    className="cal-week"
+  >
     <div
-      className="cal-day is-current_month is-weekend is-selectable"
+      className="cal-day is-current_month is-working_day is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
       2
     </div>
-  </div>
-  <div
-    className="cal-week"
-  >
     <div
       className="cal-day is-current_month is-working_day is-selectable"
       onClick={[Function]}
@@ -1835,7 +1838,7 @@ exports[
       6
     </div>
     <div
-      className="cal-day is-current_month is-working_day is-selectable"
+      className="cal-day is-current_month is-weekend is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1848,17 +1851,17 @@ exports[
     >
       8
     </div>
+  </div>
+  <div
+    className="cal-week"
+  >
     <div
-      className="cal-day is-current_month is-weekend is-selectable"
+      className="cal-day is-current_month is-working_day is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
       9
     </div>
-  </div>
-  <div
-    className="cal-week"
-  >
     <div
       className="cal-day is-current_month is-working_day is-selectable"
       onClick={[Function]}
@@ -1888,7 +1891,7 @@ exports[
       13
     </div>
     <div
-      className="cal-day is-current_month is-working_day is-selectable"
+      className="cal-day is-current_month is-weekend is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1901,19 +1904,19 @@ exports[
     >
       15
     </div>
-    <div
-      className="cal-day is-current_month is-weekend is-selectable"
-      onClick={[Function]}
-      onMouseMove={[Function]}
-    >
-      16
-    </div>
   </div>
   <div
     className="cal-week"
   >
     <div
       className="cal-day is-today is-current_month is-working_day is-selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      16
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1941,7 +1944,7 @@ exports[
       20
     </div>
     <div
-      className="cal-day is-current_month is-working_day is-selectable"
+      className="cal-day is-current_month is-weekend is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -1954,17 +1957,17 @@ exports[
     >
       22
     </div>
+  </div>
+  <div
+    className="cal-week"
+  >
     <div
-      className="cal-day is-current_month is-weekend is-selectable"
+      className="cal-day is-current_month is-working_day is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
       23
     </div>
-  </div>
-  <div
-    className="cal-week"
-  >
     <div
       className="cal-day is-current_month is-working_day is-selectable"
       onClick={[Function]}
@@ -1994,7 +1997,7 @@ exports[
       27
     </div>
     <div
-      className="cal-day is-current_month is-working_day is-selectable"
+      className="cal-day is-current_month is-weekend is-selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -2007,19 +2010,19 @@ exports[
     >
       29
     </div>
-    <div
-      className="cal-day is-current_month is-weekend is-selectable"
-      onClick={[Function]}
-      onMouseMove={[Function]}
-    >
-      30
-    </div>
   </div>
   <div
     className="cal-week"
   >
     <div
       className="cal-day is-current_month is-working_day is-selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      30
+    </div>
+    <div
+      className="cal-day is-next_month is-working_day is-not_selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -2047,7 +2050,7 @@ exports[
       3
     </div>
     <div
-      className="cal-day is-next_month is-working_day is-not_selectable"
+      className="cal-day is-next_month is-weekend is-not_selectable"
       onClick={[Function]}
       onMouseMove={[Function]}
     >
@@ -2060,20 +2063,11 @@ exports[
     >
       5
     </div>
-    <div
-      className="cal-day is-next_month is-weekend is-not_selectable"
-      onClick={[Function]}
-      onMouseMove={[Function]}
-    >
-      6
-    </div>
   </div>
 </div>
-`
+`;
 
-exports[
-  `Month #render when prop \`minNumberOfWeeks\` is defined when prop \`activeMonth\` has less weeks than defined renders <Month /> 1`
-] = `
+exports[`Month #render when prop \`minNumberOfWeeks\` is defined when prop \`activeMonth\` has less weeks than defined renders <Month /> 1`] = `
 <div
   className="calendar-month"
 >
@@ -2382,11 +2376,9 @@ exports[
     </div>
   </div>
 </div>
-`
+`;
 
-exports[
-  `Month #render when prop \`minNumberOfWeeks\` is defined when prop \`activeMonth\` has more weeks than as defined renders <Month /> 1`
-] = `
+exports[`Month #render when prop \`minNumberOfWeeks\` is defined when prop \`activeMonth\` has more weeks than as defined renders <Month /> 1`] = `
 <div
   className="calendar-month"
 >
@@ -2748,11 +2740,9 @@ exports[
     </div>
   </div>
 </div>
-`
+`;
 
-exports[
-  `Month #render when prop \`minNumberOfWeeks\` is defined when prop \`activeMonth\` has the same number of weeks as defined renders <Month /> 1`
-] = `
+exports[`Month #render when prop \`minNumberOfWeeks\` is defined when prop \`activeMonth\` has the same number of weeks as defined renders <Month /> 1`] = `
 <div
   className="calendar-month"
 >
@@ -3061,7 +3051,7 @@ exports[
     </div>
   </div>
 </div>
-`
+`;
 
 exports[`Month #render when prop \`month\` has 4 weeks renders <Month /> 1`] = `
 <div
@@ -3319,7 +3309,7 @@ exports[`Month #render when prop \`month\` has 4 weeks renders <Month /> 1`] = `
     </div>
   </div>
 </div>
-`
+`;
 
 exports[`Month #render when prop \`month\` has 5 weeks renders <Month /> 1`] = `
 <div
@@ -3630,7 +3620,7 @@ exports[`Month #render when prop \`month\` has 5 weeks renders <Month /> 1`] = `
     </div>
   </div>
 </div>
-`
+`;
 
 exports[`Month #render when prop \`month\` has 6 weeks renders <Month /> 1`] = `
 <div
@@ -3994,4 +3984,329 @@ exports[`Month #render when prop \`month\` has 6 weeks renders <Month /> 1`] = `
     </div>
   </div>
 </div>
-`
+`;
+
+exports[`Month #render when prop \`timeZone\` is defined renders <Month /> 1`] = `
+<div
+  className="cal-month"
+>
+  <div
+    className="cal-week"
+  >
+    <div
+      className="cal-day is-prev_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      26
+    </div>
+    <div
+      className="cal-day is-prev_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      27
+    </div>
+    <div
+      className="cal-day is-prev_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      28
+    </div>
+    <div
+      className="cal-day is-prev_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      29
+    </div>
+    <div
+      className="cal-day is-prev_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      30
+    </div>
+    <div
+      className="cal-day is-current_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      31
+    </div>
+    <div
+      className="cal-day is-current_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      1
+    </div>
+  </div>
+  <div
+    className="cal-week"
+  >
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      2
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      3
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      4
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      5
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      6
+    </div>
+    <div
+      className="cal-day is-current_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      7
+    </div>
+    <div
+      className="cal-day is-current_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      8
+    </div>
+  </div>
+  <div
+    className="cal-week"
+  >
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      9
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      10
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      11
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      12
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      13
+    </div>
+    <div
+      className="cal-day is-current_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      14
+    </div>
+    <div
+      className="cal-day is-current_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      15
+    </div>
+  </div>
+  <div
+    className="cal-week"
+  >
+    <div
+      className="cal-day is-today is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      16
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      17
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      18
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      19
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      20
+    </div>
+    <div
+      className="cal-day is-current_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      21
+    </div>
+    <div
+      className="cal-day is-current_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      22
+    </div>
+  </div>
+  <div
+    className="cal-week"
+  >
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      23
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      24
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      25
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      26
+    </div>
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      27
+    </div>
+    <div
+      className="cal-day is-current_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      28
+    </div>
+    <div
+      className="cal-day is-current_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      29
+    </div>
+  </div>
+  <div
+    className="cal-week"
+  >
+    <div
+      className="cal-day is-current_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      30
+    </div>
+    <div
+      className="cal-day is-next_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      31
+    </div>
+    <div
+      className="cal-day is-next_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      1
+    </div>
+    <div
+      className="cal-day is-next_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      2
+    </div>
+    <div
+      className="cal-day is-next_month is-working_day is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      3
+    </div>
+    <div
+      className="cal-day is-next_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      4
+    </div>
+    <div
+      className="cal-day is-next_month is-weekend is-not_selectable"
+      onClick={[Function]}
+      onMouseMove={[Function]}
+    >
+      5
+    </div>
+  </div>
+</div>
+`;

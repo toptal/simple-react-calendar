@@ -8,7 +8,7 @@ exports[`Day #render renders <Day /> 1`] = `
 >
   17
 </div>
-`
+`;
 
 exports[`Day #render when prop \`blockClassName\` is defined renders <Day /> 1`] = `
 <div
@@ -18,7 +18,17 @@ exports[`Day #render when prop \`blockClassName\` is defined renders <Day /> 1`]
 >
   17
 </div>
-`
+`;
+
+exports[`Day #render when prop \`timeZone\` is passed renders <Day /> 1`] = `
+<div
+  className="calendar-day"
+  onClick={[Function]}
+  onMouseMove={[Function]}
+>
+  16
+</div>
+`;
 
 exports[`Day #render when prop \`today\` is different from prop \`date\` renders <Day /> 1`] = `
 <div
@@ -28,4 +38,4 @@ exports[`Day #render when prop \`today\` is different from prop \`date\` renders
 >
   2
 </div>
-`
+`;

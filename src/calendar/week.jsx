@@ -42,6 +42,7 @@ export default class Week extends React.Component {
     onDisabledDayClick: PropTypes.func.isRequired,
     selectedMax: datePropType,
     selectedMin: datePropType,
+    timeZone: PropTypes.string,
     today: datePropType.isRequired,
     weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
   }
@@ -124,7 +125,16 @@ export default class Week extends React.Component {
   }
 
   _renderDays() {
-    const {date, today, onDayClick, onDisabledDayClick, onDayMouseMove, blockClassName, weekStartsOn} = this.props
+    const {
+      date,
+      today,
+      onDayClick,
+      onDisabledDayClick,
+      onDayMouseMove,
+      blockClassName,
+      weekStartsOn,
+      timeZone,
+    } = this.props
     const start = startOfWeek(date, {weekStartsOn})
     const end = endOfWeek(date, {weekStartsOn})
     return eachDay(start, end).map((day) => {
@@ -149,6 +159,7 @@ export default class Week extends React.Component {
           today={today}
           onClick={onClick}
           onMouseMove={selectable ? onDayMouseMove : null}
+          timeZone={timeZone}
         />
       )
     })

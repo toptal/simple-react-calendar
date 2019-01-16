@@ -93,5 +93,14 @@ describe('Day', () => {
         expect(tree).toMatchSnapshot()
       })
     })
+
+    context('when prop `timeZone` is passed', () => {
+      it('renders <Day />', () => {
+        props = Object.assign(defaultProps, {timeZone: 'Etc/GMT+12'})
+        tree = ReactTestRenderer.create(<Day {...props} />).toJSON()
+
+        expect(tree).toMatchSnapshot()
+      })
+    })
   })
 })

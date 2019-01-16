@@ -512,6 +512,15 @@ describe('Month', () => {
       })
     })
 
+    context('when prop `timeZone` is defined', () => {
+      it('renders <Month />', () => {
+        const modProps = Object.assign(defaultProps, {timeZone: 'Etc/GMT+12'})
+        const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+
+        expect(tree).toMatchSnapshot()
+      })
+    })
+
     context('when prop `minDate` and `maxDate` are defined', () => {
       context("when prop `rangeLimit` doesn't exceed `minDate` and `maxDate`", () => {
         it('renders <Month />', () => {

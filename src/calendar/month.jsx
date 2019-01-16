@@ -45,6 +45,7 @@ export default class Month extends React.Component {
     rangeLimit: PropTypes.number,
     selectedMax: datePropType,
     selectedMin: datePropType,
+    timeZone: PropTypes.string,
     today: datePropType.isRequired,
     weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
   }
@@ -221,6 +222,7 @@ export default class Month extends React.Component {
       minNumberOfWeeks,
       rangeLimit,
       onDayHover,
+      timeZone,
       weekStartsOn,
     } = this.props
     const weeks = []
@@ -261,6 +263,7 @@ export default class Month extends React.Component {
           today={today}
           blockClassName={blockClassName}
           weekStartsOn={weekStartsOn}
+          timeZone={timeZone}
         />
       )
     })
