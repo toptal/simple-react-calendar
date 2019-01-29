@@ -1,4 +1,14 @@
-# SimpleReactCalendar <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+---
+name: Getting started
+route: /
+---
+
+import { PropsTable, Playground } from "docz";
+import Calendar from "../src/src/calendar";
+import '../src/example/style/base_style.styl'
+import '../src/example/style/date_picker.styl'
+
+## SimpleReactCalendar
 
 [![NPM version][npm-image]][npm-url]
 [![written in TypeScript][typescript-image]][typescript-url]
@@ -6,40 +16,32 @@
 [![tested with Jest][jest-image]][jest-url]
 [![build status][travis-image]][travis-url]
 [![npm download][download-image]][download-url]
-[![BCH compliance][bch-image]][bch-url]
+[![BCH comliance][bch-image]][bch-url]
 [![CodeFactor][cf-image]][cf-url]
 [![codecov.io][codecov-image]][codecov-url]
 [![Doczrc provided][doczrc-image]][doczrc-url]
 
 [![npm badge][npm-badge-png]][package-url]
 
----
-
-A simple calendar component for React based applications.
-A component that is easy to start using, yet flexible when you need customization.
-
-## Screen
-
-![Alt text](./simple_react_calendar.png?raw=true 'Simple React Calendar')
-
-### Usage
+#### Usage
 
 ```js
-import React, {Component} from 'react'
-
-import SimpleReactCalendar from 'simple-react-calendar'
-
-class MyApp extends Component {
-  render() {
-    return <SimpleReactCalendar activeMonth={new Date()} />
-  }
-}
+import {Calendar} from 'simple-react-calendar'
 ```
+
+#### Example
+
+<Playground>
+  <Calendar blockClassName="date_picker" />
+</Playground>
+
+#### Props
+
+<PropsTable of={Calendar} />
 
 #### 📚 [API Docs with live preview available here.](https://simplereactcalendar.debuggable.io)
 
 ## Github
-
 Take a look at [the code here](https://github.com/toptal/simple-react-calendar).
 
 ## Contribute

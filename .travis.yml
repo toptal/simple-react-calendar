@@ -1,14 +1,13 @@
 sudo: false
 language: node_js
 node_js:
-  - 6
+  - 8
 
 install:
   - npm install -g codecov
 
 script:
   - yarn
-  - yarn lint
   - yarn test:ci && codecov
 
 cache:

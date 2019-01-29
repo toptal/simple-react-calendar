@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Day #render renders <Day /> 1`] = `
+<button
+  className="day-class simple_calendar-day"
+  onClick={[MockFunction]}
+  onMouseEnter={[MockFunction]}
+  title="Select January 1, 2000"
+  value="1999-12-31"
+>
+  31
+</button>
+`;

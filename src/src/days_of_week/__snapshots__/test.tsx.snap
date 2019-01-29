@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DaysOfWeek #render renders <DaysOfWeek /> 1`] = `
+<ol
+  className="simple-react-calendar-days_of_week"
+>
+  <li
+    className="simple-react-calendar-days_of_week_day"
+    key="Mon"
+  >
+    Mon
+  </li>
+  <li
+    className="simple-react-calendar-days_of_week_day"
+    key="Tue"
+  >
+    Tue
+  </li>
+  <li
+    className="simple-react-calendar-days_of_week_day"
+    key="Wed"
+  >
+    Wed
+  </li>
+  <li
+    className="simple-react-calendar-days_of_week_day"
+    key="Thu"
+  >
+    Thu
+  </li>
+  <li
+    className="simple-react-calendar-days_of_week_day"
+    key="Fri"
+  >
+    Fri
+  </li>
+  <li
+    className="simple-react-calendar-days_of_week_day is-weekend"
+    key="Sat"
+  >
+    Sat
+  </li>
+  <li
+    className="simple-react-calendar-days_of_week_day is-weekend"
+    key="Sun"
+  >
+    Sun
+  </li>
+</ol>
+`;

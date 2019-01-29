@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MonthHeader /> #render renders <MonthHeader /> 1`] = `
+<div
+  className="example-class-name-month_header"
+>
+  <MonthHeaderButton
+    blockClassName="example-class-name"
+    isDisabled={false}
+    onClick={[Function]}
+    type="previous"
+  />
+  <div
+    className="example-class-name-month_header_title"
+  >
+    January 2000
+  </div>
+  <MonthHeaderButton
+    blockClassName="example-class-name"
+    isDisabled={false}
+    onClick={[Function]}
+    type="next"
+  />
+</div>
+`;
+
+exports[`<MonthHeader /> #render when prop \`maxDate\` is before prop \`activeMonth\` renders <MonthHeader /> 1`] = `
+<div
+  className="example-class-name-month_header"
+>
+  <MonthHeaderButton
+    blockClassName="example-class-name"
+    isDisabled={false}
+    onClick={[Function]}
+    type="previous"
+  />
+  <div
+    className="example-class-name-month_header_title"
+  >
+    January 2000
+  </div>
+  <MonthHeaderButton
+    blockClassName="example-class-name"
+    isDisabled={true}
+    onClick={[Function]}
+    type="next"
+  />
+</div>
+`;
+
+exports[`<MonthHeader /> #render when prop \`minDate\` is after prop \`activeMonth\` renders <MonthHeader /> 1`] = `
+<div
+  className="example-class-name-month_header"
+>
+  <MonthHeaderButton
+    blockClassName="example-class-name"
+    isDisabled={true}
+    onClick={[Function]}
+    type="previous"
+  />
+  <div
+    className="example-class-name-month_header_title"
+  >
+    January 2000
+  </div>
+  <MonthHeaderButton
+    blockClassName="example-class-name"
+    isDisabled={false}
+    onClick={[Function]}
+    type="next"
+  />
+</div>
+`;

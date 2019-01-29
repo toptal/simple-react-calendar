@@ -1,0 +1,38 @@
+{
+  "extends": ["tslint:recommended", "tslint-react"],
+  "linterOptions": {
+    "exclude": ["node_modules/**"]
+  },
+  "jsRules": {},
+  "rules": {
+    "trailing-comma": true,
+    "prefer-const": true,
+    "curly": [true, "ignore-same-line"],
+    "no-unused-expression": [true, "allow-fast-null-checks"],
+    "no-shadowed-variable": true,
+    "semicolon": [true, "never"],
+    "triple-equals": true,
+    "no-empty": true,
+    "no-console": true,
+    "no-debugger": true,
+    "no-focused-test": true,
+    "jsx-boolean-value": [true, "never"],
+    "jsx-no-bind": true,
+    "jsx-no-multiline-js": false, // allow multi-line js code in JSX
+    "jsx-no-string-ref": true,
+    "jsx-self-close": true,
+    "jsx-key": true,
+    "jsx-curly-spacing": false,
+    "jsx-no-lambda": true,
+    "object-literal-key-quotes": [true, "as-needed"],
+    "quotemark": [true, "single", "jsx-double", "avoid-escape"],
+    "object-literal-sort-keys": false,
+    "interface-name": [false, "always-prefix"],
+    "ordered-imports": true,
+    "one-variable-per-declaration": false,
+    "member-access": [true, "no-public"], // @todo discuss and come up with solution concerning properties
+    "no-var-requires": false, // to use `require()`
+    "member-ordering": true
+  },
+  "rulesDirectory": ["node_modules/tslint-eslint-rules/dist/rules", "tslint-no-focused-test"]
+}
