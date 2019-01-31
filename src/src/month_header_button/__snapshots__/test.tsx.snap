@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderButton when prop \`blockClassName\` is passed renders <MonthHeaderButton /> 1`] = `
+<button
+  className="example-class-header_button is-prev"
+  onClick={[MockFunction]}
+  type="button"
+  value="previous"
+>
+  <p
+    key="1"
+  >
+    Example
+  </p>
+</button>
+`;
+
+exports[`HeaderButton when prop \`isDisabled\` is passed renders <MonthHeaderButton /> 1`] = `
+<button
+  className="test-class-header_button is-prev is-disabled"
+  disabled={true}
+  onClick={[MockFunction]}
+  type="button"
+  value="previous"
+>
+  <p
+    key="1"
+  >
+    Example
+  </p>
+</button>
+`;
+
+exports[`HeaderButton when prop \`title\` is passed renders <MonthHeaderButton /> 1`] = `
+<button
+  className="test-class-header_button is-prev"
+  onClick={[MockFunction]}
+  title="Test Title"
+  type="button"
+  value="previous"
+>
+  <p
+    key="1"
+  >
+    Example
+  </p>
+</button>
+`;
+
+exports[`HeaderButton when prop \`type\` is \`next\` renders <MonthHeaderButton /> 1`] = `
+<button
+  className="test-class-header_button is-next"
+  onClick={[MockFunction]}
+  type="button"
+  value="next"
+>
+  <p
+    key="1"
+  >
+    Example
+  </p>
+</button>
+`;

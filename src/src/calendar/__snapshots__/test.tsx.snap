@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Calendar /> #render renders <Calendar /> 1`] = `
+<div
+  className="calendar"
+>
+  <MonthHeader
+    activeMonth={"2015-06-30T22:00:00.000-02:00"}
+    blockClassName="calendar"
+    onMonthChange={[Function]}
+  />
+  <Month
+    activeMonth={"2015-06-30T22:00:00.000-02:00"}
+    blockClassName="calendar"
+    daysOfWeek={
+      Array [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun",
+      ]
+    }
+    highlightedEnd={null}
+    highlightedStart={null}
+    mode="single"
+    onChange={[Function]}
+    onNoticeChange={[Function]}
+    selectedMax={null}
+    selectedMin={null}
+    today={"1999-12-31T22:00:00.000-02:00"}
+  />
+</div>
+`;
