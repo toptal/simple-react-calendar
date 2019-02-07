@@ -1,31 +1,29 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
-import Week from './week'
-import DaysOfWeek from './days_of_week'
-import {BLOCK_CLASS_NAME} from './consts'
-import {DAYS_IN_WEEK} from './consts'
-import {datePropType} from './_lib'
-
-import startOfWeek from 'date-fns/start_of_week'
-import endOfWeek from 'date-fns/end_of_week'
+import addDays from 'date-fns/add_days'
 import areRangesOverlapping from 'date-fns/are_ranges_overlapping'
-import startOfMonth from 'date-fns/start_of_month'
+import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
 import endOfMonth from 'date-fns/end_of_month'
+import endOfWeek from 'date-fns/end_of_week'
 import isBefore from 'date-fns/is_before'
 import isEqual from 'date-fns/is_equal'
-import addDays from 'date-fns/add_days'
-import subDays from 'date-fns/sub_days'
 import isSameDay from 'date-fns/is_same_day'
-import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
+import parse from 'date-fns/parse'
+import startOfMonth from 'date-fns/start_of_month'
+import startOfWeek from 'date-fns/start_of_week'
+import subDays from 'date-fns/sub_days'
+import PropTypes from 'prop-types'
+import React from 'react'
 
-const SINGLE_MODE = 'single'
+import {datePropType} from './_lib'
+import {DAYS_IN_WEEK} from './consts'
+import DaysOfWeek from './days_of_week'
+import Week from './week'
+
 const RANGE_MODE = 'range'
 
 export default class Month extends React.Component {
   static propTypes = {
     activeMonth: datePropType.isRequired,
-    blockClassName: PropTypes.string,
+    blockClassName: PropTypes.string.isRequired,
     disableDaysOfWeek: PropTypes.bool,
     disabledIntervals: PropTypes.arrayOf(
       PropTypes.shape({
@@ -40,17 +38,13 @@ export default class Month extends React.Component {
     minNumberOfWeeks: PropTypes.number,
     mode: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    onDayHover: PropTypes.func,
+    onDayMouseEnter: PropTypes.func,
     onNoticeChange: PropTypes.func.isRequired,
     rangeLimit: PropTypes.number,
     selectedMax: datePropType,
     selectedMin: datePropType,
     today: datePropType.isRequired,
     weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
-  }
-
-  static defaultProps = {
-    blockClassName: BLOCK_CLASS_NAME,
   }
 
   _pushUpdate() {
@@ -100,10 +94,15 @@ export default class Month extends React.Component {
     return true
   }
 
-  _onDayMouseMove(date) {
-    const {onDayHover} = this.props
-    if (onDayHover) {
-      onDayHover(date)
+  handleOnDayMouseEnter = (event) => {
+    event.preventDefault()
+    const {currentTarget: {value}} = event
+    const date = parse(value)
+
+    const {onDayMouseEnter} = this.props
+
+    if (onDayMouseEnter) {
+      onDayMouseEnter(date)
     }
 
     if (!this._selectionInProgress) return
@@ -126,7 +125,10 @@ export default class Month extends React.Component {
     }
   }
 
-  _onDayClick(date) {
+  handleOnDayClick = (event) => {
+    event.preventDefault()
+    const {currentTarget: {value}} = event
+    const date = parse(value)
     const {mode} = this.props
 
     if (mode === RANGE_MODE) {
@@ -162,9 +164,10 @@ export default class Month extends React.Component {
     this._pushNoticeUpdate(null)
   }
 
-  _onDisabledDayClick() {
-    const {onNoticeChange} = this.props
-    onNoticeChange('disabled_day_click')
+  handleOnDisabledDayClick = (event) => {
+    event.preventDefault()
+
+    this.props.onNoticeChange('disabled_day_click')
   }
 
   _getMinDate() {
@@ -220,7 +223,6 @@ export default class Month extends React.Component {
       blockClassName,
       minNumberOfWeeks,
       rangeLimit,
-      onDayHover,
       weekStartsOn,
     } = this.props
     const weeks = []
@@ -244,22 +246,21 @@ export default class Month extends React.Component {
     return weeks.map((week) => {
       return (
         <Week
-          key={week.getTime()}
-          date={week}
-          minDate={minDate}
-          maxDate={maxDate}
-          selectedMin={selectedMin}
-          selectedMax={selectedMax}
-          highlightedStart={highlightedStart}
-          highlightedEnd={highlightedEnd}
-          disabledIntervals={disabledIntervals}
           activeMonth={activeMonth}
-          onDayHover={onDayHover}
-          onDayClick={this._onDayClick.bind(this)}
-          onDisabledDayClick={this._onDisabledDayClick.bind(this)}
-          onDayMouseMove={this._onDayMouseMove.bind(this)}
-          today={today}
           blockClassName={blockClassName}
+          date={week}
+          disabledIntervals={disabledIntervals}
+          highlightedEnd={highlightedEnd}
+          highlightedStart={highlightedStart}
+          key={week.getTime()}
+          maxDate={maxDate}
+          minDate={minDate}
+          onDayClick={this.handleOnDayClick}
+          onDayMouseEnter={this.handleOnDayMouseEnter}
+          onDisabledDayClick={this.handleOnDisabledDayClick}
+          selectedMax={selectedMax}
+          selectedMin={selectedMin}
+          today={today}
           weekStartsOn={weekStartsOn}
         />
       )

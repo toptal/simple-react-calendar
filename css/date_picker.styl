@@ -13,7 +13,6 @@ calendarWidth = 250px
   font-family 'PT Sans', sans-serif
 
   &-month
-
     &_header
       display flex
       justify-content space-between
@@ -45,7 +44,6 @@ calendarWidth = 250px
 
     &.is-next,
     &.is-prev
-
       &:before
         position absolute
         top 50%
@@ -62,10 +60,10 @@ calendarWidth = 250px
         background #e7f5ff
 
     &.is-prev:before
-      content: '<'
+      content '<'
 
     &.is-next:after
-      content: '>'
+      content '>'
 
   &-days_of_week
     font-size 13px
@@ -97,10 +95,13 @@ calendarWidth = 250px
     background #ffffff
     position relative
     border-radius 50%
+    margin 0
+    padding 0
+    border none
+    outline 0
 
     &:first-of-type,
     &:last-of-type
-
       &:hover
         border-radius 50%
 

@@ -24,15 +24,19 @@
     opacity .5
 
   &-day
+    margin 0
+    padding 0
+    background none
+    border none
 
     &.is-selectable
-      cursor: pointer
+      cursor pointer
 
     &.is-disabled
-      background: #f5f5f5
+      background #f5f5f5
 
     &.is-current_month
-      opacity: 1
+      opacity 1
 
     &.is-selected
       background green
@@ -44,9 +48,8 @@
         background blue
 
   &-header_button
-
     &.is-prev:before
-      content: '<'
+      content '<'
 
     &.is-next:before
-      content: '>'
+      content '>'

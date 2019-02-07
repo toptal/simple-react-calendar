@@ -1,9 +1,8 @@
-import React from 'react'
-
-import ReactTestRenderer from 'react-test-renderer'
-import Calendar from '../calendar'
-
 import {shallow} from 'enzyme'
+import React from 'react'
+import ReactTestRenderer from 'react-test-renderer'
+
+import Calendar from '../calendar'
 
 describe('Calendar', () => {
   let wrapper, props, instance
