@@ -1,97 +1,179 @@
+import {shallow} from 'enzyme'
 import React from 'react'
 
-import ReactTestRenderer from 'react-test-renderer'
 import Day from '../day'
 
-import {shallow} from 'enzyme'
-
 describe('Day', () => {
-  let defaultProps, event, tree, props, wrapper
+  let wrapper, props
 
   beforeEach(() => {
-    event = {preventDefault: jest.fn()}
-    defaultProps = {
-      date: new Date(2015, 7, 17),
-      today: new Date(2015, 7, 17),
-      activeMonth: new Date(2015, 7, 17),
-      onClick: () => {},
-      onMouseMove: () => {},
-    }
-  })
-
-  describe('#_onClick', () => {
-    context('when prop `onClick` is defined', () => {
-      it('renders <Day />', () => {
-        props = Object.assign(defaultProps, {onClick: jest.fn()})
-        wrapper = shallow(<Day {...props} />)
-
-        wrapper.instance()._onClick(event)
-
-        expect(event.preventDefault).toHaveBeenCalledTimes(1)
-        expect(props.onClick).toHaveBeenCalledWith(props.date)
-      })
-    })
-
-    context('when prop `onClick` is undefined', () => {
-      it('renders <Day />', () => {
-        props = Object.assign(defaultProps, {onClick: undefined})
-        wrapper = shallow(<Day {...props} />)
-
-        wrapper.instance()._onClick(event)
-
-        expect(event.preventDefault).toHaveBeenCalledTimes(1)
-      })
-    })
-  })
-
-  describe('#_onMouseMove', () => {
-    context('when prop `onMouseMove` is defined', () => {
-      it('renders <Day />', () => {
-        props = Object.assign(defaultProps, {onMouseMove: jest.fn()})
-        wrapper = shallow(<Day {...props} />)
-
-        wrapper.instance()._onMouseMove(event)
-
-        expect(event.preventDefault).toHaveBeenCalledTimes(1)
-        expect(props.onMouseMove).toHaveBeenCalledWith(props.date)
-      })
-    })
-
-    context('when prop `onMouseMove` is undefined', () => {
-      it('renders <Day />', () => {
-        props = Object.assign(defaultProps, {onMouseMove: undefined})
-        wrapper = shallow(<Day {...props} />)
-
-        wrapper.instance()._onMouseMove(event)
-
-        expect(event.preventDefault).toHaveBeenCalledTimes(1)
-      })
-    })
+    props = getProps()
+    wrapper = shallow(<Day {...props} />)
   })
 
   describe('#render', () => {
     it('renders <Day />', () => {
-      tree = ReactTestRenderer.create(<Day {...defaultProps} />).toJSON()
-
-      expect(tree).toMatchSnapshot()
+      expect(wrapper).toMatchSnapshot()
     })
 
-    context('when prop `today` is different from prop `date`', () => {
-      it('renders <Day />', () => {
-        props = Object.assign(defaultProps, {date: new Date(2015, 8, 2)})
-        tree = ReactTestRenderer.create(<Day {...props} />).toJSON()
+    it('attaches the proper functions', () => {
+      const button = wrapper.find('button')
 
-        expect(tree).toMatchSnapshot()
+      expect(button.prop('onClick')).toEqual(props.handleOnClick)
+      expect(button.prop('onMouseEnter')).toEqual(props.handleOnEnter)
+    })
+
+    context('class variations', () => {
+      context('when prop `isCurrentMonth` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isCurrentMonth: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
       })
-    })
 
-    context('when prop `blockClassName` is defined', () => {
-      it('renders <Day />', () => {
-        props = Object.assign(defaultProps, {blockClassName: 'cal'})
-        tree = ReactTestRenderer.create(<Day {...props} />).toJSON()
+      context('when prop `isDisabled` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isDisabled: true,
+          })
 
-        expect(tree).toMatchSnapshot()
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isHighlighted` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isHighlighted: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isMonthNext` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isMonthNext: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isMonthPrev` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isMonthPrev: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isNonSelectable` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isNonSelectable: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isSelectable` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isSelectable: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isSelected` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isSelected: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isSelectionEnd` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isSelectionEnd: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isSelectionStart` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isSelectionStart: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isToday` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isToday: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isWeekend` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isWeekend: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
+      })
+
+      context('when prop `isWorkday` is `true`', () => {
+        it('renders <Day />', () => {
+          wrapper.setProps({
+            isWorkday: true,
+          })
+
+          expect(wrapper).toMatchSnapshot()
+        })
       })
     })
   })
+})
+
+const getProps = (overrides = {}) => ({
+  blockClassName: 'example-block-class',
+  date: '2015-05-05',
+  handleOnClick: jest.fn(),
+  handleOnEnter: jest.fn(),
+  isCurrentMonth: false,
+  isDisabled: false,
+  isHighlighted: false,
+  isMonthNext: false,
+  isMonthPrev: false,
+  isNonSelectable: false,
+  isSelectable: false,
+  isSelected: false,
+  isSelectionEnd: false,
+  isSelectionStart: false,
+  isToday: false,
+  isWeekend: false,
+  isWorkday: false,
+  ...overrides,
 })

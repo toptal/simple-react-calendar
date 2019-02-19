@@ -1,53 +1,69 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
-import classnames from 'classnames'
-
-import {BLOCK_CLASS_NAME} from './consts'
-import {datePropType} from './_lib'
-
+import cx from 'classnames'
 import formatDate from 'date-fns/format'
+import PropTypes from 'prop-types'
+import React from 'react'
 
-export default class Day extends React.Component {
-  static propTypes = {
-    blockClassName: PropTypes.string,
-    className: PropTypes.string,
-    date: datePropType.isRequired,
-    onClick: PropTypes.func,
-    onMouseMove: PropTypes.func,
-    today: datePropType.isRequired,
-  }
+const Day = ({
+  blockClassName,
+  date,
+  handleOnClick,
+  handleOnEnter,
+  isCurrentMonth,
+  isDisabled,
+  isHighlighted,
+  isMonthNext,
+  isMonthPrev,
+  isNonSelectable,
+  isSelectable,
+  isSelected,
+  isSelectionEnd,
+  isSelectionStart,
+  isToday,
+  isWeekend,
+  isWorkday,
+}) => (
+  <button
+    className={cx(`${blockClassName}-day`, {
+      'is-current_month': isCurrentMonth,
+      'is-disabled': isDisabled,
+      'is-end_selection': isSelectionEnd,
+      'is-highlighted': isHighlighted,
+      'is-next_month': isMonthNext,
+      'is-not_selectable': isNonSelectable,
+      'is-prev_month': isMonthPrev,
+      'is-selectable': isSelectable,
+      'is-selected': isSelected,
+      'is-start_selection': isSelectionStart,
+      'is-today': isToday,
+      'is-weekend': isWeekend,
+      'is-working_day': isWorkday,
+    })}
+    onClick={handleOnClick}
+    onMouseEnter={handleOnEnter}
+    value={date}
+  >
+    {formatDate(date, 'D')}
+  </button>
+)
 
-  static defaultProps = {
-    blockClassName: BLOCK_CLASS_NAME,
-  }
-
-  _onClick(e) {
-    e.preventDefault()
-    const {date, onClick} = this.props
-    if (onClick) {
-      onClick(date)
-    }
-  }
-
-  _onMouseMove(e) {
-    e.preventDefault()
-    const {date, onMouseMove} = this.props
-    if (onMouseMove) {
-      onMouseMove(date)
-    }
-  }
-
-  render() {
-    const {date, className, blockClassName} = this.props
-    return (
-      <div
-        className={classnames(`${blockClassName}-day`, className)}
-        onClick={this._onClick.bind(this)}
-        onMouseMove={this._onMouseMove.bind(this)}
-      >
-        {formatDate(date, 'D')}
-      </div>
-    )
-  }
+Day.propTypes = {
+  blockClassName: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  handleOnClick: PropTypes.func,
+  handleOnEnter: PropTypes.func,
+  isCurrentMonth: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  isHighlighted: PropTypes.bool.isRequired,
+  isMonthNext: PropTypes.bool.isRequired,
+  isMonthPrev: PropTypes.bool.isRequired,
+  isNonSelectable: PropTypes.bool.isRequired,
+  isSelectable: PropTypes.bool.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  isSelectionEnd: PropTypes.bool.isRequired,
+  isSelectionStart: PropTypes.bool.isRequired,
+  isToday: PropTypes.bool.isRequired,
+  isWeekend: PropTypes.bool.isRequired,
+  isWorkday: PropTypes.bool.isRequired,
 }
+
+export default Day

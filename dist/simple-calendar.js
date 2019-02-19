@@ -89,7 +89,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2016 Jed Watson.
+  Copyright (c) 2017 Jed Watson.
   Licensed under the MIT License (MIT), see
   http://jedwatson.github.io/classnames
 */
@@ -111,8 +111,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 			if (argType === 'string' || argType === 'number') {
 				classes.push(arg);
-			} else if (Array.isArray(arg)) {
-				classes.push(classNames.apply(null, arg));
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
 			} else if (argType === 'object') {
 				for (var key in arg) {
 					if (hasOwn.call(arg, key) && arg[key]) {
@@ -126,6 +129,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	}
 
 	if (typeof module !== 'undefined' && module.exports) {
+		classNames.default = classNames;
 		module.exports = classNames;
 	} else if (true) {
 		// register as 'classnames', consistent with npm package name
@@ -135,6 +139,38 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else {}
 }());
+
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds/index.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds/index.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var MILLISECONDS_IN_MINUTE = 60000
+
+/**
+ * Google Chrome as of 67.0.3396.87 introduced timezones with offset that includes seconds.
+ * They usually appear for dates that denote time before the timezones were introduced
+ * (e.g. for 'Europe/Prague' timezone the offset is GMT+00:57:44 before 1 October 1891
+ * and GMT+01:00:00 after that date)
+ *
+ * Date#getTimezoneOffset returns the offset in minutes and would return 57 for the example above,
+ * which would lead to incorrect calculations.
+ *
+ * This function returns the timezone offset in milliseconds that takes seconds in account.
+ */
+module.exports = function getTimezoneOffsetInMilliseconds (dirtyDate) {
+  var date = new Date(dirtyDate.getTime())
+  var baseTimezoneOffset = date.getTimezoneOffset()
+  date.setSeconds(0, 0)
+  var millisecondsPartOfTimezoneOffset = date.getTime() % MILLISECONDS_IN_MINUTE
+
+  return baseTimezoneOffset * MILLISECONDS_IN_MINUTE + millisecondsPartOfTimezoneOffset
+}
 
 
 /***/ }),
@@ -164,8 +200,9 @@ var parse = __webpack_require__(/*! ../parse/index.js */ "./node_modules/date-fn
  * var result = addDays(new Date(2014, 8, 1), 10)
  * //=> Thu Sep 11 2014 00:00:00
  */
-function addDays (dirtyDate, amount) {
+function addDays (dirtyDate, dirtyAmount) {
   var date = parse(dirtyDate)
+  var amount = Number(dirtyAmount)
   date.setDate(date.getDate() + amount)
   return date
 }
@@ -201,8 +238,9 @@ var getDaysInMonth = __webpack_require__(/*! ../get_days_in_month/index.js */ ".
  * var result = addMonths(new Date(2014, 8, 1), 5)
  * //=> Sun Feb 01 2015 00:00:00
  */
-function addMonths (dirtyDate, amount) {
+function addMonths (dirtyDate, dirtyAmount) {
   var date = parse(dirtyDate)
+  var amount = Number(dirtyAmount)
   var desiredMonth = date.getMonth() + amount
   var dateWithDesiredMonth = new Date(0)
   dateWithDesiredMonth.setFullYear(date.getFullYear(), desiredMonth, 1)
@@ -344,6 +382,7 @@ var parse = __webpack_require__(/*! ../parse/index.js */ "./node_modules/date-fn
  *
  * @param {Date|String|Number} startDate - the first date
  * @param {Date|String|Number} endDate - the last date
+ * @param {Number} [step=1] - the step between each day
  * @returns {Date[]} the array with starts of days from the day of startDate to the day of endDate
  * @throws {Error} startDate cannot be after endDate
  *
@@ -361,9 +400,10 @@ var parse = __webpack_require__(/*! ../parse/index.js */ "./node_modules/date-fn
  * //   Fri Oct 10 2014 00:00:00
  * // ]
  */
-function eachDay (dirtyStartDate, dirtyEndDate) {
+function eachDay (dirtyStartDate, dirtyEndDate, dirtyStep) {
   var startDate = parse(dirtyStartDate)
   var endDate = parse(dirtyEndDate)
+  var step = dirtyStep !== undefined ? dirtyStep : 1
 
   var endTime = endDate.getTime()
 
@@ -378,7 +418,7 @@ function eachDay (dirtyStartDate, dirtyEndDate) {
 
   while (currentDate.getTime() <= endTime) {
     dates.push(parse(currentDate))
-    currentDate.setDate(currentDate.getDate() + 1)
+    currentDate.setDate(currentDate.getDate() + step)
   }
 
   return dates
@@ -459,8 +499,8 @@ var parse = __webpack_require__(/*! ../parse/index.js */ "./node_modules/date-fn
  * var result = endOfWeek(new Date(2014, 8, 2, 11, 55, 0), {weekStartsOn: 1})
  * //=> Sun Sep 07 2014 23:59:59.999
  */
-function endOfWeek (dirtyDate, options) {
-  var weekStartsOn = options ? (options.weekStartsOn || 0) : 0
+function endOfWeek (dirtyDate, dirtyOptions) {
+  var weekStartsOn = dirtyOptions ? (Number(dirtyOptions.weekStartsOn) || 0) : 0
 
   var date = parse(dirtyDate)
   var day = date.getDay()
@@ -573,9 +613,9 @@ var enLocale = __webpack_require__(/*! ../locale/en/index.js */ "./node_modules/
  * )
  * //=> '2-a de julio 2014'
  */
-function format (dirtyDate, formatStr, options) {
-  formatStr = formatStr || 'YYYY-MM-DDTHH:mm:ss.SSSZ'
-  options = options || {}
+function format (dirtyDate, dirtyFormatStr, dirtyOptions) {
+  var formatStr = dirtyFormatStr ? String(dirtyFormatStr) : 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+  var options = dirtyOptions || {}
 
   var locale = options.locale
   var localeFormatters = enLocale.format.formatters
@@ -1248,11 +1288,11 @@ var isDate = __webpack_require__(/*! ../is_date/index.js */ "./node_modules/date
  * var result = isValid(new Date(''))
  * //=> false
  */
-function isValid (date) {
-  if (isDate(date)) {
-    return !isNaN(date)
+function isValid (dirtyDate) {
+  if (isDate(dirtyDate)) {
+    return !isNaN(dirtyDate)
   } else {
-    throw new TypeError(toString.call(date) + ' is not an instance of Date')
+    throw new TypeError(toString.call(dirtyDate) + ' is not an instance of Date')
   }
 }
 
@@ -1626,6 +1666,7 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+var getTimezoneOffsetInMilliseconds = __webpack_require__(/*! ../_lib/getTimezoneOffsetInMilliseconds/index.js */ "./node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds/index.js")
 var isDate = __webpack_require__(/*! ../is_date/index.js */ "./node_modules/date-fns/is_date/index.js")
 
 var MILLISECONDS_IN_HOUR = 3600000
@@ -1701,7 +1742,7 @@ var parseTokenTimezoneHHMM = /^([+-])(\d{2}):?(\d{2})$/
  * var result = parse('+02014101', {additionalDigits: 1})
  * //=> Fri Apr 11 2014 00:00:00
  */
-function parse (argument, options) {
+function parse (argument, dirtyOptions) {
   if (isDate(argument)) {
     // Prevent the date to lose the milliseconds when passed to new Date() in IE10
     return new Date(argument.getTime())
@@ -1709,10 +1750,12 @@ function parse (argument, options) {
     return new Date(argument)
   }
 
-  options = options || {}
+  var options = dirtyOptions || {}
   var additionalDigits = options.additionalDigits
   if (additionalDigits == null) {
     additionalDigits = DEFAULT_ADDITIONAL_DIGITS
+  } else {
+    additionalDigits = Number(additionalDigits)
   }
 
   var dateStrings = splitDateString(argument)
@@ -1733,14 +1776,25 @@ function parse (argument, options) {
     }
 
     if (dateStrings.timezone) {
-      offset = parseTimezone(dateStrings.timezone)
+      offset = parseTimezone(dateStrings.timezone) * MILLISECONDS_IN_MINUTE
     } else {
-      // get offset accurate to hour in timezones that change offset
-      offset = new Date(timestamp + time).getTimezoneOffset()
-      offset = new Date(timestamp + time + offset * MILLISECONDS_IN_MINUTE).getTimezoneOffset()
+      var fullTime = timestamp + time
+      var fullTimeDate = new Date(fullTime)
+
+      offset = getTimezoneOffsetInMilliseconds(fullTimeDate)
+
+      // Adjust time when it's coming from DST
+      var fullTimeDateNextDay = new Date(fullTime)
+      fullTimeDateNextDay.setDate(fullTimeDate.getDate() + 1)
+      var offsetDiff =
+        getTimezoneOffsetInMilliseconds(fullTimeDateNextDay) -
+        getTimezoneOffsetInMilliseconds(fullTimeDate)
+      if (offsetDiff > 0) {
+        offset += offsetDiff
+      }
     }
 
-    return new Date(timestamp + time + offset * MILLISECONDS_IN_MINUTE)
+    return new Date(timestamp + time + offset)
   } else {
     return new Date(argument)
   }
@@ -2132,8 +2186,8 @@ var parse = __webpack_require__(/*! ../parse/index.js */ "./node_modules/date-fn
  * var result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0), {weekStartsOn: 1})
  * //=> Mon Sep 01 2014 00:00:00
  */
-function startOfWeek (dirtyDate, options) {
-  var weekStartsOn = options ? (options.weekStartsOn || 0) : 0
+function startOfWeek (dirtyDate, dirtyOptions) {
+  var weekStartsOn = dirtyOptions ? (Number(dirtyOptions.weekStartsOn) || 0) : 0
 
   var date = parse(dirtyDate)
   var day = date.getDay()
@@ -2212,7 +2266,8 @@ var addDays = __webpack_require__(/*! ../add_days/index.js */ "./node_modules/da
  * var result = subDays(new Date(2014, 8, 1), 10)
  * //=> Fri Aug 22 2014 00:00:00
  */
-function subDays (dirtyDate, amount) {
+function subDays (dirtyDate, dirtyAmount) {
+  var amount = Number(dirtyAmount)
   return addDays(dirtyDate, -amount)
 }
 
@@ -2859,103 +2914,88 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 
 var _classnames2 = _interopRequireDefault(_classnames);
-
-var _consts = __webpack_require__(/*! ./consts */ "./src/calendar/consts.js");
-
-var _lib = __webpack_require__(/*! ./_lib */ "./src/calendar/_lib/index.js");
 
 var _format = __webpack_require__(/*! date-fns/format */ "./node_modules/date-fns/format/index.js");
 
 var _format2 = _interopRequireDefault(_format);
 
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Day = function (_React$Component) {
-  _inherits(Day, _React$Component);
-
-  function Day() {
-    _classCallCheck(this, Day);
-
-    return _possibleConstructorReturn(this, (Day.__proto__ || Object.getPrototypeOf(Day)).apply(this, arguments));
-  }
-
-  _createClass(Day, [{
-    key: '_onClick',
-    value: function _onClick(e) {
-      e.preventDefault();
-      var _props = this.props,
-          date = _props.date,
-          onClick = _props.onClick;
-
-      if (onClick) {
-        onClick(date);
-      }
-    }
-  }, {
-    key: '_onMouseMove',
-    value: function _onMouseMove(e) {
-      e.preventDefault();
-      var _props2 = this.props,
-          date = _props2.date,
-          onMouseMove = _props2.onMouseMove;
-
-      if (onMouseMove) {
-        onMouseMove(date);
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props3 = this.props,
-          date = _props3.date,
-          className = _props3.className,
-          blockClassName = _props3.blockClassName;
-
-      return _react2.default.createElement(
-        'div',
-        {
-          className: (0, _classnames2.default)(blockClassName + '-day', className),
-          onClick: this._onClick.bind(this),
-          onMouseMove: this._onMouseMove.bind(this)
-        },
-        (0, _format2.default)(date, 'D')
-      );
-    }
-  }]);
-
-  return Day;
-}(_react2.default.Component);
+var Day = function Day(_ref) {
+  var blockClassName = _ref.blockClassName,
+      date = _ref.date,
+      handleOnClick = _ref.handleOnClick,
+      handleOnEnter = _ref.handleOnEnter,
+      isCurrentMonth = _ref.isCurrentMonth,
+      isDisabled = _ref.isDisabled,
+      isHighlighted = _ref.isHighlighted,
+      isMonthNext = _ref.isMonthNext,
+      isMonthPrev = _ref.isMonthPrev,
+      isNonSelectable = _ref.isNonSelectable,
+      isSelectable = _ref.isSelectable,
+      isSelected = _ref.isSelected,
+      isSelectionEnd = _ref.isSelectionEnd,
+      isSelectionStart = _ref.isSelectionStart,
+      isToday = _ref.isToday,
+      isWeekend = _ref.isWeekend,
+      isWorkday = _ref.isWorkday;
+  return _react2.default.createElement(
+    'button',
+    {
+      className: (0, _classnames2.default)(blockClassName + '-day', {
+        'is-current_month': isCurrentMonth,
+        'is-disabled': isDisabled,
+        'is-end_selection': isSelectionEnd,
+        'is-highlighted': isHighlighted,
+        'is-next_month': isMonthNext,
+        'is-not_selectable': isNonSelectable,
+        'is-prev_month': isMonthPrev,
+        'is-selectable': isSelectable,
+        'is-selected': isSelected,
+        'is-start_selection': isSelectionStart,
+        'is-today': isToday,
+        'is-weekend': isWeekend,
+        'is-working_day': isWorkday
+      }),
+      onClick: handleOnClick,
+      onMouseEnter: handleOnEnter,
+      value: date
+    },
+    (0, _format2.default)(date, 'D')
+  );
+};
 
 Day.propTypes = {
-  blockClassName: _propTypes2.default.string,
-  className: _propTypes2.default.string,
-  date: _lib.datePropType.isRequired,
-  onClick: _propTypes2.default.func,
-  onMouseMove: _propTypes2.default.func,
-  today: _lib.datePropType.isRequired
+  blockClassName: _propTypes2.default.string.isRequired,
+  date: _propTypes2.default.string.isRequired,
+  handleOnClick: _propTypes2.default.func,
+  handleOnEnter: _propTypes2.default.func,
+  isCurrentMonth: _propTypes2.default.bool.isRequired,
+  isDisabled: _propTypes2.default.bool.isRequired,
+  isHighlighted: _propTypes2.default.bool.isRequired,
+  isMonthNext: _propTypes2.default.bool.isRequired,
+  isMonthPrev: _propTypes2.default.bool.isRequired,
+  isNonSelectable: _propTypes2.default.bool.isRequired,
+  isSelectable: _propTypes2.default.bool.isRequired,
+  isSelected: _propTypes2.default.bool.isRequired,
+  isSelectionEnd: _propTypes2.default.bool.isRequired,
+  isSelectionStart: _propTypes2.default.bool.isRequired,
+  isToday: _propTypes2.default.bool.isRequired,
+  isWeekend: _propTypes2.default.bool.isRequired,
+  isWorkday: _propTypes2.default.bool.isRequired
 };
-Day.defaultProps = {
-  blockClassName: _consts.BLOCK_CLASS_NAME
-};
+
 exports.default = Day;
 module.exports = exports['default'];
 
@@ -3170,45 +3210,25 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(/*! react */ "react");
+var _add_days = __webpack_require__(/*! date-fns/add_days */ "./node_modules/date-fns/add_days/index.js");
 
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _week = __webpack_require__(/*! ./week */ "./src/calendar/week.jsx");
-
-var _week2 = _interopRequireDefault(_week);
-
-var _days_of_week = __webpack_require__(/*! ./days_of_week */ "./src/calendar/days_of_week.jsx");
-
-var _days_of_week2 = _interopRequireDefault(_days_of_week);
-
-var _consts = __webpack_require__(/*! ./consts */ "./src/calendar/consts.js");
-
-var _lib = __webpack_require__(/*! ./_lib */ "./src/calendar/_lib/index.js");
-
-var _start_of_week = __webpack_require__(/*! date-fns/start_of_week */ "./node_modules/date-fns/start_of_week/index.js");
-
-var _start_of_week2 = _interopRequireDefault(_start_of_week);
-
-var _end_of_week = __webpack_require__(/*! date-fns/end_of_week */ "./node_modules/date-fns/end_of_week/index.js");
-
-var _end_of_week2 = _interopRequireDefault(_end_of_week);
+var _add_days2 = _interopRequireDefault(_add_days);
 
 var _are_ranges_overlapping = __webpack_require__(/*! date-fns/are_ranges_overlapping */ "./node_modules/date-fns/are_ranges_overlapping/index.js");
 
 var _are_ranges_overlapping2 = _interopRequireDefault(_are_ranges_overlapping);
 
-var _start_of_month = __webpack_require__(/*! date-fns/start_of_month */ "./node_modules/date-fns/start_of_month/index.js");
+var _difference_in_calendar_days = __webpack_require__(/*! date-fns/difference_in_calendar_days */ "./node_modules/date-fns/difference_in_calendar_days/index.js");
 
-var _start_of_month2 = _interopRequireDefault(_start_of_month);
+var _difference_in_calendar_days2 = _interopRequireDefault(_difference_in_calendar_days);
 
 var _end_of_month = __webpack_require__(/*! date-fns/end_of_month */ "./node_modules/date-fns/end_of_month/index.js");
 
 var _end_of_month2 = _interopRequireDefault(_end_of_month);
+
+var _end_of_week = __webpack_require__(/*! date-fns/end_of_week */ "./node_modules/date-fns/end_of_week/index.js");
+
+var _end_of_week2 = _interopRequireDefault(_end_of_week);
 
 var _is_before = __webpack_require__(/*! date-fns/is_before */ "./node_modules/date-fns/is_before/index.js");
 
@@ -3218,21 +3238,45 @@ var _is_equal = __webpack_require__(/*! date-fns/is_equal */ "./node_modules/dat
 
 var _is_equal2 = _interopRequireDefault(_is_equal);
 
-var _add_days = __webpack_require__(/*! date-fns/add_days */ "./node_modules/date-fns/add_days/index.js");
+var _is_same_day = __webpack_require__(/*! date-fns/is_same_day */ "./node_modules/date-fns/is_same_day/index.js");
 
-var _add_days2 = _interopRequireDefault(_add_days);
+var _is_same_day2 = _interopRequireDefault(_is_same_day);
+
+var _parse = __webpack_require__(/*! date-fns/parse */ "./node_modules/date-fns/parse/index.js");
+
+var _parse2 = _interopRequireDefault(_parse);
+
+var _start_of_month = __webpack_require__(/*! date-fns/start_of_month */ "./node_modules/date-fns/start_of_month/index.js");
+
+var _start_of_month2 = _interopRequireDefault(_start_of_month);
+
+var _start_of_week = __webpack_require__(/*! date-fns/start_of_week */ "./node_modules/date-fns/start_of_week/index.js");
+
+var _start_of_week2 = _interopRequireDefault(_start_of_week);
 
 var _sub_days = __webpack_require__(/*! date-fns/sub_days */ "./node_modules/date-fns/sub_days/index.js");
 
 var _sub_days2 = _interopRequireDefault(_sub_days);
 
-var _is_same_day = __webpack_require__(/*! date-fns/is_same_day */ "./node_modules/date-fns/is_same_day/index.js");
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 
-var _is_same_day2 = _interopRequireDefault(_is_same_day);
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _difference_in_calendar_days = __webpack_require__(/*! date-fns/difference_in_calendar_days */ "./node_modules/date-fns/difference_in_calendar_days/index.js");
+var _react = __webpack_require__(/*! react */ "react");
 
-var _difference_in_calendar_days2 = _interopRequireDefault(_difference_in_calendar_days);
+var _react2 = _interopRequireDefault(_react);
+
+var _lib = __webpack_require__(/*! ./_lib */ "./src/calendar/_lib/index.js");
+
+var _consts = __webpack_require__(/*! ./consts */ "./src/calendar/consts.js");
+
+var _days_of_week = __webpack_require__(/*! ./days_of_week */ "./src/calendar/days_of_week.jsx");
+
+var _days_of_week2 = _interopRequireDefault(_days_of_week);
+
+var _week = __webpack_require__(/*! ./week */ "./src/calendar/week.jsx");
+
+var _week2 = _interopRequireDefault(_week);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3242,16 +3286,98 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SINGLE_MODE = 'single';
 var RANGE_MODE = 'range';
 
 var Month = function (_React$Component) {
   _inherits(Month, _React$Component);
 
   function Month() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Month);
 
-    return _possibleConstructorReturn(this, (Month.__proto__ || Object.getPrototypeOf(Month)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Month.__proto__ || Object.getPrototypeOf(Month)).call.apply(_ref, [this].concat(args))), _this), _this.handleOnDayMouseEnter = function (event) {
+      event.preventDefault();
+      var value = event.currentTarget.value;
+
+      var date = (0, _parse2.default)(value);
+
+      var onDayMouseEnter = _this.props.onDayMouseEnter;
+
+
+      if (onDayMouseEnter) {
+        onDayMouseEnter(date);
+      }
+
+      if (!_this._selectionInProgress) return;
+
+      var rangeLimit = _this.props.rangeLimit;
+
+      var dateLimit = (0, _sub_days2.default)(_this._selectionStart, rangeLimit);
+
+      var isDisabledWithin = _this._getDisabledRange({
+        start: (0, _is_before2.default)(_this._selectionStart, date) ? _this._selectionStart : date,
+        end: !(0, _is_before2.default)(_this._selectionStart, date) ? _this._selectionStart : date
+      });
+
+      if (!isDisabledWithin) return;
+
+      if (!(0, _is_equal2.default)(date, _this._selectionEnd)) {
+        if (!rangeLimit || rangeLimit && !(0, _is_before2.default)(date, dateLimit)) {
+          _this._selectionEnd = date;
+          _this._pushUpdate();
+        }
+      }
+    }, _this.handleOnDayClick = function (event) {
+      event.preventDefault();
+      var value = event.currentTarget.value;
+
+      var date = (0, _parse2.default)(value);
+      var mode = _this.props.mode;
+
+
+      if (mode === RANGE_MODE) {
+        if (_this._selectionInProgress) {
+          var isDisabledWithin = _this._getDisabledRange({
+            start: (0, _is_before2.default)(_this._selectionStart, date) ? _this._selectionStart : date,
+            end: !(0, _is_before2.default)(_this._selectionStart, date) ? _this._selectionStart : date
+          });
+
+          if (!isDisabledWithin) {
+            _this._selectionInProgress = false;
+            _this._selectionStart = null;
+            _this._selectionEnd = null;
+            _this._pushUpdate();
+            _this._pushNoticeUpdate('overlapping_with_disabled');
+            return;
+          }
+
+          _this._selectionInProgress = false;
+          _this._selectionEnd = date;
+        } else {
+          _this._selectionInProgress = true;
+          _this._selectionStart = date;
+          _this._selectionEnd = date;
+        }
+      } else {
+        _this._selectionInProgress = false;
+        _this._selectionStart = date;
+        _this._selectionEnd = date;
+      }
+
+      _this._pushUpdate();
+      _this._pushNoticeUpdate(null);
+    }, _this.handleOnDisabledDayClick = function (event) {
+      event.preventDefault();
+
+      _this.props.onNoticeChange('disabled_day_click');
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Month, [{
@@ -3313,80 +3439,6 @@ var Month = function (_React$Component) {
       }
 
       return true;
-    }
-  }, {
-    key: '_onDayMouseMove',
-    value: function _onDayMouseMove(date) {
-      var onDayHover = this.props.onDayHover;
-
-      if (onDayHover) {
-        onDayHover(date);
-      }
-
-      if (!this._selectionInProgress) return;
-
-      var rangeLimit = this.props.rangeLimit;
-
-      var dateLimit = (0, _sub_days2.default)(this._selectionStart, rangeLimit);
-
-      var isDisabledWithin = this._getDisabledRange({
-        start: (0, _is_before2.default)(this._selectionStart, date) ? this._selectionStart : date,
-        end: !(0, _is_before2.default)(this._selectionStart, date) ? this._selectionStart : date
-      });
-
-      if (!isDisabledWithin) return;
-
-      if (!(0, _is_equal2.default)(date, this._selectionEnd)) {
-        if (!rangeLimit || rangeLimit && !(0, _is_before2.default)(date, dateLimit)) {
-          this._selectionEnd = date;
-          this._pushUpdate();
-        }
-      }
-    }
-  }, {
-    key: '_onDayClick',
-    value: function _onDayClick(date) {
-      var mode = this.props.mode;
-
-
-      if (mode === RANGE_MODE) {
-        if (this._selectionInProgress) {
-          var isDisabledWithin = this._getDisabledRange({
-            start: (0, _is_before2.default)(this._selectionStart, date) ? this._selectionStart : date,
-            end: !(0, _is_before2.default)(this._selectionStart, date) ? this._selectionStart : date
-          });
-
-          if (!isDisabledWithin) {
-            this._selectionInProgress = false;
-            this._selectionStart = null;
-            this._selectionEnd = null;
-            this._pushUpdate();
-            this._pushNoticeUpdate('overlapping_with_disabled');
-            return;
-          }
-
-          this._selectionInProgress = false;
-          this._selectionEnd = date;
-        } else {
-          this._selectionInProgress = true;
-          this._selectionStart = date;
-          this._selectionEnd = date;
-        }
-      } else {
-        this._selectionInProgress = false;
-        this._selectionStart = date;
-        this._selectionEnd = date;
-      }
-
-      this._pushUpdate();
-      this._pushNoticeUpdate(null);
-    }
-  }, {
-    key: '_onDisabledDayClick',
-    value: function _onDisabledDayClick() {
-      var onNoticeChange = this.props.onNoticeChange;
-
-      onNoticeChange('disabled_day_click');
     }
   }, {
     key: '_getMinDate',
@@ -3460,7 +3512,6 @@ var Month = function (_React$Component) {
           blockClassName = _props5.blockClassName,
           minNumberOfWeeks = _props5.minNumberOfWeeks,
           rangeLimit = _props5.rangeLimit,
-          onDayHover = _props5.onDayHover,
           weekStartsOn = _props5.weekStartsOn;
 
       var weeks = [];
@@ -3483,22 +3534,21 @@ var Month = function (_React$Component) {
 
       return weeks.map(function (week) {
         return _react2.default.createElement(_week2.default, {
-          key: week.getTime(),
-          date: week,
-          minDate: minDate,
-          maxDate: maxDate,
-          selectedMin: selectedMin,
-          selectedMax: selectedMax,
-          highlightedStart: highlightedStart,
-          highlightedEnd: highlightedEnd,
-          disabledIntervals: disabledIntervals,
           activeMonth: activeMonth,
-          onDayHover: onDayHover,
-          onDayClick: _this2._onDayClick.bind(_this2),
-          onDisabledDayClick: _this2._onDisabledDayClick.bind(_this2),
-          onDayMouseMove: _this2._onDayMouseMove.bind(_this2),
-          today: today,
           blockClassName: blockClassName,
+          date: week,
+          disabledIntervals: disabledIntervals,
+          highlightedEnd: highlightedEnd,
+          highlightedStart: highlightedStart,
+          key: week.getTime(),
+          maxDate: maxDate,
+          minDate: minDate,
+          onDayClick: _this2.handleOnDayClick,
+          onDayMouseEnter: _this2.handleOnDayMouseEnter,
+          onDisabledDayClick: _this2.handleOnDisabledDayClick,
+          selectedMax: selectedMax,
+          selectedMin: selectedMin,
+          today: today,
           weekStartsOn: weekStartsOn
         });
       });
@@ -3510,7 +3560,7 @@ var Month = function (_React$Component) {
 
 Month.propTypes = {
   activeMonth: _lib.datePropType.isRequired,
-  blockClassName: _propTypes2.default.string,
+  blockClassName: _propTypes2.default.string.isRequired,
   disableDaysOfWeek: _propTypes2.default.bool,
   disabledIntervals: _propTypes2.default.arrayOf(_propTypes2.default.shape({
     start: _lib.datePropType.isRequired,
@@ -3523,16 +3573,13 @@ Month.propTypes = {
   minNumberOfWeeks: _propTypes2.default.number,
   mode: _propTypes2.default.string.isRequired,
   onChange: _propTypes2.default.func.isRequired,
-  onDayHover: _propTypes2.default.func,
+  onDayMouseEnter: _propTypes2.default.func,
   onNoticeChange: _propTypes2.default.func.isRequired,
   rangeLimit: _propTypes2.default.number,
   selectedMax: _lib.datePropType,
   selectedMin: _lib.datePropType,
   today: _lib.datePropType.isRequired,
   weekStartsOn: _propTypes2.default.oneOf(_consts.DAYS_IN_WEEK)
-};
-Month.defaultProps = {
-  blockClassName: _consts.BLOCK_CLASS_NAME
 };
 exports.default = Month;
 module.exports = exports['default'];
@@ -3782,65 +3829,29 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _classnames2 = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-
-var _classnames3 = _interopRequireDefault(_classnames2);
-
-var _day = __webpack_require__(/*! ./day */ "./src/calendar/day.jsx");
-
-var _day2 = _interopRequireDefault(_day);
-
-var _consts = __webpack_require__(/*! ./consts */ "./src/calendar/consts.js");
-
-var _lib = __webpack_require__(/*! ./_lib */ "./src/calendar/_lib/index.js");
-
 var _each_day = __webpack_require__(/*! date-fns/each_day */ "./node_modules/date-fns/each_day/index.js");
 
 var _each_day2 = _interopRequireDefault(_each_day);
-
-var _start_of_day = __webpack_require__(/*! date-fns/start_of_day */ "./node_modules/date-fns/start_of_day/index.js");
-
-var _start_of_day2 = _interopRequireDefault(_start_of_day);
-
-var _start_of_week = __webpack_require__(/*! date-fns/start_of_week */ "./node_modules/date-fns/start_of_week/index.js");
-
-var _start_of_week2 = _interopRequireDefault(_start_of_week);
 
 var _end_of_week = __webpack_require__(/*! date-fns/end_of_week */ "./node_modules/date-fns/end_of_week/index.js");
 
 var _end_of_week2 = _interopRequireDefault(_end_of_week);
 
-var _is_within_range = __webpack_require__(/*! date-fns/is_within_range */ "./node_modules/date-fns/is_within_range/index.js");
-
-var _is_within_range2 = _interopRequireDefault(_is_within_range);
-
 var _format = __webpack_require__(/*! date-fns/format */ "./node_modules/date-fns/format/index.js");
 
 var _format2 = _interopRequireDefault(_format);
-
-var _is_before = __webpack_require__(/*! date-fns/is_before */ "./node_modules/date-fns/is_before/index.js");
-
-var _is_before2 = _interopRequireDefault(_is_before);
 
 var _is_after = __webpack_require__(/*! date-fns/is_after */ "./node_modules/date-fns/is_after/index.js");
 
 var _is_after2 = _interopRequireDefault(_is_after);
 
+var _is_before = __webpack_require__(/*! date-fns/is_before */ "./node_modules/date-fns/is_before/index.js");
+
+var _is_before2 = _interopRequireDefault(_is_before);
+
 var _is_equal = __webpack_require__(/*! date-fns/is_equal */ "./node_modules/date-fns/is_equal/index.js");
 
 var _is_equal2 = _interopRequireDefault(_is_equal);
-
-var _is_weekend = __webpack_require__(/*! date-fns/is_weekend */ "./node_modules/date-fns/is_weekend/index.js");
-
-var _is_weekend2 = _interopRequireDefault(_is_weekend);
 
 var _is_same_day = __webpack_require__(/*! date-fns/is_same_day */ "./node_modules/date-fns/is_same_day/index.js");
 
@@ -3850,9 +3861,39 @@ var _is_same_month = __webpack_require__(/*! date-fns/is_same_month */ "./node_m
 
 var _is_same_month2 = _interopRequireDefault(_is_same_month);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _is_weekend = __webpack_require__(/*! date-fns/is_weekend */ "./node_modules/date-fns/is_weekend/index.js");
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _is_weekend2 = _interopRequireDefault(_is_weekend);
+
+var _is_within_range = __webpack_require__(/*! date-fns/is_within_range */ "./node_modules/date-fns/is_within_range/index.js");
+
+var _is_within_range2 = _interopRequireDefault(_is_within_range);
+
+var _start_of_day = __webpack_require__(/*! date-fns/start_of_day */ "./node_modules/date-fns/start_of_day/index.js");
+
+var _start_of_day2 = _interopRequireDefault(_start_of_day);
+
+var _start_of_week = __webpack_require__(/*! date-fns/start_of_week */ "./node_modules/date-fns/start_of_week/index.js");
+
+var _start_of_week2 = _interopRequireDefault(_start_of_week);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _lib = __webpack_require__(/*! ./_lib */ "./src/calendar/_lib/index.js");
+
+var _consts = __webpack_require__(/*! ./consts */ "./src/calendar/consts.js");
+
+var _day = __webpack_require__(/*! ./day */ "./src/calendar/day.jsx");
+
+var _day2 = _interopRequireDefault(_day);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3898,7 +3939,7 @@ var Week = function (_React$Component) {
           selectedMin = _props2.selectedMin,
           selectedMax = _props2.selectedMax;
 
-      return selectedMin && selectedMax && (0, _is_within_range2.default)((0, _start_of_day2.default)(date), (0, _start_of_day2.default)(selectedMin), (0, _start_of_day2.default)(selectedMax));
+      return Boolean(selectedMin && selectedMax && (0, _is_within_range2.default)((0, _start_of_day2.default)(date), (0, _start_of_day2.default)(selectedMin), (0, _start_of_day2.default)(selectedMax)));
     }
   }, {
     key: '_dateHighlighted',
@@ -3935,30 +3976,6 @@ var Week = function (_React$Component) {
       return false;
     }
   }, {
-    key: '_dateClasses',
-    value: function _dateClasses(date) {
-      var _classnames;
-
-      var _props4 = this.props,
-          today = _props4.today,
-          activeMonth = _props4.activeMonth,
-          selectedMax = _props4.selectedMax,
-          selectedMin = _props4.selectedMin;
-
-
-      return (0, _classnames3.default)((_classnames = {
-        'is-selected': this._dateSelected(date),
-        'is-highlighted': this._dateHighlighted(date),
-        'is-disabled': this._dateDisabled(date),
-        'is-today': (0, _is_same_day2.default)(today, date),
-        'is-current_month': (0, _is_same_month2.default)(date, activeMonth),
-        'is-start_selection': selectedMin && (0, _is_same_day2.default)(selectedMin, date),
-        'is-end_selection': selectedMax && (0, _is_same_day2.default)(selectedMax, date),
-        'is-prev_month': date.getMonth() !== activeMonth.getMonth() && (0, _is_before2.default)(date, activeMonth),
-        'is-next_month': date.getMonth() !== activeMonth.getMonth() && (0, _is_after2.default)(date, activeMonth)
-      }, _defineProperty(_classnames, (0, _is_weekend2.default)(date) ? 'is-weekend' : 'is-working_day', true), _defineProperty(_classnames, this._dateSelectable(date) ? 'is-selectable' : 'is-not_selectable', true), _classnames));
-    }
-  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -3972,38 +3989,48 @@ var Week = function (_React$Component) {
     value: function _renderDays() {
       var _this2 = this;
 
-      var _props5 = this.props,
-          date = _props5.date,
-          today = _props5.today,
-          onDayClick = _props5.onDayClick,
-          onDisabledDayClick = _props5.onDisabledDayClick,
-          onDayMouseMove = _props5.onDayMouseMove,
-          blockClassName = _props5.blockClassName,
-          weekStartsOn = _props5.weekStartsOn;
+      var _props4 = this.props,
+          date = _props4.date,
+          today = _props4.today,
+          onDayClick = _props4.onDayClick,
+          onDisabledDayClick = _props4.onDisabledDayClick,
+          onDayMouseEnter = _props4.onDayMouseEnter,
+          blockClassName = _props4.blockClassName,
+          activeMonth = _props4.activeMonth,
+          selectedMax = _props4.selectedMax,
+          selectedMin = _props4.selectedMin,
+          weekStartsOn = _props4.weekStartsOn;
 
       var start = (0, _start_of_week2.default)(date, { weekStartsOn: weekStartsOn });
       var end = (0, _end_of_week2.default)(date, { weekStartsOn: weekStartsOn });
-      return (0, _each_day2.default)(start, end).map(function (day) {
-        var data = _this2.props.data[(0, _format2.default)(day, 'YYYY-MM-DD')];
-        var selectable = _this2._dateSelectable(day);
-        var disabled = _this2._dateDisabled(day);
 
-        var onClick = void 0;
-        if (selectable) {
-          onClick = onDayClick;
-        } else if (disabled) {
-          onClick = onDisabledDayClick;
-        }
+      return (0, _each_day2.default)(start, end).map(function (day) {
+        var date = (0, _format2.default)(day, 'YYYY-MM-DD');
+        var isSelectable = _this2._dateSelectable(day);
+        var isDisabled = _this2._dateDisabled(date);
+        var isWorkDay = !(0, _is_weekend2.default)(date);
+        var isCurrentMonth = (0, _is_same_month2.default)(date, activeMonth);
+        var isNextMonth = !isCurrentMonth && (0, _is_after2.default)(date, activeMonth);
 
         return _react2.default.createElement(_day2.default, {
           blockClassName: blockClassName,
-          key: day.getTime(),
-          date: day,
-          data: data,
-          className: _this2._dateClasses(day, data),
-          today: today,
-          onClick: onClick,
-          onMouseMove: selectable ? onDayMouseMove : null
+          date: date,
+          handleOnClick: isSelectable ? onDayClick : isDisabled ? onDisabledDayClick : null,
+          handleOnEnter: isSelectable ? onDayMouseEnter : null,
+          isCurrentMonth: isCurrentMonth,
+          isDisabled: isDisabled,
+          isHighlighted: _this2._dateHighlighted(day),
+          isMonthNext: isNextMonth,
+          isMonthPrev: !isCurrentMonth && !isNextMonth,
+          isNonSelectable: !isSelectable,
+          isSelectable: isSelectable,
+          isSelected: _this2._dateSelected(day),
+          isSelectionEnd: Boolean(selectedMax && (0, _is_same_day2.default)(selectedMax, day)),
+          isSelectionStart: Boolean(selectedMin && (0, _is_same_day2.default)(selectedMin, day)),
+          isToday: (0, _is_same_day2.default)(today, day),
+          isWeekend: !isWorkDay,
+          isWorkday: isWorkDay,
+          key: date
         });
       });
     }
@@ -4014,8 +4041,7 @@ var Week = function (_React$Component) {
 
 Week.propTypes = {
   activeMonth: _lib.datePropType.isRequired,
-  blockClassName: _propTypes2.default.string,
-  data: _propTypes2.default.object,
+  blockClassName: _propTypes2.default.string.isRequired,
   date: _lib.datePropType.isRequired,
   disabledIntervals: _propTypes2.default.arrayOf(_propTypes2.default.shape({
     start: _lib.datePropType.isRequired,
@@ -4026,16 +4052,12 @@ Week.propTypes = {
   maxDate: _lib.datePropType,
   minDate: _lib.datePropType,
   onDayClick: _propTypes2.default.func.isRequired,
-  onDayMouseMove: _propTypes2.default.func.isRequired,
+  onDayMouseEnter: _propTypes2.default.func.isRequired,
   onDisabledDayClick: _propTypes2.default.func.isRequired,
   selectedMax: _lib.datePropType,
   selectedMin: _lib.datePropType,
   today: _lib.datePropType.isRequired,
   weekStartsOn: _propTypes2.default.oneOf(_consts.DAYS_IN_WEEK)
-};
-Week.defaultProps = {
-  data: {},
-  blockClassName: _consts.BLOCK_CLASS_NAME
 };
 exports.default = Week;
 module.exports = exports['default'];

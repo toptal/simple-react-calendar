@@ -72,267 +72,302 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
     <div
       className="calendar-week"
     >
-      <div
-        className="calendar-day is-prev_month is-working_day is-selectable"
+      <button
+        className="calendar-day is-prev_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-06-29"
       >
         29
-      </div>
-      <div
-        className="calendar-day is-prev_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-prev_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-06-30"
       >
         30
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-01"
       >
         1
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-02"
       >
         2
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-03"
       >
         3
-      </div>
-      <div
-        className="calendar-day is-current_month is-weekend is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-weekend"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-04"
       >
         4
-      </div>
-      <div
-        className="calendar-day is-current_month is-weekend is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-weekend"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-05"
       >
         5
-      </div>
+      </button>
     </div>
     <div
       className="calendar-week"
     >
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-06"
       >
         6
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-07"
       >
         7
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-08"
       >
         8
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-09"
       >
         9
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-10"
       >
         10
-      </div>
-      <div
-        className="calendar-day is-current_month is-weekend is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-weekend"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-11"
       >
         11
-      </div>
-      <div
-        className="calendar-day is-current_month is-weekend is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-weekend"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-12"
       >
         12
-      </div>
+      </button>
     </div>
     <div
       className="calendar-week"
     >
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-13"
       >
         13
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-14"
       >
         14
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-15"
       >
         15
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-16"
       >
         16
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-17"
       >
         17
-      </div>
-      <div
-        className="calendar-day is-current_month is-weekend is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-weekend"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-18"
       >
         18
-      </div>
-      <div
-        className="calendar-day is-current_month is-weekend is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-weekend"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-19"
       >
         19
-      </div>
+      </button>
     </div>
     <div
       className="calendar-week"
     >
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-20"
       >
         20
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-21"
       >
         21
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-22"
       >
         22
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-23"
       >
         23
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-24"
       >
         24
-      </div>
-      <div
-        className="calendar-day is-current_month is-weekend is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-weekend"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-25"
       >
         25
-      </div>
-      <div
-        className="calendar-day is-current_month is-weekend is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-weekend"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-26"
       >
         26
-      </div>
+      </button>
     </div>
     <div
       className="calendar-week"
     >
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-27"
       >
         27
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-28"
       >
         28
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-29"
       >
         29
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-30"
       >
         30
-      </div>
-      <div
-        className="calendar-day is-current_month is-working_day is-selectable"
+      </button>
+      <button
+        className="calendar-day is-current_month is-selectable is-working_day"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-07-31"
       >
         31
-      </div>
-      <div
-        className="calendar-day is-next_month is-weekend is-selectable"
+      </button>
+      <button
+        className="calendar-day is-next_month is-selectable is-weekend"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-08-01"
       >
         1
-      </div>
-      <div
-        className="calendar-day is-next_month is-weekend is-selectable"
+      </button>
+      <button
+        className="calendar-day is-next_month is-selectable is-weekend"
         onClick={[Function]}
-        onMouseMove={[Function]}
+        onMouseEnter={[Function]}
+        value="2015-08-02"
       >
         2
-      </div>
+      </button>
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@
 
 exports[`Notice when prop \`type\` is "disabled_day_click" renders <Notice /> 1`] = `
 <div
-  className="calendar-notice"
+  className="example-class-name-notice"
 >
   Selected range must not overlap with disabled dates.
 </div>
@@ -10,17 +10,7 @@ exports[`Notice when prop \`type\` is "disabled_day_click" renders <Notice /> 1`
 
 exports[`Notice when prop \`type\` is "overlapping_with_disabled" renders <Notice /> 1`] = `
 <div
-  className="calendar-notice"
->
-  Selected range must not overlap with disabled dates.
-</div>
-`
-
-exports[
-  `Notice when prop \`type\` is "overlapping_with_disabled" when prop \`blockClassName\` is "Whatever" renders div with a custom block class name 1`
-] = `
-<div
-  className="Whatever-notice"
+  className="example-class-name-notice"
 >
   Selected range must not overlap with disabled dates.
 </div>

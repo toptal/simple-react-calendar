@@ -1,37 +1,32 @@
+import addDays from 'date-fns/add_days'
+import parse from 'date-fns/parse'
+import subDays from 'date-fns/sub_days'
+import {shallow} from 'enzyme'
 import React from 'react'
 
-import ReactTestRenderer from 'react-test-renderer'
 import Month from '../month'
-import addDays from 'date-fns/add_days'
-import subDays from 'date-fns/sub_days'
 
-import {shallow} from 'enzyme'
+const date = '2017-01-01'
 
 describe('Month', () => {
-  let wrapper, instance, props
+  let wrapper, instance, props, mockEvent
 
-  const date = '2017-01-01'
-  const defaultProps = {
-    today: new Date(2015, 7, 17),
-    activeMonth: new Date(2015, 7, 17),
-    mode: 'range',
-    weekStartsOn: 1,
-    onChange: () => {},
-    onNoticeChange: () => {},
-  }
+  beforeEach(() => {
+    props = getProps()
+    wrapper = shallow(<Month {...props} />)
+    instance = wrapper.instance()
+    mockEvent = {
+      preventDefault: jest.fn(),
+      currentTarget: {value: date},
+    }
+  })
 
   describe('#_pushUpdate', () => {
-    beforeEach(() => {
-      props = Object.assign(defaultProps, {onChange: jest.fn()})
-      wrapper = shallow(<Month {...props} />)
-      instance = wrapper.instance()
-    })
-
     context('when `_selectionStart` is before `_selectionEnd`', () => {
       it('calls prop #onChange', () => {
         instance._selectionStart = '2015-06-10'
         instance._selectionEnd = '2015-06-15'
-        wrapper.instance()._pushUpdate()
+        instance._pushUpdate()
 
         expect(props.onChange).toHaveBeenCalledTimes(1)
         expect(props.onChange).toHaveBeenCalledWith({
@@ -45,7 +40,7 @@ describe('Month', () => {
       it('calls prop #onChange', () => {
         instance._selectionStart = '2015-06-15'
         instance._selectionEnd = '2015-06-10'
-        wrapper.instance()._pushUpdate()
+        instance._pushUpdate()
 
         expect(props.onChange).toHaveBeenCalledTimes(1)
         expect(props.onChange).toHaveBeenCalledWith({
@@ -57,7 +52,10 @@ describe('Month', () => {
 
     context('when prop `rangeLimit` is smaller than the difference', () => {
       it('calls prop #onChange', () => {
-        props = Object.assign(defaultProps, {rangeLimit: 5, onChange: jest.fn()})
+        props = getProps({
+          rangeLimit: 5,
+          onChange: jest.fn(),
+        })
         wrapper = shallow(<Month {...props} />)
         instance = wrapper.instance()
         instance._selectionStart = '2015-06-10'
@@ -75,10 +73,7 @@ describe('Month', () => {
 
   describe('#_pushNoticeUpdate', () => {
     it('calls prop #onNoticeChange', () => {
-      props = Object.assign(defaultProps, {onNoticeChange: jest.fn()})
-      wrapper = shallow(<Month {...props} />)
-
-      wrapper.instance()._pushNoticeUpdate('test')
+      instance._pushNoticeUpdate('test')
 
       expect(props.onNoticeChange).toHaveBeenCalledTimes(1)
       expect(props.onNoticeChange).toHaveBeenCalledWith('test')
@@ -88,16 +83,20 @@ describe('Month', () => {
   describe('#_getDisabledRange', () => {
     context('when prop `disabledIntervals` is `undefined`', () => {
       it('calls prop #onNoticeChange', () => {
-        wrapper = shallow(<Month {...defaultProps} />)
-        instance = wrapper.instance()
-
         expect(instance._getDisabledRange('test')).toBe(true)
       })
     })
 
     context('when prop `disabledIntervals` is defined', () => {
       it('calls prop #onNoticeChange', () => {
-        props = Object.assign(defaultProps, {disabledIntervals: [{start: '2015-01-01', end: '2015-06-31'}]})
+        props = getProps({
+          disabledIntervals: [
+            {
+              start: '2015-01-01',
+              end: '2015-06-31',
+            },
+          ],
+        })
         wrapper = shallow(<Month {...props} />)
         instance = wrapper.instance()
 
@@ -106,8 +105,13 @@ describe('Month', () => {
 
       context('when argument `interval` are overlapping', () => {
         it('calls prop #onNoticeChange', () => {
-          const range = {start: '2015-01-01', end: '2015-06-31'}
-          props = Object.assign(defaultProps, {disabledIntervals: [range]})
+          const range = {
+            start: '2015-01-01',
+            end: '2015-06-31',
+          }
+          props = getProps({
+            disabledIntervals: [range],
+          })
           wrapper = shallow(<Month {...props} />)
           instance = wrapper.instance()
 
@@ -117,59 +121,60 @@ describe('Month', () => {
     })
   })
 
-  describe('#_onDayMouseMove', () => {
-    context('when prop `onDayHover` is `undefined`', () => {
+  describe('#handleOnDayMouseEnter', () => {
+    it('calls #event.preventDefault', () => {
+      instance._selectionInProgress = false
+      instance.handleOnDayMouseEnter(mockEvent)
+
+      expect(mockEvent.preventDefault).toHaveBeenCalledTimes(1)
+    })
+
+    context('when prop `onDayMouseEnter` is `undefined`', () => {
       context('when #_selectionInProgress is `false`', () => {
         it('returns `undefined`', () => {
-          wrapper = shallow(<Month {...defaultProps} />)
-          instance = wrapper.instance()
           instance._selectionInProgress = false
 
-          expect(instance._onDayMouseMove(date)).toBe(undefined)
+          expect(instance.handleOnDayMouseEnter(mockEvent)).toBe(undefined)
         })
       })
 
       context('when #_selectionInProgress is `true`', () => {
         context('when #_getDisabledRange is `false`', () => {
           it('returns `undefined`', () => {
-            wrapper = shallow(<Month {...defaultProps} />)
-            instance = wrapper.instance()
             instance._selectionInProgress = true
             instance._getDisabledRange = () => false
 
-            expect(instance._onDayMouseMove(date)).toBe(undefined)
+            expect(instance.handleOnDayMouseEnter(mockEvent)).toBe(undefined)
           })
         })
 
         context('when #_getDisabledRange is defined', () => {
           context('when argument `date` is equal with `_selectionEnd`', () => {
             it('returns `undefined`', () => {
-              wrapper = shallow(<Month {...defaultProps} />)
-              instance = wrapper.instance()
               instance._selectionInProgress = true
               instance._getDisabledRange = () => true
               instance._selectionEnd = date
 
-              expect(instance._onDayMouseMove(date)).toBe(undefined)
+              expect(instance.handleOnDayMouseEnter(mockEvent)).toBe(undefined)
             })
           })
 
           context('when argument `date` is not equal with `_selectionEnd`', () => {
             context('when prop `rangeLimit` is `undefined`', () => {
               it('returns `undefined`', () => {
-                wrapper = shallow(<Month {...defaultProps} />)
-                instance = wrapper.instance()
                 instance._selectionInProgress = true
                 instance._getDisabledRange = () => true
                 instance._selectionEnd = addDays(date, 2)
 
-                expect(instance._onDayMouseMove(date)).toBe(undefined)
+                expect(instance.handleOnDayMouseEnter(mockEvent)).toBe(undefined)
               })
             })
 
             context('when prop `rangeLimit` is defined', () => {
               beforeEach(() => {
-                props = Object.assign(defaultProps, {rangeLimit: 5})
+                props = getProps({
+                  rangeLimit: 5,
+                })
                 wrapper = shallow(<Month {...props} />)
                 instance = wrapper.instance()
                 instance._selectionInProgress = true
@@ -181,7 +186,7 @@ describe('Month', () => {
                 it('returns `undefined`', () => {
                   instance._selectionStart = addDays(date, 6)
 
-                  expect(instance._onDayMouseMove(date)).toBe(undefined)
+                  expect(instance.handleOnDayMouseEnter(mockEvent)).toBe(undefined)
                 })
               })
 
@@ -190,7 +195,7 @@ describe('Month', () => {
                   instance._pushUpdate = jest.fn()
                   instance._selectionStart = subDays(date, 3)
 
-                  instance._onDayMouseMove(date)
+                  instance.handleOnDayMouseEnter(mockEvent)
                 })
 
                 it('calls #_pushUpdate', () => {
@@ -198,7 +203,7 @@ describe('Month', () => {
                 })
 
                 it('sets `_selectionEnd`', () => {
-                  expect(instance._selectionEnd).toEqual(date)
+                  expect(instance._selectionEnd).toEqual(parse(date))
                 })
               })
             })
@@ -207,23 +212,21 @@ describe('Month', () => {
       })
     })
 
-    context('when prop `onDayHover` is defined', () => {
-      it('calls prop #onDayHover', () => {
-        props = Object.assign(defaultProps, {onDayHover: jest.fn()})
-        wrapper = shallow(<Month {...props} />)
+    context('when prop `onDayMouseEnter` is defined', () => {
+      it('calls prop #onDayMouseEnter', () => {
+        instance.handleOnDayMouseEnter(mockEvent)
 
-        wrapper.instance()._onDayMouseMove(date)
-
-        expect(props.onDayHover).toHaveBeenCalledTimes(1)
-        expect(props.onDayHover).toHaveBeenCalledWith(date)
+        expect(props.onDayMouseEnter).toHaveBeenCalledTimes(1)
+        expect(props.onDayMouseEnter).toHaveBeenCalledWith(parse(date))
       })
     })
   })
 
-  describe('#_onDayClick', () => {
-    beforeEach(() => {
-      wrapper = shallow(<Month {...defaultProps} />)
-      instance = wrapper.instance()
+  describe('#handleOnDayClick', () => {
+    it('calls #event.preventDefault', () => {
+      instance.handleOnDayClick(mockEvent)
+
+      expect(mockEvent.preventDefault).toHaveBeenCalledTimes(1)
     })
 
     context('when prop `mode` is `RANGE_MODE`', () => {
@@ -233,11 +236,11 @@ describe('Month', () => {
             instance._pushNoticeUpdate = () => {}
             instance._selectionInProgress = true
 
-            instance._onDayClick(date)
+            instance.handleOnDayClick(mockEvent)
 
             expect(instance._selectionInProgress).toBe(false)
             expect(instance._selectionStart).toBe(undefined)
-            expect(instance._selectionEnd).toBe(date)
+            expect(instance._selectionEnd).toEqual(parse(date))
           })
         })
 
@@ -246,7 +249,7 @@ describe('Month', () => {
             instance._pushNoticeUpdate = () => {}
             instance._selectionInProgress = true
             instance._getDisabledRange = () => false
-            instance._onDayClick(date)
+            instance.handleOnDayClick(mockEvent)
             instance._pushUpdate = jest.fn()
             instance._pushNoticeUpdate = jest.fn()
           })
@@ -264,27 +267,29 @@ describe('Month', () => {
           instance._pushNoticeUpdate = () => {}
           instance._selectionInProgress = false
 
-          instance._onDayClick(date)
+          instance.handleOnDayClick(mockEvent)
 
           expect(instance._selectionInProgress).toBe(true)
-          expect(instance._selectionStart).toBe(date)
-          expect(instance._selectionEnd).toBe(date)
+          expect(instance._selectionStart).toEqual(parse(date))
+          expect(instance._selectionEnd).toEqual(parse(date))
         })
       })
     })
 
     context('when prop `mode` is `SINGLE_MODE`', () => {
       it('sets instance states', () => {
-        props = Object.assign(defaultProps, {mode: 'single'})
+        props = getProps({
+          mode: 'single',
+        })
         wrapper = shallow(<Month {...props} />)
         const instance = wrapper.instance()
         instance._pushNoticeUpdate = () => {}
 
-        instance._onDayClick(date)
+        instance.handleOnDayClick(mockEvent)
 
         expect(instance._selectionInProgress).toBe(false)
-        expect(instance._selectionStart).toBe(date)
-        expect(instance._selectionEnd).toBe(date)
+        expect(instance._selectionStart).toEqual(parse(date))
+        expect(instance._selectionEnd).toEqual(parse(date))
       })
     })
 
@@ -292,7 +297,7 @@ describe('Month', () => {
       instance._pushUpdate = jest.fn()
       instance._pushNoticeUpdate = () => {}
 
-      instance._onDayClick('2017-01-01')
+      instance.handleOnDayClick(mockEvent)
 
       expect(instance._pushUpdate).toHaveBeenCalledTimes(1)
     })
@@ -301,19 +306,16 @@ describe('Month', () => {
       instance._pushUpdate = () => {}
       instance._pushNoticeUpdate = jest.fn()
 
-      wrapper.instance()._onDayClick('2017-01-01')
+      instance.handleOnDayClick(mockEvent)
 
       expect(instance._pushNoticeUpdate).toHaveBeenCalledTimes(1)
       expect(instance._pushNoticeUpdate).toHaveBeenCalledWith(null)
     })
   })
 
-  describe('#_onDisabledDayClick', () => {
+  describe('#handleOnDisabledDayClick', () => {
     it('calls prop #onNoticeChange', () => {
-      props = Object.assign(defaultProps, {onNoticeChange: jest.fn()})
-      wrapper = shallow(<Month {...props} />)
-
-      wrapper.instance()._onDisabledDayClick()
+      instance.handleOnDisabledDayClick(mockEvent)
 
       expect(props.onNoticeChange).toHaveBeenCalledTimes(1)
       expect(props.onNoticeChange).toHaveBeenCalledWith('disabled_day_click')
@@ -323,8 +325,10 @@ describe('Month', () => {
   describe('#_getMinDate', () => {
     context('when `minDate` is `undefined`', () => {
       it('returns `calcStartDate`', () => {
-        props = Object.assign(defaultProps, {rangeLimit: 5})
-        wrapper = shallow(<Month {...defaultProps} />)
+        props = getProps({
+          rangeLimit: 5,
+        })
+        wrapper = shallow(<Month {...props} />)
         instance = wrapper.instance()
         instance._selectionStart = date
 
@@ -335,8 +339,11 @@ describe('Month', () => {
     context('when `minDate` is defined', () => {
       context('when `minDate` is before `calcStartDate`', () => {
         it('returns `calcStartDate`', () => {
-          props = Object.assign(defaultProps, {rangeLimit: 5, minDate: '2016-12-12'})
-          wrapper = shallow(<Month {...defaultProps} />)
+          props = getProps({
+            rangeLimit: 5,
+            minDate: '2016-12-12',
+          })
+          wrapper = shallow(<Month {...props} />)
           instance = wrapper.instance()
           instance._selectionStart = date
 
@@ -346,8 +353,11 @@ describe('Month', () => {
 
       context('when `minDate` is after `calcStartDate`', () => {
         it('returns `minDate`', () => {
-          props = Object.assign(defaultProps, {rangeLimit: 5, minDate: '2017-01-15'})
-          wrapper = shallow(<Month {...defaultProps} />)
+          props = getProps({
+            rangeLimit: 5,
+            minDate: '2017-01-15',
+          })
+          wrapper = shallow(<Month {...props} />)
           instance = wrapper.instance()
           instance._selectionStart = date
 
@@ -360,8 +370,10 @@ describe('Month', () => {
   describe('#_getMaxDate', () => {
     context('when `maxDate` is `undefined`', () => {
       it('returns `calcEndDate`', () => {
-        props = Object.assign(defaultProps, {rangeLimit: 5})
-        wrapper = shallow(<Month {...defaultProps} />)
+        props = getProps({
+          rangeLimit: 5,
+        })
+        wrapper = shallow(<Month {...props} />)
         instance = wrapper.instance()
         instance._selectionStart = date
 
@@ -372,8 +384,11 @@ describe('Month', () => {
     context('when `maxDate` is defined', () => {
       context('when `maxDate` is before `calcEndDate`', () => {
         it('returns `maxDate`', () => {
-          props = Object.assign(defaultProps, {rangeLimit: 5, maxDate: '2017-01-03'})
-          wrapper = shallow(<Month {...defaultProps} />)
+          props = getProps({
+            rangeLimit: 5,
+            maxDate: '2017-01-03',
+          })
+          wrapper = shallow(<Month {...props} />)
           instance = wrapper.instance()
           instance._selectionStart = date
 
@@ -383,8 +398,11 @@ describe('Month', () => {
 
       context('when `maxDate` is after `calcEndDate`', () => {
         it('returns `calcEndDate`', () => {
-          props = Object.assign(defaultProps, {rangeLimit: 5, maxDate: '2017-01-15'})
-          wrapper = shallow(<Month {...defaultProps} />)
+          props = getProps({
+            rangeLimit: 5,
+            maxDate: '2017-01-15',
+          })
+          wrapper = shallow(<Month {...props} />)
           instance = wrapper.instance()
           instance._selectionStart = date
 
@@ -396,148 +414,154 @@ describe('Month', () => {
 
   describe('#render', () => {
     it('renders <Month />', () => {
-      const tree = ReactTestRenderer.create(<Month {...defaultProps} />).toJSON()
-
-      expect(tree).toMatchSnapshot()
+      expect(wrapper).toMatchSnapshot()
     })
 
     context('when `_selectionInProgress` is `true` and prop `rangeLimit` is defined', () => {
-      beforeEach(() => {
-        wrapper = shallow(<Month {...defaultProps} />)
-        instance = wrapper.instance()
+      it('renders <Month />', () => {
+        wrapper.setState({
+          rangeLimit: 5,
+          minDate: new Date(2015, 5, 15),
+          maxDate: new Date(2015, 10, 15),
+        })
+        instance._selectionStart = new Date(2015, 6, 15)
         instance._selectionInProgress = true
-        instance._getMaxDate = jest.fn()
-        instance._getMinDate = jest.fn()
-        wrapper.setState({rangeLimit: 5})
-      })
 
-      it('calls `_getMaxDate`', () => {
-        expect(instance._getMaxDate).toHaveBeenCalledTimes(1)
-      })
-
-      it('calls `_getMinDate`', () => {
-        expect(instance._getMinDate).toHaveBeenCalledTimes(1)
+        expect(wrapper).toMatchSnapshot()
       })
     })
 
     context('when prop `disabledIntervals` is `[]`', () => {
       it('renders <Month />', () => {
-        const modProps = Object.assign(defaultProps, {disabledIntervals: []})
-        const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+        props = getProps({
+          disabledIntervals: [],
+        })
+        wrapper = shallow(<Month {...props} />)
 
-        expect(tree).toMatchSnapshot()
+        expect(wrapper).toMatchSnapshot()
       })
     })
 
     context('when prop `month` has 4 weeks', () => {
       it('renders <Month />', () => {
-        const modProps = Object.assign(defaultProps, {activeMonth: new Date(2010, 1, 15)})
-        const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+        props = getProps({
+          activeMonth: new Date(2010, 1, 15),
+        })
+        wrapper = shallow(<Month {...props} />)
 
-        expect(tree).toMatchSnapshot()
+        expect(wrapper).toMatchSnapshot()
       })
     })
 
     context('when prop `month` has 5 weeks', () => {
       it('renders <Month />', () => {
-        const modProps = Object.assign(defaultProps, {activeMonth: new Date(2015, 5, 15)})
-        const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+        props = getProps({
+          activeMonth: new Date(2015, 5, 15),
+        })
+        wrapper = shallow(<Month {...props} />)
 
-        expect(tree).toMatchSnapshot()
+        expect(wrapper).toMatchSnapshot()
       })
     })
 
     context('when prop `month` has 6 weeks', () => {
       it('renders <Month />', () => {
-        const modProps = Object.assign(defaultProps, {activeMonth: new Date(2015, 7, 15)})
-        const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+        props = getProps({
+          activeMonth: new Date(2015, 7, 15),
+        })
+        wrapper = shallow(<Month {...props} />)
 
-        expect(tree).toMatchSnapshot()
+        expect(wrapper).toMatchSnapshot()
       })
     })
 
     context('when prop `minNumberOfWeeks` is defined', () => {
       context('when prop `activeMonth` has less weeks than defined', () => {
         it('renders <Month />', () => {
-          const modProps = Object.assign(defaultProps, {
+          props = getProps({
             activeMonth: new Date(2010, 1, 15),
             minNumberOfWeeks: 5,
           })
-          const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+          wrapper = shallow(<Month {...props} />)
 
-          expect(tree).toMatchSnapshot()
+          expect(wrapper).toMatchSnapshot()
         })
       })
 
       context('when prop `activeMonth` has the same number of weeks as defined', () => {
         it('renders <Month />', () => {
-          const modProps = Object.assign(defaultProps, {
+          props = getProps({
             activeMonth: new Date(2015, 5, 15),
             minNumberOfWeeks: 5,
           })
-          const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+          wrapper = shallow(<Month {...props} />)
 
-          expect(tree).toMatchSnapshot()
+          expect(wrapper).toMatchSnapshot()
         })
       })
 
       context('when prop `activeMonth` has more weeks than as defined', () => {
         it('renders <Month />', () => {
-          const modProps = Object.assign(defaultProps, {
+          props = getProps({
             activeMonth: new Date(2015, 7, 15),
             minNumberOfWeeks: 5,
           })
-          const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+          wrapper = shallow(<Month {...props} />)
 
-          expect(tree).toMatchSnapshot()
+          expect(wrapper).toMatchSnapshot()
         })
-      })
-    })
-
-    context('when prop `blockClassName` is defined', () => {
-      it('renders <Month />', () => {
-        const modProps = Object.assign(defaultProps, {blockClassName: 'cal'})
-        const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
-
-        expect(tree).toMatchSnapshot()
       })
     })
 
     context('when prop `disableDaysOfWeek` is defined', () => {
       it('renders <Month />', () => {
-        const modProps = Object.assign(defaultProps, {disableDaysOfWeek: true})
-        const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+        props = getProps({
+          disableDaysOfWeek: true,
+        })
+        wrapper = shallow(<Month {...props} />)
 
-        expect(tree).toMatchSnapshot()
+        expect(wrapper).toMatchSnapshot()
       })
     })
 
     context('when prop `minDate` and `maxDate` are defined', () => {
       context("when prop `rangeLimit` doesn't exceed `minDate` and `maxDate`", () => {
         it('renders <Month />', () => {
-          const modProps = Object.assign(defaultProps, {
+          props = getProps({
             minDate: new Date(2015, 7, 12),
             maxDate: new Date(2015, 7, 23),
             rangeLimit: 10,
           })
-          const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+          wrapper = shallow(<Month {...props} />)
 
-          expect(tree).toMatchSnapshot()
+          expect(wrapper).toMatchSnapshot()
         })
       })
 
       context('when prop `rangeLimit` exceed `minDate` and `maxDate`', () => {
         it('renders <Month />', () => {
-          const modProps = Object.assign(defaultProps, {
+          props = getProps({
             minDate: new Date(2015, 7, 1),
             maxDate: new Date(2015, 7, 31),
             rangeLimit: 10,
           })
-          const tree = ReactTestRenderer.create(<Month {...modProps} />).toJSON()
+          wrapper = shallow(<Month {...props} />)
 
-          expect(tree).toMatchSnapshot()
+          expect(wrapper).toMatchSnapshot()
         })
       })
     })
   })
+})
+
+const getProps = (overrides = {}) => ({
+  activeMonth: new Date(2015, 7, 17),
+  blockClassName: 'example-class',
+  mode: 'range',
+  onChange: jest.fn(),
+  onDayMouseEnter: jest.fn(),
+  onNoticeChange: jest.fn(),
+  today: new Date(2015, 7, 17),
+  weekStartsOn: 1,
+  ...overrides,
 })
