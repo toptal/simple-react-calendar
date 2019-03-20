@@ -1,14 +1,19 @@
 # simple-react-calendar <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
 
 [![NPM version][npm-image]][npm-url]
+[![deps][deps]][deps-url]
 [![build status][travis-image]][travis-url]
 [![npm download][download-image]][download-url]
+
 [![BCH comliance][bch-image]][bch-url]
 [![CodeFactor][cf-image]][cf-url]
-[![styled with prettier][prettier-image]][prettier-url]
 [![codecov.io][codecov-image]][codecov-url]
+
+[![styled with prettier][prettier-image]][prettier-url]
 [![Tested with Jest][jest-image]][jest-url]
 [![storybook provided][storybook-image]][storybook-url]
+
+---
 
 [![npm badge][npm-badge-png]][package-url]
 
@@ -24,7 +29,7 @@ You can find the component's online demo [here](./docs/index.html).
 
 ## Screen
 
-![Alt text](./simple_react_calendar.png?raw=true "Simple React Calendar")
+![Alt text](./simple_react_calendar.png?raw=true 'Simple React Calendar')
 
 ### Install
 
@@ -111,8 +116,28 @@ Block class name can be overrided with `blockClassName` prop (see above).
 | Calendar day                             | `.calendar-day`                | <ul><li><code>.is-selected</code> - when the date is selected</li><li><code>.is-highlighted</code> - when the date is highlighted</li><li><code>.is-today</code> - when the date is current one</li><li><code>.is-start_selection</code> - when the date is start day of selection</li><li><code>.is-end_selection</code> - when the date is end day of selection</li><li><code>.is-current_month</code> - when the date belongs to the current month</li><li><code>.is-prev_month</code> - when the date belongs to the previous month</li><li><code>.is-next_month</code> - when the date belongs to the next month</li><li><code>.is-weekend</code> - when the date is the weekend</li><li><code>.is-working_day</code> - when the date is the working day</li><li><code>.is-selectable</code> - when the date can be selected</li><li><code>.is-not_selectable</code> - when the date can't be selected</li></ul> |
 | Calendar notice (notice element)         | `.calendar-notice`             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
+### Examples
+
+Fork this repository and clone your version of the repository
+
+Install dependencies
+
+```js
+yarn
+```
+
+Start example server locally
+
+```js
+  yarn start
+```
+
+You now have examples running on http://localhost:9000
+
 [npm-badge-png]: https://nodei.co/npm/simple-react-calendar.png?downloads=true&downloadRank=true&stars=true
 [npm-version-svg]: http://versionbadg.es/toptal/simple-react-calendar.svg
+[deps]: https://david-dm.org/toptal/simple-react-calendar.svg
+[deps-url]: https://david-dm.org/toptal/simple-react-calendar
 [package-url]: https://npmjs.org/package/simple-react-calendar
 [npm-image]: http://img.shields.io/npm/v/simple-react-calendar.svg
 [npm-url]: http://npmjs.org/package/simple-react-calendar
@@ -128,9 +153,9 @@ Block class name can be overrided with `blockClassName` prop (see above).
 [cf-url]: https://www.codefactor.io/repository/github/toptal/simple-react-calendar
 [prettier-image]: https://img.shields.io/badge/styled_with-prettier-ff69b4.svg
 [prettier-url]: https://github.com/prettier/prettier
-[jest-image]: https://img.shields.io/badge/Tested_with-Jest-%2399424f.svg
+[jest-image]: https://img.shields.io/badge/tested_with-Jest-%2399424f.svg
 [jest-url]: https://facebook.github.io/jest/
 [codecov-image]: https://codecov.io/gh/toptal/simple-react-calendar/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/toptal/simple-react-calendar
-[storybook-image]: https://img.shields.io/badge/Storybook-provided-f1618c.svg
+[storybook-image]: https://img.shields.io/badge/storybook-provided-f1618c.svg
 [storybook-url]: https://storybook.js.org/

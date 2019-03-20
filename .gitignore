@@ -1,9 +1,10 @@
+.cache
+.idea
+coverage
+lib
 node_modules
 npm-debug.log
 tmp
-lib
-.idea/
-coverage/**/*
 
 ## Yarn error
 yarn-error.log
