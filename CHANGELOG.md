@@ -9,6 +9,7 @@
 - Add `Storybook` for demo page
 - Update `Babel` and `Webpack`
 - Add local Development environment
+- Update `Storybook`
 
 ### Fix
 

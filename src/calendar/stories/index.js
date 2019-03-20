@@ -1,12 +1,12 @@
+import '../../example/style/base_style.styl'
+import '../../example/style/date_picker.styl'
+
+import {action} from '@storybook/addon-actions'
+import {array, boolean, date, number, object, text, withKnobs} from '@storybook/addon-knobs/react'
+import {storiesOf} from '@storybook/react'
 import React from 'react'
 
-import {storiesOf} from '@storybook/react'
-import {action} from '@storybook/addon-actions'
-import {withKnobs, text, boolean, number, date, object, array} from '@storybook/addon-knobs/react'
-import '../../../css/base_style.styl'
-import '../../../css/date_picker.styl'
-
-import Calendar from '../../index'
+import Calendar from '../..'
 
 const stories = storiesOf('Calendar', module)
 
