@@ -96,7 +96,9 @@ export default class Month extends React.Component {
 
   handleOnDayMouseEnter = (event) => {
     event.preventDefault()
-    const {currentTarget: {value}} = event
+    const {
+      currentTarget: {value},
+    } = event
     const date = parse(value)
 
     const {onDayMouseEnter} = this.props
@@ -127,7 +129,9 @@ export default class Month extends React.Component {
 
   handleOnDayClick = (event) => {
     event.preventDefault()
-    const {currentTarget: {value}} = event
+    const {
+      currentTarget: {value},
+    } = event
     const date = parse(value)
     const {mode} = this.props
 
