@@ -16,6 +16,7 @@
 - Add local Development environment
 - Update `Storybook`
 - Update `Jest`
+- Update `eslint`
 
 ### Fix
 
