@@ -5,10 +5,9 @@ exports[`HeaderButton renders <HeaderButton /> 1`] = `
   className="calendar-header_button is-prev"
   disabled={false}
   onClick={[Function]}
-  title={undefined}
   type="button"
 />
-`
+`;
 
 exports[`HeaderButton when prop \`arrow\` is defined renders <HeaderButton /> 1`] = `
 <button
@@ -24,27 +23,25 @@ exports[`HeaderButton when prop \`arrow\` is defined renders <HeaderButton /> 1`
     Test
   </i>
 </button>
-`
+`;
 
 exports[`HeaderButton when prop \`blockClassName\` is defined renders <HeaderButton /> 1`] = `
 <button
   className="cal-header_button is-next is-disabled"
   disabled={true}
   onClick={[Function]}
-  title={undefined}
   type="button"
 />
-`
+`;
 
 exports[`HeaderButton when prop \`enabled\` is \`false\` renders <HeaderButton /> 1`] = `
 <button
   className="calendar-header_button is-prev is-disabled"
   disabled={true}
   onClick={[Function]}
-  title={undefined}
   type="button"
 />
-`
+`;
 
 exports[`HeaderButton when prop \`title\` is defined renders <HeaderButton /> 1`] = `
 <button
@@ -54,14 +51,13 @@ exports[`HeaderButton when prop \`title\` is defined renders <HeaderButton /> 1`
   title="testTitle"
   type="button"
 />
-`
+`;
 
 exports[`HeaderButton when prop \`type\` is "next" renders <HeaderButton /> 1`] = `
 <button
   className="calendar-header_button is-next is-disabled"
   disabled={true}
   onClick={[Function]}
-  title={undefined}
   type="button"
 />
-`
+`;

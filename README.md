@@ -25,7 +25,7 @@ A component that is easy to start using, yet flexible when you need customizatio
 
 ## Usage
 
-You can find the component's online demo [here](./docs/index.html).
+You can find the component's online demo [here](https://toptal.github.io/simple-react-calendar).
 
 ## Screen
 
