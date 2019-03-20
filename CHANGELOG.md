@@ -4,18 +4,20 @@
 
 ### Features
 
+### Chore
+
+- Remove `Test` build settings from webpack
+- Update `jest-context` to get rid of installation warning
+- Simplify `Day` Component
 - Integrate `Jest` for unit testing
 - Update `Webpack` and `Babel`
 - Add `Storybook` for demo page
 - Update `Babel` and `Webpack`
 - Add local Development environment
 - Update `Storybook`
+- Update `Jest`
 
 ### Fix
-
-- Remove `Test` build settings from webpack
-- Update `jest-context` to get rid of installation warning
-- Simplify `Day` Component
 
 ## 1.7.0
 
