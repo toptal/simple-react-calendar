@@ -1,7 +1,15 @@
 {
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
+  "parserOptions": {
+    "ecmaFeatures": {
+        "jsx": true,
+        "modules": true
+    },
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "env": {
     "browser": true,
@@ -13,13 +21,6 @@
     "require": true
   },
   "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
   "plugins": [
     "react"
   ],
@@ -51,8 +52,7 @@
         ]
       }
     }],
-    "react/sort-prop-types": 2,
-    "react/wrap-multilines": 2
+    "react/sort-prop-types": 2
   }
 }
 
