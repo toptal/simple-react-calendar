@@ -5,16 +5,17 @@ exports[`HeaderButton renders <HeaderButton /> 1`] = `
   className="calendar-header_button is-prev"
   disabled={false}
   onClick={[Function]}
+  title="Previous month"
   type="button"
 />
 `;
 
 exports[`HeaderButton when prop \`arrow\` is defined renders <HeaderButton /> 1`] = `
 <button
-  className="cal-header_button is-next is-disabled"
-  disabled={true}
+  className="calendar-header_button is-prev"
+  disabled={false}
   onClick={[Function]}
-  title="testTitle"
+  title="Previous month"
   type="button"
 >
   <i
@@ -27,9 +28,10 @@ exports[`HeaderButton when prop \`arrow\` is defined renders <HeaderButton /> 1`
 
 exports[`HeaderButton when prop \`blockClassName\` is defined renders <HeaderButton /> 1`] = `
 <button
-  className="cal-header_button is-next is-disabled"
-  disabled={true}
+  className="cal-header_button is-prev"
+  disabled={false}
   onClick={[Function]}
+  title="Previous month"
   type="button"
 />
 `;
@@ -39,14 +41,15 @@ exports[`HeaderButton when prop \`enabled\` is \`false\` renders <HeaderButton /
   className="calendar-header_button is-prev is-disabled"
   disabled={true}
   onClick={[Function]}
+  title="Previous month"
   type="button"
 />
 `;
 
 exports[`HeaderButton when prop \`title\` is defined renders <HeaderButton /> 1`] = `
 <button
-  className="cal-header_button is-next is-disabled"
-  disabled={true}
+  className="calendar-header_button is-prev"
+  disabled={false}
   onClick={[Function]}
   title="testTitle"
   type="button"
@@ -55,9 +58,10 @@ exports[`HeaderButton when prop \`title\` is defined renders <HeaderButton /> 1`
 
 exports[`HeaderButton when prop \`type\` is "next" renders <HeaderButton /> 1`] = `
 <button
-  className="calendar-header_button is-next is-disabled"
-  disabled={true}
+  className="calendar-header_button is-next"
+  disabled={false}
   onClick={[Function]}
+  title="Next month"
   type="button"
 />
 `;

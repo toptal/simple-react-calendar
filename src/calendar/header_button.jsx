@@ -1,9 +1,6 @@
-import React from 'react'
-
-import PropTypes from 'prop-types'
 import classnames from 'classnames'
-
-import {BLOCK_CLASS_NAME} from './consts'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 export default class HeaderButton extends React.Component {
   static propTypes = {
@@ -14,10 +11,6 @@ export default class HeaderButton extends React.Component {
     onClick: PropTypes.func.isRequired,
     title: PropTypes.string,
     type: PropTypes.oneOf(['prev', 'next']).isRequired,
-  }
-
-  static defaultProps = {
-    blockClassName: BLOCK_CLASS_NAME,
   }
 
   render() {

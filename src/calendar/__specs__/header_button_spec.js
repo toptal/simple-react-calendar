@@ -1,63 +1,67 @@
+import {shallow} from 'enzyme'
 import React from 'react'
 
+import {BLOCK_CLASS_NAME, NEXT_MONTH_TITLE, PREV_MONTH_TITLE} from '../consts'
 import HeaderButton from '../header_button'
-import ReactTestRenderer from 'react-test-renderer'
 
 describe('HeaderButton', () => {
-  const defaultProps = {
-    type: 'prev',
-    enabled: true,
-    onClick: () => {},
-  }
+  let wrapper, props
+
+  beforeEach(() => {
+    props = getProps()
+    wrapper = shallow(<HeaderButton {...props} />)
+  })
 
   it('renders <HeaderButton />', () => {
-    const tree = ReactTestRenderer.create(<HeaderButton {...defaultProps} />).toJSON()
-
-    expect(tree).toMatchSnapshot()
+    expect(wrapper).toMatchSnapshot()
   })
 
   context('when prop `enabled` is `false`', () => {
     it('renders <HeaderButton />', () => {
-      const modProps = Object.assign(defaultProps, {enabled: false})
-      const tree = ReactTestRenderer.create(<HeaderButton {...modProps} />).toJSON()
+      wrapper.setProps({enabled: false})
 
-      expect(tree).toMatchSnapshot()
+      expect(wrapper).toMatchSnapshot()
     })
   })
 
   context('when prop `type` is "next"', () => {
     it('renders <HeaderButton />', () => {
-      const modProps = Object.assign(defaultProps, {type: 'next'})
-      const tree = ReactTestRenderer.create(<HeaderButton {...modProps} />).toJSON()
+      wrapper.setProps({type: 'next', title: NEXT_MONTH_TITLE})
 
-      expect(tree).toMatchSnapshot()
+      expect(wrapper).toMatchSnapshot()
     })
   })
 
   context('when prop `blockClassName` is defined', () => {
     it('renders <HeaderButton />', () => {
-      const modProps = Object.assign(defaultProps, {blockClassName: 'cal'})
-      const tree = ReactTestRenderer.create(<HeaderButton {...modProps} />).toJSON()
+      wrapper.setProps({blockClassName: 'cal'})
 
-      expect(tree).toMatchSnapshot()
+      expect(wrapper).toMatchSnapshot()
     })
   })
 
   context('when prop `title` is defined', () => {
     it('renders <HeaderButton />', () => {
-      const modProps = Object.assign(defaultProps, {title: 'testTitle'})
-      const tree = ReactTestRenderer.create(<HeaderButton {...modProps} />).toJSON()
+      wrapper.setProps({title: 'testTitle'})
 
-      expect(tree).toMatchSnapshot()
+      expect(wrapper).toMatchSnapshot()
     })
   })
 
   context('when prop `arrow` is defined', () => {
     it('renders <HeaderButton />', () => {
-      const modProps = Object.assign(defaultProps, {arrow: <i className="icon">Test</i>})
-      const tree = ReactTestRenderer.create(<HeaderButton {...modProps} />).toJSON()
+      wrapper.setProps({arrow: <i className="icon">Test</i>})
 
-      expect(tree).toMatchSnapshot()
+      expect(wrapper).toMatchSnapshot()
     })
   })
+})
+
+const getProps = (overrides = {}) => ({
+  type: 'prev',
+  enabled: true,
+  onClick: () => {},
+  blockClassName: BLOCK_CLASS_NAME,
+  title: PREV_MONTH_TITLE,
+  ...overrides,
 })

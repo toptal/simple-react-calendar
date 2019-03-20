@@ -1,16 +1,14 @@
-import React from 'react'
+import isSameMonth from 'date-fns/is_same_month'
+import isValidDate from 'date-fns/is_valid'
+import startOfMonth from 'date-fns/start_of_month'
 import PropTypes from 'prop-types'
+import React from 'react'
 
+import {datePropType} from './_lib'
+import {BLOCK_CLASS_NAME, DAYS_IN_WEEK, DAYS_OF_WEEK, NEXT_MONTH_TITLE, PREV_MONTH_TITLE} from './consts'
 import Month from './month'
 import MonthHeader from './month_header'
 import Notice from './notice'
-import {BLOCK_CLASS_NAME} from './consts'
-import {DAYS_IN_WEEK} from './consts'
-import {datePropType} from './_lib'
-
-import startOfMonth from 'date-fns/start_of_month'
-import isSameMonth from 'date-fns/is_same_month'
-import isValidDate from 'date-fns/is_valid'
 
 const SINGLE_MODE = 'single'
 const RANGE_MODE = 'range'
@@ -29,6 +27,7 @@ export default class Calendar extends React.Component {
     NoticeComponent: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     activeMonth: datePropType,
     blockClassName: PropTypes.string,
+    daysOfWeek: PropTypes.arrayOf(PropTypes.string),
     disableDaysOfWeek: PropTypes.bool,
     disabledIntervals: PropTypes.arrayOf(
       PropTypes.shape({
@@ -66,9 +65,12 @@ export default class Calendar extends React.Component {
   }
 
   static defaultProps = {
-    weekStartsOn: 1,
-    mode: SINGLE_MODE,
     blockClassName: BLOCK_CLASS_NAME,
+    daysOfWeek: DAYS_OF_WEEK,
+    headerNextTitle: NEXT_MONTH_TITLE,
+    headerPrevTitle: PREV_MONTH_TITLE,
+    mode: SINGLE_MODE,
+    weekStartsOn: 1,
   }
 
   constructor(props) {
@@ -212,6 +214,7 @@ export default class Calendar extends React.Component {
       disabledIntervals,
       rangeLimit,
       weekStartsOn,
+      daysOfWeek,
     } = this.props
     const selection = this._selection()
     const highlight = this._highlight()
@@ -220,38 +223,38 @@ export default class Calendar extends React.Component {
     return (
       <div className={blockClassName}>
         {this._renderNotice()}
-
         <MonthHeaderComponent
-          ref="header"
-          minDate={minDate}
-          maxDate={maxDate}
-          headerPrevArrow={headerPrevArrow}
-          headerPrevTitle={headerPrevTitle}
+          activeMonth={this._activeMonth()}
+          blockClassName={blockClassName}
           headerNextArrow={headerNextArrow}
           headerNextTitle={headerNextTitle}
-          activeMonth={this._activeMonth()}
+          headerPrevArrow={headerPrevArrow}
+          headerPrevTitle={headerPrevTitle}
+          maxDate={maxDate}
+          minDate={minDate}
           onMonthChange={this._switchMonth.bind(this)}
-          blockClassName={blockClassName}
+          ref="header"
         />
         <Month
-          mode={mode}
-          minDate={minDate}
-          maxDate={maxDate}
-          minNumberOfWeeks={minNumberOfWeeks}
-          rangeLimit={rangeLimit}
-          today={this._today()}
-          ref="month"
           activeMonth={this._activeMonth()}
-          selectedMin={selection.start}
-          selectedMax={selection.end}
-          disableDaysOfWeek={disableDaysOfWeek}
-          onDayHover={onDayHover}
-          highlightedStart={highlight.start}
-          highlightedEnd={highlight.end}
-          onChange={this._selectionChanged.bind(this)}
-          onNoticeChange={this._noticeChanged.bind(this)}
           blockClassName={blockClassName}
+          daysOfWeek={daysOfWeek}
+          disableDaysOfWeek={disableDaysOfWeek}
           disabledIntervals={disabledIntervals}
+          highlightedEnd={highlight.end}
+          highlightedStart={highlight.start}
+          maxDate={maxDate}
+          minDate={minDate}
+          minNumberOfWeeks={minNumberOfWeeks}
+          mode={mode}
+          onChange={this._selectionChanged.bind(this)}
+          onDayMouseEnter={onDayHover}
+          onNoticeChange={this._noticeChanged.bind(this)}
+          rangeLimit={rangeLimit}
+          ref="month"
+          selectedMax={selection.end}
+          selectedMin={selection.start}
+          today={this._today()}
           weekStartsOn={weekStartsOn}
         />
       </div>
