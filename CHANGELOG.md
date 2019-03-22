@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-### Features
+## 1.8.0
 
 ### Chore
 
@@ -17,8 +17,6 @@
 - Update `Storybook`
 - Update `Jest`
 - Update `eslint`
-
-### Fix
 
 ## 1.7.0
 

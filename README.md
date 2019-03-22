@@ -4,16 +4,11 @@
 [![deps][deps]][deps-url]
 [![build status][travis-image]][travis-url]
 [![npm download][download-image]][download-url]
-
-[![BCH comliance][bch-image]][bch-url]
 [![CodeFactor][cf-image]][cf-url]
 [![codecov.io][codecov-image]][codecov-url]
-
 [![styled with prettier][prettier-image]][prettier-url]
 [![Tested with Jest][jest-image]][jest-url]
 [![storybook provided][storybook-image]][storybook-url]
-
----
 
 [![npm badge][npm-badge-png]][package-url]
 
@@ -35,30 +30,26 @@ You can find the component's online demo [here](https://toptal.github.io/simple-
 
 #### Using npm
 
-```
+```bash
 npm install simple-react-calendar
 ```
 
 #### Using yarn
 
-```
+```bash
 yarn add simple-react-calendar
 ```
 
 ### Usage
 
-```
+```js
 import React, {Component} from 'react'
 
 import SimpleReactCalendar from 'simple-react-calendar'
 
 class MyApp extends Component {
   render() {
-    return (
-      <SimpleReactCalendar
-        activeMonth={new Date()}
-      />
-    )
+    return <SimpleReactCalendar activeMonth={new Date()} />
   }
 }
 ```
@@ -73,7 +64,7 @@ All of the properties are optional, just rendering `<Calendar />` will already g
 | `NoticeComponent`      | `object` or `func`                           | renders when `shownNoticeType` state has been set                                                                                                                                                                                                                                                          |
 | `activeMonth`          | `datePropType`\*                             | any day within the month that you want initially displayed                                                                                                                                                                                                                                                 |
 | `blockClassName`       | `string`                                     | base class name that will be used as a class prefix (see [](#class-names))                                                                                                                                                                                                                                 |
-| `daysOfWeek`    | `[string]`                                      | array of string represents the days                                                                                                                                                                                                                                                                         |
+| `daysOfWeek`           | `[string]`                                   | array of string represents the days                                                                                                                                                                                                                                                                        |
 | `disableDaysOfWeek`    | `bool`                                       | disable rendering days of the week                                                                                                                                                                                                                                                                         |
 | `disabledIntervals`    | `[{start: datePropType, end: datePropType}]` | disabled intervals of dates. Array of objects `[{start: Date(), end: Date()}]`. When user try to select disabled date or date range which consist disabled date(s) inside, `Notice` will appear                                                                                                            |
 | `headerNextArrow`      | `element`                                    | any kind of react element will be rendered into the next month button `(element)`                                                                                                                                                                                                                          |
@@ -117,23 +108,41 @@ Block class name can be overrided with `blockClassName` prop (see above).
 | Calendar day                             | `.calendar-day`                | <ul><li><code>.is-selected</code> - when the date is selected</li><li><code>.is-highlighted</code> - when the date is highlighted</li><li><code>.is-today</code> - when the date is current one</li><li><code>.is-start_selection</code> - when the date is start day of selection</li><li><code>.is-end_selection</code> - when the date is end day of selection</li><li><code>.is-current_month</code> - when the date belongs to the current month</li><li><code>.is-prev_month</code> - when the date belongs to the previous month</li><li><code>.is-next_month</code> - when the date belongs to the next month</li><li><code>.is-weekend</code> - when the date is the weekend</li><li><code>.is-working_day</code> - when the date is the working day</li><li><code>.is-selectable</code> - when the date can be selected</li><li><code>.is-not_selectable</code> - when the date can't be selected</li></ul> |
 | Calendar notice (notice element)         | `.calendar-notice`             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
-### Examples
+### Local development environment
 
 Fork this repository and clone your version of the repository
 
 Install dependencies
 
-```js
-yarn
+```bash
+  yarn
 ```
 
 Start example server locally
 
-```js
+```bash
   yarn start
 ```
 
 You now have examples running on http://localhost:9000
+
+### Local StoryBook
+
+Fork this repository and clone your version of the repository
+
+Install dependencies
+
+```bash
+  yarn
+```
+
+Start example server locally
+
+```bash
+  yarn storybook
+```
+
+You now have examples running on http://localhost:6006
 
 [npm-badge-png]: https://nodei.co/npm/simple-react-calendar.png?downloads=true&downloadRank=true&stars=true
 [npm-version-svg]: http://versionbadg.es/toptal/simple-react-calendar.svg
@@ -148,8 +157,6 @@ You now have examples running on http://localhost:9000
 [node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/simple-react-calendar.svg
 [download-url]: https://npmjs.org/package/simple-react-calendar
-[bch-image]: https://bettercodehub.com/edge/badge/toptal/simple-react-calendar?branch=master
-[bch-url]: https://bettercodehub.com/
 [cf-image]: https://www.codefactor.io/repository/github/toptal/simple-react-calendar/badge
 [cf-url]: https://www.codefactor.io/repository/github/toptal/simple-react-calendar
 [prettier-image]: https://img.shields.io/badge/styled_with-prettier-ff69b4.svg

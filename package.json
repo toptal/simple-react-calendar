@@ -8,19 +8,19 @@
     "type": "git",
     "url": "git+https://github.com/toptal/simple-react-calendar.git"
   },
-  "version": "1.7.0",
+  "version": "1.8.0",
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js  --env.development --hot --progress",
     "build": "rm -rf ./dist && webpack --config config/webpack.lib.js --progress --env.production ",
     "build:lib": "rm -rf ./lib && yarn babel ./src --out-dir ./lib --ignore ./src/calendar/__specs__ --ignore ./src/example/ --ignore ./src/calendar/stories",
-    "prepublish": "yarn build:lib",
+    "prepare": "yarn build:lib",
     "clean": "rm -rf ./lib rm -rf ./dist",
     "test": "env NODE_ENV=test TZ=UTC jest ",
     "test:watch": "env NODE_ENV=test TZ=UTC jest --watch",
     "test:coverage": "env NODE_ENV=test TZ=UTC jest --coverage",
     "test:ci": "env NODE_ENV=test TZ=UTC jest --bail --coverage --maxWorkers=4 --ci",
     "lint": "eslint src/ --ext .js,.jsx",
-    "format:js": "prettier \"+(src)/**/*.+(js*)\" --write",
+    "format:js": "prettier \"+(config|src|docs|.storybook)/**/*.+(js*)\" --write",
     "format:md": "prettier \"*.+(md)\" --write",
     "precommit": "lint-staged",
     "storybook": "start-storybook -p 6006",
@@ -34,6 +34,36 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "simple",
+    "calendar",
+    "react-component",
+    "calendar",
+    "full calendar"
+  ],
+  "files": [
+    "README.md",
+    "lib",
+    "dist"
+  ],
+  "homepage": "https://github.com/toptal/simple-react-calendar#readme",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "lint-staged": {
+    "prettier": {
+      "*.{js*,md}": [
+        "prettier --write",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "./src/calendar/__specs__/*.js"
+    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -85,36 +115,11 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
-  "lint-staged": {
-    "prettier": {
-      "*.{js*,md}": [
-        "prettier --write",
-        "git add"
-      ]
-    },
-    "ignore": [
-      "./src/calendar/__specs__/*.js"
-    ]
-  },
   "dependencies": {
     "classnames": "^2.2.5",
     "date-fns": "^1.27.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-prop-types": "^0.4.0"
-  },
-  "keywords": [
-    "react",
-    "reactjs",
-    "simple",
-    "calendar",
-    "react-component",
-    "calendar",
-    "full calendar"
-  ],
-  "files": [
-    "README.md",
-    "lib",
-    "dist"
-  ]
+  }
 }
