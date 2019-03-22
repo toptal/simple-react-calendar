@@ -1,6 +1,7 @@
 import {shallow} from 'enzyme'
 import React from 'react'
 
+import {NEXT_MONTH_TITLE, PREV_MONTH_TITLE} from '../consts'
 import MonthHeader from '../month_header'
 
 describe('MonthHeader', () => {
@@ -49,5 +50,7 @@ const getProps = (overrides = {}) => ({
   blockClassName: 'example-class',
   activeMonth: new Date(2015, 7, 17),
   onMonthChange: jest.fn(),
+  headerPrevTitle: PREV_MONTH_TITLE,
+  headerNextTitle: NEXT_MONTH_TITLE,
   ...overrides,
 })

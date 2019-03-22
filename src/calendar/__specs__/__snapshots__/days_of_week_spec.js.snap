@@ -2,42 +2,49 @@
 
 exports[`DaysOfWeek #render renders <DaysOfWeek /> 1`] = `
 <div
-  className="test-class-days_of_week"
+  className="calendar-days_of_week"
 >
   <div
-    className="test-class-days_of_week_day"
+    className="calendar-days_of_week_day"
+    key="Mon"
+  >
+    Mon
+  </div>
+  <div
+    className="calendar-days_of_week_day"
+    key="Tue"
   >
     Tue
   </div>
   <div
-    className="test-class-days_of_week_day"
+    className="calendar-days_of_week_day"
+    key="Wed"
   >
     Wed
   </div>
   <div
-    className="test-class-days_of_week_day"
+    className="calendar-days_of_week_day"
+    key="Thu"
   >
     Thu
   </div>
   <div
-    className="test-class-days_of_week_day"
+    className="calendar-days_of_week_day"
+    key="Fri"
   >
     Fri
   </div>
   <div
-    className="test-class-days_of_week_day"
+    className="calendar-days_of_week_day is-weekend"
+    key="Sat"
   >
     Sat
   </div>
   <div
-    className="test-class-days_of_week_day is-weekend"
+    className="calendar-days_of_week_day is-weekend"
+    key="Sun"
   >
     Sun
   </div>
-  <div
-    className="test-class-days_of_week_day is-weekend"
-  >
-    Mon
-  </div>
 </div>
-`
+`;

@@ -5,7 +5,6 @@
   &-month
     width 300px
     user-select none
-    display table
 
     &_header
       display flex
@@ -14,11 +13,13 @@
 
   &-week,
   &-days_of_week
-    display table-row
+    display flex
+    justify-content space-between
 
   &-day,
   &-days_of_week_day
-    display table-cell
+    display inline-block
+    width 40px
     text-align center
     line-height 30px
     opacity .5

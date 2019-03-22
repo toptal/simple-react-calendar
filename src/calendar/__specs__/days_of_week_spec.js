@@ -1,17 +1,19 @@
+import {shallow} from 'enzyme'
 import React from 'react'
 
+import {BLOCK_CLASS_NAME, DAYS_OF_WEEK} from '../consts'
 import DaysOfWeek from '../days_of_week'
 
-import ReactTestRenderer from 'react-test-renderer'
-import {shallow} from 'enzyme'
-
 describe('DaysOfWeek', () => {
-  let wrapper, tree
+  let wrapper, props
+
+  beforeEach(() => {
+    props = getProps()
+    wrapper = shallow(<DaysOfWeek {...props} />)
+  })
 
   describe('#_getDaysOfWeek', () => {
     it('return days of week', () => {
-      wrapper = shallow(<DaysOfWeek weekStartsOn={2} />)
-
       const daysOfWeek = wrapper.instance()._getDaysOfWeek(3)
 
       expect(daysOfWeek).toEqual(['Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue'])
@@ -20,9 +22,14 @@ describe('DaysOfWeek', () => {
 
   describe('#render', () => {
     it('renders <DaysOfWeek />', () => {
-      tree = ReactTestRenderer.create(<DaysOfWeek weekStartsOn={2} blockClassName="test-class" />).toJSON()
-
-      expect(tree).toMatchSnapshot()
+      expect(wrapper).toMatchSnapshot()
     })
   })
+})
+
+const getProps = (overrides = {}) => ({
+  blockClassName: BLOCK_CLASS_NAME,
+  daysOfWeek: DAYS_OF_WEEK,
+  weekStartsOn: 1,
+  ...overrides,
 })
