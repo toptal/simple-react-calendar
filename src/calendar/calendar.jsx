@@ -54,6 +54,8 @@ export default class Calendar extends React.Component {
     onSelectionProgress: PropTypes.func,
     rangeLimit: PropTypes.number,
     renderDay: PropTypes.func,
+    renderDayOfWeek: PropTypes.func,
+    renderDaysOfWeek: PropTypes.func,
     renderMonth: PropTypes.func,
     renderMonthHeader: PropTypes.func,
     renderWeek: PropTypes.func,
@@ -248,6 +250,8 @@ export default class Calendar extends React.Component {
       renderDay,
       renderWeek,
       renderMonth,
+      renderDaysOfWeek,
+      renderDayOfWeek,
     } = this.props
 
     const selection = this._selection()
@@ -258,6 +262,8 @@ export default class Calendar extends React.Component {
         customRender={renderMonth}
         renderDay={renderDay}
         renderWeek={renderWeek}
+        renderDaysOfWeek={renderDaysOfWeek}
+        renderDayOfWeek={renderDayOfWeek}
         activeMonth={this._activeMonth()}
         blockClassName={blockClassName}
         daysOfWeek={daysOfWeek}

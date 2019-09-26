@@ -44,6 +44,8 @@ export default class Month extends React.Component {
     onNoticeChange: PropTypes.func.isRequired,
     rangeLimit: PropTypes.number,
     renderDay: PropTypes.func,
+    renderDayOfWeek: PropTypes.func,
+    renderDaysOfWeek: PropTypes.func,
     renderWeek: PropTypes.func,
     selectedMax: datePropType,
     selectedMin: datePropType,
@@ -223,11 +225,19 @@ export default class Month extends React.Component {
   }
 
   _renderDaysOfWeek() {
-    const {disableDaysOfWeek, blockClassName, weekStartsOn, daysOfWeek} = this.props
+    const {disableDaysOfWeek, blockClassName, weekStartsOn, daysOfWeek, renderDaysOfWeek, renderDayOfWeek} = this.props
 
     if (disableDaysOfWeek) return
 
-    return <DaysOfWeek blockClassName={blockClassName} weekStartsOn={weekStartsOn} daysOfWeek={daysOfWeek} />
+    return (
+      <DaysOfWeek
+        blockClassName={blockClassName}
+        weekStartsOn={weekStartsOn}
+        daysOfWeek={daysOfWeek}
+        customRender={renderDaysOfWeek}
+        renderDayOfWeek={renderDayOfWeek}
+      />
+    )
   }
 
   _renderWeeks() {
