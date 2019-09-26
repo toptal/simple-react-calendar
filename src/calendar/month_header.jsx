@@ -13,6 +13,7 @@ export default class MonthHeader extends React.Component {
   static propTypes = {
     activeMonth: datePropType.isRequired,
     blockClassName: PropTypes.string,
+    customRender: PropTypes.func,
     headerNextArrow: PropTypes.element,
     headerNextTitle: PropTypes.string,
     headerPrevArrow: PropTypes.element,
@@ -37,10 +38,21 @@ export default class MonthHeader extends React.Component {
       headerNextTitle,
       headerPrevArrow,
       headerPrevTitle,
+      customRender,
     } = this.props
 
     const prevEnabled = minDate ? isBefore(startOfMonth(minDate), startOfMonth(activeMonth)) : true
     const nextEnabled = maxDate ? isAfter(startOfMonth(maxDate), startOfMonth(activeMonth)) : true
+
+    if (customRender) {
+      return customRender({
+        ...this.props,
+        prevEnabled,
+        nextEnabled,
+        switchMonth: this._switchMonth.bind(this),
+        children: 'no content, please use activeMonth prop and custom buttons instead',
+      })
+    }
 
     return (
       <div className={`${blockClassName}-month_header`}>

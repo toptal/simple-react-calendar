@@ -301,12 +301,9 @@ export default class Calendar extends React.Component {
       renderMonthHeader,
     } = this.props
 
-    if (renderMonthHeader) {
-      return renderMonthHeader({...this.props})
-    }
-
     return (
       <MonthHeaderComponent
+        customRender={renderMonthHeader}
         activeMonth={this._activeMonth()}
         blockClassName={blockClassName}
         headerNextArrow={headerNextArrow}
