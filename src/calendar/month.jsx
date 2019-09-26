@@ -225,7 +225,7 @@ export default class Month extends React.Component {
   _renderDaysOfWeek() {
     const {disableDaysOfWeek, blockClassName, weekStartsOn, daysOfWeek} = this.props
 
-    if (!disableDaysOfWeek) return
+    if (disableDaysOfWeek) return
 
     return <DaysOfWeek blockClassName={blockClassName} weekStartsOn={weekStartsOn} daysOfWeek={daysOfWeek} />
   }
