@@ -4,47 +4,47 @@ exports[`DaysOfWeek #render renders <DaysOfWeek /> 1`] = `
 <div
   className="calendar-days_of_week"
 >
-  <div
-    className="calendar-days_of_week_day"
+  <DayOfWeek
+    blockClassName="calendar"
+    day="Mon"
+    isWeekend={false}
     key="Mon"
-  >
-    Mon
-  </div>
-  <div
-    className="calendar-days_of_week_day"
+  />
+  <DayOfWeek
+    blockClassName="calendar"
+    day="Tue"
+    isWeekend={false}
     key="Tue"
-  >
-    Tue
-  </div>
-  <div
-    className="calendar-days_of_week_day"
+  />
+  <DayOfWeek
+    blockClassName="calendar"
+    day="Wed"
+    isWeekend={false}
     key="Wed"
-  >
-    Wed
-  </div>
-  <div
-    className="calendar-days_of_week_day"
+  />
+  <DayOfWeek
+    blockClassName="calendar"
+    day="Thu"
+    isWeekend={false}
     key="Thu"
-  >
-    Thu
-  </div>
-  <div
-    className="calendar-days_of_week_day"
+  />
+  <DayOfWeek
+    blockClassName="calendar"
+    day="Fri"
+    isWeekend={false}
     key="Fri"
-  >
-    Fri
-  </div>
-  <div
-    className="calendar-days_of_week_day is-weekend"
+  />
+  <DayOfWeek
+    blockClassName="calendar"
+    day="Sat"
+    isWeekend={true}
     key="Sat"
-  >
-    Sat
-  </div>
-  <div
-    className="calendar-days_of_week_day is-weekend"
+  />
+  <DayOfWeek
+    blockClassName="calendar"
+    day="Sun"
+    isWeekend={true}
     key="Sun"
-  >
-    Sun
-  </div>
+  />
 </div>
 `;
