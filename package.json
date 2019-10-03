@@ -121,8 +121,5 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-prop-types": "^0.4.0"
-  },
-  "resolutions": {
-    "**/**/fsevents": "^1.2.9"
   }
 }
