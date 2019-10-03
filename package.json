@@ -55,7 +55,7 @@
     "lib": "lib"
   },
   "lint-staged": {
-    "*.{jsx, js, tsx, ts, md}": [
+    "*.{jsx, js, tsx, ts, md, yml}": [
       "npm run lint:path",
       "prettier-standard",
       "git add"
