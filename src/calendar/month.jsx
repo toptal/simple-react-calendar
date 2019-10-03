@@ -1,15 +1,15 @@
-import addDays from 'date-fns/add_days'
-import areRangesOverlapping from 'date-fns/are_ranges_overlapping'
-import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
-import endOfMonth from 'date-fns/end_of_month'
-import endOfWeek from 'date-fns/end_of_week'
-import isBefore from 'date-fns/is_before'
-import isEqual from 'date-fns/is_equal'
-import isSameDay from 'date-fns/is_same_day'
-import parse from 'date-fns/parse'
-import startOfMonth from 'date-fns/start_of_month'
-import startOfWeek from 'date-fns/start_of_week'
-import subDays from 'date-fns/sub_days'
+import addDays from 'date-fns/addDays'
+import areIntervalsOverlapping from 'date-fns/areIntervalsOverlapping'
+import differenceInCalendarDays from 'date-fns/differenceInCalendarDays'
+import endOfMonth from 'date-fns/endOfMonth'
+import endOfWeek from 'date-fns/endOfWeek'
+import isBefore from 'date-fns/isBefore'
+import isEqual from 'date-fns/isEqual'
+import isSameDay from 'date-fns/isSameDay'
+import parseISO from 'date-fns/parseISO'
+import startOfMonth from 'date-fns/startOfMonth'
+import startOfWeek from 'date-fns/startOfWeek'
+import subDays from 'date-fns/subDays'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -92,7 +92,7 @@ export default class Month extends React.Component {
     for (let i = 0; i < disabledIntervals.length; i++) {
       const {start: intervalStart, end: intervalEnd} = disabledIntervals[i]
 
-      if (areRangesOverlapping(start, end, intervalStart, intervalEnd)) {
+      if (areIntervalsOverlapping(start, end, intervalStart, intervalEnd)) {
         return
       }
     }
@@ -105,7 +105,7 @@ export default class Month extends React.Component {
     const {
       currentTarget: {value},
     } = event
-    const date = parse(value)
+    const date = parseISO(value)
 
     const {onDayMouseEnter} = this.props
 
@@ -138,7 +138,7 @@ export default class Month extends React.Component {
     const {
       currentTarget: {value},
     } = event
-    const date = parse(value)
+    const date = parseISO(value)
     const {mode} = this.props
 
     if (mode === RANGE_MODE) {

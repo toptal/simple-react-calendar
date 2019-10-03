@@ -1,8 +1,8 @@
-import addMonths from 'date-fns/add_months'
+import addMonths from 'date-fns/addMonths'
 import formatDate from 'date-fns/format'
-import isAfter from 'date-fns/is_after'
-import isBefore from 'date-fns/is_before'
-import startOfMonth from 'date-fns/start_of_month'
+import isAfter from 'date-fns/isAfter'
+import isBefore from 'date-fns/isBefore'
+import startOfMonth from 'date-fns/startOfMonth'
 import PropTypes from 'prop-types'
 import React from 'react'
 

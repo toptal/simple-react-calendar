@@ -1,6 +1,6 @@
-import isSameMonth from 'date-fns/is_same_month'
-import isValidDate from 'date-fns/is_valid'
-import startOfMonth from 'date-fns/start_of_month'
+import isSameMonth from 'date-fns/isSameMonth'
+import isValidDate from 'date-fns/isValid'
+import startOfMonth from 'date-fns/startOfMonth'
 import PropTypes from 'prop-types'
 import React from 'react'
 

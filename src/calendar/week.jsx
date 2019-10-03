@@ -1,15 +1,16 @@
-import eachDay from 'date-fns/each_day'
-import endOfWeek from 'date-fns/end_of_week'
+import eachDayOfInterval from 'date-fns/eachDayOfInterval'
+import endOfWeek from 'date-fns/endOfWeek'
+import parseISO from 'date-fns/parseISO'
 import format from 'date-fns/format'
-import isAfter from 'date-fns/is_after'
-import isBefore from 'date-fns/is_before'
-import isEqual from 'date-fns/is_equal'
-import isSameDay from 'date-fns/is_same_day'
-import isSameMonth from 'date-fns/is_same_month'
-import isWeekend from 'date-fns/is_weekend'
-import isWithinRange from 'date-fns/is_within_range'
-import startOfDay from 'date-fns/start_of_day'
-import startOfWeek from 'date-fns/start_of_week'
+import isAfter from 'date-fns/isAfter'
+import isBefore from 'date-fns/isBefore'
+import isEqual from 'date-fns/isEqual'
+import isSameDay from 'date-fns/isSameDay'
+import isSameMonth from 'date-fns/isSameMonth'
+import isWeekend from 'date-fns/isWeekend'
+import isWithinInterval from 'date-fns/isWithinInterval'
+import startOfDay from 'date-fns/startOfDay'
+import startOfWeek from 'date-fns/startOfWeek'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -51,7 +52,7 @@ export default class Week extends React.Component {
     }
 
     if (minDate && maxDate) {
-      return isWithinRange(date, minDate, maxDate)
+      return isWithinInterval(date, minDate, maxDate)
     } else if (minDate && !maxDate) {
       return isAfter(date, minDate) || isEqual(date, minDate)
     } else if (maxDate && !minDate) {
@@ -64,7 +65,7 @@ export default class Week extends React.Component {
   _dateSelected(date) {
     const {selectedMin, selectedMax} = this.props
     return Boolean(
-      selectedMin && selectedMax && isWithinRange(startOfDay(date), startOfDay(selectedMin), startOfDay(selectedMax))
+      selectedMin && selectedMax && isWithinInterval(startOfDay(date), startOfDay(selectedMin), startOfDay(selectedMax))
     )
   }
 
@@ -72,7 +73,7 @@ export default class Week extends React.Component {
     const {highlightedStart, highlightedEnd} = this.props
     if (!highlightedStart || !highlightedEnd) return false
 
-    return isWithinRange(startOfDay(date), startOfDay(highlightedStart), startOfDay(highlightedEnd))
+    return isWithinInterval(startOfDay(date), {start: startOfDay(highlightedStart), end: startOfDay(highlightedEnd)})
   }
 
   _dateDisabled(date) {
@@ -83,7 +84,7 @@ export default class Week extends React.Component {
     for (let i = 0; i < disabledIntervals.length; i++) {
       const {start, end} = disabledIntervals[i]
 
-      dateDisabled = isWithinRange(startOfDay(date), startOfDay(start), startOfDay(end))
+      dateDisabled = isWithinInterval(startOfDay(date), {start: startOfDay(start), end: startOfDay(end)})
 
       if (dateDisabled) {
         return dateDisabled
@@ -124,13 +125,15 @@ export default class Week extends React.Component {
     const start = startOfWeek(date, {weekStartsOn})
     const end = endOfWeek(date, {weekStartsOn})
 
-    return eachDay(start, end).map((day) => {
-      const date = format(day, 'YYYY-MM-DD')
+    return eachDayOfInterval({start, end}).map((day) => {
+      consoel.log(day)
+      debugger
+      const date = format(day, 'yyyy-MM-dd')
       const isSelectable = this._dateSelectable(day)
       const isDisabled = this._dateDisabled(date)
-      const isWorkDay = !isWeekend(date)
-      const isCurrentMonth = isSameMonth(date, activeMonth)
-      const isNextMonth = !isCurrentMonth && isAfter(date, activeMonth)
+      const isWorkDay = !isWeekend(day)
+      const isCurrentMonth = isSameMonth(day, activeMonth)
+      const isNextMonth = !isCurrentMonth && isAfter(day, activeMonth)
 
       return (
         <Day

@@ -1,6 +1,6 @@
-import addDays from 'date-fns/add_days'
-import parse from 'date-fns/parse'
-import subDays from 'date-fns/sub_days'
+import addDays from 'date-fns/addDays'
+import parseISO from 'date-fns/parseISO'
+import subDays from 'date-fns/subDays'
 import {shallow} from 'enzyme'
 import React from 'react'
 
@@ -203,7 +203,7 @@ describe('Month', () => {
                 })
 
                 it('sets `_selectionEnd`', () => {
-                  expect(instance._selectionEnd).toEqual(parse(date))
+                  expect(instance._selectionEnd).toEqual(parseISO(date))
                 })
               })
             })
@@ -217,7 +217,7 @@ describe('Month', () => {
         instance.handleOnDayMouseEnter(mockEvent)
 
         expect(props.onDayMouseEnter).toHaveBeenCalledTimes(1)
-        expect(props.onDayMouseEnter).toHaveBeenCalledWith(parse(date))
+        expect(props.onDayMouseEnter).toHaveBeenCalledWith(parseISO(date))
       })
     })
   })
@@ -240,7 +240,7 @@ describe('Month', () => {
 
             expect(instance._selectionInProgress).toBe(false)
             expect(instance._selectionStart).toBe(undefined)
-            expect(instance._selectionEnd).toEqual(parse(date))
+            expect(instance._selectionEnd).toEqual(parseISO(date))
           })
         })
 
@@ -270,8 +270,8 @@ describe('Month', () => {
           instance.handleOnDayClick(mockEvent)
 
           expect(instance._selectionInProgress).toBe(true)
-          expect(instance._selectionStart).toEqual(parse(date))
-          expect(instance._selectionEnd).toEqual(parse(date))
+          expect(instance._selectionStart).toEqual(parseISO(date))
+          expect(instance._selectionEnd).toEqual(parseISO(date))
         })
       })
     })
@@ -288,8 +288,8 @@ describe('Month', () => {
         instance.handleOnDayClick(mockEvent)
 
         expect(instance._selectionInProgress).toBe(false)
-        expect(instance._selectionStart).toEqual(parse(date))
-        expect(instance._selectionEnd).toEqual(parse(date))
+        expect(instance._selectionStart).toEqual(parseISO(date))
+        expect(instance._selectionEnd).toEqual(parseISO(date))
       })
     })
 

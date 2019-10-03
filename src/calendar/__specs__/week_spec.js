@@ -47,7 +47,7 @@ describe.only('Week', () => {
     })
 
     context('when prop `highlightedStart` and `highlightedEnd` are defined', () => {
-      it('renders <Week />', () => {
+      it.only('renders <Week />', () => {
         wrapper.setProps({
           date: new Date(2015, 5, 29),
           today: new Date(2015, 5, 31),
