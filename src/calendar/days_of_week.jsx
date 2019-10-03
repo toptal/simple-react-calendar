@@ -1,13 +1,16 @@
-import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import {DAYS_IN_WEEK} from './consts'
+import DayOfWeek from './day_of_week'
 
+const FRIDAY_INDEX = 4
 export default class DaysOfWeek extends React.Component {
   static propTypes = {
     blockClassName: PropTypes.string,
+    customRender: PropTypes.func,
     daysOfWeek: PropTypes.arrayOf(PropTypes.string),
+    renderDayOfWeek: PropTypes.func,
     weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
   }
 
@@ -16,24 +19,26 @@ export default class DaysOfWeek extends React.Component {
   }
 
   render() {
-    const {blockClassName, weekStartsOn} = this.props
+    const {blockClassName, weekStartsOn, customRender, renderDayOfWeek} = this.props
     const slicedDaysOfWeek = this._getDaysOfWeek(weekStartsOn)
 
-    return (
-      <div className={`${blockClassName}-days_of_week`}>
-        {slicedDaysOfWeek.map((day, index) => {
-          return (
-            <div
-              className={classnames(`${blockClassName}-days_of_week_day`, {
-                'is-weekend': index > 4, // 4 is an index of Friday
-              })}
-              key={day}
-            >
-              {day}
-            </div>
-          )
-        })}
-      </div>
-    )
+    const children = slicedDaysOfWeek.map((day, index) => (
+      <DayOfWeek
+        blockClassName={blockClassName}
+        isWeekend={index > FRIDAY_INDEX}
+        day={day}
+        customRender={renderDayOfWeek}
+        key={day}
+      />
+    ))
+
+    if (customRender) {
+      return customRender({
+        ...this.props,
+        children,
+      })
+    }
+
+    return <div className={`${blockClassName}-days_of_week`}>{children}</div>
   }
 }

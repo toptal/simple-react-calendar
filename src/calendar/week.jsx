@@ -21,6 +21,7 @@ export default class Week extends React.Component {
   static propTypes = {
     activeMonth: datePropType.isRequired,
     blockClassName: PropTypes.string.isRequired,
+    customRender: PropTypes.func,
     date: datePropType.isRequired,
     disabledIntervals: PropTypes.arrayOf(
       PropTypes.shape({
@@ -35,6 +36,7 @@ export default class Week extends React.Component {
     onDayClick: PropTypes.func.isRequired,
     onDayMouseEnter: PropTypes.func.isRequired,
     onDisabledDayClick: PropTypes.func.isRequired,
+    renderDay: PropTypes.func,
     selectedMax: datePropType,
     selectedMin: datePropType,
     today: datePropType.isRequired,
@@ -92,7 +94,17 @@ export default class Week extends React.Component {
   }
 
   render() {
-    return <div className={`${this.props.blockClassName}-week`}>{this._renderDays()}</div>
+    const {customRender} = this.props
+    const children = this._renderDays()
+
+    if (customRender) {
+      return customRender({
+        ...this.props,
+        children
+      })
+    }
+
+    return <div className={`${this.props.blockClassName}-week`}>{children}</div>
   }
 
   _renderDays() {
@@ -107,6 +119,7 @@ export default class Week extends React.Component {
       selectedMax,
       selectedMin,
       weekStartsOn,
+      renderDay,
     } = this.props
     const start = startOfWeek(date, {weekStartsOn})
     const end = endOfWeek(date, {weekStartsOn})
@@ -121,6 +134,7 @@ export default class Week extends React.Component {
 
       return (
         <Day
+          customRender={renderDay}
           blockClassName={blockClassName}
           date={date}
           handleOnClick={isSelectable ? onDayClick : isDisabled ? onDisabledDayClick : null}

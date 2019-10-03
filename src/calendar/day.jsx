@@ -3,26 +3,37 @@ import formatDate from 'date-fns/format'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const Day = ({
-  blockClassName,
-  date,
-  handleOnClick,
-  handleOnEnter,
-  isCurrentMonth,
-  isDisabled,
-  isHighlighted,
-  isMonthNext,
-  isMonthPrev,
-  isNonSelectable,
-  isSelectable,
-  isSelected,
-  isSelectionEnd,
-  isSelectionStart,
-  isToday,
-  isWeekend,
-  isWorkday,
-}) => (
-  <button
+const Day = (props) => {
+  const {
+    blockClassName,
+    date,
+    handleOnClick,
+    handleOnEnter,
+    isCurrentMonth,
+    isDisabled,
+    isHighlighted,
+    isMonthNext,
+    isMonthPrev,
+    isNonSelectable,
+    isSelectable,
+    isSelected,
+    isSelectionEnd,
+    isSelectionStart,
+    isToday,
+    isWeekend,
+    isWorkday,
+    customRender
+  } = props
+  const children = formatDate(date, 'D')
+
+  if (customRender) {
+    return customRender({
+      ...props,
+      children
+    })
+  }
+
+  return <button
     className={cx(`${blockClassName}-day`, {
       'is-current_month': isCurrentMonth,
       'is-disabled': isDisabled,
@@ -42,12 +53,13 @@ const Day = ({
     onMouseEnter={handleOnEnter}
     value={date}
   >
-    {formatDate(date, 'D')}
+    {children}
   </button>
-)
+}
 
 Day.propTypes = {
   blockClassName: PropTypes.string.isRequired,
+  customRender: PropTypes.func,
   date: PropTypes.string.isRequired,
   handleOnClick: PropTypes.func,
   handleOnEnter: PropTypes.func,
@@ -63,7 +75,7 @@ Day.propTypes = {
   isSelectionStart: PropTypes.bool.isRequired,
   isToday: PropTypes.bool.isRequired,
   isWeekend: PropTypes.bool.isRequired,
-  isWorkday: PropTypes.bool.isRequired,
+  isWorkday: PropTypes.bool.isRequired
 }
 
 export default Day

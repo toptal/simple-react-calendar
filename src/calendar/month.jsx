@@ -24,6 +24,7 @@ export default class Month extends React.Component {
   static propTypes = {
     activeMonth: datePropType.isRequired,
     blockClassName: PropTypes.string.isRequired,
+    customRender: PropTypes.func,
     daysOfWeek: PropTypes.arrayOf(PropTypes.string),
     disableDaysOfWeek: PropTypes.bool,
     disabledIntervals: PropTypes.arrayOf(
@@ -42,6 +43,10 @@ export default class Month extends React.Component {
     onDayMouseEnter: PropTypes.func,
     onNoticeChange: PropTypes.func.isRequired,
     rangeLimit: PropTypes.number,
+    renderDay: PropTypes.func,
+    renderDayOfWeek: PropTypes.func,
+    renderDaysOfWeek: PropTypes.func,
+    renderWeek: PropTypes.func,
     selectedMax: datePropType,
     selectedMin: datePropType,
     today: datePropType.isRequired,
@@ -200,15 +205,38 @@ export default class Month extends React.Component {
   }
 
   render() {
-    const {blockClassName, disableDaysOfWeek, weekStartsOn, daysOfWeek} = this.props
+    const {blockClassName, customRender} = this.props
+
+    const children = (
+      <React.Fragment>
+        {this._renderDaysOfWeek()}
+        {this._renderWeeks()}
+      </React.Fragment>
+    )
+
+    if (customRender) {
+      return customRender({
+        ...this.props,
+        children,
+      })
+    }
+
+    return <div className={`${blockClassName}-month`}>{children}</div>
+  }
+
+  _renderDaysOfWeek() {
+    const {disableDaysOfWeek, blockClassName, weekStartsOn, daysOfWeek, renderDaysOfWeek, renderDayOfWeek} = this.props
+
+    if (disableDaysOfWeek) return
 
     return (
-      <div className={`${blockClassName}-month`}>
-        {!disableDaysOfWeek && (
-          <DaysOfWeek blockClassName={blockClassName} weekStartsOn={weekStartsOn} daysOfWeek={daysOfWeek} />
-        )}
-        {this._renderWeeks()}
-      </div>
+      <DaysOfWeek
+        blockClassName={blockClassName}
+        weekStartsOn={weekStartsOn}
+        daysOfWeek={daysOfWeek}
+        customRender={renderDaysOfWeek}
+        renderDayOfWeek={renderDayOfWeek}
+      />
     )
   }
 
@@ -225,6 +253,8 @@ export default class Month extends React.Component {
       minNumberOfWeeks,
       rangeLimit,
       weekStartsOn,
+      renderDay,
+      renderWeek,
     } = this.props
     const weeks = []
     let {minDate, maxDate} = this.props
@@ -247,6 +277,8 @@ export default class Month extends React.Component {
     return weeks.map((week) => {
       return (
         <Week
+          customRender={renderWeek}
+          renderDay={renderDay}
           activeMonth={activeMonth}
           blockClassName={blockClassName}
           date={week}

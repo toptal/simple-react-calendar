@@ -27,6 +27,7 @@ export default class Calendar extends React.Component {
     NoticeComponent: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     activeMonth: datePropType,
     blockClassName: PropTypes.string,
+    customRender: PropTypes.func,
     daysOfWeek: PropTypes.arrayOf(PropTypes.string),
     disableDaysOfWeek: PropTypes.bool,
     disabledIntervals: PropTypes.arrayOf(
@@ -52,6 +53,12 @@ export default class Calendar extends React.Component {
     onSelect: PropTypes.func,
     onSelectionProgress: PropTypes.func,
     rangeLimit: PropTypes.number,
+    renderDay: PropTypes.func,
+    renderDayOfWeek: PropTypes.func,
+    renderDaysOfWeek: PropTypes.func,
+    renderMonth: PropTypes.func,
+    renderMonthHeader: PropTypes.func,
+    renderWeek: PropTypes.func,
     selected: PropTypes.oneOfType([
       datePropType,
       PropTypes.shape({
@@ -199,13 +206,38 @@ export default class Calendar extends React.Component {
   }
 
   render() {
+    const {blockClassName, customRender} = this.props
+
+    const children = (
+      <React.Fragment>
+        {this._renderNotice()}
+        {this._renderMonthHeader()}
+        {this._renderMonth()}
+      </React.Fragment>
+    )
+
+    if (customRender) {
+      return customRender({
+        ...this.props,
+        children,
+      })
+    }
+
+    return <div className={blockClassName}>{children}</div>
+  }
+
+  _renderNotice() {
+    const {shownNoticeType} = this.state
+    const {blockClassName} = this.props
+    const NoticeComponent = this.props.NoticeComponent || Notice
+
+    return shownNoticeType && <NoticeComponent blockClassName={blockClassName} type={shownNoticeType} />
+  }
+
+  _renderMonth() {
     const {
       blockClassName,
       disableDaysOfWeek,
-      headerNextArrow,
-      headerNextTitle,
-      headerPrevArrow,
-      headerPrevTitle,
       maxDate,
       minDate,
       minNumberOfWeeks,
@@ -215,57 +247,74 @@ export default class Calendar extends React.Component {
       rangeLimit,
       weekStartsOn,
       daysOfWeek,
+      renderDay,
+      renderWeek,
+      renderMonth,
+      renderDaysOfWeek,
+      renderDayOfWeek,
     } = this.props
+
     const selection = this._selection()
     const highlight = this._highlight()
-    const MonthHeaderComponent = this.props.MonthHeaderComponent || MonthHeader
 
     return (
-      <div className={blockClassName}>
-        {this._renderNotice()}
-        <MonthHeaderComponent
-          activeMonth={this._activeMonth()}
-          blockClassName={blockClassName}
-          headerNextArrow={headerNextArrow}
-          headerNextTitle={headerNextTitle}
-          headerPrevArrow={headerPrevArrow}
-          headerPrevTitle={headerPrevTitle}
-          maxDate={maxDate}
-          minDate={minDate}
-          onMonthChange={this._switchMonth.bind(this)}
-          ref="header"
-        />
-        <Month
-          activeMonth={this._activeMonth()}
-          blockClassName={blockClassName}
-          daysOfWeek={daysOfWeek}
-          disableDaysOfWeek={disableDaysOfWeek}
-          disabledIntervals={disabledIntervals}
-          highlightedEnd={highlight.end}
-          highlightedStart={highlight.start}
-          maxDate={maxDate}
-          minDate={minDate}
-          minNumberOfWeeks={minNumberOfWeeks}
-          mode={mode}
-          onChange={this._selectionChanged.bind(this)}
-          onDayMouseEnter={onDayHover}
-          onNoticeChange={this._noticeChanged.bind(this)}
-          rangeLimit={rangeLimit}
-          ref="month"
-          selectedMax={selection.end}
-          selectedMin={selection.start}
-          today={this._today()}
-          weekStartsOn={weekStartsOn}
-        />
-      </div>
+      <Month
+        customRender={renderMonth}
+        renderDay={renderDay}
+        renderWeek={renderWeek}
+        renderDaysOfWeek={renderDaysOfWeek}
+        renderDayOfWeek={renderDayOfWeek}
+        activeMonth={this._activeMonth()}
+        blockClassName={blockClassName}
+        daysOfWeek={daysOfWeek}
+        disableDaysOfWeek={disableDaysOfWeek}
+        disabledIntervals={disabledIntervals}
+        highlightedEnd={highlight.end}
+        highlightedStart={highlight.start}
+        maxDate={maxDate}
+        minDate={minDate}
+        minNumberOfWeeks={minNumberOfWeeks}
+        mode={mode}
+        onChange={this._selectionChanged.bind(this)}
+        onDayMouseEnter={onDayHover}
+        onNoticeChange={this._noticeChanged.bind(this)}
+        rangeLimit={rangeLimit}
+        ref="month"
+        selectedMax={selection.end}
+        selectedMin={selection.start}
+        today={this._today()}
+        weekStartsOn={weekStartsOn}
+      />
     )
   }
 
-  _renderNotice() {
-    const {shownNoticeType} = this.state
-    const {blockClassName} = this.props
-    const NoticeComponent = this.props.NoticeComponent || Notice
+  _renderMonthHeader() {
+    const {
+      blockClassName,
+      headerNextArrow,
+      headerNextTitle,
+      headerPrevArrow,
+      headerPrevTitle,
+      maxDate,
+      minDate,
+      MonthHeaderComponent = MonthHeader,
+      renderMonthHeader,
+    } = this.props
 
-    return shownNoticeType && <NoticeComponent blockClassName={blockClassName} type={shownNoticeType} />
+    return (
+      <MonthHeaderComponent
+        customRender={renderMonthHeader}
+        activeMonth={this._activeMonth()}
+        blockClassName={blockClassName}
+        headerNextArrow={headerNextArrow}
+        headerNextTitle={headerNextTitle}
+        headerPrevArrow={headerPrevArrow}
+        headerPrevTitle={headerPrevTitle}
+        maxDate={maxDate}
+        minDate={minDate}
+        onMonthChange={this._switchMonth.bind(this)}
+        ref="header"
+      />
+    )
   }
 }
