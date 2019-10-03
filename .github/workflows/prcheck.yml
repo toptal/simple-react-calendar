@@ -1,0 +1,17 @@
+name: PR check
+
+on: [pull_request]
+
+jobs:
+  checks:
+    name: General checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install
+        run: yarn install
+      - name: Lint
+        run: yarn lint
+      - name: Unit test
+        run: yarn test:ci
