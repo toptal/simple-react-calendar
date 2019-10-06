@@ -4,14 +4,25 @@ on: [pull_request]
 
 jobs:
   checks:
-    name: General checks
     runs-on: ubuntu-latest
 
     steps:
+      # Check out
       - uses: actions/checkout@v1
-      - name: Install
-        run: yarn install
+        with: {submodules: true}
+
+      # Get local dependencies
+      - run: yarn install
+
+      # Danger Check
+      - run: yarn danger ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+
+      # Lint Check
       - name: Lint
         run: yarn lint
+
+      # Unit test Check
       - name: Unit test
         run: yarn test:ci
