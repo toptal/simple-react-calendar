@@ -16,11 +16,12 @@ jobs:
       # Get local dependencies
       - run: yarn install
 
+      # TODO enable storybook deploy on CI
       # Generate static storybook
-      - run: yarn storybook:build
+      # - run: yarn storybook:build
 
-      # Deploy static storybook
-      - run: yarn storybook:deploy
+      # # Deploy static storybook
+      # - run: yarn storybook:deploy
 
       # Create release
       - run: ./node_modules/.bin/semantic-release --debug
