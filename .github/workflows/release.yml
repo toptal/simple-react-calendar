@@ -17,7 +17,7 @@ jobs:
       - run: yarn install
 
       # Generate static storybook
-      - run: yarn generate-storybook
+      - run: yarn storybook:build
 
       # Deploy static storybook
       - run: yarn storybook:deploy
