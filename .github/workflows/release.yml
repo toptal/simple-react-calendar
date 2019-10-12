@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out
+      - uses: actions/checkout@v1
+        with: {submodules: true}
+
+      # Get local dependencies
+      - run: yarn install
+
+      # Generate dist folder
+      - run: yarn build:dist
+
+      # Generate static storybook
+      - run: yarn generate-storybook
+
+      # Deploy static storybook
+      - run: yarn storybook:deploy
+
+      # Create release
+      - run: ./node_modules/.bin/semantic-release --debug
+        env:
+          GH_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
