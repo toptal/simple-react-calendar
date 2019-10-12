@@ -16,9 +16,6 @@ jobs:
       # Get local dependencies
       - run: yarn install
 
-      # Generate dist folder
-      - run: yarn build:dist
-
       # Generate static storybook
       - run: yarn generate-storybook
 
