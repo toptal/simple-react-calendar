@@ -42,7 +42,7 @@
   },
   "lint-staged": {
     "*.{jsx, js, tsx, ts, md, yml}": [
-      "npm run lint:path",
+      "npm run lint",
       "prettier-standard",
       "git add"
     ]
@@ -74,6 +74,13 @@
     "@babel/preset-react": "^7.0.0",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/commit-analyzer": "^6.3.0",
+    "@semantic-release/exec": "^3.3.7",
+    "@semantic-release/git": "^7.0.16",
+    "@semantic-release/github": "^5.5.3",
+    "@semantic-release/npm": "^5.2.0",
+    "@semantic-release/release-notes-generator": "^7.3.0",
     "@storybook/addon-actions": "^5.0.3",
     "@storybook/addon-knobs": "^5.0.3",
     "@storybook/addons": "^5.0.3",
@@ -105,6 +112,7 @@
     "mockdate": "^2.0.2",
     "prettier-standard": "^15.0.1",
     "react-test-renderer": "^16.8.4",
+    "semantic-release": "^15.13.24",
     "style-loader": "^1.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
