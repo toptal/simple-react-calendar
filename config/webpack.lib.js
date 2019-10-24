@@ -11,7 +11,7 @@ const libraryWebpackConfig = merge.smart(baseWebpackConfig, {
   mode: 'production',
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
   },
 
   output: {

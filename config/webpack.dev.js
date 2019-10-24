@@ -17,7 +17,7 @@ const developmentConfig = merge.smart(baseWebpackConfig, {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.styl'],
+    extensions: ['.js', '.jsx', '.tsx', '.ts', '.styl'],
   },
 
   devServer: {
@@ -27,27 +27,24 @@ const developmentConfig = merge.smart(baseWebpackConfig, {
   },
 
   module: {
-    rules: [
-      {
-        test: /\.styl$/,
-        use: [
-          {
-            loader: 'style-loader',
+    rules: [{
+      test: /\.styl$/,
+      use: [{
+          loader: 'style-loader',
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
+            sourceMap: false,
+            plugins: [autoprefixer],
           },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              sourceMap: false,
-              plugins: [autoprefixer],
-            },
-          },
-          {
-            loader: 'stylus-loader',
-          },
-        ],
-      },
-    ],
+        },
+        {
+          loader: 'stylus-loader',
+        },
+      ],
+    }, ],
   },
 
   plugins: [
