@@ -3,7 +3,7 @@ import React from 'react'
 
 import Week from '../week'
 
-describe.only('Week', () => {
+describe('Week', () => {
   let props, wrapper
 
   beforeEach(() => {
