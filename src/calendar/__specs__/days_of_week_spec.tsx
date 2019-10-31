@@ -1,7 +1,7 @@
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 
-import {BLOCK_CLASS_NAME, DAYS_OF_WEEK} from '../consts'
+import { BLOCK_CLASS_NAME, DAYS_OF_WEEK } from '../consts'
 import DaysOfWeek from '../days_of_week'
 
 describe('DaysOfWeek', () => {

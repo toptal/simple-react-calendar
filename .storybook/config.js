@@ -1,7 +1,7 @@
-import {configure} from '@storybook/react'
+import { configure } from '@storybook/react'
 
 function loadStories() {
-  require('../src/calendar/stories/index.js')
+  require('../src/calendar/stories/index.jsx')
 }
 
 configure(loadStories, module)

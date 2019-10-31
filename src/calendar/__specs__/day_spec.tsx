@@ -1,4 +1,4 @@
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 
 import Day from '../day'
@@ -23,8 +23,8 @@ describe('Day', () => {
       expect(button.prop('onMouseEnter')).toEqual(props.handleOnEnter)
     })
 
-    context('class variations', () => {
-      context('when prop `isCurrentMonth` is `true`', () => {
+    describe('class variations', () => {
+      describe('when prop `isCurrentMonth` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isCurrentMonth: true,
@@ -34,7 +34,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isDisabled` is `true`', () => {
+      describe('when prop `isDisabled` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isDisabled: true,
@@ -44,7 +44,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isHighlighted` is `true`', () => {
+      describe('when prop `isHighlighted` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isHighlighted: true,
@@ -54,7 +54,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isMonthNext` is `true`', () => {
+      describe('when prop `isMonthNext` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isMonthNext: true,
@@ -64,7 +64,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isMonthPrev` is `true`', () => {
+      describe('when prop `isMonthPrev` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isMonthPrev: true,
@@ -74,7 +74,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isNonSelectable` is `true`', () => {
+      describe('when prop `isNonSelectable` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isNonSelectable: true,
@@ -84,7 +84,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isSelectable` is `true`', () => {
+      describe('when prop `isSelectable` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isSelectable: true,
@@ -94,7 +94,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isSelected` is `true`', () => {
+      describe('when prop `isSelected` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isSelected: true,
@@ -104,7 +104,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isSelectionEnd` is `true`', () => {
+      describe('when prop `isSelectionEnd` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isSelectionEnd: true,
@@ -114,7 +114,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isSelectionStart` is `true`', () => {
+      describe('when prop `isSelectionStart` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isSelectionStart: true,
@@ -124,7 +124,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isToday` is `true`', () => {
+      describe('when prop `isToday` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isToday: true,
@@ -134,7 +134,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isWeekend` is `true`', () => {
+      describe('when prop `isWeekend` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isWeekend: true,
@@ -144,7 +144,7 @@ describe('Day', () => {
         })
       })
 
-      context('when prop `isWorkday` is `true`', () => {
+      describe('when prop `isWorkday` is `true`', () => {
         it('renders <Day />', () => {
           wrapper.setProps({
             isWorkday: true,
@@ -156,7 +156,6 @@ describe('Day', () => {
     })
   })
 })
-
 const getProps = (overrides = {}) => ({
   blockClassName: 'example-block-class',
   date: '2015-05-05',

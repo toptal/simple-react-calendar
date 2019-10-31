@@ -9,7 +9,7 @@ exports[`Day #render class variations when prop \`isCurrentMonth\` is \`true\` r
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isDisabled\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -20,7 +20,7 @@ exports[`Day #render class variations when prop \`isDisabled\` is \`true\` rende
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isHighlighted\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -31,7 +31,7 @@ exports[`Day #render class variations when prop \`isHighlighted\` is \`true\` re
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isMonthNext\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -42,7 +42,7 @@ exports[`Day #render class variations when prop \`isMonthNext\` is \`true\` rend
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isMonthPrev\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -53,7 +53,7 @@ exports[`Day #render class variations when prop \`isMonthPrev\` is \`true\` rend
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isNonSelectable\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -64,7 +64,7 @@ exports[`Day #render class variations when prop \`isNonSelectable\` is \`true\` 
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isSelectable\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -75,7 +75,7 @@ exports[`Day #render class variations when prop \`isSelectable\` is \`true\` ren
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isSelected\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -86,7 +86,7 @@ exports[`Day #render class variations when prop \`isSelected\` is \`true\` rende
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isSelectionEnd\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -97,7 +97,7 @@ exports[`Day #render class variations when prop \`isSelectionEnd\` is \`true\` r
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isSelectionStart\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -108,7 +108,7 @@ exports[`Day #render class variations when prop \`isSelectionStart\` is \`true\`
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isToday\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -119,7 +119,7 @@ exports[`Day #render class variations when prop \`isToday\` is \`true\` renders 
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isWeekend\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -130,7 +130,7 @@ exports[`Day #render class variations when prop \`isWeekend\` is \`true\` render
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render class variations when prop \`isWorkday\` is \`true\` renders <Day /> 1`] = `
 <button
@@ -141,7 +141,7 @@ exports[`Day #render class variations when prop \`isWorkday\` is \`true\` render
 >
   5
 </button>
-`
+`;
 
 exports[`Day #render renders <Day /> 1`] = `
 <button
@@ -152,4 +152,4 @@ exports[`Day #render renders <Day /> 1`] = `
 >
   5
 </button>
-`
+`;

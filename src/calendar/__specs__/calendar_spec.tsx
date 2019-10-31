@@ -1,4 +1,4 @@
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 
@@ -9,8 +9,8 @@ describe('Calendar', () => {
   const date = new Date(2015, 6, 1)
 
   describe('#componentWillReceiveProps', () => {
-    context('when nextProps `activeMonth` is defined', () => {
-      context('when nextProps `activeMonth` and prop `activeMonth` is different', () => {
+    describe('when nextProps `activeMonth` is defined', () => {
+      describe('when nextProps `activeMonth` and prop `activeMonth` is different', () => {
         it('sets state `activeMonth`', () => {
           props = {activeMonth: date}
           wrapper = shallow(<Calendar />)
@@ -21,7 +21,7 @@ describe('Calendar', () => {
       })
     })
 
-    context('when nextProps `activeMonth` is `undefined`', () => {
+    describe('when nextProps `activeMonth` is `undefined`', () => {
       it("doesn't set state", () => {
         props = {activeMonth: date}
         wrapper = shallow(<Calendar />)
@@ -33,7 +33,7 @@ describe('Calendar', () => {
   })
 
   describe('#_initialMonth', () => {
-    context('when prop `activeMonth` is valid date', () => {
+    describe('when prop `activeMonth` is valid date', () => {
       it('returns `activeMonth`', () => {
         wrapper = shallow(<Calendar activeMonth={date} />)
 
@@ -41,7 +41,7 @@ describe('Calendar', () => {
       })
     })
 
-    context('when prop `activeMonth` is invalid date', () => {
+    describe('when prop `activeMonth` is invalid date', () => {
       it('returns `activeMonth`', () => {
         props = {
           activeMonth: '2017-01-01',
@@ -56,23 +56,22 @@ describe('Calendar', () => {
   })
 
   describe('#_switchMonth', () => {
-    context('when prop `onMonthChange` is defined', () => {
+    describe('when prop `onMonthChange` is defined', () => {
       it('calls prop #onMonthChange', () => {
         props = {onMonthChange: jest.fn(), activeMonth: date}
         wrapper = shallow(<Calendar {...props} />)
-
         wrapper.instance()._switchMonth('2017-01-01')
 
         expect(props.onMonthChange).toHaveBeenCalledTimes(1)
+
         expect(props.onMonthChange).toHaveBeenCalledWith('2017-01-01')
       })
     })
 
-    context('when prop `onMonthChange` is `undefined`', () => {
+    describe('when prop `onMonthChange` is `undefined`', () => {
       it('sets `activeMonth` state', () => {
         props = {activeMonth: date}
         wrapper = shallow(<Calendar {...props} />)
-
         wrapper.instance()._switchMonth('2017-01-01')
 
         expect(wrapper.state('activeMonth')).toBe('2017-01-01')
@@ -81,7 +80,7 @@ describe('Calendar', () => {
   })
 
   describe('#_activeMonth', () => {
-    context('when prop `onMonthChange` is defined', () => {
+    describe('when prop `onMonthChange` is defined', () => {
       it('returns prop `activeMonth`', () => {
         props = {onMonthChange: jest.fn(), activeMonth: date}
         wrapper = shallow(<Calendar {...props} />)
@@ -90,7 +89,7 @@ describe('Calendar', () => {
       })
     })
 
-    context('when prop `onMonthChange` is `undefined`', () => {
+    describe('when prop `onMonthChange` is `undefined`', () => {
       it('returns state `activeMonth`', () => {
         wrapper = shallow(<Calendar activeMonth={date} />)
         wrapper.setState({activeMonth: '2015-01-01'})
@@ -101,15 +100,18 @@ describe('Calendar', () => {
   })
 
   describe('#_highlight', () => {
-    context('when prop `highlighted` is `undefined`', () => {
+    describe('when prop `highlighted` is `undefined`', () => {
       it('returns object', () => {
         wrapper = shallow(<Calendar />)
 
-        expect(wrapper.instance()._highlight()).toEqual({start: null, end: null})
+        expect(wrapper.instance()._highlight()).toEqual({
+          start: null,
+          end: null,
+        })
       })
     })
 
-    context('when prop `highlighted` is defined', () => {
+    describe('when prop `highlighted` is defined', () => {
       it('returns object', () => {
         props = {
           highlighted: {
@@ -122,7 +124,7 @@ describe('Calendar', () => {
         expect(wrapper.instance()._highlight()).toEqual(props.highlighted)
       })
 
-      context('when prop `highlighted.start` is invalid date', () => {
+      describe('when prop `highlighted.start` is invalid date', () => {
         it('returns object', () => {
           props = {
             highlighted: {
@@ -132,11 +134,14 @@ describe('Calendar', () => {
           }
           wrapper = shallow(<Calendar {...props} />)
 
-          expect(wrapper.instance()._highlight()).toEqual({start: null, end: null})
+          expect(wrapper.instance()._highlight()).toEqual({
+            start: null,
+            end: null,
+          })
         })
       })
 
-      context('when prop `highlighted.end` is invalid date', () => {
+      describe('when prop `highlighted.end` is invalid date', () => {
         it('returns object', () => {
           props = {
             highlighted: {
@@ -146,7 +151,10 @@ describe('Calendar', () => {
           }
           wrapper = shallow(<Calendar {...props} />)
 
-          expect(wrapper.instance()._highlight()).toEqual({start: null, end: null})
+          expect(wrapper.instance()._highlight()).toEqual({
+            start: null,
+            end: null,
+          })
         })
       })
     })
@@ -160,7 +168,7 @@ describe('Calendar', () => {
       instance = wrapper.instance()
     })
 
-    context('when #_selectionStart and #_selectionEnd returns valid date', () => {
+    describe('when #_selectionStart and #_selectionEnd returns valid date', () => {
       it('returns object', () => {
         const start = date
         const end = new Date(2015, 7, 1)
@@ -171,7 +179,7 @@ describe('Calendar', () => {
       })
     })
 
-    context('when #_selectionStart and #_selectionEnd returns invalid date', () => {
+    describe('when #_selectionStart and #_selectionEnd returns invalid date', () => {
       it('returns object', () => {
         instance._selectionStart = () => date
         instance._selectionEnd = () => 'abc'
@@ -182,7 +190,7 @@ describe('Calendar', () => {
   })
 
   describe('#_selectionDate', () => {
-    context("when prop `mode` is 'single'", () => {
+    describe("when prop `mode` is 'single'", () => {
       it('returns prop `selected', () => {
         props = {selected: date}
         wrapper = shallow(<Calendar {...props} />)
@@ -191,18 +199,21 @@ describe('Calendar', () => {
       })
     })
 
-    context("when prop `mode` is 'range'", () => {
+    describe("when prop `mode` is 'range'", () => {
       const selected = {start: date, end: new Date(2015, 7, 1)}
-      const selection = {start: new Date(2017, 6, 1), end: new Date(2017, 7, 1)}
+      const selection = {
+        start: new Date(2017, 6, 1),
+        end: new Date(2017, 7, 1),
+      }
 
-      context('when prop `onSelectionProgress` is `undefined`', () => {
+      describe('when prop `onSelectionProgress` is `undefined`', () => {
         beforeEach(() => {
           props = {selected, mode: 'range'}
           wrapper = shallow(<Calendar {...props} />)
           instance = wrapper.instance()
         })
 
-        context('when state `selection` is `defined`', () => {
+        describe('when state `selection` is `defined`', () => {
           it('returns state `selection.start`', () => {
             wrapper.setState({selection})
 
@@ -215,7 +226,7 @@ describe('Calendar', () => {
         })
       })
 
-      context('when prop `onSelectionProgress` is defined', () => {
+      describe('when prop `onSelectionProgress` is defined', () => {
         it('returns prop `selected.start`', () => {
           props = {selected, mode: 'range', onSelectionProgress: () => {}}
           wrapper = shallow(<Calendar {...props} />)
@@ -230,63 +241,66 @@ describe('Calendar', () => {
   describe('#_selectionChanged', () => {
     const selection = {start: date, end: new Date(2015, 7, 1)}
 
-    context("when prop `mode` is 'single'", () => {
-      context('when prop `onSelect` is defined', () => {
-        context('when selection `start` is defined', () => {
+    describe("when prop `mode` is 'single'", () => {
+      describe('when prop `onSelect` is defined', () => {
+        describe('when selection `start` is defined', () => {
           it('calls prop #onSelect', () => {
             props = {onSelect: jest.fn()}
             wrapper = shallow(<Calendar {...props} />)
-
             wrapper.instance()._selectionChanged(selection)
 
             expect(props.onSelect).toHaveBeenCalledTimes(1)
+
             expect(props.onSelect).toHaveBeenCalledWith(selection.start)
           })
         })
       })
     })
 
-    context("when prop `mode` is 'range'", () => {
-      context('when prop `onSelect` is defined', () => {
+    describe("when prop `mode` is 'range'", () => {
+      describe('when prop `onSelect` is defined', () => {
         it('calls prop #onSelect', () => {
           props = {mode: 'range', onSelect: jest.fn()}
           wrapper = shallow(<Calendar {...props} />)
-
           wrapper.instance()._selectionChanged(selection)
 
           expect(props.onSelect).toHaveBeenCalledTimes(1)
+
           expect(props.onSelect).toHaveBeenCalledWith(selection)
         })
       })
 
-      context('when prop `onSelectionProgress` is defined', () => {
+      describe('when prop `onSelectionProgress` is defined', () => {
         it('calls prop #onSelectionProgress', () => {
           props = {mode: 'range', onSelectionProgress: jest.fn()}
           wrapper = shallow(<Calendar {...props} />)
-
           wrapper.instance()._selectionChanged(Object.assign(selection, {inProgress: true}))
 
           expect(props.onSelectionProgress).toHaveBeenCalledTimes(1)
+
           expect(props.onSelectionProgress).toHaveBeenCalledWith(Object.assign(selection, {inProgress: true}))
         })
       })
 
-      context('when prop `onSelectionProgress` is `undefined`', () => {
+      describe('when prop `onSelectionProgress` is `undefined`', () => {
         beforeEach(() => {
           props = {mode: 'range'}
           wrapper = shallow(<Calendar {...props} />)
           instance = wrapper.instance()
         })
 
-        context('when selection `inProgress` is `true`', () => {
+        describe('when selection `inProgress` is `true`', () => {
           it('sets state `selection`', () => {
             instance._selectionChanged(Object.assign(selection, {inProgress: true}))
 
-            expect(wrapper.state('selection')).toEqual({start: date, end: new Date(2015, 7, 1)})
+            expect(wrapper.state('selection')).toEqual({
+              start: date,
+              end: new Date(2015, 7, 1),
+            })
           })
         })
 
-        context('when selection `inProgress` is `false`', () => {
+        describe('when selection `inProgress` is `false`', () => {
           it('sets state `selection`', () => {
             instance._selectionChanged(Object.assign(selection, {inProgress: false}))
 
@@ -302,7 +316,6 @@ describe('Calendar', () => {
       wrapper = shallow(<Calendar />)
 
       expect(wrapper.state('shownNoticeType')).toBe(null)
-
       wrapper.instance()._noticeChanged('disabled_day_click')
 
       expect(wrapper.state('shownNoticeType')).toBe('disabled_day_click')
@@ -310,7 +323,7 @@ describe('Calendar', () => {
   })
 
   describe('#_today', () => {
-    context('when prop `today` is defined', () => {
+    describe('when prop `today` is defined', () => {
       it('returns date', () => {
         wrapper = shallow(<Calendar today={date} />)
 
@@ -318,7 +331,7 @@ describe('Calendar', () => {
       })
     })
 
-    context('when prop `today` is `undefined`', () => {
+    describe('when prop `today` is `undefined`', () => {
       it('returns date', () => {
         wrapper = shallow(<Calendar />)
 

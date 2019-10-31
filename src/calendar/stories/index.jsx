@@ -82,8 +82,8 @@ stories
 
     return (
       <Calendar
-        mode="range"
-        blockClassName="date_picker"
+        mode='range'
+        blockClassName='date_picker'
         activeMonth={activeMonth}
         disableDaysOfWeek={disableDaysOfWeek}
         disabledIntervals={disabledIntervals}
@@ -102,7 +102,7 @@ stories
   })
   .add('Logging props call', () => (
     <Calendar
-      mode="range"
+      mode='range'
       activeMonth={activeMonth}
       onDayHover={action('onDayHover')}
       onMonthChange={action('onMonthChange')}
