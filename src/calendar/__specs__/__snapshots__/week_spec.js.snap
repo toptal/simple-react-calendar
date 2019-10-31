@@ -145,7 +145,7 @@ exports[`Week #render renders <Week /> 1`] = `
     key="2015-08-23"
   />
 </div>
-`
+`;
 
 exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <Week /> 1`] = `
 <div
@@ -292,7 +292,7 @@ exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <
     key="2015-07-05"
   />
 </div>
-`
+`;
 
 exports[`Week #render when prop \`date\` falls in the previous month renders <Week /> 1`] = `
 <div
@@ -439,7 +439,7 @@ exports[`Week #render when prop \`date\` falls in the previous month renders <We
     key="2015-08-02"
   />
 </div>
-`
+`;
 
 exports[`Week #render when prop \`date\` is different month renders <Week /> 1`] = `
 <div
@@ -586,7 +586,7 @@ exports[`Week #render when prop \`date\` is different month renders <Week /> 1`]
     key="2015-07-05"
   />
 </div>
-`
+`;
 
 exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
 <div
@@ -595,8 +595,6 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-06-29"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={true}
     isDisabled={false}
     isHighlighted={false}
@@ -655,8 +653,6 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-07-02"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -675,8 +671,6 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-07-03"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -695,8 +689,6 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-07-04"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -715,8 +707,6 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-07-05"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -733,7 +723,7 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
     key="2015-07-05"
   />
 </div>
-`
+`;
 
 exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /> 1`] = `
 <div
@@ -823,7 +813,6 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     blockClassName="example-class"
     date="2015-08-21"
     handleOnClick={[MockFunction]}
-    handleOnEnter={null}
     isCurrentMonth={true}
     isDisabled={true}
     isHighlighted={false}
@@ -843,7 +832,6 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     blockClassName="example-class"
     date="2015-08-22"
     handleOnClick={[MockFunction]}
-    handleOnEnter={null}
     isCurrentMonth={true}
     isDisabled={true}
     isHighlighted={false}
@@ -863,7 +851,6 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     blockClassName="example-class"
     date="2015-08-23"
     handleOnClick={[MockFunction]}
-    handleOnEnter={null}
     isCurrentMonth={true}
     isDisabled={true}
     isHighlighted={false}
@@ -880,7 +867,7 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     key="2015-08-23"
   />
 </div>
-`
+`;
 
 exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are defined renders <Week /> 1`] = `
 <div
@@ -1027,7 +1014,7 @@ exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are 
     key="2015-07-05"
   />
 </div>
-`
+`;
 
 exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
 <div
@@ -1076,8 +1063,6 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-07-01"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1096,8 +1081,6 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-07-02"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1116,8 +1099,6 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-07-03"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1136,8 +1117,6 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-07-04"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1156,8 +1135,6 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-07-05"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1174,7 +1151,7 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
     key="2015-07-05"
   />
 </div>
-`
+`;
 
 exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
 <div
@@ -1183,8 +1160,6 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
   <Day
     blockClassName="example-class"
     date="2015-06-29"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={true}
     isDisabled={false}
     isHighlighted={false}
@@ -1321,7 +1296,7 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
     key="2015-07-05"
   />
 </div>
-`
+`;
 
 exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined renders <Week /> 1`] = `
 <div
@@ -1468,7 +1443,7 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     key="2015-07-05"
   />
 </div>
-`
+`;
 
 exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined renders <Week /> 2`] = `
 <div
@@ -1477,8 +1452,6 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
   <Day
     blockClassName="example-class"
     date="2015-06-29"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={true}
     isDisabled={false}
     isHighlighted={false}
@@ -1537,8 +1510,6 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
   <Day
     blockClassName="example-class"
     date="2015-07-02"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1557,8 +1528,6 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
   <Day
     blockClassName="example-class"
     date="2015-07-03"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1577,8 +1546,6 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
   <Day
     blockClassName="example-class"
     date="2015-07-04"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1597,8 +1564,6 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
   <Day
     blockClassName="example-class"
     date="2015-07-05"
-    handleOnClick={null}
-    handleOnEnter={null}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1615,11 +1580,9 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     key="2015-07-05"
   />
 </div>
-`
+`;
 
-exports[
-  `Week #render when prop \`selectedMin\` and \`selectedMax\` are defined when prop \`selectedMin\` and \`selectedMax\` are the same day renders <Week /> 1`
-] = `
+exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined when prop \`selectedMin\` and \`selectedMax\` are the same day renders <Week /> 1`] = `
 <div
   className="example-class-week"
 >
@@ -1764,4 +1727,4 @@ exports[
     key="2015-07-05"
   />
 </div>
-`
+`;

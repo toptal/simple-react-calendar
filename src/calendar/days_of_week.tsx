@@ -1,21 +1,24 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { Component } from 'react'
 
-import {DAYS_IN_WEEK} from './consts'
+import { IDayOfWeekRenderProps, IDaysOfWeekRenderProps } from '../@types'
 import DayOfWeek from './day_of_week'
 
 const FRIDAY_INDEX = 4
-export default class DaysOfWeek extends React.Component {
-  static propTypes = {
-    blockClassName: PropTypes.string,
-    customRender: PropTypes.func,
-    daysOfWeek: PropTypes.arrayOf(PropTypes.string),
-    renderDayOfWeek: PropTypes.func,
-    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
-  }
 
-  _getDaysOfWeek(day) {
-    return this.props.daysOfWeek.slice(day - 1).concat(this.props.daysOfWeek.slice(0, day - 1))
+export type Props = {
+  blockClassName?: string
+  customRender?: IDaysOfWeekRenderProps
+  daysOfWeek: string[]
+  renderDayOfWeek?: IDayOfWeekRenderProps
+  weekStartsOn: number
+}
+
+export default class DaysOfWeek extends Component<Props, {}> {
+  _getDaysOfWeek(dayIndex: number) {
+    const {daysOfWeek} = this.props
+    const adjustedIndex = dayIndex - 1
+
+    return daysOfWeek.slice(adjustedIndex).concat(daysOfWeek.slice(0, adjustedIndex))
   }
 
   render() {

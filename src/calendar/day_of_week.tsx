@@ -1,8 +1,16 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { FC } from 'react'
 
-const DayOfWeek = (props) => {
+import { IDayOfWeekRenderProps } from '../@types'
+
+export type Props = {
+  blockClassName?: string
+  customRender?: IDayOfWeekRenderProps
+  day: string
+  isWeekend: boolean
+}
+
+const DayOfWeek: FC<Props> = (props) => {
   const {blockClassName, isWeekend, day, customRender} = props
 
   const children = day
@@ -23,13 +31,6 @@ const DayOfWeek = (props) => {
       {children}
     </div>
   )
-}
-
-DayOfWeek.propTypes = {
-  blockClassName: PropTypes.string,
-  customRender: PropTypes.func,
-  day: PropTypes.string.isRequired,
-  isWeekend: PropTypes.bool.isRequired,
 }
 
 export default DayOfWeek

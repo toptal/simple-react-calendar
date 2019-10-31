@@ -1,19 +1,27 @@
 import isSameMonth from 'date-fns/is_same_month'
 import isValidDate from 'date-fns/is_valid'
 import startOfMonth from 'date-fns/start_of_month'
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { Component, Fragment, ReactElement } from 'react'
 
-import {datePropType} from './_lib'
-import {BLOCK_CLASS_NAME, DAYS_IN_WEEK, DAYS_OF_WEEK, NEXT_MONTH_TITLE, PREV_MONTH_TITLE} from './consts'
+import {
+  ICalendarRenderProp,
+  IDate,
+  IDateSelection,
+  IDayOfWeekRenderProps,
+  IDayRenderProps,
+  IDaysOfWeekRenderProps,
+  IMonthHeaderRenderProps,
+  IMonthRenderProps,
+  INoticeType,
+  ISelectionRange,
+  IWeekRenderProps,
+} from '../@types'
+import { BLOCK_CLASS_NAME, DAYS_OF_WEEK, NEXT_MONTH_TITLE, PREV_MONTH_TITLE } from './consts'
 import Month from './month'
 import MonthHeader from './month_header'
 import Notice from './notice'
 
-const SINGLE_MODE = 'single'
-const RANGE_MODE = 'range'
-
-const isValid = function(date) {
+const isValid = function(date: Date) {
   try {
     return isValidDate(date)
   } catch (e) {
@@ -21,66 +29,70 @@ const isValid = function(date) {
   }
 }
 
-export default class Calendar extends React.Component {
-  static propTypes = {
-    MonthHeaderComponent: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    NoticeComponent: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    activeMonth: datePropType,
-    blockClassName: PropTypes.string,
-    customRender: PropTypes.func,
-    daysOfWeek: PropTypes.arrayOf(PropTypes.string),
-    disableDaysOfWeek: PropTypes.bool,
-    disabledIntervals: PropTypes.arrayOf(
-      PropTypes.shape({
-        start: datePropType.isRequired,
-        end: datePropType.isRequired,
-      })
-    ),
-    headerNextArrow: PropTypes.element,
-    headerNextTitle: PropTypes.string,
-    headerPrevArrow: PropTypes.element,
-    headerPrevTitle: PropTypes.string,
-    highlighted: PropTypes.shape({
-      start: datePropType.isRequired,
-      end: datePropType.isRequired,
-    }),
-    maxDate: datePropType,
-    minDate: datePropType,
-    minNumberOfWeeks: PropTypes.number,
-    mode: PropTypes.oneOf([SINGLE_MODE, RANGE_MODE]),
-    onDayHover: PropTypes.func,
-    onMonthChange: PropTypes.func,
-    onSelect: PropTypes.func,
-    onSelectionProgress: PropTypes.func,
-    rangeLimit: PropTypes.number,
-    renderDay: PropTypes.func,
-    renderDayOfWeek: PropTypes.func,
-    renderDaysOfWeek: PropTypes.func,
-    renderMonth: PropTypes.func,
-    renderMonthHeader: PropTypes.func,
-    renderWeek: PropTypes.func,
-    selected: PropTypes.oneOfType([
-      datePropType,
-      PropTypes.shape({
-        start: datePropType.isRequired,
-        end: datePropType.isRequired,
-        inProgress: PropTypes.bool,
-      }),
-    ]),
-    today: datePropType,
-    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
-  }
+type ISelection = {
+  start: IDate
+  end: IDate
+  inProgress: boolean
+}
 
+export type Props = {
+  MonthHeaderComponent?: ReactElement
+  NoticeComponent?: ReactElement
+  activeMonth?: IDate
+  blockClassName: string
+  customRender?: ICalendarRenderProp
+  daysOfWeek: string[]
+  disableDaysOfWeek?: boolean
+  disabledIntervals?: {
+    start: IDate
+    end: IDate
+  }[]
+  headerNextArrow?: ReactElement
+  headerNextTitle?: string
+  headerPrevArrow?: ReactElement
+  headerPrevTitle?: string
+  highlighted?: {
+    start: IDate
+    end: IDate
+  }
+  maxDate: IDate | undefined
+  minDate: IDate | undefined
+  minNumberOfWeeks?: number
+  mode: 'range' | 'single'
+  onDayHover?: (...args: any[]) => any
+  onMonthChange?: (...args: any[]) => any
+  onSelect?: (...args: any[]) => any
+  onSelectionProgress?: (...args: any[]) => any
+  rangeLimit?: number
+  renderDay?: IDayRenderProps
+  renderDayOfWeek?: IDayOfWeekRenderProps
+  renderDaysOfWeek?: IDaysOfWeekRenderProps
+  renderMonth?: IMonthRenderProps
+  renderMonthHeader?: IMonthHeaderRenderProps
+  renderWeek?: IWeekRenderProps
+  selected?: IDate | ISelectionRange
+  today?: IDate
+  weekStartsOn?: number
+}
+
+type State = {
+  activeMonth: any
+  selection: {start: any; end: any} | null
+  shownNoticeType: any | null
+}
+
+export default class Calendar extends Component<Props, State> {
   static defaultProps = {
     blockClassName: BLOCK_CLASS_NAME,
     daysOfWeek: DAYS_OF_WEEK,
+    disableDaysOfWeek: false,
     headerNextTitle: NEXT_MONTH_TITLE,
     headerPrevTitle: PREV_MONTH_TITLE,
-    mode: SINGLE_MODE,
+    mode: 'single',
     weekStartsOn: 1,
   }
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       activeMonth: this._initialMonth(props),
@@ -89,29 +101,30 @@ export default class Calendar extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.activeMonth && !isSameMonth(nextProps.activeMonth, this.props.activeMonth)) {
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.activeMonth && !isSameMonth(nextProps.activeMonth, this.props.activeMonth as IDate)) {
       this.setState({activeMonth: startOfMonth(nextProps.activeMonth)})
     }
   }
 
-  _initialMonth(props) {
+  _initialMonth(props: Props) {
     const {selected, activeMonth, mode, today} = props || this.props
 
-    if (isValid(activeMonth)) {
+    if (isValid(activeMonth as Date)) {
       return activeMonth
     } else {
       if (selected) {
-        const selectionStart = mode === SINGLE_MODE ? selected : selected.start
-        if (isValid(selectionStart)) {
-          return startOfMonth(selectionStart)
+        const selectionStart = mode === 'single' ? selected : (selected as ISelectionRange).start
+
+        if (isValid(selectionStart as Date)) {
+          return startOfMonth(selectionStart as Date)
         }
       }
     }
     return startOfMonth(today || new Date())
   }
 
-  _switchMonth(date) {
+  _switchMonth(date: Date) {
     const {onMonthChange} = this.props
     if (typeof onMonthChange === 'function') {
       onMonthChange(date)
@@ -133,11 +146,12 @@ export default class Calendar extends React.Component {
 
   _highlight() {
     const {highlighted} = this.props
+
     if (!highlighted) return {start: null, end: null}
 
     const {start, end} = highlighted
 
-    if (isValid(start) && isValid(end)) {
+    if (isValid(start as Date) && isValid(end as Date)) {
       return {start, end}
     } else {
       return {start: null, end: null}
@@ -155,40 +169,40 @@ export default class Calendar extends React.Component {
     }
   }
 
-  _selectionStart() {
+  _selectionStart(): Date {
     return this._selectionDate('start')
   }
 
-  _selectionEnd() {
+  _selectionEnd(): Date {
     return this._selectionDate('end')
   }
 
-  _selectionDate(dateType) {
+  _selectionDate(dateType: IDateSelection) {
     const {selected, onSelectionProgress} = this.props
     const {selection} = this.state
 
     switch (this.props.mode) {
-      case SINGLE_MODE:
+      case 'single':
         return selected
 
-      case RANGE_MODE:
+      case 'range':
         if (!onSelectionProgress && selection) {
           return selection[dateType]
         } else {
-          return selected && selected[dateType]
+          return selected && (selected as ISelectionRange)[dateType]
         }
     }
   }
 
-  _selectionChanged(selection) {
+  _selectionChanged(selection: ISelection) {
     const {start, end, inProgress} = selection
     const {mode, onSelect, onSelectionProgress} = this.props
 
-    if (onSelect && start && (mode !== RANGE_MODE || !inProgress)) {
-      onSelect(mode === SINGLE_MODE ? start : {start, end})
+    if (onSelect && start && (mode !== 'range' || !inProgress)) {
+      onSelect(mode === 'single' ? start : {start, end})
     }
 
-    if (mode === RANGE_MODE) {
+    if (mode === 'range') {
       if (onSelectionProgress) {
         onSelectionProgress(selection)
       } else {
@@ -197,7 +211,7 @@ export default class Calendar extends React.Component {
     }
   }
 
-  _noticeChanged(shownNoticeType) {
+  _noticeChanged(shownNoticeType: INoticeType) {
     this.setState({shownNoticeType})
   }
 
@@ -209,11 +223,11 @@ export default class Calendar extends React.Component {
     const {blockClassName, customRender} = this.props
 
     const children = (
-      <React.Fragment>
+      <Fragment>
         {this._renderNotice()}
         {this._renderMonthHeader()}
         {this._renderMonth()}
-      </React.Fragment>
+      </Fragment>
     )
 
     if (customRender) {
@@ -231,6 +245,7 @@ export default class Calendar extends React.Component {
     const {blockClassName} = this.props
     const NoticeComponent = this.props.NoticeComponent || Notice
 
+    // @ts-ignore
     return shownNoticeType && <NoticeComponent blockClassName={blockClassName} type={shownNoticeType} />
   }
 
@@ -258,6 +273,7 @@ export default class Calendar extends React.Component {
     const highlight = this._highlight()
 
     return (
+      // @ts-ignore: No overload matches this call
       <Month
         customRender={renderMonth}
         renderDay={renderDay}
@@ -274,7 +290,7 @@ export default class Calendar extends React.Component {
         maxDate={maxDate}
         minDate={minDate}
         minNumberOfWeeks={minNumberOfWeeks}
-        mode={mode}
+        mode={mode as 'range' | 'single'}
         onChange={this._selectionChanged.bind(this)}
         onDayMouseEnter={onDayHover}
         onNoticeChange={this._noticeChanged.bind(this)}
@@ -283,7 +299,7 @@ export default class Calendar extends React.Component {
         selectedMax={selection.end}
         selectedMin={selection.start}
         today={this._today()}
-        weekStartsOn={weekStartsOn}
+        weekStartsOn={weekStartsOn as number}
       />
     )
   }
@@ -302,6 +318,7 @@ export default class Calendar extends React.Component {
     } = this.props
 
     return (
+      // @ts-ignore
       <MonthHeaderComponent
         customRender={renderMonthHeader}
         activeMonth={this._activeMonth()}

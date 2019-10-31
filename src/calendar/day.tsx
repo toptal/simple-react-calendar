@@ -1,20 +1,15 @@
 import cx from 'classnames'
 import formatDate from 'date-fns/format'
-import React, { FC, ReactElement, SyntheticEvent } from 'react'
+import React, { FC, SyntheticEvent } from 'react'
 
-type IMonthDayRenderProp = (props: IMonthDayRenderPropArgs) => ReactElement
+import { IDayRenderProps } from '../@types'
 
-interface IMonthDayRenderPropArgs extends IProps {
-  // TODO: remove this and leave it to the passed function to format the date in the desired format
-  children: string
-}
-
-interface IProps {
+export interface Props {
   blockClassName: string
-  customRender: IMonthDayRenderProp
+  customRender?: IDayRenderProps
   date: string
-  handleOnClick: (event: SyntheticEvent<HTMLElement>) => void
-  handleOnEnter: (event: SyntheticEvent<HTMLElement>) => void
+  handleOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void
+  handleOnEnter?: (event: SyntheticEvent<HTMLButtonElement>) => void
   isCurrentMonth: boolean
   isDisabled: boolean
   isHighlighted: boolean
@@ -30,7 +25,7 @@ interface IProps {
   isWorkday: boolean
 }
 
-const Day: FC<IProps> = (props) => {
+const Day: FC<Props> = (props) => {
   const {
     blockClassName,
     customRender,

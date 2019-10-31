@@ -10,40 +10,36 @@ import isWeekend from 'date-fns/is_weekend'
 import isWithinRange from 'date-fns/is_within_range'
 import startOfDay from 'date-fns/start_of_day'
 import startOfWeek from 'date-fns/start_of_week'
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { Component, SyntheticEvent } from 'react'
 
-import {datePropType} from './_lib'
-import {DAYS_IN_WEEK} from './consts'
+import { IDate, IDayRenderProps, IWeekRenderProps } from '../@types'
 import Day from './day'
 
-export default class Week extends React.Component {
-  static propTypes = {
-    activeMonth: datePropType.isRequired,
-    blockClassName: PropTypes.string.isRequired,
-    customRender: PropTypes.func,
-    date: datePropType.isRequired,
-    disabledIntervals: PropTypes.arrayOf(
-      PropTypes.shape({
-        start: datePropType.isRequired,
-        end: datePropType.isRequired,
-      })
-    ),
-    highlightedEnd: datePropType,
-    highlightedStart: datePropType,
-    maxDate: datePropType,
-    minDate: datePropType,
-    onDayClick: PropTypes.func.isRequired,
-    onDayMouseEnter: PropTypes.func.isRequired,
-    onDisabledDayClick: PropTypes.func.isRequired,
-    renderDay: PropTypes.func,
-    selectedMax: datePropType,
-    selectedMin: datePropType,
-    today: datePropType.isRequired,
-    weekStartsOn: PropTypes.oneOf(DAYS_IN_WEEK),
-  }
+export type Props = {
+  activeMonth: IDate
+  blockClassName: string
+  customRender?: IWeekRenderProps
+  date: IDate
+  disabledIntervals?: {
+    start: IDate
+    end: IDate
+  }[]
+  highlightedEnd?: IDate
+  highlightedStart?: IDate
+  maxDate?: IDate
+  minDate?: IDate
+  onDayClick: (event: SyntheticEvent<HTMLButtonElement>) => void
+  onDayMouseEnter: (event: SyntheticEvent<HTMLButtonElement>) => void
+  onDisabledDayClick: (event: SyntheticEvent<HTMLButtonElement>) => void
+  renderDay?: IDayRenderProps
+  selectedMax?: IDate
+  selectedMin?: IDate
+  today: IDate
+  weekStartsOn: number
+}
 
-  _dateSelectable(date) {
+export default class Week extends Component<Props, {}> {
+  _dateSelectable(date: Date) {
     const {minDate, maxDate} = this.props
 
     if (this._dateDisabled(date)) {
@@ -61,28 +57,27 @@ export default class Week extends React.Component {
     }
   }
 
-  _dateSelected(date) {
+  _dateSelected(date: Date) {
     const {selectedMin, selectedMax} = this.props
     return Boolean(
       selectedMin && selectedMax && isWithinRange(startOfDay(date), startOfDay(selectedMin), startOfDay(selectedMax))
     )
   }
 
-  _dateHighlighted(date) {
+  _dateHighlighted(date: Date) {
     const {highlightedStart, highlightedEnd} = this.props
     if (!highlightedStart || !highlightedEnd) return false
 
     return isWithinRange(startOfDay(date), startOfDay(highlightedStart), startOfDay(highlightedEnd))
   }
 
-  _dateDisabled(date) {
+  _dateDisabled(date: Date | string) {
     let dateDisabled
     const {disabledIntervals} = this.props
     if (!disabledIntervals) return false
 
     for (let i = 0; i < disabledIntervals.length; i++) {
       const {start, end} = disabledIntervals[i]
-
       dateDisabled = isWithinRange(startOfDay(date), startOfDay(start), startOfDay(end))
 
       if (dateDisabled) {
@@ -100,7 +95,7 @@ export default class Week extends React.Component {
     if (customRender) {
       return customRender({
         ...this.props,
-        children
+        children,
       })
     }
 
@@ -134,11 +129,11 @@ export default class Week extends React.Component {
 
       return (
         <Day
-          customRender={renderDay}
           blockClassName={blockClassName}
+          customRender={renderDay}
           date={date}
-          handleOnClick={isSelectable ? onDayClick : isDisabled ? onDisabledDayClick : null}
-          handleOnEnter={isSelectable ? onDayMouseEnter : null}
+          handleOnClick={isSelectable ? onDayClick : isDisabled ? onDisabledDayClick : undefined}
+          handleOnEnter={isSelectable ? onDayMouseEnter : undefined}
           isCurrentMonth={isCurrentMonth}
           isDisabled={isDisabled}
           isHighlighted={this._dateHighlighted(day)}
