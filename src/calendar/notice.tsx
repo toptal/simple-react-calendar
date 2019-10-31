@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { FC } from 'react'
 
 import { INoticeType } from '../@types'
 
@@ -7,18 +7,24 @@ export type Props = {
   type: INoticeType
 }
 
-export default class Notice extends Component<Props, {}> {
-  render() {
-    const {blockClassName} = this.props
+interface IGetNoticeMessage {
+  type: INoticeType
+}
 
-    return <div className={`${blockClassName}-notice`}>{this._renderMessage()}</div>
-  }
-
-  _renderMessage() {
-    switch (this.props.type) {
-      case 'overlapping_with_disabled':
-      case 'disabled_day_click':
-        return 'Selected range must not overlap with disabled dates.'
-    }
+const getNoticeMessage = ({ type }: IGetNoticeMessage) => {
+  switch (type) {
+    case 'overlapping_with_disabled':
+    case 'disabled_day_click':
+      return 'Selected range must not overlap with disabled dates.'
   }
 }
+
+const Notice: FC<Props> = ({ blockClassName, type }) => {
+  const message = getNoticeMessage({ type })
+
+  return <div className={`${blockClassName}-notice`}>{message}</div>
+}
+
+Notice.displayName = 'Notice'
+
+export default Notice

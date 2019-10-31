@@ -17,7 +17,7 @@ describe('Month', () => {
     instance = wrapper.instance()
     mockEvent = {
       preventDefault: jest.fn(),
-      currentTarget: {value: date},
+      currentTarget: { value: date },
     }
   })
 
@@ -113,6 +113,7 @@ describe('Month', () => {
             start: '2015-01-01',
             end: '2015-06-31',
           }
+
           props = getProps({
             disabledIntervals: [range],
           })
@@ -288,6 +289,7 @@ describe('Month', () => {
         })
         wrapper = shallow(<Month {...props} />)
         const instance = wrapper.instance()
+
         instance._pushNoticeUpdate = () => {}
         instance.handleOnDayClick(mockEvent)
 

@@ -27,24 +27,27 @@ const developmentConfig = merge.smart(baseWebpackConfig, {
   },
 
   module: {
-    rules: [{
-      test: /\.styl$/,
-      use: [{
-          loader: 'style-loader',
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            ident: 'postcss',
-            sourceMap: false,
-            plugins: [autoprefixer],
+    rules: [
+      {
+        test: /\.styl$/,
+        use: [
+          {
+            loader: 'style-loader',
           },
-        },
-        {
-          loader: 'stylus-loader',
-        },
-      ],
-    }, ],
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              sourceMap: false,
+              plugins: [autoprefixer],
+            },
+          },
+          {
+            loader: 'stylus-loader',
+          },
+        ],
+      },
+    ],
   },
 
   plugins: [

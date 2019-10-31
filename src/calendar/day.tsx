@@ -76,6 +76,7 @@ const Day: FC<Props> = (props) => {
       onClick={handleOnClick}
       onMouseEnter={handleOnEnter}
       value={date}
+      type='button'
     >
       {children}
     </button>

@@ -38,9 +38,11 @@ export type Props = {
   weekStartsOn: number
 }
 
+// TODO: FC Rewrite
+/* eslint-disable react/require-optimization */
 export default class Week extends Component<Props, {}> {
   _dateSelectable(date: Date) {
-    const {minDate, maxDate} = this.props
+    const { minDate, maxDate } = this.props
 
     if (this._dateDisabled(date)) {
       return false
@@ -58,14 +60,16 @@ export default class Week extends Component<Props, {}> {
   }
 
   _dateSelected(date: Date) {
-    const {selectedMin, selectedMax} = this.props
+    const { selectedMin, selectedMax } = this.props
+
     return Boolean(
-      selectedMin && selectedMax && isWithinRange(startOfDay(date), startOfDay(selectedMin), startOfDay(selectedMax))
+      selectedMin && selectedMax && isWithinRange(startOfDay(date), startOfDay(selectedMin), startOfDay(selectedMax)),
     )
   }
 
   _dateHighlighted(date: Date) {
-    const {highlightedStart, highlightedEnd} = this.props
+    const { highlightedStart, highlightedEnd } = this.props
+
     if (!highlightedStart || !highlightedEnd) return false
 
     return isWithinRange(startOfDay(date), startOfDay(highlightedStart), startOfDay(highlightedEnd))
@@ -73,11 +77,13 @@ export default class Week extends Component<Props, {}> {
 
   _dateDisabled(date: Date | string) {
     let dateDisabled
-    const {disabledIntervals} = this.props
+    const { disabledIntervals } = this.props
+
     if (!disabledIntervals) return false
 
     for (let i = 0; i < disabledIntervals.length; i++) {
-      const {start, end} = disabledIntervals[i]
+      const { start, end } = disabledIntervals[i]
+
       dateDisabled = isWithinRange(startOfDay(date), startOfDay(start), startOfDay(end))
 
       if (dateDisabled) {
@@ -86,20 +92,6 @@ export default class Week extends Component<Props, {}> {
     }
 
     return false
-  }
-
-  render() {
-    const {customRender} = this.props
-    const children = this._renderDays()
-
-    if (customRender) {
-      return customRender({
-        ...this.props,
-        children,
-      })
-    }
-
-    return <div className={`${this.props.blockClassName}-week`}>{children}</div>
   }
 
   _renderDays() {
@@ -116,8 +108,8 @@ export default class Week extends Component<Props, {}> {
       weekStartsOn,
       renderDay,
     } = this.props
-    const start = startOfWeek(date, {weekStartsOn})
-    const end = endOfWeek(date, {weekStartsOn})
+    const start = startOfWeek(date, { weekStartsOn })
+    const end = endOfWeek(date, { weekStartsOn })
 
     return eachDay(start, end).map((day) => {
       const date = format(day, 'YYYY-MM-DD')
@@ -151,5 +143,19 @@ export default class Week extends Component<Props, {}> {
         />
       )
     })
+  }
+
+  render() {
+    const { customRender, blockClassName } = this.props
+    const children = this._renderDays()
+
+    if (customRender) {
+      return customRender({
+        ...this.props,
+        children,
+      })
+    }
+
+    return <div className={`${blockClassName}-week`}>{children}</div>
   }
 }

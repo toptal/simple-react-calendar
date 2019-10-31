@@ -18,7 +18,7 @@ describe('Week', () => {
 
     describe('when prop `date` is different month', () => {
       it('renders <Week />', () => {
-        wrapper.setProps({date: new Date(2015, 5, 29)})
+        wrapper.setProps({ date: new Date(2015, 5, 29) })
 
         expect(wrapper).toMatchSnapshot()
       })
@@ -131,7 +131,8 @@ describe('Week', () => {
             end: new Date(2015, 7, 23),
           },
         ]
-        wrapper.setProps({disabledIntervals})
+
+        wrapper.setProps({ disabledIntervals })
 
         expect(wrapper).toMatchSnapshot()
       })

@@ -12,9 +12,9 @@ describe('Calendar', () => {
     describe('when nextProps `activeMonth` is defined', () => {
       describe('when nextProps `activeMonth` and prop `activeMonth` is different', () => {
         it('sets state `activeMonth`', () => {
-          props = {activeMonth: date}
+          props = { activeMonth: date }
           wrapper = shallow(<Calendar />)
-          wrapper.setProps({activeMonth: new Date(2015, 9, 1)})
+          wrapper.setProps({ activeMonth: new Date(2015, 9, 1) })
 
           expect(wrapper.state('activeMonth')).toEqual(new Date(2015, 9, 1))
         })
@@ -23,9 +23,9 @@ describe('Calendar', () => {
 
     describe('when nextProps `activeMonth` is `undefined`', () => {
       it("doesn't set state", () => {
-        props = {activeMonth: date}
+        props = { activeMonth: date }
         wrapper = shallow(<Calendar />)
-        wrapper.setProps({disableDaysOfWeek: false})
+        wrapper.setProps({ disableDaysOfWeek: false })
 
         expect(wrapper.state('activeMonth')).not.toEqual(new Date(2015, 9, 1))
       })
@@ -58,7 +58,7 @@ describe('Calendar', () => {
   describe('#_switchMonth', () => {
     describe('when prop `onMonthChange` is defined', () => {
       it('calls prop #onMonthChange', () => {
-        props = {onMonthChange: jest.fn(), activeMonth: date}
+        props = { onMonthChange: jest.fn(), activeMonth: date }
         wrapper = shallow(<Calendar {...props} />)
         wrapper.instance()._switchMonth('2017-01-01')
 
@@ -70,7 +70,7 @@ describe('Calendar', () => {
 
     describe('when prop `onMonthChange` is `undefined`', () => {
       it('sets `activeMonth` state', () => {
-        props = {activeMonth: date}
+        props = { activeMonth: date }
         wrapper = shallow(<Calendar {...props} />)
         wrapper.instance()._switchMonth('2017-01-01')
 
@@ -82,7 +82,7 @@ describe('Calendar', () => {
   describe('#_activeMonth', () => {
     describe('when prop `onMonthChange` is defined', () => {
       it('returns prop `activeMonth`', () => {
-        props = {onMonthChange: jest.fn(), activeMonth: date}
+        props = { onMonthChange: jest.fn(), activeMonth: date }
         wrapper = shallow(<Calendar {...props} />)
 
         expect(wrapper.instance()._activeMonth()).toBe(props.activeMonth)
@@ -92,7 +92,7 @@ describe('Calendar', () => {
     describe('when prop `onMonthChange` is `undefined`', () => {
       it('returns state `activeMonth`', () => {
         wrapper = shallow(<Calendar activeMonth={date} />)
-        wrapper.setState({activeMonth: '2015-01-01'})
+        wrapper.setState({ activeMonth: '2015-01-01' })
 
         expect(wrapper.instance()._activeMonth()).toBe('2015-01-01')
       })
@@ -172,10 +172,11 @@ describe('Calendar', () => {
       it('returns object', () => {
         const start = date
         const end = new Date(2015, 7, 1)
+
         instance._selectionStart = () => start
         instance._selectionEnd = () => end
 
-        expect(instance._selection()).toEqual({start, end})
+        expect(instance._selection()).toEqual({ start, end })
       })
     })
 
@@ -184,7 +185,7 @@ describe('Calendar', () => {
         instance._selectionStart = () => date
         instance._selectionEnd = () => 'abc'
 
-        expect(instance._selection()).toEqual({start: null, end: null})
+        expect(instance._selection()).toEqual({ start: null, end: null })
       })
     })
   })
@@ -192,7 +193,7 @@ describe('Calendar', () => {
   describe('#_selectionDate', () => {
     describe("when prop `mode` is 'single'", () => {
       it('returns prop `selected', () => {
-        props = {selected: date}
+        props = { selected: date }
         wrapper = shallow(<Calendar {...props} />)
 
         expect(wrapper.instance()._selectionDate('end')).toBe(props.selected)
@@ -200,7 +201,7 @@ describe('Calendar', () => {
     })
 
     describe("when prop `mode` is 'range'", () => {
-      const selected = {start: date, end: new Date(2015, 7, 1)}
+      const selected = { start: date, end: new Date(2015, 7, 1) }
       const selection = {
         start: new Date(2017, 6, 1),
         end: new Date(2017, 7, 1),
@@ -208,14 +209,14 @@ describe('Calendar', () => {
 
       describe('when prop `onSelectionProgress` is `undefined`', () => {
         beforeEach(() => {
-          props = {selected, mode: 'range'}
+          props = { selected, mode: 'range' }
           wrapper = shallow(<Calendar {...props} />)
           instance = wrapper.instance()
         })
 
         describe('when state `selection` is `defined`', () => {
           it('returns state `selection.start`', () => {
-            wrapper.setState({selection})
+            wrapper.setState({ selection })
 
             expect(instance._selectionDate('start')).toBe(selection.start)
           })
@@ -228,9 +229,9 @@ describe('Calendar', () => {
 
       describe('when prop `onSelectionProgress` is defined', () => {
         it('returns prop `selected.start`', () => {
-          props = {selected, mode: 'range', onSelectionProgress: () => {}}
+          props = { selected, mode: 'range', onSelectionProgress: () => {} }
           wrapper = shallow(<Calendar {...props} />)
-          wrapper.setState({selection})
+          wrapper.setState({ selection })
 
           expect(wrapper.instance()._selectionDate('start')).toBe(props.selected.start)
         })
@@ -239,13 +240,13 @@ describe('Calendar', () => {
   })
 
   describe('#_selectionChanged', () => {
-    const selection = {start: date, end: new Date(2015, 7, 1)}
+    const selection = { start: date, end: new Date(2015, 7, 1) }
 
     describe("when prop `mode` is 'single'", () => {
       describe('when prop `onSelect` is defined', () => {
         describe('when selection `start` is defined', () => {
           it('calls prop #onSelect', () => {
-            props = {onSelect: jest.fn()}
+            props = { onSelect: jest.fn() }
             wrapper = shallow(<Calendar {...props} />)
             wrapper.instance()._selectionChanged(selection)
 
@@ -260,7 +261,7 @@ describe('Calendar', () => {
     describe("when prop `mode` is 'range'", () => {
       describe('when prop `onSelect` is defined', () => {
         it('calls prop #onSelect', () => {
-          props = {mode: 'range', onSelect: jest.fn()}
+          props = { mode: 'range', onSelect: jest.fn() }
           wrapper = shallow(<Calendar {...props} />)
           wrapper.instance()._selectionChanged(selection)
 
@@ -272,26 +273,26 @@ describe('Calendar', () => {
 
       describe('when prop `onSelectionProgress` is defined', () => {
         it('calls prop #onSelectionProgress', () => {
-          props = {mode: 'range', onSelectionProgress: jest.fn()}
+          props = { mode: 'range', onSelectionProgress: jest.fn() }
           wrapper = shallow(<Calendar {...props} />)
-          wrapper.instance()._selectionChanged(Object.assign(selection, {inProgress: true}))
+          wrapper.instance()._selectionChanged(Object.assign(selection, { inProgress: true }))
 
           expect(props.onSelectionProgress).toHaveBeenCalledTimes(1)
 
-          expect(props.onSelectionProgress).toHaveBeenCalledWith(Object.assign(selection, {inProgress: true}))
+          expect(props.onSelectionProgress).toHaveBeenCalledWith(Object.assign(selection, { inProgress: true }))
         })
       })
 
       describe('when prop `onSelectionProgress` is `undefined`', () => {
         beforeEach(() => {
-          props = {mode: 'range'}
+          props = { mode: 'range' }
           wrapper = shallow(<Calendar {...props} />)
           instance = wrapper.instance()
         })
 
         describe('when selection `inProgress` is `true`', () => {
           it('sets state `selection`', () => {
-            instance._selectionChanged(Object.assign(selection, {inProgress: true}))
+            instance._selectionChanged(Object.assign(selection, { inProgress: true }))
 
             expect(wrapper.state('selection')).toEqual({
               start: date,
@@ -302,7 +303,7 @@ describe('Calendar', () => {
 
         describe('when selection `inProgress` is `false`', () => {
           it('sets state `selection`', () => {
-            instance._selectionChanged(Object.assign(selection, {inProgress: false}))
+            instance._selectionChanged(Object.assign(selection, { inProgress: false }))
 
             expect(wrapper.state('selection')).toBe(null)
           })
