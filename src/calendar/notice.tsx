@@ -1,14 +1,16 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { Component } from 'react'
 
-export default class Notice extends React.Component {
-  static propTypes = {
-    blockClassName: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(['overlapping_with_disabled', 'disabled_day_click']).isRequired,
-  }
+import { INoticeType } from '../@types'
 
+export type Props = {
+  blockClassName: string
+  type: INoticeType
+}
+
+export default class Notice extends Component<Props, {}> {
   render() {
     const {blockClassName} = this.props
+
     return <div className={`${blockClassName}-notice`}>{this._renderMessage()}</div>
   }
 

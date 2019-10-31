@@ -3,29 +3,29 @@ import formatDate from 'date-fns/format'
 import isAfter from 'date-fns/is_after'
 import isBefore from 'date-fns/is_before'
 import startOfMonth from 'date-fns/start_of_month'
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { Component, ReactElement } from 'react'
 
-import {datePropType} from './_lib'
+import { IDate, IMonthHeaderRenderProps } from '../@types'
 import HeaderButton from './header_button'
 
-export default class MonthHeader extends React.Component {
-  static propTypes = {
-    activeMonth: datePropType.isRequired,
-    blockClassName: PropTypes.string,
-    customRender: PropTypes.func,
-    headerNextArrow: PropTypes.element,
-    headerNextTitle: PropTypes.string,
-    headerPrevArrow: PropTypes.element,
-    headerPrevTitle: PropTypes.string,
-    maxDate: datePropType,
-    minDate: datePropType,
-    onMonthChange: PropTypes.func.isRequired,
-  }
+export type Props = {
+  activeMonth: IDate
+  blockClassName?: string
+  customRender?: IMonthHeaderRenderProps
+  headerNextArrow?: ReactElement
+  headerNextTitle?: string
+  headerPrevArrow?: ReactElement
+  headerPrevTitle?: string
+  maxDate?: IDate
+  minDate?: IDate
+  onMonthChange: (...args: any[]) => any
+}
 
-  _switchMonth(offset) {
+export default class MonthHeader extends Component<Props, {}> {
+  _switchMonth(offset: -1 | 1) {
     const {onMonthChange, activeMonth} = this.props
-    onMonthChange(addMonths(activeMonth, parseInt(offset)))
+
+    onMonthChange(addMonths(activeMonth, offset))
   }
 
   render() {
