@@ -24,7 +24,7 @@ exports[`MonthHeader #render renders <MonthHeader /> 1`] = `
     type="next"
   />
 </div>
-`
+`;
 
 exports[`MonthHeader #render when prop \`maxDate\` is before prop \`activeMonth\` renders <MonthHeader /> 1`] = `
 <div
@@ -50,7 +50,7 @@ exports[`MonthHeader #render when prop \`maxDate\` is before prop \`activeMonth\
     type="next"
   />
 </div>
-`
+`;
 
 exports[`MonthHeader #render when prop \`minDate\` is after prop \`activeMonth\` renders <MonthHeader /> 1`] = `
 <div
@@ -76,4 +76,4 @@ exports[`MonthHeader #render when prop \`minDate\` is after prop \`activeMonth\`
     type="next"
   />
 </div>
-`
+`;

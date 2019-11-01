@@ -371,4 +371,4 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
     </div>
   </div>
 </div>
-`
+`;

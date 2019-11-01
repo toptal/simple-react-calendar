@@ -1,9 +1,9 @@
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 
 import Week from '../week'
 
-describe.only('Week', () => {
+describe('Week', () => {
   let props, wrapper
 
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe.only('Week', () => {
       expect(wrapper).toMatchSnapshot()
     })
 
-    context('when prop `date` is different month', () => {
+    describe('when prop `date` is different month', () => {
       it('renders <Week />', () => {
         wrapper.setProps({date: new Date(2015, 5, 29)})
 
@@ -24,7 +24,7 @@ describe.only('Week', () => {
       })
     })
 
-    context('when prop `date` falls in prop `activeMonth`', () => {
+    describe('when prop `date` falls in prop `activeMonth`', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
           date: new Date(2015, 5, 29),
@@ -35,7 +35,7 @@ describe.only('Week', () => {
       })
     })
 
-    context('when prop `date` falls in the previous month', () => {
+    describe('when prop `date` falls in the previous month', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
           date: new Date(2015, 6, 27),
@@ -46,7 +46,7 @@ describe.only('Week', () => {
       })
     })
 
-    context('when prop `highlightedStart` and `highlightedEnd` are defined', () => {
+    describe('when prop `highlightedStart` and `highlightedEnd` are defined', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
           date: new Date(2015, 5, 29),
@@ -60,7 +60,7 @@ describe.only('Week', () => {
       })
     })
 
-    context('when prop `selectedMin` and `selectedMax` are defined', () => {
+    describe('when prop `selectedMin` and `selectedMax` are defined', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
           date: new Date(2015, 5, 29),
@@ -72,7 +72,7 @@ describe.only('Week', () => {
         expect(wrapper).toMatchSnapshot()
       })
 
-      context('when prop `selectedMin` and `selectedMax` are the same day', () => {
+      describe('when prop `selectedMin` and `selectedMax` are the same day', () => {
         it('renders <Week />', () => {
           wrapper.setProps({
             date: new Date(2015, 5, 29, 21, 0),
@@ -86,7 +86,7 @@ describe.only('Week', () => {
       })
     })
 
-    context('when prop `minDate` is defined', () => {
+    describe('when prop `minDate` is defined', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
           date: new Date(2015, 5, 29),
@@ -98,7 +98,7 @@ describe.only('Week', () => {
       })
     })
 
-    context('when prop `maxDate` is defined', () => {
+    describe('when prop `maxDate` is defined', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
           date: new Date(2015, 5, 29),
@@ -110,7 +110,7 @@ describe.only('Week', () => {
       })
     })
 
-    context('when prop `selectedMin` and `selectedMax` are defined', () => {
+    describe('when prop `selectedMin` and `selectedMax` are defined', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
           date: new Date(2015, 5, 29),
@@ -123,7 +123,7 @@ describe.only('Week', () => {
       })
     })
 
-    context('when prop `disabledIntervals` is defined', () => {
+    describe('when prop `disabledIntervals` is defined', () => {
       it('renders <Week />', () => {
         const disabledIntervals = [
           {
@@ -137,7 +137,7 @@ describe.only('Week', () => {
       })
     })
 
-    context('when prop `dateDisabled`', () => {
+    describe('when prop `dateDisabled`', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
           date: new Date(2015, 5, 29),

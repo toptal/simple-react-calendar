@@ -1,7 +1,7 @@
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 
-import {BLOCK_CLASS_NAME, NEXT_MONTH_TITLE, PREV_MONTH_TITLE} from '../consts'
+import { BLOCK_CLASS_NAME, NEXT_MONTH_TITLE, PREV_MONTH_TITLE } from '../consts'
 import HeaderButton from '../header_button'
 
 describe('HeaderButton', () => {
@@ -16,7 +16,7 @@ describe('HeaderButton', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  context('when prop `enabled` is `false`', () => {
+  describe('when prop `enabled` is `false`', () => {
     it('renders <HeaderButton />', () => {
       wrapper.setProps({enabled: false})
 
@@ -24,7 +24,7 @@ describe('HeaderButton', () => {
     })
   })
 
-  context('when prop `type` is "next"', () => {
+  describe('when prop `type` is "next"', () => {
     it('renders <HeaderButton />', () => {
       wrapper.setProps({type: 'next', title: NEXT_MONTH_TITLE})
 
@@ -32,7 +32,7 @@ describe('HeaderButton', () => {
     })
   })
 
-  context('when prop `blockClassName` is defined', () => {
+  describe('when prop `blockClassName` is defined', () => {
     it('renders <HeaderButton />', () => {
       wrapper.setProps({blockClassName: 'cal'})
 
@@ -40,7 +40,7 @@ describe('HeaderButton', () => {
     })
   })
 
-  context('when prop `title` is defined', () => {
+  describe('when prop `title` is defined', () => {
     it('renders <HeaderButton />', () => {
       wrapper.setProps({title: 'testTitle'})
 
@@ -48,7 +48,7 @@ describe('HeaderButton', () => {
     })
   })
 
-  context('when prop `arrow` is defined', () => {
+  describe('when prop `arrow` is defined', () => {
     it('renders <HeaderButton />', () => {
       wrapper.setProps({arrow: <i className="icon">Test</i>})
 

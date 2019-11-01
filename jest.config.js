@@ -3,9 +3,10 @@
 module.exports = {
   collectCoverage: true,
   coverageDirectory: './coverage/',
-  setupFiles: ['<rootDir>/config/_jest/setupTests.js', 'jest-plugin-context/setup'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  setupFiles: ['<rootDir>/config/_jest/setupTests.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
-  testMatch: ['**/__specs__/**/*.js'],
+  testMatch: ['**/__specs__/**/*.tsx'],
   testPathIgnorePatterns: ['/node_modules/', '/fixtures/', '/dist'],
   testURL: 'http://localhost/',
 }

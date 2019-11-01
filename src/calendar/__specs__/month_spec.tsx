@@ -1,7 +1,7 @@
 import addDays from 'date-fns/add_days'
 import parse from 'date-fns/parse'
 import subDays from 'date-fns/sub_days'
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 
 import Month from '../month'
@@ -22,13 +22,14 @@ describe('Month', () => {
   })
 
   describe('#_pushUpdate', () => {
-    context('when `_selectionStart` is before `_selectionEnd`', () => {
+    describe('when `_selectionStart` is before `_selectionEnd`', () => {
       it('calls prop #onChange', () => {
         instance._selectionStart = '2015-06-10'
         instance._selectionEnd = '2015-06-15'
         instance._pushUpdate()
 
         expect(props.onChange).toHaveBeenCalledTimes(1)
+
         expect(props.onChange).toHaveBeenCalledWith({
           start: '2015-06-10',
           end: '2015-06-15',
@@ -36,13 +37,14 @@ describe('Month', () => {
       })
     })
 
-    context('when `_selectionEnd` is before `_selectionStart`', () => {
+    describe('when `_selectionEnd` is before `_selectionStart`', () => {
       it('calls prop #onChange', () => {
         instance._selectionStart = '2015-06-15'
         instance._selectionEnd = '2015-06-10'
         instance._pushUpdate()
 
         expect(props.onChange).toHaveBeenCalledTimes(1)
+
         expect(props.onChange).toHaveBeenCalledWith({
           start: '2015-06-10',
           end: '2015-06-15',
@@ -50,7 +52,7 @@ describe('Month', () => {
       })
     })
 
-    context('when prop `rangeLimit` is smaller than the difference', () => {
+    describe('when prop `rangeLimit` is smaller than the difference', () => {
       it('calls prop #onChange', () => {
         props = getProps({
           rangeLimit: 5,
@@ -63,6 +65,7 @@ describe('Month', () => {
         wrapper.instance()._pushUpdate()
 
         expect(props.onChange).toHaveBeenCalledTimes(1)
+
         expect(props.onChange).toHaveBeenCalledWith({
           start: '2015-06-10',
           end: addDays('2015-06-10', 5),
@@ -76,18 +79,19 @@ describe('Month', () => {
       instance._pushNoticeUpdate('test')
 
       expect(props.onNoticeChange).toHaveBeenCalledTimes(1)
+
       expect(props.onNoticeChange).toHaveBeenCalledWith('test')
     })
   })
 
   describe('#_getDisabledRange', () => {
-    context('when prop `disabledIntervals` is `undefined`', () => {
+    describe('when prop `disabledIntervals` is `undefined`', () => {
       it('calls prop #onNoticeChange', () => {
         expect(instance._getDisabledRange('test')).toBe(true)
       })
     })
 
-    context('when prop `disabledIntervals` is defined', () => {
+    describe('when prop `disabledIntervals` is defined', () => {
       it('calls prop #onNoticeChange', () => {
         props = getProps({
           disabledIntervals: [
@@ -103,7 +107,7 @@ describe('Month', () => {
         expect(instance._getDisabledRange('test')).toBe(true)
       })
 
-      context('when argument `interval` are overlapping', () => {
+      describe('when argument `interval` are overlapping', () => {
         it('calls prop #onNoticeChange', () => {
           const range = {
             start: '2015-01-01',
@@ -129,8 +133,8 @@ describe('Month', () => {
       expect(mockEvent.preventDefault).toHaveBeenCalledTimes(1)
     })
 
-    context('when prop `onDayMouseEnter` is `undefined`', () => {
-      context('when #_selectionInProgress is `false`', () => {
+    describe('when prop `onDayMouseEnter` is `undefined`', () => {
+      describe('when #_selectionInProgress is `false`', () => {
         it('returns `undefined`', () => {
           instance._selectionInProgress = false
 
@@ -138,8 +142,8 @@ describe('Month', () => {
         })
       })
 
-      context('when #_selectionInProgress is `true`', () => {
-        context('when #_getDisabledRange is `false`', () => {
+      describe('when #_selectionInProgress is `true`', () => {
+        describe('when #_getDisabledRange is `false`', () => {
           it('returns `undefined`', () => {
             instance._selectionInProgress = true
             instance._getDisabledRange = () => false
@@ -148,8 +152,8 @@ describe('Month', () => {
           })
         })
 
-        context('when #_getDisabledRange is defined', () => {
-          context('when argument `date` is equal with `_selectionEnd`', () => {
+        describe('when #_getDisabledRange is defined', () => {
+          describe('when argument `date` is equal with `_selectionEnd`', () => {
             it('returns `undefined`', () => {
               instance._selectionInProgress = true
               instance._getDisabledRange = () => true
@@ -159,8 +163,8 @@ describe('Month', () => {
             })
           })
 
-          context('when argument `date` is not equal with `_selectionEnd`', () => {
-            context('when prop `rangeLimit` is `undefined`', () => {
+          describe('when argument `date` is not equal with `_selectionEnd`', () => {
+            describe('when prop `rangeLimit` is `undefined`', () => {
               it('returns `undefined`', () => {
                 instance._selectionInProgress = true
                 instance._getDisabledRange = () => true
@@ -170,7 +174,7 @@ describe('Month', () => {
               })
             })
 
-            context('when prop `rangeLimit` is defined', () => {
+            describe('when prop `rangeLimit` is defined', () => {
               beforeEach(() => {
                 props = getProps({
                   rangeLimit: 5,
@@ -182,7 +186,7 @@ describe('Month', () => {
                 instance._selectionEnd = addDays(date, 2)
               })
 
-              context('when argument `date` is before `dateLimit`', () => {
+              describe('when argument `date` is before `dateLimit`', () => {
                 it('returns `undefined`', () => {
                   instance._selectionStart = addDays(date, 6)
 
@@ -190,18 +194,15 @@ describe('Month', () => {
                 })
               })
 
-              context('when argument `date` is after `dateLimit`', () => {
+              describe('when argument `date` is after `dateLimit`', () => {
                 beforeEach(() => {
                   instance._pushUpdate = jest.fn()
                   instance._selectionStart = subDays(date, 3)
-
                   instance.handleOnDayMouseEnter(mockEvent)
                 })
-
                 it('calls #_pushUpdate', () => {
                   expect(instance._pushUpdate).toHaveBeenCalledTimes(1)
                 })
-
                 it('sets `_selectionEnd`', () => {
                   expect(instance._selectionEnd).toEqual(parse(date))
                 })
@@ -212,11 +213,12 @@ describe('Month', () => {
       })
     })
 
-    context('when prop `onDayMouseEnter` is defined', () => {
+    describe('when prop `onDayMouseEnter` is defined', () => {
       it('calls prop #onDayMouseEnter', () => {
         instance.handleOnDayMouseEnter(mockEvent)
 
         expect(props.onDayMouseEnter).toHaveBeenCalledTimes(1)
+
         expect(props.onDayMouseEnter).toHaveBeenCalledWith(parse(date))
       })
     })
@@ -229,22 +231,23 @@ describe('Month', () => {
       expect(mockEvent.preventDefault).toHaveBeenCalledTimes(1)
     })
 
-    context('when prop `mode` is `RANGE_MODE`', () => {
-      context('when `_selectionInProgress` is `true`', () => {
-        context('when #_getDisabledRange is `true`', () => {
+    describe('when prop `mode` is `RANGE_MODE`', () => {
+      describe('when `_selectionInProgress` is `true`', () => {
+        describe('when #_getDisabledRange is `true`', () => {
           it('sets instance states', () => {
             instance._pushNoticeUpdate = () => {}
             instance._selectionInProgress = true
-
             instance.handleOnDayClick(mockEvent)
 
             expect(instance._selectionInProgress).toBe(false)
+
             expect(instance._selectionStart).toBe(undefined)
+
             expect(instance._selectionEnd).toEqual(parse(date))
           })
         })
 
-        context('when #_getDisabledRange is `false`', () => {
+        describe('when #_getDisabledRange is `false`', () => {
           beforeEach(() => {
             instance._pushNoticeUpdate = () => {}
             instance._selectionInProgress = true
@@ -253,30 +256,32 @@ describe('Month', () => {
             instance._pushUpdate = jest.fn()
             instance._pushNoticeUpdate = jest.fn()
           })
-
           it('sets instance states', () => {
             expect(instance._selectionInProgress).toBe(false)
+
             expect(instance._selectionStart).toBe(null)
+
             expect(instance._selectionEnd).toBe(null)
           })
         })
       })
 
-      context('when `_selectionInProgress` is `false`', () => {
+      describe('when `_selectionInProgress` is `false`', () => {
         it('sets instance states', () => {
           instance._pushNoticeUpdate = () => {}
           instance._selectionInProgress = false
-
           instance.handleOnDayClick(mockEvent)
 
           expect(instance._selectionInProgress).toBe(true)
+
           expect(instance._selectionStart).toEqual(parse(date))
+
           expect(instance._selectionEnd).toEqual(parse(date))
         })
       })
     })
 
-    context('when prop `mode` is `SINGLE_MODE`', () => {
+    describe('when prop `mode` is `SINGLE_MODE`', () => {
       it('sets instance states', () => {
         props = getProps({
           mode: 'single',
@@ -284,31 +289,29 @@ describe('Month', () => {
         wrapper = shallow(<Month {...props} />)
         const instance = wrapper.instance()
         instance._pushNoticeUpdate = () => {}
-
         instance.handleOnDayClick(mockEvent)
 
         expect(instance._selectionInProgress).toBe(false)
+
         expect(instance._selectionStart).toEqual(parse(date))
+
         expect(instance._selectionEnd).toEqual(parse(date))
       })
     })
-
     it('calls #_pushUpdate', () => {
       instance._pushUpdate = jest.fn()
       instance._pushNoticeUpdate = () => {}
-
       instance.handleOnDayClick(mockEvent)
 
       expect(instance._pushUpdate).toHaveBeenCalledTimes(1)
     })
-
     it('calls #_pushNoticeUpdate', () => {
       instance._pushUpdate = () => {}
       instance._pushNoticeUpdate = jest.fn()
-
       instance.handleOnDayClick(mockEvent)
 
       expect(instance._pushNoticeUpdate).toHaveBeenCalledTimes(1)
+
       expect(instance._pushNoticeUpdate).toHaveBeenCalledWith(null)
     })
   })
@@ -318,12 +321,13 @@ describe('Month', () => {
       instance.handleOnDisabledDayClick(mockEvent)
 
       expect(props.onNoticeChange).toHaveBeenCalledTimes(1)
+
       expect(props.onNoticeChange).toHaveBeenCalledWith('disabled_day_click')
     })
   })
 
   describe('#_getMinDate', () => {
-    context('when `minDate` is `undefined`', () => {
+    describe('when `minDate` is `undefined`', () => {
       it('returns `calcStartDate`', () => {
         props = getProps({
           rangeLimit: 5,
@@ -336,8 +340,8 @@ describe('Month', () => {
       })
     })
 
-    context('when `minDate` is defined', () => {
-      context('when `minDate` is before `calcStartDate`', () => {
+    describe('when `minDate` is defined', () => {
+      describe('when `minDate` is before `calcStartDate`', () => {
         it('returns `calcStartDate`', () => {
           props = getProps({
             rangeLimit: 5,
@@ -351,7 +355,7 @@ describe('Month', () => {
         })
       })
 
-      context('when `minDate` is after `calcStartDate`', () => {
+      describe('when `minDate` is after `calcStartDate`', () => {
         it('returns `minDate`', () => {
           props = getProps({
             rangeLimit: 5,
@@ -368,7 +372,7 @@ describe('Month', () => {
   })
 
   describe('#_getMaxDate', () => {
-    context('when `maxDate` is `undefined`', () => {
+    describe('when `maxDate` is `undefined`', () => {
       it('returns `calcEndDate`', () => {
         props = getProps({
           rangeLimit: 5,
@@ -381,8 +385,8 @@ describe('Month', () => {
       })
     })
 
-    context('when `maxDate` is defined', () => {
-      context('when `maxDate` is before `calcEndDate`', () => {
+    describe('when `maxDate` is defined', () => {
+      describe('when `maxDate` is before `calcEndDate`', () => {
         it('returns `maxDate`', () => {
           props = getProps({
             rangeLimit: 5,
@@ -396,7 +400,7 @@ describe('Month', () => {
         })
       })
 
-      context('when `maxDate` is after `calcEndDate`', () => {
+      describe('when `maxDate` is after `calcEndDate`', () => {
         it('returns `calcEndDate`', () => {
           props = getProps({
             rangeLimit: 5,
@@ -417,7 +421,7 @@ describe('Month', () => {
       expect(wrapper).toMatchSnapshot()
     })
 
-    context('when `_selectionInProgress` is `true` and prop `rangeLimit` is defined', () => {
+    describe('when `_selectionInProgress` is `true` and prop `rangeLimit` is defined', () => {
       it('renders <Month />', () => {
         wrapper.setState({
           rangeLimit: 5,
@@ -431,7 +435,7 @@ describe('Month', () => {
       })
     })
 
-    context('when prop `disabledIntervals` is `[]`', () => {
+    describe('when prop `disabledIntervals` is `[]`', () => {
       it('renders <Month />', () => {
         props = getProps({
           disabledIntervals: [],
@@ -442,7 +446,7 @@ describe('Month', () => {
       })
     })
 
-    context('when prop `month` has 4 weeks', () => {
+    describe('when prop `month` has 4 weeks', () => {
       it('renders <Month />', () => {
         props = getProps({
           activeMonth: new Date(2010, 1, 15),
@@ -453,7 +457,7 @@ describe('Month', () => {
       })
     })
 
-    context('when prop `month` has 5 weeks', () => {
+    describe('when prop `month` has 5 weeks', () => {
       it('renders <Month />', () => {
         props = getProps({
           activeMonth: new Date(2015, 5, 15),
@@ -464,7 +468,7 @@ describe('Month', () => {
       })
     })
 
-    context('when prop `month` has 6 weeks', () => {
+    describe('when prop `month` has 6 weeks', () => {
       it('renders <Month />', () => {
         props = getProps({
           activeMonth: new Date(2015, 7, 15),
@@ -475,8 +479,8 @@ describe('Month', () => {
       })
     })
 
-    context('when prop `minNumberOfWeeks` is defined', () => {
-      context('when prop `activeMonth` has less weeks than defined', () => {
+    describe('when prop `minNumberOfWeeks` is defined', () => {
+      describe('when prop `activeMonth` has less weeks than defined', () => {
         it('renders <Month />', () => {
           props = getProps({
             activeMonth: new Date(2010, 1, 15),
@@ -488,7 +492,7 @@ describe('Month', () => {
         })
       })
 
-      context('when prop `activeMonth` has the same number of weeks as defined', () => {
+      describe('when prop `activeMonth` has the same number of weeks as defined', () => {
         it('renders <Month />', () => {
           props = getProps({
             activeMonth: new Date(2015, 5, 15),
@@ -500,7 +504,7 @@ describe('Month', () => {
         })
       })
 
-      context('when prop `activeMonth` has more weeks than as defined', () => {
+      describe('when prop `activeMonth` has more weeks than as defined', () => {
         it('renders <Month />', () => {
           props = getProps({
             activeMonth: new Date(2015, 7, 15),
@@ -513,7 +517,7 @@ describe('Month', () => {
       })
     })
 
-    context('when prop `disableDaysOfWeek` is defined', () => {
+    describe('when prop `disableDaysOfWeek` is defined', () => {
       it('renders <Month />', () => {
         props = getProps({
           disableDaysOfWeek: true,
@@ -524,8 +528,8 @@ describe('Month', () => {
       })
     })
 
-    context('when prop `minDate` and `maxDate` are defined', () => {
-      context("when prop `rangeLimit` doesn't exceed `minDate` and `maxDate`", () => {
+    describe('when prop `minDate` and `maxDate` are defined', () => {
+      describe("when prop `rangeLimit` doesn't exceed `minDate` and `maxDate`", () => {
         it('renders <Month />', () => {
           props = getProps({
             minDate: new Date(2015, 7, 12),
@@ -538,7 +542,7 @@ describe('Month', () => {
         })
       })
 
-      context('when prop `rangeLimit` exceed `minDate` and `maxDate`', () => {
+      describe('when prop `rangeLimit` exceed `minDate` and `maxDate`', () => {
         it('renders <Month />', () => {
           props = getProps({
             minDate: new Date(2015, 7, 1),
@@ -553,7 +557,6 @@ describe('Month', () => {
     })
   })
 })
-
 const getProps = (overrides = {}) => ({
   activeMonth: new Date(2015, 7, 17),
   blockClassName: 'example-class',

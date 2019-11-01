@@ -1,4 +1,4 @@
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 
 import Notice from '../notice'
@@ -11,13 +11,13 @@ describe('Notice', () => {
     wrapper = shallow(<Notice {...props} />)
   })
 
-  context('when prop `type` is "overlapping_with_disabled"', () => {
+  describe('when prop `type` is "overlapping_with_disabled"', () => {
     it('renders <Notice />', () => {
       expect(wrapper).toMatchSnapshot()
     })
   })
 
-  context('when prop `type` is "disabled_day_click"', () => {
+  describe('when prop `type` is "disabled_day_click"', () => {
     it('renders <Notice />', () => {
       wrapper.setProps('disabled_day_click')
 
