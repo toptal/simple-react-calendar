@@ -1,13 +1,13 @@
 import cx from 'classnames'
-import formatDate from 'date-fns/format'
 import React, { FC, SyntheticEvent } from 'react'
 
-import { IDayRenderProps } from '../@types'
+import { IWeekDayRenderProps } from '../../@types'
 
 export interface Props {
   blockClassName: string
-  customRender?: IDayRenderProps
+  customRender?: IWeekDayRenderProps
   date: string
+  getDayFormatted: (date: Date) => string
   handleOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void
   handleOnEnter?: (event: SyntheticEvent<HTMLButtonElement>) => void
   isCurrentMonth: boolean
@@ -25,11 +25,12 @@ export interface Props {
   isWorkday: boolean
 }
 
-const Day: FC<Props> = (props) => {
+const WeekDay: FC<Props> = (props) => {
   const {
     blockClassName,
     customRender,
     date,
+    getDayFormatted,
     handleOnClick,
     handleOnEnter,
     isCurrentMonth,
@@ -46,14 +47,8 @@ const Day: FC<Props> = (props) => {
     isWeekend,
     isWorkday,
   } = props
-  const children = formatDate(date, 'D')
-
   if (customRender) {
-    return customRender({
-      ...props,
-      // TODO: remove this and leave it to the passed function to format the date in the desired format
-      children,
-    })
+    return customRender(props)
   }
 
   return (
@@ -76,11 +71,13 @@ const Day: FC<Props> = (props) => {
       onClick={handleOnClick}
       onMouseEnter={handleOnEnter}
       value={date}
-      type='button'
+      type="button"
     >
-      {children}
+      {getDayFormatted(date)}
     </button>
   )
 }
 
-export default Day
+WeekDay.displayName = 'WeekDay'
+
+export default WeekDay
