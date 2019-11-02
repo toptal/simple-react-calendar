@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Week when render prop has not been passed default render 1`] = `
+<div>
+  <div
+    class="test-class-name-week"
+  >
+    <div
+      class="test-class-name-week_number"
+    >
+      48
+    </div>
+    <div
+      class="test-class-name-week_days"
+    >
+      <div
+        class="test-class-name-day_wrapper"
+      >
+        <button
+          class="test-class-name-day is-current_month is-selectable is-working_day"
+          type="button"
+          value="2019-11-25"
+        >
+          25
+        </button>
+      </div>
+      <div
+        class="test-class-name-day_wrapper"
+      >
+        <button
+          class="test-class-name-day is-current_month is-selectable is-working_day"
+          type="button"
+          value="2019-11-26"
+        >
+          26
+        </button>
+      </div>
+      <div
+        class="test-class-name-day_wrapper"
+      >
+        <button
+          class="test-class-name-day is-current_month is-not_selectable is-today is-working_day"
+          type="button"
+          value="2019-11-27"
+        >
+          27
+        </button>
+      </div>
+      <div
+        class="test-class-name-day_wrapper"
+      >
+        <button
+          class="test-class-name-day is-current_month is-end_selection is-not_selectable is-selected is-working_day"
+          type="button"
+          value="2019-11-28"
+        >
+          28
+        </button>
+      </div>
+      <div
+        class="test-class-name-day_wrapper"
+      >
+        <button
+          class="test-class-name-day is-current_month is-not_selectable is-selected is-start_selection is-working_day"
+          type="button"
+          value="2019-11-29"
+        >
+          29
+        </button>
+      </div>
+      <div
+        class="test-class-name-day_wrapper"
+      >
+        <button
+          class="test-class-name-day is-current_month is-not_selectable is-weekend"
+          type="button"
+          value="2019-11-30"
+        >
+          30
+        </button>
+      </div>
+      <div
+        class="test-class-name-day_wrapper"
+      >
+        <button
+          class="test-class-name-day is-next_month is-not_selectable is-weekend"
+          type="button"
+          value="2019-12-01"
+        >
+          1
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

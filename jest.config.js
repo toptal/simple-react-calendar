@@ -2,10 +2,14 @@
 
 module.exports = {
   collectCoverage: true,
-  coverageDirectory: "./coverage/",
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-  setupFiles: ["<rootDir>/config/_jest/setupTests.js"],
-  snapshotSerializers: ["enzyme-to-json/serializer"],
-  testMatch: ["**/__specs__/**/*.tsx"],
-  testPathIgnorePatterns: ["/node_modules/", "/fixtures/", "/dist"]
-};
+  collectCoverageFrom: ['src/calendar/**/*.tsx', 'src/calendar/helper/*.ts', '!src/calendar/stories/**/*.(ts|tsx)'],
+  globals: {
+    'ts-jest': {
+      tsConfig: 'tsconfig.jest.json',
+    },
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'gql', 'graphql', 'node'],
+  testMatch: ['**/(test).(ts|tsx)'],
+  testPathIgnorePatterns: ['/.storybook', '/ci', '/dist', '/lib', '/src/example'],
+  roots: ['<rootDir>/src'],
+}

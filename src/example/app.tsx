@@ -3,7 +3,7 @@ import './style/date_picker.styl'
 
 import React, { FC } from 'react'
 
-import SimpleReactCalendar from '../calendar/calendar'
+import SimpleReactCalendar from '../calendar/Calendar'
 
 const App: FC = () => (
   <SimpleReactCalendar

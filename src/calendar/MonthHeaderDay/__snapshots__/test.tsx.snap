@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthHeaderDay when day is \`Monday\` default render 1`] = `
+<div>
+  <div
+    class="test-class-name-days_of_week_day"
+  >
+    Monday
+  </div>
+</div>
+`;
+
+exports[`MonthHeaderDay when day is \`Sunday\` default render 1`] = `
+<div>
+  <div
+    class="test-class-name-days_of_week_day is-weekend"
+  >
+    Sunday
+  </div>
+</div>
+`;

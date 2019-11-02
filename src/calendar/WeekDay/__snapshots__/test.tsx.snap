@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeekDay when render prop has not been passed default render 1`] = `
+<div>
+  <div
+    class="test-class-name-day_wrapper"
+  >
+    <button
+      class="test-class-name-day is-current_month is-highlighted is-selectable is-today is-working_day"
+      type="button"
+      value="2019-11-25"
+    >
+      25
+    </button>
+  </div>
+</div>
+`;

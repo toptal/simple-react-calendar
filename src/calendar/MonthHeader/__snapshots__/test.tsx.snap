@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthHeader when render prop has not been passed default render 1`] = `
+<div>
+  <header
+    class="test-class-name-month_header"
+  >
+    <div
+      class="test-class-name-month_header_wrapper"
+    >
+      <button
+        class="test-class-name-header_button is-prev is-disabled"
+        data-calendar-value="-1"
+        disabled=""
+        title="Previous Month"
+        type="button"
+      >
+        &gt;
+      </button>
+      <h3
+        class="test-class-name-month_header_title"
+      >
+        November 2019
+      </h3>
+      <button
+        class="test-class-name-header_button is-next"
+        data-calendar-value="1"
+        title="Next Month"
+        type="button"
+      >
+        &lt;
+      </button>
+    </div>
+    <div
+      class="test-class-name-month_header_days"
+    >
+      <div
+        class="test-class-name-days_of_week_day is-weekend"
+      >
+        Mon
+      </div>
+      <div
+        class="test-class-name-days_of_week_day"
+      >
+        Tue
+      </div>
+      <div
+        class="test-class-name-days_of_week_day"
+      >
+        Wed
+      </div>
+      <div
+        class="test-class-name-days_of_week_day"
+      >
+        Thu
+      </div>
+      <div
+        class="test-class-name-days_of_week_day"
+      >
+        Fri
+      </div>
+      <div
+        class="test-class-name-days_of_week_day"
+      >
+        Sat
+      </div>
+      <div
+        class="test-class-name-days_of_week_day is-weekend"
+      >
+        Sun
+      </div>
+    </div>
+  </header>
+</div>
+`;
+
+exports[`MonthHeader when render prop has not been passed when \`showMonthPrev\`, \`showMonthName\`, \`showMonthNext\` \`showDaysOfWeek\` props are \`falsy\` default render 1`] = `<div />`;

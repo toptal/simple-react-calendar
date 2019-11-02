@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthHeaderButton when type is \`next\` default render 1`] = `
+<div>
+  <button
+    class="test-class-name-header_button is-next"
+    data-calendar-value="1"
+    title="Next Month"
+    type="button"
+  >
+    &lt;
+  </button>
+</div>
+`;
+
+exports[`MonthHeaderButton when type is \`prev\` default render 1`] = `
+<div>
+  <button
+    class="test-class-name-header_button is-prev"
+    data-calendar-value="-1"
+    title="Previous Month"
+    type="button"
+  >
+    &gt;
+  </button>
+</div>
+`;

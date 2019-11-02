@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notice when day is \`Sunday\` default render 1`] = `
+<div>
+  <div
+    class="test-class-name-notice"
+  />
+</div>
+`;
+
+exports[`Notice when type is \`disabled_day_click\` default render 1`] = `
+<div>
+  <div
+    class="test-class-name-notice"
+  >
+    Selected range must not overlap with disabled dates.
+  </div>
+</div>
+`;
+
+exports[`Notice when type is \`null\` default render 1`] = `
+<div>
+  <div
+    class="test-class-name-notice"
+  />
+</div>
+`;
+
+exports[`Notice when type is \`overlapping_with_disabled\` default render 1`] = `
+<div>
+  <div
+    class="test-class-name-notice"
+  />
+</div>
+`;
