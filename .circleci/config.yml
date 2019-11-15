@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/simple-react-calendar
+
+    docker:
+      - image: cypress/browsers:node12.6.0-chrome77
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: npm-cache-v1-{{ checksum "yarn.lockn" }}
+
+      - run:
+          name: Install Dependencies
+          command: yarn install
+
+      - save_cache:
+          key: npm-cache-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - /home/circleci/.npm
+
+      - run:
+          name: Danger Check
+          command: yarn danger ci
+          env:
+            GITHUB_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+
+      - run:
+          name: Lint ESLint
+          command: yarn lint
+
+      - run:
+          name: Lint Typescript
+          command: yarn lint:tsc
+
+      - run:
+          name: Unit test
+          command: yarn test:ci
