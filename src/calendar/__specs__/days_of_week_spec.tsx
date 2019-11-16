@@ -14,9 +14,9 @@ describe('DaysOfWeek', () => {
 
   describe('#_getDaysOfWeek', () => {
     it('return days of week', () => {
-      const daysOfWeek = wrapper.instance()._getDaysOfWeek(3)
-
-      expect(daysOfWeek).toEqual(['Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue'])
+      // TODO: extract to a shared helper
+      // @ts-ignore
+      expect(DaysOfWeek.getDaysOfWeek({ daysOfWeek: DAYS_OF_WEEK, dayIndex: 3 })).toEqual(['Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue'])
     })
   })
 

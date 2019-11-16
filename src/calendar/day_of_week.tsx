@@ -11,7 +11,7 @@ export type Props = {
 }
 
 const DayOfWeek: FC<Props> = (props) => {
-  const {blockClassName, isWeekend, day, customRender} = props
+  const { blockClassName, isWeekend, day, customRender } = props
 
   const children = day
 

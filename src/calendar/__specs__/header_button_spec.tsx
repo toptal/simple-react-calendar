@@ -18,7 +18,7 @@ describe('HeaderButton', () => {
 
   describe('when prop `enabled` is `false`', () => {
     it('renders <HeaderButton />', () => {
-      wrapper.setProps({enabled: false})
+      wrapper.setProps({ enabled: false })
 
       expect(wrapper).toMatchSnapshot()
     })
@@ -26,7 +26,7 @@ describe('HeaderButton', () => {
 
   describe('when prop `type` is "next"', () => {
     it('renders <HeaderButton />', () => {
-      wrapper.setProps({type: 'next', title: NEXT_MONTH_TITLE})
+      wrapper.setProps({ type: 'next', title: NEXT_MONTH_TITLE })
 
       expect(wrapper).toMatchSnapshot()
     })
@@ -34,7 +34,7 @@ describe('HeaderButton', () => {
 
   describe('when prop `blockClassName` is defined', () => {
     it('renders <HeaderButton />', () => {
-      wrapper.setProps({blockClassName: 'cal'})
+      wrapper.setProps({ blockClassName: 'cal' })
 
       expect(wrapper).toMatchSnapshot()
     })
@@ -42,7 +42,7 @@ describe('HeaderButton', () => {
 
   describe('when prop `title` is defined', () => {
     it('renders <HeaderButton />', () => {
-      wrapper.setProps({title: 'testTitle'})
+      wrapper.setProps({ title: 'testTitle' })
 
       expect(wrapper).toMatchSnapshot()
     })
@@ -50,7 +50,7 @@ describe('HeaderButton', () => {
 
   describe('when prop `arrow` is defined', () => {
     it('renders <HeaderButton />', () => {
-      wrapper.setProps({arrow: <i className="icon">Test</i>})
+      wrapper.setProps({ arrow: <i className='icon'>Test</i> })
 
       expect(wrapper).toMatchSnapshot()
     })

@@ -11,12 +11,12 @@ export type Props = {
   type: 'prev' | 'next'
 }
 
-const HeaderButton: FC<Props> = ({arrow, blockClassName, enabled, type, title, onClick}) => (
+const HeaderButton: FC<Props> = ({ arrow, blockClassName, enabled, type, title, onClick }) => (
   <button
     className={classnames(`${blockClassName}-header_button`, `is-${type}`, {
       'is-disabled': !enabled,
     })}
-    type="button"
+    type='button'
     disabled={!enabled}
     title={title}
     onClick={onClick}

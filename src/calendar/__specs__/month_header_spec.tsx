@@ -15,7 +15,7 @@ describe('MonthHeader', () => {
 
   describe('#_switchMonth', () => {
     it('calls #onMonthChange', () => {
-      wrapper.setProps({maxDate: new Date(2015, 7, 1)})
+      wrapper.setProps({ maxDate: new Date(2015, 7, 1) })
       instance._switchMonth(1)
 
       expect(props.onMonthChange).toHaveBeenCalledTimes(1)
@@ -31,7 +31,7 @@ describe('MonthHeader', () => {
 
     describe('when prop `minDate` is after prop `activeMonth`', () => {
       it('renders <MonthHeader />', () => {
-        wrapper.setProps({minDate: new Date(2015, 8, 17)})
+        wrapper.setProps({ minDate: new Date(2015, 8, 17) })
 
         expect(wrapper).toMatchSnapshot()
       })
@@ -39,7 +39,7 @@ describe('MonthHeader', () => {
 
     describe('when prop `maxDate` is before prop `activeMonth`', () => {
       it('renders <MonthHeader />', () => {
-        wrapper.setProps({maxDate: new Date(2015, 6, 17)})
+        wrapper.setProps({ maxDate: new Date(2015, 6, 17) })
 
         expect(wrapper).toMatchSnapshot()
       })

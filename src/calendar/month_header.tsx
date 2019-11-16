@@ -21,9 +21,11 @@ export type Props = {
   onMonthChange: (...args: any[]) => any
 }
 
+// TODO: FC Rewrite
+/* eslint-disable react/require-optimization */
 export default class MonthHeader extends Component<Props, {}> {
   _switchMonth(offset: -1 | 1) {
-    const {onMonthChange, activeMonth} = this.props
+    const { onMonthChange, activeMonth } = this.props
 
     onMonthChange(addMonths(activeMonth, offset))
   }
@@ -57,7 +59,7 @@ export default class MonthHeader extends Component<Props, {}> {
     return (
       <div className={`${blockClassName}-month_header`}>
         <HeaderButton
-          type="prev"
+          type='prev'
           arrow={headerPrevArrow}
           title={headerPrevTitle}
           enabled={prevEnabled}
@@ -66,7 +68,7 @@ export default class MonthHeader extends Component<Props, {}> {
         />
         <div className={`${blockClassName}-month_header_title`}>{formatDate(activeMonth, 'MMMM YYYY')}</div>
         <HeaderButton
-          type="next"
+          type='next'
           arrow={headerNextArrow}
           title={headerNextTitle}
           enabled={nextEnabled}

@@ -1,8 +1,6 @@
 const autoprefixer = require('autoprefixer')
 
-module.exports = ({
-  config
-}) => {
+module.exports = ({config}) => {
   config.module.rules.push({
     test: /\.(ts|tsx|js|jsx)$/,
     loader: require.resolve('babel-loader'),
@@ -10,7 +8,8 @@ module.exports = ({
 
   config.module.rules.push({
     test: /\.styl$/,
-    use: [{
+    use: [
+      {
         loader: require.resolve('style-loader'),
       },
       {
@@ -24,7 +23,7 @@ module.exports = ({
       {
         loader: require.resolve('stylus-loader'),
       },
-    ]
+    ],
   })
 
   config.resolve.extensions.push('.ts', '.tsx', '.js', '.jsx')

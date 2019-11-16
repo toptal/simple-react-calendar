@@ -1,6 +1,50 @@
 version: 2
 jobs:
-  build:
+  release:
+    working_directory: ~/simple-react-calendar
+
+    docker:
+      - image: cibuilds/base:latest
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+
+      - save_cache:
+            name: Save Yarn Package Cache
+            key: yarn-packages-{{ checksum "yarn.lock" }}
+            paths:
+              - ~/.cache/yarn
+
+      - run:
+          name: Build
+          command: yarn build
+
+      - run:
+          name: Build Storybook
+          command: yarn storybook:build
+
+      - run:
+          name: Deploy Storybook
+          command: yarn storybook:deploy
+
+      - run:
+          name: Release
+          command: ./node_modules/.bin/semantic-release
+          environment:
+            GH_TOKEN: GH_token
+            GITHUB_TOKEN: GH_token
+            NPM_TOKEN: NPM_token
+
+  prCheck:
     working_directory: ~/simple-react-calendar
 
     docker:
@@ -8,23 +52,27 @@ jobs:
 
     steps:
       - checkout
+
       - restore_cache:
-          key: npm-cache-v1-{{ checksum "yarn.lockn" }}
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
 
       - run:
           name: Install Dependencies
-          command: yarn install
+          command: yarn install --frozen-lockfile
 
       - save_cache:
-          key: npm-cache-v1-{{ checksum "yarn.lock" }}
-          paths:
-            - /home/circleci/.npm
+            name: Save Yarn Package Cache
+            key: yarn-packages-{{ checksum "yarn.lock" }}
+            paths:
+              - ~/.cache/yarn
 
-      - run:
-          name: Danger Check
-          command: yarn danger ci
-          env:
-            GITHUB_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+      # - run:
+      #     name: Danger Check
+      #     command: yarn danger ci
+      #     environment:
+      #       DANGER_GITHUB_API_TOKEN: DANGER_GITHUB_API_TOKEN
 
       - run:
           name: Lint ESLint
@@ -37,3 +85,16 @@ jobs:
       - run:
           name: Unit test
           command: yarn test:ci
+
+workflows:
+  version: 2
+  # release:
+  #   jobs:
+  #     - release:
+  #         filters:
+  #           branches:
+  #             only: master
+
+  pr_check:
+    jobs:
+      - prCheck

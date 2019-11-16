@@ -61,83 +61,17 @@ type IInterval = {
   end: Date | null
 }
 
+// TODO: FC Rewrite
+/* eslint-disable react/require-optimization */
 export default class Month extends Component<Props, {}> {
-  _pushUpdate() {
-    const {onChange, rangeLimit} = this.props
-    let start, end
-
-    // TODO: simplify with FC approach, remove state logic from child components
-    //       this is passed from the parent component
-    // @ts-ignore
-    if (this._selectionStart && this._selectionEnd) {
-      // TODO: simplify with FC approach, remove state logic from child components
-      //       this is passed from the parent component
-      // @ts-ignore
-      if (isBefore(this._selectionStart, this._selectionEnd)) {
-        // TODO: simplify with FC approach, remove state logic from child components
-        //       this is passed from the parent component
-        // @ts-ignore
-        start = this._selectionStart
-        // TODO: simplify with FC approach, remove state logic from child components
-        //       this is passed from the parent component
-        // @ts-ignore
-        end = this._selectionEnd
-      } else {
-        // TODO: simplify with FC approach, remove state logic from child components
-        //       this is passed from the parent component
-        // @ts-ignore
-        start = this._selectionEnd
-        // TODO: simplify with FC approach, remove state logic from child components
-        //       this is passed from the parent component
-        // @ts-ignore
-        end = this._selectionStart
-      }
-
-      if (rangeLimit && rangeLimit < differenceInCalendarDays(end, start)) {
-        end = addDays(start, rangeLimit)
-      }
-    }
-
-    return onChange({
-      start,
-      end,
-      // TODO: simplify with FC approach, remove state logic from child components
-      //       this is passed from the parent component
-      // @ts-ignore
-      inProgress: this._selectionInProgress,
-    })
-  }
-
-  _pushNoticeUpdate(noticeType: INoticeType) {
-    const {onNoticeChange} = this.props
-    return onNoticeChange(noticeType)
-  }
-
-  _getDisabledRange(interval: IInterval) {
-    const {start, end} = interval
-    const {disabledIntervals} = this.props
-
-    if (!disabledIntervals) return true
-
-    for (let i = 0; i < disabledIntervals.length; i++) {
-      const {start: intervalStart, end: intervalEnd} = disabledIntervals[i]
-
-      if (areRangesOverlapping(start as Date, end as Date, intervalStart, intervalEnd)) {
-        return
-      }
-    }
-
-    return true
-  }
-
   handleOnDayMouseEnter = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()
     const {
-      currentTarget: {value},
+      currentTarget: { value },
     } = event
     const date = parse(value)
 
-    const {onDayMouseEnter} = this.props
+    const { onDayMouseEnter } = this.props
 
     if (onDayMouseEnter) {
       onDayMouseEnter(date)
@@ -148,7 +82,7 @@ export default class Month extends Component<Props, {}> {
     // @ts-ignore
     if (!this._selectionInProgress) return
 
-    const {rangeLimit} = this.props
+    const { rangeLimit } = this.props
     // TODO: simplify with FC approach, remove state logic from child components
     //       this is passed from the parent component
     // @ts-ignore
@@ -183,10 +117,10 @@ export default class Month extends Component<Props, {}> {
   handleOnDayClick = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()
     const {
-      currentTarget: {value},
+      currentTarget: { value },
     } = event
     const date = parse(value)
-    const {mode} = this.props
+    const { mode } = this.props
 
     if (mode === RANGE_MODE) {
       // TODO: simplify with FC approach, remove state logic from child components
@@ -262,13 +196,61 @@ export default class Month extends Component<Props, {}> {
     this._pushNoticeUpdate(null)
   }
 
-  handleOnDisabledDayClick = (event: SyntheticEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    this.props.onNoticeChange('disabled_day_click')
+  handleOnDisabledDayClick = ({ preventDefault }: SyntheticEvent<HTMLButtonElement>) => {
+    const { onNoticeChange } = this.props
+
+    preventDefault()
+    onNoticeChange('disabled_day_click')
+  }
+
+  _pushUpdate() {
+    const { onChange, rangeLimit } = this.props
+    let start, end
+
+    // TODO: simplify with FC approach, remove state logic from child components
+    //       this is passed from the parent component
+    // @ts-ignore
+    if (this._selectionStart && this._selectionEnd) {
+      // TODO: simplify with FC approach, remove state logic from child components
+      //       this is passed from the parent component
+      // @ts-ignore
+      if (isBefore(this._selectionStart, this._selectionEnd)) {
+        // TODO: simplify with FC approach, remove state logic from child components
+        //       this is passed from the parent component
+        // @ts-ignore
+        start = this._selectionStart
+        // TODO: simplify with FC approach, remove state logic from child components
+        //       this is passed from the parent component
+        // @ts-ignore
+        end = this._selectionEnd
+      } else {
+        // TODO: simplify with FC approach, remove state logic from child components
+        //       this is passed from the parent component
+        // @ts-ignore
+        start = this._selectionEnd
+        // TODO: simplify with FC approach, remove state logic from child components
+        //       this is passed from the parent component
+        // @ts-ignore
+        end = this._selectionStart
+      }
+
+      if (rangeLimit && rangeLimit < differenceInCalendarDays(end, start)) {
+        end = addDays(start, rangeLimit)
+      }
+    }
+
+    return onChange({
+      start,
+      end,
+      // TODO: simplify with FC approach, remove state logic from child components
+      //       this is passed from the parent component
+      // @ts-ignore
+      inProgress: this._selectionInProgress,
+    })
   }
 
   _getMinDate() {
-    const {rangeLimit, minDate} = this.props
+    const { rangeLimit, minDate } = this.props
     // TODO: simplify with FC approach, remove state logic from child components
     //       this is passed from the parent component
     // @ts-ignore
@@ -276,14 +258,38 @@ export default class Month extends Component<Props, {}> {
 
     if (minDate) {
       const isCalcStartDayAfter = isBefore(minDate, calcStartDate)
+
       return isCalcStartDayAfter ? calcStartDate : minDate
     } else {
       return calcStartDate
     }
   }
 
+  _pushNoticeUpdate(noticeType: INoticeType) {
+    const { onNoticeChange } = this.props
+
+    return onNoticeChange(noticeType)
+  }
+
+  _getDisabledRange(interval: IInterval) {
+    const { start, end } = interval
+    const { disabledIntervals } = this.props
+
+    if (!disabledIntervals) return true
+
+    for (let i = 0; i < disabledIntervals.length; i++) {
+      const { start: intervalStart, end: intervalEnd } = disabledIntervals[i]
+
+      if (areRangesOverlapping(start as Date, end as Date, intervalStart, intervalEnd)) {
+        return
+      }
+    }
+
+    return true
+  }
+
   _getMaxDate() {
-    const {rangeLimit, maxDate} = this.props
+    const { rangeLimit, maxDate } = this.props
     // TODO: simplify with FC approach, remove state logic from child components
     //       this is passed from the parent component
     // @ts-ignore
@@ -291,34 +297,15 @@ export default class Month extends Component<Props, {}> {
 
     if (maxDate) {
       const isCalcEndDayBefore = isBefore(calcEndDate, maxDate)
+
       return isCalcEndDayBefore ? calcEndDate : maxDate
     } else {
       return calcEndDate
     }
   }
 
-  render() {
-    const {blockClassName, customRender} = this.props
-
-    const children = (
-      <Fragment>
-        {this._renderDaysOfWeek()}
-        {this._renderWeeks()}
-      </Fragment>
-    )
-
-    if (customRender) {
-      return customRender({
-        ...this.props,
-        children,
-      })
-    }
-
-    return <div className={`${blockClassName}-month`}>{children}</div>
-  }
-
   _renderDaysOfWeek() {
-    const {disableDaysOfWeek, blockClassName, weekStartsOn, daysOfWeek, renderDaysOfWeek, renderDayOfWeek} = this.props
+    const { disableDaysOfWeek, blockClassName, weekStartsOn, daysOfWeek, renderDaysOfWeek, renderDayOfWeek } = this.props
 
     if (disableDaysOfWeek) return
 
@@ -350,9 +337,9 @@ export default class Month extends Component<Props, {}> {
       renderWeek,
     } = this.props
     const weeks = []
-    let {minDate, maxDate} = this.props
-    let date = startOfWeek(startOfMonth(activeMonth), {weekStartsOn})
-    const end = endOfWeek(endOfMonth(activeMonth), {weekStartsOn})
+    let { minDate, maxDate } = this.props
+    let date = startOfWeek(startOfMonth(activeMonth), { weekStartsOn })
+    const end = endOfWeek(endOfMonth(activeMonth), { weekStartsOn })
 
     // TODO: simplify with FC approach, remove state logic from child components
     //       this is passed from the parent component
@@ -363,7 +350,9 @@ export default class Month extends Component<Props, {}> {
     }
 
     while (
-      (typeof minNumberOfWeeks == 'number' && minNumberOfWeeks > weeks.length) ||
+      // TODO: External helper with weeknumber etc
+      /* eslint-disable no-unmodified-loop-condition */
+      (typeof minNumberOfWeeks === 'number' && minNumberOfWeeks > weeks.length) ||
       (isBefore(date, end) || isSameDay(date, end))
     ) {
       weeks.push(date)
@@ -394,5 +383,25 @@ export default class Month extends Component<Props, {}> {
         />
       )
     })
+  }
+
+  render() {
+    const { blockClassName, customRender } = this.props
+
+    const children = (
+      <Fragment>
+        {this._renderDaysOfWeek()}
+        {this._renderWeeks()}
+      </Fragment>
+    )
+
+    if (customRender) {
+      return customRender({
+        ...this.props,
+        children,
+      })
+    }
+
+    return <div className={`${blockClassName}-month`}>{children}</div>
   }
 }

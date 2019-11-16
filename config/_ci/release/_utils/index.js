@@ -10,11 +10,7 @@ const log = function (text, color) {
   console.log(chalk[color](text))
 }
 
-const generatePackageJson = (
-  sourceData,
-  outDir,
-  version = false,
-) => {
+const generatePackageJson = (sourceData, outDir, version = false) => {
   log(`Creating package.json in: ${outDir}/package.json`)
   fs.ensureDirSync(outDir)
   const out = path.resolve(outDir, './package.json')
@@ -32,5 +28,5 @@ const generatePackageJson = (
 
 module.exports = {
   log,
-  generatePackageJson
+  generatePackageJson,
 }
