@@ -1,9 +1,9 @@
 import '../../example/style/base_style.styl'
 import '../../example/style/date_picker.styl'
 
-import {action} from '@storybook/addon-actions'
-import {array, boolean, date, number, object, text, withKnobs} from '@storybook/addon-knobs/react'
-import {storiesOf} from '@storybook/react'
+import { action } from '@storybook/addon-actions'
+import { array, boolean, date, number, object, text, withKnobs } from '@storybook/addon-knobs/react'
+import { storiesOf } from '@storybook/react'
 import React from 'react'
 
 import Calendar from '../..'
@@ -26,7 +26,7 @@ stories
     const disableDaysOfWeek = boolean('disableDaysOfWeek', false)
 
     // disabledIntervals
-    const disabledIntervals = array('disabledIntervals', [{start: new Date('2018-01-23'), end: new Date('2018-01-27')}])
+    const disabledIntervals = array('disabledIntervals', [{ start: new Date('2018-01-23'), end: new Date('2018-01-27') }])
 
     // headerNextTitle
     const headerNextTitle = text('headerNextTitle', 'Next month')
@@ -36,7 +36,7 @@ stories
 
     // highlighted
     const highlightedLabel = 'Selected'
-    const highlightedDefaultValue = {start: new Date('2018-01-03'), end: new Date('2018-01-05')}
+    const highlightedDefaultValue = { start: new Date('2018-01-03'), end: new Date('2018-01-05') }
     const highlighted = object(highlightedLabel, highlightedDefaultValue)
 
     // maxDate
@@ -61,7 +61,7 @@ stories
 
     // Selected
     const selectedLabel = 'Selected'
-    const selectedDefaultValue = {start: new Date('2018-01-08'), end: new Date('2018-01-12')}
+    const selectedDefaultValue = { start: new Date('2018-01-08'), end: new Date('2018-01-12') }
     const selected = object(selectedLabel, selectedDefaultValue)
 
     // today
