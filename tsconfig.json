@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./src",
     "esModuleInterop": true,
@@ -13,12 +12,7 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "strict": true,
-    "target": "es2017",
-    "types": ["jest"],
-    "typeRoots": ["node_modules/@types", "src/@types"],
-    "paths": {
-      "*": ["@types/*"]
-    },
+    "target": "es2017"
   },
   "include": ["src"],
   "exclude": ["src/**/__specs__/*", "src/**/stories/*"]
