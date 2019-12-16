@@ -285,8 +285,6 @@ export default class Calendar extends Component<Props, State> {
         onDayMouseEnter={onDayHover}
         onNoticeChange={this._noticeChanged.bind(this)}
         rangeLimit={rangeLimit}
-        /* eslint-disable react/no-string-refs */
-        ref='month'
         selectedMax={selection.end}
         selectedMin={selection.start}
         today={this._today()}
@@ -321,8 +319,6 @@ export default class Calendar extends Component<Props, State> {
         maxDate={maxDate}
         minDate={minDate}
         onMonthChange={this._switchMonth.bind(this)}
-        /* eslint-disable react/no-string-refs */
-        ref='header'
       />
     )
   }
