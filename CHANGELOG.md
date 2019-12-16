@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 1.9.1
+
+- Remove string refs
+
 ## 1.9.0
 
 - Add custom render functions
