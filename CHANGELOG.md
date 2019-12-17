@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 1.9.2
+
+- Issue with `lib` folder creation
+
 ## 1.9.1
 
 - Remove string refs
