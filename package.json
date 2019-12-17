@@ -12,7 +12,7 @@
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js  --env.development --hot --progress",
     "build": "rm -rf ./dist && webpack --config config/webpack.lib.js --progress --env.production ",
-    "build:lib": "rm -rf ./lib && yarn babel ./src --out-dir ./lib --ignore ./src/calendar/__specs__ --ignore ./src/example/ --ignore ./src/calendar/stories",
+    "build:lib": "yarn babel src --delete-dir-on-start --out-dir lib --extensions '.ts','.tsx' --ignore 'src/example','src/@types','src/calendar/__specs__'",
     "prepare": "yarn build:lib",
     "clean": "rm -rf ./lib rm -rf ./dist",
     "test": "env NODE_ENV=test TZ=UTC jest ",
@@ -68,11 +68,13 @@
     "lib": "lib"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/preset-react": "^7.6.3",
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-transform-typescript": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.4",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@semantic-release/changelog": "^3.0.4",
@@ -143,8 +145,6 @@
     "react-dom": "^16.0.0"
   },
   "dependencies": {
-    "@babel/plugin-transform-typescript": "^7.6.3",
-    "@babel/preset-typescript": "^7.6.0",
     "classnames": "^2.2.5",
     "date-fns": "^1.27.2",
     "react": "^16.0.0",
