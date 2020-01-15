@@ -7,7 +7,7 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.core')
 
 const developmentConfig = merge.smart(baseWebpackConfig, {
-  entry: './src/example/index.jsx',
+  entry: './src/example/index.tsx',
 
   mode: 'development',
 
