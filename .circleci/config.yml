@@ -24,16 +24,21 @@ jobs:
             paths:
               - ~/.cache/yarn
 
-      # - run:
-      #     name: Build Storybook
-      #     command: yarn storybook:build
+      - run:
+          name: Build dist
+          command: yarn build
 
-      # - run:
-      #     name: Deploy Storybook
-      #     command: yarn storybook:deploy
-      #     environment:
-      #       GH_TOKEN: GH_token
-      #       GITHUB_TOKEN: GH_token
+      - run:
+          name: Build lib
+          command: yarn build:lib
+
+      - run:
+          name: Build Storybook
+          command: yarn storybook:build
+
+      - run:
+          name: Deploy Storybook
+          command: yarn storybook:deploy
 
       - run:
           name: Release
