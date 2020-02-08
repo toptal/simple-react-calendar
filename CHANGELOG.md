@@ -1,3 +1,11 @@
+## [1.9.4](https://github.com/toptal/simple-react-calendar/compare/v1.9.3...v1.9.4) (2020-02-08)
+
+
+### Bug Fixes
+
+* **ci:** turn off storybook deployment ([#132](https://github.com/toptal/simple-react-calendar/issues/132)) ([8390e71](https://github.com/toptal/simple-react-calendar/commit/8390e7172bfd50ea8df70326d44742702fc6d8f5))
+* **ci:** turn on storybook generate ([#131](https://github.com/toptal/simple-react-calendar/issues/131)) ([4cf2844](https://github.com/toptal/simple-react-calendar/commit/4cf284448b4376f1cb051fd2afee429d698b25ff))
+
 # Changelog `simple-react-calendar`
 
 ## Unreleased
