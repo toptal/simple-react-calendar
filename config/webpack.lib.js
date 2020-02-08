@@ -5,49 +5,49 @@ const baseWebpackConfig = require('./webpack.core')
 
 const libraryWebpackConfig = merge.smart(baseWebpackConfig, {
   entry: {
-    'simple-calendar': path.resolve(__dirname, '../src'),
+    'simple-calendar': path.resolve(__dirname, '../src')
+  },
+
+  externals: {
+    classnames: {
+      amd: 'Classnames',
+      commonjs: 'classnames',
+      commonjs2: 'classnames',
+      root: 'Classnames'
+    },
+    'date-fns': {
+      amd: 'DateFNS',
+      commonjs: 'date-fns',
+      commonjs2: 'date-fns',
+      root: 'DateFNS'
+    },
+    react: {
+      amd: 'React',
+      commonjs: 'react',
+      commonjs2: 'react',
+      root: 'React'
+    },
+    'react-dom': {
+      amd: 'ReactDOM',
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      root: 'ReactDOM'
+    }
   },
 
   mode: 'production',
-
-  resolve: {
-    extensions: ['.js', '.jsx', '.tsx', '.ts'],
-  },
 
   output: {
     filename: '[name].js',
     library: 'Calendar',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, '../dist'),
-    sourceMapFilename: '[file].map',
+    sourceMapFilename: '[file].map'
   },
 
-  externals: {
-    react: {
-      commonjs: 'react',
-      commonjs2: 'react',
-      amd: 'React',
-      root: 'React',
-    },
-    'react-dom': {
-      commonjs: 'react-dom',
-      commonjs2: 'react-dom',
-      amd: 'ReactDOM',
-      root: 'ReactDOM',
-    },
-    'date-fns': {
-      commonjs: 'date-fns',
-      commonjs2: 'date-fns',
-      amd: 'DateFNS',
-      root: 'DateFNS',
-    },
-    classnames: {
-      commonjs: 'classnames',
-      commonjs2: 'classnames',
-      amd: 'Classnames',
-      root: 'Classnames',
-    },
-  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.tsx', '.ts']
+  }
 })
 
 module.exports = libraryWebpackConfig

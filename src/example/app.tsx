@@ -10,7 +10,7 @@ const App: FC = () => (
     blockClassName='date_picker'
     onSelect={({ start, end }) => {
       /* eslint-disable no-console */
-      console.log('>>>>>', { start, end })
+      console.log('>>>>>', { end, start })
     }}
   />
 )

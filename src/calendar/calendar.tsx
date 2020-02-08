@@ -1,8 +1,14 @@
+import React, { Component, Fragment, ReactElement } from 'react'
 import isSameMonth from 'date-fns/is_same_month'
 import isValidDate from 'date-fns/is_valid'
 import startOfMonth from 'date-fns/start_of_month'
-import React, { Component, Fragment, ReactElement } from 'react'
 
+import {
+  BLOCK_CLASS_NAME,
+  DAYS_OF_WEEK,
+  NEXT_MONTH_TITLE,
+  PREV_MONTH_TITLE
+} from './consts'
 import {
   ICalendarRenderProp,
   IDate,
@@ -14,9 +20,8 @@ import {
   IMonthRenderProps,
   INoticeType,
   ISelectionRange,
-  IWeekRenderProps,
+  IWeekRenderProps
 } from '../@types'
-import { BLOCK_CLASS_NAME, DAYS_OF_WEEK, NEXT_MONTH_TITLE, PREV_MONTH_TITLE } from './consts'
 import Month from './month'
 import MonthHeader from './month_header'
 import Notice from './notice'
@@ -77,7 +82,7 @@ export type Props = {
 
 type State = {
   activeMonth: any
-  selection: {start: any; end: any} | null
+  selection: { start: any; end: any } | null
   shownNoticeType: any | null
 }
 
@@ -91,7 +96,7 @@ export default class Calendar extends Component<Props, State> {
     headerNextTitle: NEXT_MONTH_TITLE,
     headerPrevTitle: PREV_MONTH_TITLE,
     mode: 'single',
-    weekStartsOn: 1,
+    weekStartsOn: 1
   }
 
   constructor(props: Props) {
@@ -99,7 +104,7 @@ export default class Calendar extends Component<Props, State> {
     this.state = {
       activeMonth: this._initialMonth(props),
       selection: null,
-      shownNoticeType: null,
+      shownNoticeType: null
     }
   }
 
@@ -108,7 +113,10 @@ export default class Calendar extends Component<Props, State> {
   componentWillReceiveProps(nextProps: Props) {
     const { activeMonth } = this.props
 
-    if (nextProps.activeMonth && !isSameMonth(nextProps.activeMonth, activeMonth as IDate)) {
+    if (
+      nextProps.activeMonth &&
+      !isSameMonth(nextProps.activeMonth, activeMonth as IDate)
+    ) {
       this.setState({ activeMonth: startOfMonth(nextProps.activeMonth) })
     }
   }
@@ -118,15 +126,16 @@ export default class Calendar extends Component<Props, State> {
 
     if (isValid(activeMonth as Date)) {
       return activeMonth
-    } else {
-      if (selected) {
-        const selectionStart = mode === 'single' ? selected : (selected as ISelectionRange).start
+    }
+    if (selected) {
+      const selectionStart =
+        mode === 'single' ? selected : (selected as ISelectionRange).start
 
-        if (isValid(selectionStart as Date)) {
-          return startOfMonth(selectionStart as Date)
-        }
+      if (isValid(selectionStart as Date)) {
+        return startOfMonth(selectionStart as Date)
       }
     }
+
     return startOfMonth(today || new Date())
   }
 
@@ -137,7 +146,7 @@ export default class Calendar extends Component<Props, State> {
       onMonthChange(date)
     } else {
       this.setState({
-        activeMonth: date,
+        activeMonth: date
       })
     }
   }
@@ -147,24 +156,22 @@ export default class Calendar extends Component<Props, State> {
 
     if (onMonthChange) {
       return activeMonth
-    } else {
-      /* eslint-disable react/destructuring-assignment */
-      return this.state.activeMonth
     }
+    /* eslint-disable react/destructuring-assignment */
+    return this.state.activeMonth
   }
 
   _highlight() {
     const { highlighted } = this.props
 
-    if (!highlighted) return { start: null, end: null }
+    if (!highlighted) return { end: null, start: null }
 
     const { start, end } = highlighted
 
     if (isValid(start as Date) && isValid(end as Date)) {
-      return { start, end }
-    } else {
-      return { start: null, end: null }
+      return { end, start }
     }
+    return { end: null, start: null }
   }
 
   _selection() {
@@ -172,10 +179,9 @@ export default class Calendar extends Component<Props, State> {
     const end = this._selectionEnd()
 
     if (isValid(start) && isValid(end)) {
-      return { start, end }
-    } else {
-      return { start: null, end: null }
+      return { end, start }
     }
+    return { end: null, start: null }
   }
 
   _selectionStart(): Date {
@@ -197,9 +203,8 @@ export default class Calendar extends Component<Props, State> {
       case 'range':
         if (!onSelectionProgress && selection) {
           return selection[dateType]
-        } else {
-          return selected && (selected as ISelectionRange)[dateType]
         }
+        return selected && (selected as ISelectionRange)[dateType]
     }
   }
 
@@ -208,14 +213,14 @@ export default class Calendar extends Component<Props, State> {
     const { mode, onSelect, onSelectionProgress } = this.props
 
     if (onSelect && start && (mode !== 'range' || !inProgress)) {
-      onSelect(mode === 'single' ? start : { start, end })
+      onSelect(mode === 'single' ? start : { end, start })
     }
 
     if (mode === 'range') {
       if (onSelectionProgress) {
         onSelectionProgress(selection)
       } else {
-        this.setState({ selection: inProgress ? { start, end } : null })
+        this.setState({ selection: inProgress ? { end, start } : null })
       }
     }
   }
@@ -235,8 +240,15 @@ export default class Calendar extends Component<Props, State> {
     /* eslint-disable react/destructuring-assignment */
     const NoticeComponent = this.props.NoticeComponent || Notice
 
-    // @ts-ignore
-    return shownNoticeType && <NoticeComponent blockClassName={blockClassName} type={shownNoticeType} />
+    return (
+      shownNoticeType && (
+        // @ts-ignore
+        <NoticeComponent
+          blockClassName={blockClassName}
+          type={shownNoticeType}
+        />
+      )
+    )
   }
 
   _renderMonth() {
@@ -256,7 +268,7 @@ export default class Calendar extends Component<Props, State> {
       renderWeek,
       renderMonth,
       renderDaysOfWeek,
-      renderDayOfWeek,
+      renderDayOfWeek
     } = this.props
 
     const selection = this._selection()
@@ -303,7 +315,7 @@ export default class Calendar extends Component<Props, State> {
       maxDate,
       minDate,
       MonthHeaderComponent = MonthHeader,
-      renderMonthHeader,
+      renderMonthHeader
     } = this.props
 
     return (
@@ -337,7 +349,7 @@ export default class Calendar extends Component<Props, State> {
     if (customRender) {
       return customRender({
         ...this.props,
-        children,
+        children
       })
     }
 

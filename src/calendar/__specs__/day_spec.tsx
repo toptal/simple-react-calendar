@@ -1,5 +1,5 @@
+import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
 
 import Day, { Props } from '../day'
 
@@ -24,7 +24,7 @@ const renderDay = (props: Partial<Props> = {}) => {
       isWeekend={false}
       isWorkday={false}
       {...props}
-    />,
+    />
   )
 }
 // TODO: remove me

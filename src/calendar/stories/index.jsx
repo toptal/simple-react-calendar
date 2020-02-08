@@ -1,9 +1,17 @@
 import '../../example/style/base_style.styl'
 import '../../example/style/date_picker.styl'
 
-import {action} from '@storybook/addon-actions'
-import {array, boolean, date, number, object, text, withKnobs} from '@storybook/addon-knobs/react'
-import {storiesOf} from '@storybook/react'
+import { action } from '@storybook/addon-actions'
+import {
+  array,
+  boolean,
+  date,
+  number,
+  object,
+  text,
+  withKnobs
+} from '@storybook/addon-knobs/react'
+import { storiesOf } from '@storybook/react'
 import React from 'react'
 
 import Calendar from '../..'
@@ -13,10 +21,10 @@ const stories = storiesOf('Calendar', module)
 const activeMonth = new Date('2018-01-01')
 const styles = {
   display: 'flex',
-  margin: '60px 0',
   justifyContent: 'center',
+  margin: '60px 0'
 }
-const CenterDecorator = (storyFn) => <div style={styles}>{storyFn()}</div>
+const CenterDecorator = storyFn => <div style={styles}>{storyFn()}</div>
 
 stories
   .addDecorator(withKnobs)
@@ -26,7 +34,9 @@ stories
     const disableDaysOfWeek = boolean('disableDaysOfWeek', false)
 
     // disabledIntervals
-    const disabledIntervals = array('disabledIntervals', [{start: new Date('2018-01-23'), end: new Date('2018-01-27')}])
+    const disabledIntervals = array('disabledIntervals', [
+      { end: new Date('2018-01-27'), start: new Date('2018-01-23') }
+    ])
 
     // headerNextTitle
     const headerNextTitle = text('headerNextTitle', 'Next month')
@@ -36,7 +46,10 @@ stories
 
     // highlighted
     const highlightedLabel = 'Selected'
-    const highlightedDefaultValue = {start: new Date('2018-01-03'), end: new Date('2018-01-05')}
+    const highlightedDefaultValue = {
+      end: new Date('2018-01-05'),
+      start: new Date('2018-01-03')
+    }
     const highlighted = object(highlightedLabel, highlightedDefaultValue)
 
     // maxDate
@@ -52,7 +65,10 @@ stories
     // minNumberOfWeeks
     const minNumberOfWeeksLabel = 'minNumberOfWeeks'
     const minNumberOfWeeksDefaultValue = 4
-    const minNumberOfWeeks = number(minNumberOfWeeksLabel, minNumberOfWeeksDefaultValue)
+    const minNumberOfWeeks = number(
+      minNumberOfWeeksLabel,
+      minNumberOfWeeksDefaultValue
+    )
 
     // rangeLimit
     const rangeLimitLabel = 'rangeLimit'
@@ -61,7 +77,10 @@ stories
 
     // Selected
     const selectedLabel = 'Selected'
-    const selectedDefaultValue = {start: new Date('2018-01-08'), end: new Date('2018-01-12')}
+    const selectedDefaultValue = {
+      end: new Date('2018-01-12'),
+      start: new Date('2018-01-08')
+    }
     const selected = object(selectedLabel, selectedDefaultValue)
 
     // today
@@ -73,12 +92,16 @@ stories
     const weekStartsOnLabel = 'weekStartsOn'
     const weekStartsOnDefaultValue = 1
     const weekStartsOnOptions = {
-      range: true,
-      min: 0,
       max: 6,
-      step: 1,
+      min: 0,
+      range: true,
+      step: 1
     }
-    const weekStartsOn = number(weekStartsOnLabel, weekStartsOnDefaultValue, weekStartsOnOptions)
+    const weekStartsOn = number(
+      weekStartsOnLabel,
+      weekStartsOnDefaultValue,
+      weekStartsOnOptions
+    )
 
     return (
       <Calendar

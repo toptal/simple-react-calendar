@@ -1,5 +1,5 @@
-import classnames from 'classnames'
 import React, { FC, ReactElement } from 'react'
+import classnames from 'classnames'
 
 export type Props = {
   arrow?: ReactElement
@@ -11,10 +11,17 @@ export type Props = {
   type: 'prev' | 'next'
 }
 
-const HeaderButton: FC<Props> = ({ arrow, blockClassName, enabled, type, title, onClick }) => (
+const HeaderButton: FC<Props> = ({
+  arrow,
+  blockClassName,
+  enabled,
+  type,
+  title,
+  onClick
+}) => (
   <button
     className={classnames(`${blockClassName}-header_button`, `is-${type}`, {
-      'is-disabled': !enabled,
+      'is-disabled': !enabled
     })}
     type='button'
     disabled={!enabled}

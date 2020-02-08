@@ -4,7 +4,7 @@ import React from 'react'
 import Notice from '../notice'
 
 describe('Notice', () => {
-  let wrapper, props
+  let props, wrapper
 
   beforeEach(() => {
     props = getProps()
@@ -27,7 +27,7 @@ describe('Notice', () => {
 })
 
 const getProps = (overrides = {}) => ({
-  type: 'overlapping_with_disabled',
   blockClassName: 'example-class-name',
-  ...overrides,
+  type: 'overlapping_with_disabled',
+  ...overrides
 })

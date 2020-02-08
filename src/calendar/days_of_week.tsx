@@ -21,12 +21,20 @@ interface IGetDaysOfWeek {
 const getDaysOfWeek = ({ daysOfWeek, dayIndex }: IGetDaysOfWeek): string[] => {
   const adjustedIndex = dayIndex - 1
 
-  return daysOfWeek.slice(adjustedIndex).concat(daysOfWeek.slice(0, adjustedIndex))
+  return daysOfWeek
+    .slice(adjustedIndex)
+    .concat(daysOfWeek.slice(0, adjustedIndex))
 }
 
-const DaysOfWeek: FC<Props> = (props) => {
-  const { blockClassName, weekStartsOn, customRender, renderDayOfWeek, daysOfWeek } = props
-  const slicedDaysOfWeek = getDaysOfWeek({ daysOfWeek, dayIndex: weekStartsOn })
+const DaysOfWeek: FC<Props> = props => {
+  const {
+    blockClassName,
+    weekStartsOn,
+    customRender,
+    renderDayOfWeek,
+    daysOfWeek
+  } = props
+  const slicedDaysOfWeek = getDaysOfWeek({ dayIndex: weekStartsOn, daysOfWeek })
 
   const children = slicedDaysOfWeek.map((day, index) => (
     <DayOfWeek
@@ -41,7 +49,7 @@ const DaysOfWeek: FC<Props> = (props) => {
   if (customRender) {
     return customRender({
       ...props,
-      children,
+      children
     })
   }
 

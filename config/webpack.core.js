@@ -4,19 +4,19 @@ const baseWebpackConfig = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
         exclude: [/node_modules/],
+        test: /\.(js|jsx|ts|tsx)$/,
         use: [
           {
             loader: 'babel-loader',
             options: {
-              cacheDirectory: true,
-            },
-          },
-        ],
-      },
-    ],
-  },
+              cacheDirectory: true
+            }
+          }
+        ]
+      }
+    ]
+  }
 }
 
 module.exports = baseWebpackConfig

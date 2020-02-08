@@ -5,7 +5,7 @@ import ReactTestRenderer from 'react-test-renderer'
 import Calendar from '../calendar'
 
 describe('Calendar', () => {
-  let wrapper, props, instance
+  let instance, props, wrapper
   const date = new Date(2015, 6, 1)
 
   describe('#componentWillReceiveProps', () => {
@@ -46,7 +46,7 @@ describe('Calendar', () => {
         props = {
           activeMonth: '2017-01-01',
           selected: 'abc',
-          today: date,
+          today: date
         }
         wrapper = shallow(<Calendar {...props} />)
 
@@ -58,7 +58,7 @@ describe('Calendar', () => {
   describe('#_switchMonth', () => {
     describe('when prop `onMonthChange` is defined', () => {
       it('calls prop #onMonthChange', () => {
-        props = { onMonthChange: jest.fn(), activeMonth: date }
+        props = { activeMonth: date, onMonthChange: jest.fn() }
         wrapper = shallow(<Calendar {...props} />)
         wrapper.instance()._switchMonth('2017-01-01')
 
@@ -82,7 +82,7 @@ describe('Calendar', () => {
   describe('#_activeMonth', () => {
     describe('when prop `onMonthChange` is defined', () => {
       it('returns prop `activeMonth`', () => {
-        props = { onMonthChange: jest.fn(), activeMonth: date }
+        props = { activeMonth: date, onMonthChange: jest.fn() }
         wrapper = shallow(<Calendar {...props} />)
 
         expect(wrapper.instance()._activeMonth()).toBe(props.activeMonth)
@@ -105,8 +105,8 @@ describe('Calendar', () => {
         wrapper = shallow(<Calendar />)
 
         expect(wrapper.instance()._highlight()).toEqual({
-          start: null,
           end: null,
+          start: null
         })
       })
     })
@@ -115,9 +115,9 @@ describe('Calendar', () => {
       it('returns object', () => {
         props = {
           highlighted: {
-            start: date,
             end: new Date(2015, 7, 1),
-          },
+            start: date
+          }
         }
         wrapper = shallow(<Calendar {...props} />)
 
@@ -128,15 +128,15 @@ describe('Calendar', () => {
         it('returns object', () => {
           props = {
             highlighted: {
-              start: 'abc',
               end: new Date(2015, 7, 1),
-            },
+              start: 'abc'
+            }
           }
           wrapper = shallow(<Calendar {...props} />)
 
           expect(wrapper.instance()._highlight()).toEqual({
-            start: null,
             end: null,
+            start: null
           })
         })
       })
@@ -145,15 +145,15 @@ describe('Calendar', () => {
         it('returns object', () => {
           props = {
             highlighted: {
-              start: date,
               end: 'abc',
-            },
+              start: date
+            }
           }
           wrapper = shallow(<Calendar {...props} />)
 
           expect(wrapper.instance()._highlight()).toEqual({
-            start: null,
             end: null,
+            start: null
           })
         })
       })
@@ -176,7 +176,7 @@ describe('Calendar', () => {
         instance._selectionStart = () => start
         instance._selectionEnd = () => end
 
-        expect(instance._selection()).toEqual({ start, end })
+        expect(instance._selection()).toEqual({ end, start })
       })
     })
 
@@ -185,7 +185,7 @@ describe('Calendar', () => {
         instance._selectionStart = () => date
         instance._selectionEnd = () => 'abc'
 
-        expect(instance._selection()).toEqual({ start: null, end: null })
+        expect(instance._selection()).toEqual({ end: null, start: null })
       })
     })
   })
@@ -201,15 +201,15 @@ describe('Calendar', () => {
     })
 
     describe("when prop `mode` is 'range'", () => {
-      const selected = { start: date, end: new Date(2015, 7, 1) }
+      const selected = { end: new Date(2015, 7, 1), start: date }
       const selection = {
-        start: new Date(2017, 6, 1),
         end: new Date(2017, 7, 1),
+        start: new Date(2017, 6, 1)
       }
 
       describe('when prop `onSelectionProgress` is `undefined`', () => {
         beforeEach(() => {
-          props = { selected, mode: 'range' }
+          props = { mode: 'range', selected }
           wrapper = shallow(<Calendar {...props} />)
           instance = wrapper.instance()
         })
@@ -229,18 +229,20 @@ describe('Calendar', () => {
 
       describe('when prop `onSelectionProgress` is defined', () => {
         it('returns prop `selected.start`', () => {
-          props = { selected, mode: 'range', onSelectionProgress: () => {} }
+          props = { mode: 'range', onSelectionProgress: () => {}, selected }
           wrapper = shallow(<Calendar {...props} />)
           wrapper.setState({ selection })
 
-          expect(wrapper.instance()._selectionDate('start')).toBe(props.selected.start)
+          expect(wrapper.instance()._selectionDate('start')).toBe(
+            props.selected.start
+          )
         })
       })
     })
   })
 
   describe('#_selectionChanged', () => {
-    const selection = { start: date, end: new Date(2015, 7, 1) }
+    const selection = { end: new Date(2015, 7, 1), start: date }
 
     describe("when prop `mode` is 'single'", () => {
       describe('when prop `onSelect` is defined', () => {
@@ -275,11 +277,15 @@ describe('Calendar', () => {
         it('calls prop #onSelectionProgress', () => {
           props = { mode: 'range', onSelectionProgress: jest.fn() }
           wrapper = shallow(<Calendar {...props} />)
-          wrapper.instance()._selectionChanged(Object.assign(selection, { inProgress: true }))
+          wrapper
+            .instance()
+            ._selectionChanged(Object.assign(selection, { inProgress: true }))
 
           expect(props.onSelectionProgress).toHaveBeenCalledTimes(1)
 
-          expect(props.onSelectionProgress).toHaveBeenCalledWith(Object.assign(selection, { inProgress: true }))
+          expect(props.onSelectionProgress).toHaveBeenCalledWith(
+            Object.assign(selection, { inProgress: true })
+          )
         })
       })
 
@@ -292,18 +298,22 @@ describe('Calendar', () => {
 
         describe('when selection `inProgress` is `true`', () => {
           it('sets state `selection`', () => {
-            instance._selectionChanged(Object.assign(selection, { inProgress: true }))
+            instance._selectionChanged(
+              Object.assign(selection, { inProgress: true })
+            )
 
             expect(wrapper.state('selection')).toEqual({
-              start: date,
               end: new Date(2015, 7, 1),
+              start: date
             })
           })
         })
 
         describe('when selection `inProgress` is `false`', () => {
           it('sets state `selection`', () => {
-            instance._selectionChanged(Object.assign(selection, { inProgress: false }))
+            instance._selectionChanged(
+              Object.assign(selection, { inProgress: false })
+            )
 
             expect(wrapper.state('selection')).toBe(null)
           })
@@ -343,7 +353,9 @@ describe('Calendar', () => {
 
   describe('#render', () => {
     it('renders <Calendar />', () => {
-      const tree = ReactTestRenderer.create(<Calendar activeMonth={date} onMonthChange={() => {}} />).toJSON()
+      const tree = ReactTestRenderer.create(
+        <Calendar activeMonth={date} onMonthChange={() => {}} />
+      ).toJSON()
 
       expect(tree).toMatchSnapshot()
     })

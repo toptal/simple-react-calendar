@@ -1,6 +1,6 @@
+import React, { FC, SyntheticEvent } from 'react'
 import cx from 'classnames'
 import formatDate from 'date-fns/format'
-import React, { FC, SyntheticEvent } from 'react'
 
 import { IDayRenderProps } from '../@types'
 
@@ -25,7 +25,7 @@ export interface Props {
   isWorkday: boolean
 }
 
-const Day: FC<Props> = (props) => {
+const Day: FC<Props> = props => {
   const {
     blockClassName,
     customRender,
@@ -46,7 +46,7 @@ const Day: FC<Props> = (props) => {
     isSelectionStart,
     isToday,
     isWeekend,
-    isWorkday,
+    isWorkday
   } = props
   const children = formatDate(date, 'D')
 
@@ -54,7 +54,7 @@ const Day: FC<Props> = (props) => {
     return customRender({
       ...props,
       // TODO: remove this and leave it to the passed function to format the date in the desired format
-      children,
+      children
     })
   }
 
@@ -73,7 +73,7 @@ const Day: FC<Props> = (props) => {
         'is-start_selection': isSelectionStart,
         'is-today': isToday,
         'is-weekend': isWeekend,
-        'is-working_day': isWorkday,
+        'is-working_day': isWorkday
       })}
       onClick={handleOnClick}
       onMouseEnter={handleOnEnter}
