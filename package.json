@@ -13,7 +13,6 @@
     "start": "webpack-dev-server --config config/webpack.dev.js  --env.development --hot --progress",
     "build": "rm -rf ./dist && webpack --config config/webpack.lib.js --progress --env.production ",
     "build:lib": "yarn babel src --delete-dir-on-start --out-dir lib --extensions '.ts','.tsx' --ignore 'src/example','src/@types','src/calendar/__specs__'",
-    "prepare": "yarn build:lib",
     "clean": "rm -rf ./lib rm -rf ./dist",
     "test": "env NODE_ENV=test TZ=UTC jest ",
     "test:watch": "env NODE_ENV=test TZ=UTC jest --watch",
