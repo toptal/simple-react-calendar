@@ -37,10 +37,6 @@ jobs:
           command: yarn storybook:build
 
       - run:
-          name: Deploy Storybook
-          command: yarn storybook:deploy
-
-      - run:
           name: Release
           command: ./node_modules/.bin/semantic-release
 
