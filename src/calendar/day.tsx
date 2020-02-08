@@ -30,11 +30,13 @@ const Day: FC<Props> = (props) => {
     blockClassName,
     customRender,
     date,
+    // TODO: rename methods to onCick, onEnter
     handleOnClick,
     handleOnEnter,
     isCurrentMonth,
     isDisabled,
     isHighlighted,
+    // TODO: rename to isNextMonth, isPrevMonth
     isMonthNext,
     isMonthPrev,
     isNonSelectable,

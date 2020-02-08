@@ -1,178 +1,146 @@
-import { shallow } from 'enzyme'
 import React from 'react'
+import { render, fireEvent } from '@testing-library/react'
 
-import Day from '../day'
+import Day, { Props } from '../day'
 
-describe('Day', () => {
-  let wrapper, props
+const renderDay = (props: Partial<Props> = {}) => {
+  return render(
+    <Day
+      blockClassName='example-block-class'
+      date='2015-05-05'
+      handleOnClick={() => {}}
+      handleOnEnter={() => {}}
+      isCurrentMonth={false}
+      isDisabled={false}
+      isHighlighted={false}
+      isMonthNext={false}
+      isMonthPrev={false}
+      isNonSelectable={false}
+      isSelectable={false}
+      isSelected={false}
+      isSelectionEnd={false}
+      isSelectionStart={false}
+      isToday={false}
+      isWeekend={false}
+      isWorkday={false}
+      {...props}
+    />,
+  )
+}
+// TODO: remove me
 
-  beforeEach(() => {
-    props = getProps()
-    wrapper = shallow(<Day {...props} />)
-  })
+test('default render', () => {
+  const { container } = renderDay()
 
-  describe('#render', () => {
-    it('renders <Day />', () => {
-      expect(wrapper).toMatchSnapshot()
-    })
-
-    it('attaches the proper functions', () => {
-      const button = wrapper.find('button')
-
-      expect(button.prop('onClick')).toEqual(props.handleOnClick)
-      expect(button.prop('onMouseEnter')).toEqual(props.handleOnEnter)
-    })
-
-    describe('class variations', () => {
-      describe('when prop `isCurrentMonth` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isCurrentMonth: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isDisabled` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isDisabled: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isHighlighted` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isHighlighted: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isMonthNext` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isMonthNext: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isMonthPrev` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isMonthPrev: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isNonSelectable` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isNonSelectable: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isSelectable` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isSelectable: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isSelected` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isSelected: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isSelectionEnd` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isSelectionEnd: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isSelectionStart` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isSelectionStart: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isToday` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isToday: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isWeekend` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isWeekend: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-
-      describe('when prop `isWorkday` is `true`', () => {
-        it('renders <Day />', () => {
-          wrapper.setProps({
-            isWorkday: true,
-          })
-
-          expect(wrapper).toMatchSnapshot()
-        })
-      })
-    })
-  })
+  expect(container.firstChild).toMatchSnapshot()
 })
-const getProps = (overrides = {}) => ({
-  blockClassName: 'example-block-class',
-  date: '2015-05-05',
-  handleOnClick: jest.fn(),
-  handleOnEnter: jest.fn(),
-  isCurrentMonth: false,
-  isDisabled: false,
-  isHighlighted: false,
-  isMonthNext: false,
-  isMonthPrev: false,
-  isNonSelectable: false,
-  isSelectable: false,
-  isSelected: false,
-  isSelectionEnd: false,
-  isSelectionStart: false,
-  isToday: false,
-  isWeekend: false,
-  isWorkday: false,
-  ...overrides,
+
+test('trigger callback on click', () => {
+  const handleOnClick = jest.fn()
+  const { getByRole } = renderDay({ handleOnClick })
+
+  const button = getByRole('button')
+
+  fireEvent.click(button)
+
+  expect(handleOnClick).toBeCalled()
+})
+
+test('trigger callback on mouseenter', () => {
+  const handleOnEnter = jest.fn()
+  const { getByRole } = renderDay({ handleOnEnter })
+
+  const button = getByRole('button')
+
+  fireEvent.mouseEnter(button)
+
+  expect(handleOnEnter).toBeCalled()
+})
+
+test('custom render', () => {
+  const customRender = () => {
+    return <button type='button'>Custom</button>
+  }
+
+  const { container } = renderDay({ customRender })
+
+  expect(container.firstChild).toMatchSnapshot()
+})
+
+test('handle currentMonth', () => {
+  const { container } = renderDay({ isCurrentMonth: true })
+
+  expect(container.firstChild).toHaveClass('is-current_month')
+})
+
+test('handle isDisabled', () => {
+  const { container } = renderDay({ isDisabled: true })
+
+  expect(container.firstChild).toHaveClass('is-disabled')
+})
+
+test('handle isHighlighted', () => {
+  const { container } = renderDay({ isHighlighted: true })
+
+  expect(container.firstChild).toHaveClass('is-highlighted')
+})
+
+test('handle isMonthNext', () => {
+  const { container } = renderDay({ isMonthNext: true })
+
+  expect(container.firstChild).toHaveClass('is-next_month')
+})
+
+test('handle isMonthPrev', () => {
+  const { container } = renderDay({ isMonthPrev: true })
+
+  expect(container.firstChild).toHaveClass('is-prev_month')
+})
+
+test('handle isNonSelectable', () => {
+  const { container } = renderDay({ isNonSelectable: true })
+
+  expect(container.firstChild).toHaveClass('is-not_selectable')
+})
+
+test('handle isSelectable', () => {
+  const { container } = renderDay({ isSelectable: true })
+
+  expect(container.firstChild).toHaveClass('is-selectable')
+})
+
+test('handle isSelected', () => {
+  const { container } = renderDay({ isSelected: true })
+
+  expect(container.firstChild).toHaveClass('is-selected')
+})
+
+test('handle isSelectionEnd', () => {
+  const { container } = renderDay({ isSelectionEnd: true })
+
+  expect(container.firstChild).toHaveClass('is-end_selection')
+})
+
+test('handle isSelectionStart', () => {
+  const { container } = renderDay({ isSelectionStart: true })
+
+  expect(container.firstChild).toHaveClass('is-start_selection')
+})
+
+test('handle isToday', () => {
+  const { container } = renderDay({ isToday: true })
+
+  expect(container.firstChild).toHaveClass('is-today')
+})
+
+test('handle isWeekend', () => {
+  const { container } = renderDay({ isWeekend: true })
+
+  expect(container.firstChild).toHaveClass('is-weekend')
+})
+
+test('handle isWorkday', () => {
+  const { container } = renderDay({ isWorkday: true })
+
+  expect(container.firstChild).toHaveClass('is-working_day')
 })
