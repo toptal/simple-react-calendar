@@ -4,7 +4,8 @@ module.exports = {
   analyzeCommits: ['@semantic-release/commit-analyzer'], // Determine the type of release by analyzing commits with conventional-changelog
   verifyConditions: [
     '@semantic-release/changelog', // Verify the presence and the validity of the configuration
-
+    '@semantic-release/github',
+    '@semantic-release/npm',
     '@semantic-release/git' // Verify the presence and the validity of the Git authentication and release configuration
   ],
   generateNotes: ['@semantic-release/release-notes-generator'], // Generate release notes for the commits added since the last release with conventional-changelog
@@ -12,9 +13,9 @@ module.exports = {
     '@semantic-release/changelog', // Create or update the changelog file in the local project repository
     '@semantic-release/npm', // Update the package.json version and create the npm package tarball
     [
-      '@semantic-release/exec', // Execute a shell command to bump next version inside README.md / package.json
+      '@semantic-release/git',
       {
-        prepareCmd: 'yarn build && yarn build:lib'
+        assets: ['CHANGELOG.md', 'README.md', 'package.json', './lib', './dist', './docs'] // Push a release commit and tag, including globed files
       }
     ]
   ],
