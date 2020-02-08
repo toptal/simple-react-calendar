@@ -38,10 +38,6 @@ jobs:
       - run:
           name: Release
           command: ./node_modules/.bin/semantic-release
-          environment:
-            GH_TOKEN: GH_token
-            GITHUB_TOKEN: GH_token
-            NPM_TOKEN: NPM_token
 
   prCheck:
     working_directory: ~/simple-react-calendar
