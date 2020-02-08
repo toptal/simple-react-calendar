@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/simple-react-calendar
 
     docker:
-      - image: cibuilds/base:latest
+      - image: cypress/browsers:node12.6.0-chrome77
 
     steps:
       - checkout
@@ -25,16 +25,15 @@ jobs:
               - ~/.cache/yarn
 
       - run:
-          name: Build
-          command: yarn build
-
-      - run:
           name: Build Storybook
           command: yarn storybook:build
 
       - run:
           name: Deploy Storybook
           command: yarn storybook:deploy
+          environment:
+            GH_TOKEN: GH_token
+            GITHUB_TOKEN: GH_token
 
       - run:
           name: Release
@@ -86,12 +85,12 @@ jobs:
 
 workflows:
   version: 2
-  # release:
-  #   jobs:
-  #     - release:
-  #         filters:
-  #           branches:
-  #             only: master
+  release:
+    jobs:
+      - release:
+          filters:
+            branches:
+              only: master
 
   pr_check:
     jobs:

@@ -15,18 +15,14 @@ const generatePackageJson = (sourceData, outDir, version = false) => {
   fs.ensureDirSync(outDir)
   const out = path.resolve(outDir, './package.json')
 
-  const data = {
-    ...sourceData,
-  }
-
   if (version) {
-    data.version = version
+    sourceData.version = version
   }
 
-  fs.writeFileSync(out, JSON.stringify(data, null, 2))
+  fs.writeFileSync(out, JSON.stringify(sourceData, null, 2))
 }
 
 module.exports = {
   log,
-  generatePackageJson,
+  generatePackageJson
 }
