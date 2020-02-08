@@ -68,11 +68,9 @@ jobs:
             paths:
               - ~/.cache/yarn
 
-      # - run:
-      #     name: Danger Check
-      #     command: yarn danger ci
-      #     environment:
-      #       DANGER_GITHUB_API_TOKEN: DANGER_GITHUB_API_TOKEN
+      - run:
+          name: Danger Check
+          command: yarn danger ci
 
       - run:
           name: Lint ESLint
