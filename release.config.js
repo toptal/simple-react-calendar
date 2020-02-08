@@ -12,17 +12,23 @@ module.exports = {
   prepare: [
     '@semantic-release/changelog', // Create or update the changelog file in the local project repository
     '@semantic-release/npm', // Update the package.json version and create the npm package tarball
-    ,
     [
-      '@semantic-release/exec', // Execute a shell command to update package.json to new version
+      '@semantic-release/exec', // Execute a shell command to bump next version inside README.md / package.json
       {
+        generateNotesCmd: './config/_ci/release/bump-version ${nextRelease.version}',
         prepareCmd: './config/_ci/release/prepare-assets ${nextRelease.version}'
+      }
+    ],
+    [
+      '@semantic-release/exec', // Execute a shell command generate js bundle
+      {
+        prepareCmd: 'yarn build && yarn build:lib'
       }
     ],
     [
       '@semantic-release/git',
       {
-        assets: ['CHANGELOG.md', 'README.md', 'package.json', './dist', './lib'] // Push a release commit and tag, including globed files
+        assets: ['CHANGELOG.md', 'README.md', 'package.json', './dist', './lib', './docs'] // Push a release commit and tag, including globed files
       }
     ]
   ],
@@ -33,5 +39,4 @@ module.exports = {
   ],
   success: ['@semantic-release/github'], // Add a comment to GitHub issues and pull requests resolved in the release
   fail: ['@semantic-release/github'], // Open a GitHub issue when a release fails
-  plugins: [] // Reset default plugins and use custom steps defined in this file
 }

@@ -2,5 +2,5 @@
 
 CWD="$(dirname "$0")"
 
-$CWD/bump-package-json $1
+$CWD/../../../bin/bump-package-json $1
 rm .gitignore
