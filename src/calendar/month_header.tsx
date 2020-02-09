@@ -1,9 +1,9 @@
+import React, { Component, ReactElement } from 'react'
 import addMonths from 'date-fns/add_months'
 import formatDate from 'date-fns/format'
 import isAfter from 'date-fns/is_after'
 import isBefore from 'date-fns/is_before'
 import startOfMonth from 'date-fns/start_of_month'
-import React, { Component, ReactElement } from 'react'
 
 import { IDate, IMonthHeaderRenderProps } from '../@types'
 import HeaderButton from './header_button'
@@ -40,19 +40,24 @@ export default class MonthHeader extends Component<Props, {}> {
       headerNextTitle,
       headerPrevArrow,
       headerPrevTitle,
-      customRender,
+      customRender
     } = this.props
 
-    const prevEnabled = minDate ? isBefore(startOfMonth(minDate), startOfMonth(activeMonth)) : true
-    const nextEnabled = maxDate ? isAfter(startOfMonth(maxDate), startOfMonth(activeMonth)) : true
+    const prevEnabled = minDate
+      ? isBefore(startOfMonth(minDate), startOfMonth(activeMonth))
+      : true
+    const nextEnabled = maxDate
+      ? isAfter(startOfMonth(maxDate), startOfMonth(activeMonth))
+      : true
 
     if (customRender) {
       return customRender({
         ...this.props,
-        prevEnabled,
+        children:
+          'no content, please use activeMonth prop and custom buttons instead',
         nextEnabled,
-        switchMonth: this._switchMonth.bind(this),
-        children: 'no content, please use activeMonth prop and custom buttons instead',
+        prevEnabled,
+        switchMonth: this._switchMonth.bind(this)
       })
     }
 
@@ -66,7 +71,9 @@ export default class MonthHeader extends Component<Props, {}> {
           onClick={this._switchMonth.bind(this, -1)}
           blockClassName={blockClassName}
         />
-        <div className={`${blockClassName}-month_header_title`}>{formatDate(activeMonth, 'MMMM YYYY')}</div>
+        <div className={`${blockClassName}-month_header_title`}>
+          {formatDate(activeMonth, 'MMMM YYYY')}
+        </div>
         <HeaderButton
           type='next'
           arrow={headerNextArrow}

@@ -70,7 +70,7 @@ jobs:
 
       - run:
           name: Lint ESLint
-          command: yarn lint
+          command: yarn lint:ci
 
       - run:
           name: Lint Typescript

@@ -7,24 +7,15 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.core')
 
 const developmentConfig = merge.smart(baseWebpackConfig, {
-  entry: './src/example/index.tsx',
-
-  mode: 'development',
-
-  output: {
-    path: path.resolve(__dirname, '../dist'),
-    filename: 'ui.bundle.js',
-  },
-
-  resolve: {
-    extensions: ['.js', '.jsx', '.tsx', '.ts', '.styl'],
-  },
-
   devServer: {
     contentBase: path.resolve(__dirname, '../dist'),
     hot: true,
-    port: 9000,
+    port: 9000
   },
+
+  entry: './src/example/index.tsx',
+
+  mode: 'development',
 
   module: {
     rules: [
@@ -32,33 +23,42 @@ const developmentConfig = merge.smart(baseWebpackConfig, {
         test: /\.styl$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: 'style-loader'
           },
           {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              sourceMap: false,
               plugins: [autoprefixer],
-            },
+              sourceMap: false
+            }
           },
           {
-            loader: 'stylus-loader',
-          },
-        ],
-      },
-    ],
+            loader: 'stylus-loader'
+          }
+        ]
+      }
+    ]
+  },
+
+  output: {
+    filename: 'ui.bundle.js',
+    path: path.resolve(__dirname, '../dist')
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'SimpleReactCalendar',
+      appMountId: 'root',
       inject: false,
       template: require('html-webpack-template'),
-      appMountId: 'root',
+      title: 'SimpleReactCalendar'
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ],
+
+  resolve: {
+    extensions: ['.js', '.jsx', '.tsx', '.ts', '.styl']
+  }
 })
 
 module.exports = developmentConfig

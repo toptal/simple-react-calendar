@@ -27,8 +27,8 @@ describe('Week', () => {
     describe('when prop `date` falls in prop `activeMonth`', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
-          date: new Date(2015, 5, 29),
           activeMonth: new Date(2015, 5, 1),
+          date: new Date(2015, 5, 29)
         })
 
         expect(wrapper).toMatchSnapshot()
@@ -38,8 +38,8 @@ describe('Week', () => {
     describe('when prop `date` falls in the previous month', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
-          date: new Date(2015, 6, 27),
           activeMonth: new Date(2015, 7, 1),
+          date: new Date(2015, 6, 27)
         })
 
         expect(wrapper).toMatchSnapshot()
@@ -49,11 +49,11 @@ describe('Week', () => {
     describe('when prop `highlightedStart` and `highlightedEnd` are defined', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
-          date: new Date(2015, 5, 29),
-          today: new Date(2015, 5, 31),
           activeMonth: new Date(2015, 5, 1),
-          highlightedStart: new Date(2015, 5, 29),
+          date: new Date(2015, 5, 29),
           highlightedEnd: new Date(2015, 6, 1),
+          highlightedStart: new Date(2015, 5, 29),
+          today: new Date(2015, 5, 31)
         })
 
         expect(wrapper).toMatchSnapshot()
@@ -63,10 +63,10 @@ describe('Week', () => {
     describe('when prop `selectedMin` and `selectedMax` are defined', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
-          date: new Date(2015, 5, 29),
           activeMonth: new Date(2015, 5, 1),
-          selectedMin: new Date(2015, 5, 30),
+          date: new Date(2015, 5, 29),
           selectedMax: new Date(2015, 6, 2),
+          selectedMin: new Date(2015, 5, 30)
         })
 
         expect(wrapper).toMatchSnapshot()
@@ -75,10 +75,10 @@ describe('Week', () => {
       describe('when prop `selectedMin` and `selectedMax` are the same day', () => {
         it('renders <Week />', () => {
           wrapper.setProps({
-            date: new Date(2015, 5, 29, 21, 0),
             activeMonth: new Date(2015, 5, 1),
-            selectedMin: new Date(2015, 5, 30),
+            date: new Date(2015, 5, 29, 21, 0),
             selectedMax: new Date(2015, 5, 30),
+            selectedMin: new Date(2015, 5, 30)
           })
 
           expect(wrapper).toMatchSnapshot()
@@ -89,9 +89,9 @@ describe('Week', () => {
     describe('when prop `minDate` is defined', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
-          date: new Date(2015, 5, 29),
           activeMonth: new Date(2015, 5, 1),
-          minDate: new Date(2015, 5, 30),
+          date: new Date(2015, 5, 29),
+          minDate: new Date(2015, 5, 30)
         })
 
         expect(wrapper).toMatchSnapshot()
@@ -101,9 +101,9 @@ describe('Week', () => {
     describe('when prop `maxDate` is defined', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
-          date: new Date(2015, 5, 29),
           activeMonth: new Date(2015, 5, 1),
-          maxDate: new Date(2015, 5, 30),
+          date: new Date(2015, 5, 29),
+          maxDate: new Date(2015, 5, 30)
         })
 
         expect(wrapper).toMatchSnapshot()
@@ -113,10 +113,10 @@ describe('Week', () => {
     describe('when prop `selectedMin` and `selectedMax` are defined', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
-          date: new Date(2015, 5, 29),
           activeMonth: new Date(2015, 5, 1),
-          minDate: new Date(2015, 5, 30),
+          date: new Date(2015, 5, 29),
           maxDate: new Date(2015, 6, 1),
+          minDate: new Date(2015, 5, 30)
         })
 
         expect(wrapper).toMatchSnapshot()
@@ -127,9 +127,9 @@ describe('Week', () => {
       it('renders <Week />', () => {
         const disabledIntervals = [
           {
-            start: new Date(2015, 7, 21),
             end: new Date(2015, 7, 23),
-          },
+            start: new Date(2015, 7, 21)
+          }
         ]
 
         wrapper.setProps({ disabledIntervals })
@@ -141,10 +141,10 @@ describe('Week', () => {
     describe('when prop `dateDisabled`', () => {
       it('renders <Week />', () => {
         wrapper.setProps({
-          date: new Date(2015, 5, 29),
           activeMonth: new Date(2015, 5, 1),
-          minDate: new Date(2015, 5, 30),
+          date: new Date(2015, 5, 29),
           maxDate: new Date(2015, 6, 1),
+          minDate: new Date(2015, 5, 30)
         })
 
         expect(wrapper).toMatchSnapshot()
@@ -162,5 +162,5 @@ const getProps = (overrides = {}) => ({
   onDisabledDayClick: jest.fn(),
   today: new Date(2015, 7, 17),
   weekStartsOn: 1,
-  ...overrides,
+  ...overrides
 })

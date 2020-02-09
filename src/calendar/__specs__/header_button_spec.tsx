@@ -5,7 +5,7 @@ import { BLOCK_CLASS_NAME, NEXT_MONTH_TITLE, PREV_MONTH_TITLE } from '../consts'
 import HeaderButton from '../header_button'
 
 describe('HeaderButton', () => {
-  let wrapper, props
+  let props, wrapper
 
   beforeEach(() => {
     props = getProps()
@@ -26,7 +26,7 @@ describe('HeaderButton', () => {
 
   describe('when prop `type` is "next"', () => {
     it('renders <HeaderButton />', () => {
-      wrapper.setProps({ type: 'next', title: NEXT_MONTH_TITLE })
+      wrapper.setProps({ title: NEXT_MONTH_TITLE, type: 'next' })
 
       expect(wrapper).toMatchSnapshot()
     })
@@ -58,10 +58,10 @@ describe('HeaderButton', () => {
 })
 
 const getProps = (overrides = {}) => ({
-  type: 'prev',
+  blockClassName: BLOCK_CLASS_NAME,
   enabled: true,
   onClick: () => {},
-  blockClassName: BLOCK_CLASS_NAME,
   title: PREV_MONTH_TITLE,
-  ...overrides,
+  type: 'prev',
+  ...overrides
 })

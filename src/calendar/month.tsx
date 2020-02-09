@@ -1,3 +1,4 @@
+import React, { Component, Fragment, SyntheticEvent } from 'react'
 import addDays from 'date-fns/add_days'
 import areRangesOverlapping from 'date-fns/are_ranges_overlapping'
 import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
@@ -10,7 +11,6 @@ import parse from 'date-fns/parse'
 import startOfMonth from 'date-fns/start_of_month'
 import startOfWeek from 'date-fns/start_of_week'
 import subDays from 'date-fns/sub_days'
-import React, { Component, Fragment, SyntheticEvent } from 'react'
 
 import {
   IDate,
@@ -19,7 +19,7 @@ import {
   IDaysOfWeekRenderProps,
   IMonthRenderProps,
   INoticeType,
-  IWeekRenderProps,
+  IWeekRenderProps
 } from '../@types'
 import DaysOfWeek from './days_of_week'
 import Week from './week'
@@ -67,7 +67,7 @@ export default class Month extends Component<Props, {}> {
   handleOnDayMouseEnter = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()
     const {
-      currentTarget: { value },
+      currentTarget: { value }
     } = event
     const date = parse(value)
 
@@ -91,11 +91,11 @@ export default class Month extends Component<Props, {}> {
       // TODO: simplify with FC approach, remove state logic from child components
       //       this is passed from the parent component
       // @ts-ignore
-      start: isBefore(this._selectionStart, date) ? this._selectionStart : date,
+      end: !isBefore(this._selectionStart, date) ? this._selectionStart : date,
       // TODO: simplify with FC approach, remove state logic from child components
       //       this is passed from the parent component
       // @ts-ignore
-      end: !isBefore(this._selectionStart, date) ? this._selectionStart : date,
+      start: isBefore(this._selectionStart, date) ? this._selectionStart : date
     })
 
     if (!isDisabledWithin) return
@@ -117,7 +117,7 @@ export default class Month extends Component<Props, {}> {
   handleOnDayClick = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()
     const {
-      currentTarget: { value },
+      currentTarget: { value }
     } = event
     const date = parse(value)
     const { mode } = this.props
@@ -131,11 +131,17 @@ export default class Month extends Component<Props, {}> {
           // TODO: simplify with FC approach, remove state logic from child components
           //       this is passed from the parent component
           // @ts-ignore
-          start: isBefore(this._selectionStart, date) ? this._selectionStart : date,
+          end: !isBefore(this._selectionStart, date)
+          // @ts-ignore
+            ? this._selectionStart
+            : date,
           // TODO: simplify with FC approach, remove state logic from child components
           //       this is passed from the parent component
           // @ts-ignore
-          end: !isBefore(this._selectionStart, date) ? this._selectionStart : date,
+          start: isBefore(this._selectionStart, date)
+            // @ts-ignore
+            ? this._selectionStart
+            : date
         })
 
         if (!isDisabledWithin) {
@@ -196,7 +202,9 @@ export default class Month extends Component<Props, {}> {
     this._pushNoticeUpdate(null)
   }
 
-  handleOnDisabledDayClick = ({ preventDefault }: SyntheticEvent<HTMLButtonElement>) => {
+  handleOnDisabledDayClick = ({
+    preventDefault
+  }: SyntheticEvent<HTMLButtonElement>) => {
     const { onNoticeChange } = this.props
 
     preventDefault()
@@ -205,7 +213,7 @@ export default class Month extends Component<Props, {}> {
 
   _pushUpdate() {
     const { onChange, rangeLimit } = this.props
-    let start, end
+    let end, start
 
     // TODO: simplify with FC approach, remove state logic from child components
     //       this is passed from the parent component
@@ -240,12 +248,12 @@ export default class Month extends Component<Props, {}> {
     }
 
     return onChange({
-      start,
       end,
       // TODO: simplify with FC approach, remove state logic from child components
       //       this is passed from the parent component
       // @ts-ignore
       inProgress: this._selectionInProgress,
+      start
     })
   }
 
@@ -260,9 +268,8 @@ export default class Month extends Component<Props, {}> {
       const isCalcStartDayAfter = isBefore(minDate, calcStartDate)
 
       return isCalcStartDayAfter ? calcStartDate : minDate
-    } else {
-      return calcStartDate
     }
+    return calcStartDate
   }
 
   _pushNoticeUpdate(noticeType: INoticeType) {
@@ -280,7 +287,14 @@ export default class Month extends Component<Props, {}> {
     for (let i = 0; i < disabledIntervals.length; i++) {
       const { start: intervalStart, end: intervalEnd } = disabledIntervals[i]
 
-      if (areRangesOverlapping(start as Date, end as Date, intervalStart, intervalEnd)) {
+      if (
+        areRangesOverlapping(
+          start as Date,
+          end as Date,
+          intervalStart,
+          intervalEnd
+        )
+      ) {
         return
       }
     }
@@ -299,13 +313,19 @@ export default class Month extends Component<Props, {}> {
       const isCalcEndDayBefore = isBefore(calcEndDate, maxDate)
 
       return isCalcEndDayBefore ? calcEndDate : maxDate
-    } else {
-      return calcEndDate
     }
+    return calcEndDate
   }
 
   _renderDaysOfWeek() {
-    const { disableDaysOfWeek, blockClassName, weekStartsOn, daysOfWeek, renderDaysOfWeek, renderDayOfWeek } = this.props
+    const {
+      disableDaysOfWeek,
+      blockClassName,
+      weekStartsOn,
+      daysOfWeek,
+      renderDaysOfWeek,
+      renderDayOfWeek
+    } = this.props
 
     if (disableDaysOfWeek) return
 
@@ -334,7 +354,7 @@ export default class Month extends Component<Props, {}> {
       rangeLimit,
       weekStartsOn,
       renderDay,
-      renderWeek,
+      renderWeek
     } = this.props
     const weeks = []
     let { minDate, maxDate } = this.props
@@ -352,14 +372,15 @@ export default class Month extends Component<Props, {}> {
     while (
       // TODO: External helper with weeknumber etc
       /* eslint-disable no-unmodified-loop-condition */
-      (typeof minNumberOfWeeks === 'number' && minNumberOfWeeks > weeks.length) ||
+      (typeof minNumberOfWeeks === 'number' &&
+        minNumberOfWeeks > weeks.length) ||
       (isBefore(date, end) || isSameDay(date, end))
     ) {
       weeks.push(date)
       date = addDays(date, 7)
     }
 
-    return weeks.map((week) => {
+    return weeks.map(week => {
       return (
         <Week
           activeMonth={activeMonth}
@@ -398,7 +419,7 @@ export default class Month extends Component<Props, {}> {
     if (customRender) {
       return customRender({
         ...this.props,
-        children,
+        children
       })
     }
 

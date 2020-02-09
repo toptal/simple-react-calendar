@@ -5,7 +5,7 @@ import { BLOCK_CLASS_NAME, DAYS_OF_WEEK } from '../consts'
 import DaysOfWeek from '../days_of_week'
 
 describe('DaysOfWeek', () => {
-  let wrapper, props
+  let props, wrapper
 
   beforeEach(() => {
     props = getProps()
@@ -16,7 +16,9 @@ describe('DaysOfWeek', () => {
     it('return days of week', () => {
       // TODO: extract to a shared helper
       // @ts-ignore
-      expect(DaysOfWeek.getDaysOfWeek({ daysOfWeek: DAYS_OF_WEEK, dayIndex: 3 })).toEqual(['Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue'])
+      expect(
+        DaysOfWeek.getDaysOfWeek({ dayIndex: 3, daysOfWeek: DAYS_OF_WEEK })
+      ).toEqual(['Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue'])
     })
   })
 
@@ -31,5 +33,5 @@ const getProps = (overrides = {}) => ({
   blockClassName: BLOCK_CLASS_NAME,
   daysOfWeek: DAYS_OF_WEEK,
   weekStartsOn: 1,
-  ...overrides,
+  ...overrides
 })

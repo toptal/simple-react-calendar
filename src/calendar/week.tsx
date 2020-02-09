@@ -1,3 +1,4 @@
+import React, { Component, SyntheticEvent } from 'react'
 import eachDay from 'date-fns/each_day'
 import endOfWeek from 'date-fns/end_of_week'
 import format from 'date-fns/format'
@@ -10,7 +11,6 @@ import isWeekend from 'date-fns/is_weekend'
 import isWithinRange from 'date-fns/is_within_range'
 import startOfDay from 'date-fns/start_of_day'
 import startOfWeek from 'date-fns/start_of_week'
-import React, { Component, SyntheticEvent } from 'react'
 
 import { IDate, IDayRenderProps, IWeekRenderProps } from '../@types'
 import Day from './day'
@@ -54,16 +54,21 @@ export default class Week extends Component<Props, {}> {
       return isAfter(date, minDate) || isEqual(date, minDate)
     } else if (maxDate && !minDate) {
       return isBefore(date, maxDate) || isEqual(date, maxDate)
-    } else {
-      return true
     }
+    return true
   }
 
   _dateSelected(date: Date) {
     const { selectedMin, selectedMax } = this.props
 
     return Boolean(
-      selectedMin && selectedMax && isWithinRange(startOfDay(date), startOfDay(selectedMin), startOfDay(selectedMax)),
+      selectedMin &&
+        selectedMax &&
+        isWithinRange(
+          startOfDay(date),
+          startOfDay(selectedMin),
+          startOfDay(selectedMax)
+        )
     )
   }
 
@@ -72,7 +77,11 @@ export default class Week extends Component<Props, {}> {
 
     if (!highlightedStart || !highlightedEnd) return false
 
-    return isWithinRange(startOfDay(date), startOfDay(highlightedStart), startOfDay(highlightedEnd))
+    return isWithinRange(
+      startOfDay(date),
+      startOfDay(highlightedStart),
+      startOfDay(highlightedEnd)
+    )
   }
 
   _dateDisabled(date: Date | string) {
@@ -84,7 +93,11 @@ export default class Week extends Component<Props, {}> {
     for (let i = 0; i < disabledIntervals.length; i++) {
       const { start, end } = disabledIntervals[i]
 
-      dateDisabled = isWithinRange(startOfDay(date), startOfDay(start), startOfDay(end))
+      dateDisabled = isWithinRange(
+        startOfDay(date),
+        startOfDay(start),
+        startOfDay(end)
+      )
 
       if (dateDisabled) {
         return dateDisabled
@@ -106,12 +119,12 @@ export default class Week extends Component<Props, {}> {
       selectedMax,
       selectedMin,
       weekStartsOn,
-      renderDay,
+      renderDay
     } = this.props
     const start = startOfWeek(date, { weekStartsOn })
     const end = endOfWeek(date, { weekStartsOn })
 
-    return eachDay(start, end).map((day) => {
+    return eachDay(start, end).map(day => {
       const date = format(day, 'YYYY-MM-DD')
       const isSelectable = this._dateSelectable(day)
       const isDisabled = this._dateDisabled(date)
@@ -124,7 +137,13 @@ export default class Week extends Component<Props, {}> {
           blockClassName={blockClassName}
           customRender={renderDay}
           date={date}
-          handleOnClick={isSelectable ? onDayClick : isDisabled ? onDisabledDayClick : undefined}
+          handleOnClick={
+            isSelectable
+              ? onDayClick
+              : isDisabled
+              ? onDisabledDayClick
+              : undefined
+          }
           handleOnEnter={isSelectable ? onDayMouseEnter : undefined}
           isCurrentMonth={isCurrentMonth}
           isDisabled={isDisabled}
@@ -152,7 +171,7 @@ export default class Week extends Component<Props, {}> {
     if (customRender) {
       return customRender({
         ...this.props,
-        children,
+        children
       })
     }
 

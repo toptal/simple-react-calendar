@@ -5,7 +5,7 @@ import { NEXT_MONTH_TITLE, PREV_MONTH_TITLE } from '../consts'
 import MonthHeader from '../month_header'
 
 describe('MonthHeader', () => {
-  let props, wrapper, instance
+  let instance, props, wrapper
 
   beforeEach(() => {
     props = getProps()
@@ -47,10 +47,10 @@ describe('MonthHeader', () => {
   })
 })
 const getProps = (overrides = {}) => ({
-  blockClassName: 'example-class',
   activeMonth: new Date(2015, 7, 17),
-  onMonthChange: jest.fn(),
-  headerPrevTitle: PREV_MONTH_TITLE,
+  blockClassName: 'example-class',
   headerNextTitle: NEXT_MONTH_TITLE,
-  ...overrides,
+  headerPrevTitle: PREV_MONTH_TITLE,
+  onMonthChange: jest.fn(),
+  ...overrides
 })

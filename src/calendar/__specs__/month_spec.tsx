@@ -1,23 +1,23 @@
+import { shallow } from 'enzyme'
+import React from 'react'
 import addDays from 'date-fns/add_days'
 import parse from 'date-fns/parse'
 import subDays from 'date-fns/sub_days'
-import { shallow } from 'enzyme'
-import React from 'react'
 
 import Month from '../month'
 
 const date = '2017-01-01'
 
 describe('Month', () => {
-  let wrapper, instance, props, mockEvent
+  let instance, mockEvent, props, wrapper
 
   beforeEach(() => {
     props = getProps()
     wrapper = shallow(<Month {...props} />)
     instance = wrapper.instance()
     mockEvent = {
-      preventDefault: jest.fn(),
       currentTarget: { value: date },
+      preventDefault: jest.fn()
     }
   })
 
@@ -31,8 +31,8 @@ describe('Month', () => {
         expect(props.onChange).toHaveBeenCalledTimes(1)
 
         expect(props.onChange).toHaveBeenCalledWith({
-          start: '2015-06-10',
           end: '2015-06-15',
+          start: '2015-06-10'
         })
       })
     })
@@ -46,8 +46,8 @@ describe('Month', () => {
         expect(props.onChange).toHaveBeenCalledTimes(1)
 
         expect(props.onChange).toHaveBeenCalledWith({
-          start: '2015-06-10',
           end: '2015-06-15',
+          start: '2015-06-10'
         })
       })
     })
@@ -55,8 +55,8 @@ describe('Month', () => {
     describe('when prop `rangeLimit` is smaller than the difference', () => {
       it('calls prop #onChange', () => {
         props = getProps({
-          rangeLimit: 5,
           onChange: jest.fn(),
+          rangeLimit: 5
         })
         wrapper = shallow(<Month {...props} />)
         instance = wrapper.instance()
@@ -67,8 +67,8 @@ describe('Month', () => {
         expect(props.onChange).toHaveBeenCalledTimes(1)
 
         expect(props.onChange).toHaveBeenCalledWith({
-          start: '2015-06-10',
           end: addDays('2015-06-10', 5),
+          start: '2015-06-10'
         })
       })
     })
@@ -96,10 +96,10 @@ describe('Month', () => {
         props = getProps({
           disabledIntervals: [
             {
-              start: '2015-01-01',
               end: '2015-06-31',
-            },
-          ],
+              start: '2015-01-01'
+            }
+          ]
         })
         wrapper = shallow(<Month {...props} />)
         instance = wrapper.instance()
@@ -110,12 +110,12 @@ describe('Month', () => {
       describe('when argument `interval` are overlapping', () => {
         it('calls prop #onNoticeChange', () => {
           const range = {
-            start: '2015-01-01',
             end: '2015-06-31',
+            start: '2015-01-01'
           }
 
           props = getProps({
-            disabledIntervals: [range],
+            disabledIntervals: [range]
           })
           wrapper = shallow(<Month {...props} />)
           instance = wrapper.instance()
@@ -171,14 +171,16 @@ describe('Month', () => {
                 instance._getDisabledRange = () => true
                 instance._selectionEnd = addDays(date, 2)
 
-                expect(instance.handleOnDayMouseEnter(mockEvent)).toBe(undefined)
+                expect(instance.handleOnDayMouseEnter(mockEvent)).toBe(
+                  undefined
+                )
               })
             })
 
             describe('when prop `rangeLimit` is defined', () => {
               beforeEach(() => {
                 props = getProps({
-                  rangeLimit: 5,
+                  rangeLimit: 5
                 })
                 wrapper = shallow(<Month {...props} />)
                 instance = wrapper.instance()
@@ -191,7 +193,9 @@ describe('Month', () => {
                 it('returns `undefined`', () => {
                   instance._selectionStart = addDays(date, 6)
 
-                  expect(instance.handleOnDayMouseEnter(mockEvent)).toBe(undefined)
+                  expect(instance.handleOnDayMouseEnter(mockEvent)).toBe(
+                    undefined
+                  )
                 })
               })
 
@@ -285,7 +289,7 @@ describe('Month', () => {
     describe('when prop `mode` is `SINGLE_MODE`', () => {
       it('sets instance states', () => {
         props = getProps({
-          mode: 'single',
+          mode: 'single'
         })
         wrapper = shallow(<Month {...props} />)
         const instance = wrapper.instance()
@@ -332,7 +336,7 @@ describe('Month', () => {
     describe('when `minDate` is `undefined`', () => {
       it('returns `calcStartDate`', () => {
         props = getProps({
-          rangeLimit: 5,
+          rangeLimit: 5
         })
         wrapper = shallow(<Month {...props} />)
         instance = wrapper.instance()
@@ -346,8 +350,8 @@ describe('Month', () => {
       describe('when `minDate` is before `calcStartDate`', () => {
         it('returns `calcStartDate`', () => {
           props = getProps({
-            rangeLimit: 5,
             minDate: '2016-12-12',
+            rangeLimit: 5
           })
           wrapper = shallow(<Month {...props} />)
           instance = wrapper.instance()
@@ -360,8 +364,8 @@ describe('Month', () => {
       describe('when `minDate` is after `calcStartDate`', () => {
         it('returns `minDate`', () => {
           props = getProps({
-            rangeLimit: 5,
             minDate: '2017-01-15',
+            rangeLimit: 5
           })
           wrapper = shallow(<Month {...props} />)
           instance = wrapper.instance()
@@ -377,7 +381,7 @@ describe('Month', () => {
     describe('when `maxDate` is `undefined`', () => {
       it('returns `calcEndDate`', () => {
         props = getProps({
-          rangeLimit: 5,
+          rangeLimit: 5
         })
         wrapper = shallow(<Month {...props} />)
         instance = wrapper.instance()
@@ -391,8 +395,8 @@ describe('Month', () => {
       describe('when `maxDate` is before `calcEndDate`', () => {
         it('returns `maxDate`', () => {
           props = getProps({
-            rangeLimit: 5,
             maxDate: '2017-01-03',
+            rangeLimit: 5
           })
           wrapper = shallow(<Month {...props} />)
           instance = wrapper.instance()
@@ -405,8 +409,8 @@ describe('Month', () => {
       describe('when `maxDate` is after `calcEndDate`', () => {
         it('returns `calcEndDate`', () => {
           props = getProps({
-            rangeLimit: 5,
             maxDate: '2017-01-15',
+            rangeLimit: 5
           })
           wrapper = shallow(<Month {...props} />)
           instance = wrapper.instance()
@@ -426,9 +430,9 @@ describe('Month', () => {
     describe('when `_selectionInProgress` is `true` and prop `rangeLimit` is defined', () => {
       it('renders <Month />', () => {
         wrapper.setState({
-          rangeLimit: 5,
-          minDate: new Date(2015, 5, 15),
           maxDate: new Date(2015, 10, 15),
+          minDate: new Date(2015, 5, 15),
+          rangeLimit: 5
         })
         instance._selectionStart = new Date(2015, 6, 15)
         instance._selectionInProgress = true
@@ -440,7 +444,7 @@ describe('Month', () => {
     describe('when prop `disabledIntervals` is `[]`', () => {
       it('renders <Month />', () => {
         props = getProps({
-          disabledIntervals: [],
+          disabledIntervals: []
         })
         wrapper = shallow(<Month {...props} />)
 
@@ -451,7 +455,7 @@ describe('Month', () => {
     describe('when prop `month` has 4 weeks', () => {
       it('renders <Month />', () => {
         props = getProps({
-          activeMonth: new Date(2010, 1, 15),
+          activeMonth: new Date(2010, 1, 15)
         })
         wrapper = shallow(<Month {...props} />)
 
@@ -462,7 +466,7 @@ describe('Month', () => {
     describe('when prop `month` has 5 weeks', () => {
       it('renders <Month />', () => {
         props = getProps({
-          activeMonth: new Date(2015, 5, 15),
+          activeMonth: new Date(2015, 5, 15)
         })
         wrapper = shallow(<Month {...props} />)
 
@@ -473,7 +477,7 @@ describe('Month', () => {
     describe('when prop `month` has 6 weeks', () => {
       it('renders <Month />', () => {
         props = getProps({
-          activeMonth: new Date(2015, 7, 15),
+          activeMonth: new Date(2015, 7, 15)
         })
         wrapper = shallow(<Month {...props} />)
 
@@ -486,7 +490,7 @@ describe('Month', () => {
         it('renders <Month />', () => {
           props = getProps({
             activeMonth: new Date(2010, 1, 15),
-            minNumberOfWeeks: 5,
+            minNumberOfWeeks: 5
           })
           wrapper = shallow(<Month {...props} />)
 
@@ -498,7 +502,7 @@ describe('Month', () => {
         it('renders <Month />', () => {
           props = getProps({
             activeMonth: new Date(2015, 5, 15),
-            minNumberOfWeeks: 5,
+            minNumberOfWeeks: 5
           })
           wrapper = shallow(<Month {...props} />)
 
@@ -510,7 +514,7 @@ describe('Month', () => {
         it('renders <Month />', () => {
           props = getProps({
             activeMonth: new Date(2015, 7, 15),
-            minNumberOfWeeks: 5,
+            minNumberOfWeeks: 5
           })
           wrapper = shallow(<Month {...props} />)
 
@@ -522,7 +526,7 @@ describe('Month', () => {
     describe('when prop `disableDaysOfWeek` is defined', () => {
       it('renders <Month />', () => {
         props = getProps({
-          disableDaysOfWeek: true,
+          disableDaysOfWeek: true
         })
         wrapper = shallow(<Month {...props} />)
 
@@ -534,9 +538,9 @@ describe('Month', () => {
       describe("when prop `rangeLimit` doesn't exceed `minDate` and `maxDate`", () => {
         it('renders <Month />', () => {
           props = getProps({
-            minDate: new Date(2015, 7, 12),
             maxDate: new Date(2015, 7, 23),
-            rangeLimit: 10,
+            minDate: new Date(2015, 7, 12),
+            rangeLimit: 10
           })
           wrapper = shallow(<Month {...props} />)
 
@@ -547,9 +551,9 @@ describe('Month', () => {
       describe('when prop `rangeLimit` exceed `minDate` and `maxDate`', () => {
         it('renders <Month />', () => {
           props = getProps({
-            minDate: new Date(2015, 7, 1),
             maxDate: new Date(2015, 7, 31),
-            rangeLimit: 10,
+            minDate: new Date(2015, 7, 1),
+            rangeLimit: 10
           })
           wrapper = shallow(<Month {...props} />)
 
@@ -568,5 +572,5 @@ const getProps = (overrides = {}) => ({
   onNoticeChange: jest.fn(),
   today: new Date(2015, 7, 17),
   weekStartsOn: 1,
-  ...overrides,
+  ...overrides
 })
