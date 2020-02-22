@@ -12,14 +12,15 @@ import startOfMonth from 'date-fns/start_of_month'
 import startOfWeek from 'date-fns/start_of_week'
 import subDays from 'date-fns/sub_days'
 
+import { GetDayFormatted, GetISODate } from '../helper'
 import {
   IDate,
   IDayOfWeekRenderProps,
-  IDayRenderProps,
   IDaysOfWeekRenderProps,
   IMonthRenderProps,
   INoticeType,
-  IWeekRenderProps
+  IWeekRenderProps,
+  RenderPropsDay
 } from '../@types'
 import DaysOfWeek from './days_of_week'
 import Week from './week'
@@ -46,9 +47,11 @@ export type Props = {
   onDayMouseEnter?: (...args: any[]) => any
   onNoticeChange: (...args: any[]) => any
   rangeLimit?: number
-  renderDay?: IDayRenderProps
+  renderDay: RenderPropsDay
   renderDayOfWeek?: IDayOfWeekRenderProps
   renderDaysOfWeek?: IDaysOfWeekRenderProps
+  getDayFormatted: GetDayFormatted
+  getISODate: GetISODate
   renderWeek?: IWeekRenderProps
   selectedMax?: IDate
   selectedMin?: IDate
@@ -67,9 +70,11 @@ export default class Month extends Component<Props, {}> {
   handleOnDayMouseEnter = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()
     const {
-      currentTarget: { value }
+      currentTarget: {
+        dataset: { simpleReactCalendarDay }
+      }
     } = event
-    const date = parse(value)
+    const date = parse(simpleReactCalendarDay as string)
 
     const { onDayMouseEnter } = this.props
 
@@ -116,10 +121,13 @@ export default class Month extends Component<Props, {}> {
 
   handleOnDayClick = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()
+
     const {
-      currentTarget: { value }
+      currentTarget: {
+        dataset: { simpleReactCalendarDay }
+      }
     } = event
-    const date = parse(value)
+    const date = parse(simpleReactCalendarDay as string)
     const { mode } = this.props
 
     if (mode === RANGE_MODE) {
@@ -192,6 +200,7 @@ export default class Month extends Component<Props, {}> {
       //       this is passed from the parent component
       // @ts-ignore
       this._selectionStart = date
+
       // TODO: simplify with FC approach, remove state logic from child components
       //       this is passed from the parent component
       // @ts-ignore
@@ -354,7 +363,9 @@ export default class Month extends Component<Props, {}> {
       rangeLimit,
       weekStartsOn,
       renderDay,
-      renderWeek
+      renderWeek,
+      getDayFormatted,
+      getISODate
     } = this.props
     const weeks = []
     let { minDate, maxDate } = this.props
@@ -374,7 +385,8 @@ export default class Month extends Component<Props, {}> {
       /* eslint-disable no-unmodified-loop-condition */
       (typeof minNumberOfWeeks === 'number' &&
         minNumberOfWeeks > weeks.length) ||
-      (isBefore(date, end) || isSameDay(date, end))
+      isBefore(date, end) ||
+      isSameDay(date, end)
     ) {
       weeks.push(date)
       date = addDays(date, 7)
@@ -386,6 +398,7 @@ export default class Month extends Component<Props, {}> {
           activeMonth={activeMonth}
           blockClassName={blockClassName}
           customRender={renderWeek}
+          getDayFormatted={getDayFormatted}
           date={week}
           disabledIntervals={disabledIntervals}
           highlightedEnd={highlightedEnd}
@@ -401,6 +414,7 @@ export default class Month extends Component<Props, {}> {
           selectedMin={selectedMin}
           today={today}
           weekStartsOn={weekStartsOn}
+          getISODate={getISODate}
         />
       )
     })
