@@ -1,3 +1,20 @@
+# [2.0.0](https://github.com/toptal/simple-react-calendar/compare/v1.9.4...v2.0.0) (2020-02-22)
+
+
+### Bug Fixes
+
+* **command:** remove prepare npm command ([#134](https://github.com/toptal/simple-react-calendar/issues/134)) ([efaf896](https://github.com/toptal/simple-react-calendar/commit/efaf8964179417fa2996f5d53136f9c17f85e05e))
+
+
+### Features
+
+* **day:** isolate logic and render prop on the day level ([#135](https://github.com/toptal/simple-react-calendar/issues/135)) ([e5b5fa7](https://github.com/toptal/simple-react-calendar/commit/e5b5fa7d2eea1cbcbfa15d51da06764845d350e5))
+
+
+### BREAKING CHANGES
+
+* **day:** Render prop of Day has been changed.
+
 ## [1.9.4](https://github.com/toptal/simple-react-calendar/compare/v1.9.3...v1.9.4) (2020-02-08)
 
 
