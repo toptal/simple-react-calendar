@@ -7,6 +7,7 @@ import SimpleReactCalendar from '../calendar/calendar'
 
 const App: FC = () => (
   <SimpleReactCalendar
+    mode='range'
     blockClassName='date_picker'
     onSelect={({ start, end }) => {
       /* eslint-disable no-console */

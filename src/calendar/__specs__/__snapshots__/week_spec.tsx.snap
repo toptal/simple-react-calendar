@@ -5,8 +5,10 @@ exports[`Week #render renders <Week /> 1`] = `
   className="example-class-week"
 >
   <Day
+    ISODate="2015-08-17"
     blockClassName="example-class"
-    date="2015-08-17"
+    date={2015-08-17T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -21,12 +23,14 @@ exports[`Week #render renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={true}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-08-17"
   />
   <Day
+    ISODate="2015-08-18"
     blockClassName="example-class"
-    date="2015-08-18"
+    date={2015-08-18T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -41,12 +45,14 @@ exports[`Week #render renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-08-18"
   />
   <Day
+    ISODate="2015-08-19"
     blockClassName="example-class"
-    date="2015-08-19"
+    date={2015-08-19T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -61,12 +67,14 @@ exports[`Week #render renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-08-19"
   />
   <Day
+    ISODate="2015-08-20"
     blockClassName="example-class"
-    date="2015-08-20"
+    date={2015-08-20T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -81,12 +89,14 @@ exports[`Week #render renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-08-20"
   />
   <Day
+    ISODate="2015-08-21"
     blockClassName="example-class"
-    date="2015-08-21"
+    date={2015-08-21T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -101,12 +111,14 @@ exports[`Week #render renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-08-21"
   />
   <Day
+    ISODate="2015-08-22"
     blockClassName="example-class"
-    date="2015-08-22"
+    date={2015-08-22T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -121,12 +133,14 @@ exports[`Week #render renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-08-22"
   />
   <Day
+    ISODate="2015-08-23"
     blockClassName="example-class"
-    date="2015-08-23"
+    date={2015-08-23T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -141,7 +155,7 @@ exports[`Week #render renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-08-23"
   />
 </div>
@@ -152,8 +166,10 @@ exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <
   className="example-class-week"
 >
   <Day
+    ISODate="2015-06-29"
     blockClassName="example-class"
-    date="2015-06-29"
+    date={2015-06-29T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -168,12 +184,14 @@ exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-29"
   />
   <Day
+    ISODate="2015-06-30"
     blockClassName="example-class"
-    date="2015-06-30"
+    date={2015-06-30T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -188,12 +206,14 @@ exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-30"
   />
   <Day
+    ISODate="2015-07-01"
     blockClassName="example-class"
-    date="2015-07-01"
+    date={2015-07-01T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -208,12 +228,14 @@ exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-01"
   />
   <Day
+    ISODate="2015-07-02"
     blockClassName="example-class"
-    date="2015-07-02"
+    date={2015-07-02T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -228,12 +250,14 @@ exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-02"
   />
   <Day
+    ISODate="2015-07-03"
     blockClassName="example-class"
-    date="2015-07-03"
+    date={2015-07-03T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -248,12 +272,14 @@ exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-03"
   />
   <Day
+    ISODate="2015-07-04"
     blockClassName="example-class"
-    date="2015-07-04"
+    date={2015-07-04T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -268,12 +294,14 @@ exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-04"
   />
   <Day
+    ISODate="2015-07-05"
     blockClassName="example-class"
-    date="2015-07-05"
+    date={2015-07-05T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -288,7 +316,7 @@ exports[`Week #render when prop \`date\` falls in prop \`activeMonth\` renders <
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-05"
   />
 </div>
@@ -299,8 +327,10 @@ exports[`Week #render when prop \`date\` falls in the previous month renders <We
   className="example-class-week"
 >
   <Day
+    ISODate="2015-07-27"
     blockClassName="example-class"
-    date="2015-07-27"
+    date={2015-07-27T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -315,12 +345,14 @@ exports[`Week #render when prop \`date\` falls in the previous month renders <We
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-27"
   />
   <Day
+    ISODate="2015-07-28"
     blockClassName="example-class"
-    date="2015-07-28"
+    date={2015-07-28T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -335,12 +367,14 @@ exports[`Week #render when prop \`date\` falls in the previous month renders <We
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-28"
   />
   <Day
+    ISODate="2015-07-29"
     blockClassName="example-class"
-    date="2015-07-29"
+    date={2015-07-29T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -355,12 +389,14 @@ exports[`Week #render when prop \`date\` falls in the previous month renders <We
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-29"
   />
   <Day
+    ISODate="2015-07-30"
     blockClassName="example-class"
-    date="2015-07-30"
+    date={2015-07-30T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -375,12 +411,14 @@ exports[`Week #render when prop \`date\` falls in the previous month renders <We
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-30"
   />
   <Day
+    ISODate="2015-07-31"
     blockClassName="example-class"
-    date="2015-07-31"
+    date={2015-07-31T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -395,12 +433,14 @@ exports[`Week #render when prop \`date\` falls in the previous month renders <We
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-31"
   />
   <Day
+    ISODate="2015-08-01"
     blockClassName="example-class"
-    date="2015-08-01"
+    date={2015-08-01T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -415,12 +455,14 @@ exports[`Week #render when prop \`date\` falls in the previous month renders <We
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-08-01"
   />
   <Day
+    ISODate="2015-08-02"
     blockClassName="example-class"
-    date="2015-08-02"
+    date={2015-08-02T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -435,7 +477,7 @@ exports[`Week #render when prop \`date\` falls in the previous month renders <We
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-08-02"
   />
 </div>
@@ -446,8 +488,10 @@ exports[`Week #render when prop \`date\` is different month renders <Week /> 1`]
   className="example-class-week"
 >
   <Day
+    ISODate="2015-06-29"
     blockClassName="example-class"
-    date="2015-06-29"
+    date={2015-06-29T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -462,12 +506,14 @@ exports[`Week #render when prop \`date\` is different month renders <Week /> 1`]
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-29"
   />
   <Day
+    ISODate="2015-06-30"
     blockClassName="example-class"
-    date="2015-06-30"
+    date={2015-06-30T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -482,12 +528,14 @@ exports[`Week #render when prop \`date\` is different month renders <Week /> 1`]
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-30"
   />
   <Day
+    ISODate="2015-07-01"
     blockClassName="example-class"
-    date="2015-07-01"
+    date={2015-07-01T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -502,12 +550,14 @@ exports[`Week #render when prop \`date\` is different month renders <Week /> 1`]
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-01"
   />
   <Day
+    ISODate="2015-07-02"
     blockClassName="example-class"
-    date="2015-07-02"
+    date={2015-07-02T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -522,12 +572,14 @@ exports[`Week #render when prop \`date\` is different month renders <Week /> 1`]
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-02"
   />
   <Day
+    ISODate="2015-07-03"
     blockClassName="example-class"
-    date="2015-07-03"
+    date={2015-07-03T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -542,12 +594,14 @@ exports[`Week #render when prop \`date\` is different month renders <Week /> 1`]
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-03"
   />
   <Day
+    ISODate="2015-07-04"
     blockClassName="example-class"
-    date="2015-07-04"
+    date={2015-07-04T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -562,12 +616,14 @@ exports[`Week #render when prop \`date\` is different month renders <Week /> 1`]
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-04"
   />
   <Day
+    ISODate="2015-07-05"
     blockClassName="example-class"
-    date="2015-07-05"
+    date={2015-07-05T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -582,7 +638,7 @@ exports[`Week #render when prop \`date\` is different month renders <Week /> 1`]
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-05"
   />
 </div>
@@ -593,8 +649,12 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
   className="example-class-week"
 >
   <Day
+    ISODate="2015-06-29"
     blockClassName="example-class"
-    date="2015-06-29"
+    date={2015-06-29T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={true}
     isDisabled={false}
     isHighlighted={false}
@@ -607,12 +667,14 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-29"
   />
   <Day
+    ISODate="2015-06-30"
     blockClassName="example-class"
-    date="2015-06-30"
+    date={2015-06-30T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -627,12 +689,14 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-30"
   />
   <Day
+    ISODate="2015-07-01"
     blockClassName="example-class"
-    date="2015-07-01"
+    date={2015-07-01T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -647,12 +711,16 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-01"
   />
   <Day
+    ISODate="2015-07-02"
     blockClassName="example-class"
-    date="2015-07-02"
+    date={2015-07-02T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -665,12 +733,16 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-02"
   />
   <Day
+    ISODate="2015-07-03"
     blockClassName="example-class"
-    date="2015-07-03"
+    date={2015-07-03T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -683,12 +755,16 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-03"
   />
   <Day
+    ISODate="2015-07-04"
     blockClassName="example-class"
-    date="2015-07-04"
+    date={2015-07-04T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -701,12 +777,16 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-04"
   />
   <Day
+    ISODate="2015-07-05"
     blockClassName="example-class"
-    date="2015-07-05"
+    date={2015-07-05T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -719,7 +799,7 @@ exports[`Week #render when prop \`dateDisabled\` renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-05"
   />
 </div>
@@ -730,8 +810,10 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
   className="example-class-week"
 >
   <Day
+    ISODate="2015-08-17"
     blockClassName="example-class"
-    date="2015-08-17"
+    date={2015-08-17T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -746,12 +828,14 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     isSelectionStart={false}
     isToday={true}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-08-17"
   />
   <Day
+    ISODate="2015-08-18"
     blockClassName="example-class"
-    date="2015-08-18"
+    date={2015-08-18T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -766,12 +850,14 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-08-18"
   />
   <Day
+    ISODate="2015-08-19"
     blockClassName="example-class"
-    date="2015-08-19"
+    date={2015-08-19T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -786,12 +872,14 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-08-19"
   />
   <Day
+    ISODate="2015-08-20"
     blockClassName="example-class"
-    date="2015-08-20"
+    date={2015-08-20T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -806,13 +894,16 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-08-20"
   />
   <Day
+    ISODate="2015-08-21"
     blockClassName="example-class"
-    date="2015-08-21"
+    date={2015-08-21T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
+    handleOnEnter={[Function]}
     isCurrentMonth={true}
     isDisabled={true}
     isHighlighted={false}
@@ -825,13 +916,16 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-08-21"
   />
   <Day
+    ISODate="2015-08-22"
     blockClassName="example-class"
-    date="2015-08-22"
+    date={2015-08-22T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
+    handleOnEnter={[Function]}
     isCurrentMonth={true}
     isDisabled={true}
     isHighlighted={false}
@@ -844,13 +938,16 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-08-22"
   />
   <Day
+    ISODate="2015-08-23"
     blockClassName="example-class"
-    date="2015-08-23"
+    date={2015-08-23T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
+    handleOnEnter={[Function]}
     isCurrentMonth={true}
     isDisabled={true}
     isHighlighted={false}
@@ -863,7 +960,7 @@ exports[`Week #render when prop \`disabledIntervals\` is defined renders <Week /
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-08-23"
   />
 </div>
@@ -874,8 +971,10 @@ exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are 
   className="example-class-week"
 >
   <Day
+    ISODate="2015-06-29"
     blockClassName="example-class"
-    date="2015-06-29"
+    date={2015-06-29T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -890,12 +989,14 @@ exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-29"
   />
   <Day
+    ISODate="2015-06-30"
     blockClassName="example-class"
-    date="2015-06-30"
+    date={2015-06-30T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -910,12 +1011,14 @@ exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-30"
   />
   <Day
+    ISODate="2015-07-01"
     blockClassName="example-class"
-    date="2015-07-01"
+    date={2015-07-01T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -930,12 +1033,14 @@ exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are 
     isSelectionStart={false}
     isToday={true}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-01"
   />
   <Day
+    ISODate="2015-07-02"
     blockClassName="example-class"
-    date="2015-07-02"
+    date={2015-07-02T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -950,12 +1055,14 @@ exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-02"
   />
   <Day
+    ISODate="2015-07-03"
     blockClassName="example-class"
-    date="2015-07-03"
+    date={2015-07-03T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -970,12 +1077,14 @@ exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-03"
   />
   <Day
+    ISODate="2015-07-04"
     blockClassName="example-class"
-    date="2015-07-04"
+    date={2015-07-04T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -990,12 +1099,14 @@ exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are 
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-04"
   />
   <Day
+    ISODate="2015-07-05"
     blockClassName="example-class"
-    date="2015-07-05"
+    date={2015-07-05T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1010,7 +1121,7 @@ exports[`Week #render when prop \`highlightedStart\` and \`highlightedEnd\` are 
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-05"
   />
 </div>
@@ -1021,8 +1132,10 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
   className="example-class-week"
 >
   <Day
+    ISODate="2015-06-29"
     blockClassName="example-class"
-    date="2015-06-29"
+    date={2015-06-29T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -1037,12 +1150,14 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-29"
   />
   <Day
+    ISODate="2015-06-30"
     blockClassName="example-class"
-    date="2015-06-30"
+    date={2015-06-30T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -1057,12 +1172,16 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-30"
   />
   <Day
+    ISODate="2015-07-01"
     blockClassName="example-class"
-    date="2015-07-01"
+    date={2015-07-01T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1075,12 +1194,16 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-01"
   />
   <Day
+    ISODate="2015-07-02"
     blockClassName="example-class"
-    date="2015-07-02"
+    date={2015-07-02T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1093,12 +1216,16 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-02"
   />
   <Day
+    ISODate="2015-07-03"
     blockClassName="example-class"
-    date="2015-07-03"
+    date={2015-07-03T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1111,12 +1238,16 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-03"
   />
   <Day
+    ISODate="2015-07-04"
     blockClassName="example-class"
-    date="2015-07-04"
+    date={2015-07-04T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1129,12 +1260,16 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-04"
   />
   <Day
+    ISODate="2015-07-05"
     blockClassName="example-class"
-    date="2015-07-05"
+    date={2015-07-05T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1147,7 +1282,7 @@ exports[`Week #render when prop \`maxDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-05"
   />
 </div>
@@ -1158,8 +1293,12 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
   className="example-class-week"
 >
   <Day
+    ISODate="2015-06-29"
     blockClassName="example-class"
-    date="2015-06-29"
+    date={2015-06-29T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={true}
     isDisabled={false}
     isHighlighted={false}
@@ -1172,12 +1311,14 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-29"
   />
   <Day
+    ISODate="2015-06-30"
     blockClassName="example-class"
-    date="2015-06-30"
+    date={2015-06-30T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -1192,12 +1333,14 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-30"
   />
   <Day
+    ISODate="2015-07-01"
     blockClassName="example-class"
-    date="2015-07-01"
+    date={2015-07-01T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1212,12 +1355,14 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-01"
   />
   <Day
+    ISODate="2015-07-02"
     blockClassName="example-class"
-    date="2015-07-02"
+    date={2015-07-02T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1232,12 +1377,14 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-02"
   />
   <Day
+    ISODate="2015-07-03"
     blockClassName="example-class"
-    date="2015-07-03"
+    date={2015-07-03T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1252,12 +1399,14 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-03"
   />
   <Day
+    ISODate="2015-07-04"
     blockClassName="example-class"
-    date="2015-07-04"
+    date={2015-07-04T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1272,12 +1421,14 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-04"
   />
   <Day
+    ISODate="2015-07-05"
     blockClassName="example-class"
-    date="2015-07-05"
+    date={2015-07-05T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1292,7 +1443,7 @@ exports[`Week #render when prop \`minDate\` is defined renders <Week /> 1`] = `
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-05"
   />
 </div>
@@ -1303,8 +1454,10 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
   className="example-class-week"
 >
   <Day
+    ISODate="2015-06-29"
     blockClassName="example-class"
-    date="2015-06-29"
+    date={2015-06-29T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -1319,12 +1472,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-29"
   />
   <Day
+    ISODate="2015-06-30"
     blockClassName="example-class"
-    date="2015-06-30"
+    date={2015-06-30T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -1339,12 +1494,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={true}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-30"
   />
   <Day
+    ISODate="2015-07-01"
     blockClassName="example-class"
-    date="2015-07-01"
+    date={2015-07-01T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1359,12 +1516,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-01"
   />
   <Day
+    ISODate="2015-07-02"
     blockClassName="example-class"
-    date="2015-07-02"
+    date={2015-07-02T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1379,12 +1538,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-02"
   />
   <Day
+    ISODate="2015-07-03"
     blockClassName="example-class"
-    date="2015-07-03"
+    date={2015-07-03T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1399,12 +1560,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-03"
   />
   <Day
+    ISODate="2015-07-04"
     blockClassName="example-class"
-    date="2015-07-04"
+    date={2015-07-04T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1419,12 +1582,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-04"
   />
   <Day
+    ISODate="2015-07-05"
     blockClassName="example-class"
-    date="2015-07-05"
+    date={2015-07-05T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1439,7 +1604,7 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-05"
   />
 </div>
@@ -1450,8 +1615,12 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
   className="example-class-week"
 >
   <Day
+    ISODate="2015-06-29"
     blockClassName="example-class"
-    date="2015-06-29"
+    date={2015-06-29T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={true}
     isDisabled={false}
     isHighlighted={false}
@@ -1464,12 +1633,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-29"
   />
   <Day
+    ISODate="2015-06-30"
     blockClassName="example-class"
-    date="2015-06-30"
+    date={2015-06-30T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -1484,12 +1655,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-30"
   />
   <Day
+    ISODate="2015-07-01"
     blockClassName="example-class"
-    date="2015-07-01"
+    date={2015-07-01T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1504,12 +1677,16 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-01"
   />
   <Day
+    ISODate="2015-07-02"
     blockClassName="example-class"
-    date="2015-07-02"
+    date={2015-07-02T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1522,12 +1699,16 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-02"
   />
   <Day
+    ISODate="2015-07-03"
     blockClassName="example-class"
-    date="2015-07-03"
+    date={2015-07-03T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1540,12 +1721,16 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-03"
   />
   <Day
+    ISODate="2015-07-04"
     blockClassName="example-class"
-    date="2015-07-04"
+    date={2015-07-04T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1558,12 +1743,16 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-04"
   />
   <Day
+    ISODate="2015-07-05"
     blockClassName="example-class"
-    date="2015-07-05"
+    date={2015-07-05T00:00:00.000Z}
+    getDayFormatted={[Function]}
+    handleOnClick={[Function]}
+    handleOnEnter={[Function]}
     isCurrentMonth={false}
     isDisabled={false}
     isHighlighted={false}
@@ -1576,7 +1765,7 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-05"
   />
 </div>
@@ -1587,8 +1776,10 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
   className="example-class-week"
 >
   <Day
+    ISODate="2015-06-29"
     blockClassName="example-class"
-    date="2015-06-29"
+    date={2015-06-29T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -1603,12 +1794,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-29"
   />
   <Day
+    ISODate="2015-06-30"
     blockClassName="example-class"
-    date="2015-06-30"
+    date={2015-06-30T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={true}
@@ -1623,12 +1816,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={true}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-06-30"
   />
   <Day
+    ISODate="2015-07-01"
     blockClassName="example-class"
-    date="2015-07-01"
+    date={2015-07-01T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1643,12 +1838,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-01"
   />
   <Day
+    ISODate="2015-07-02"
     blockClassName="example-class"
-    date="2015-07-02"
+    date={2015-07-02T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1663,12 +1860,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-02"
   />
   <Day
+    ISODate="2015-07-03"
     blockClassName="example-class"
-    date="2015-07-03"
+    date={2015-07-03T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1683,12 +1882,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={false}
-    isWorkday={true}
+    isWorkDay={true}
     key="2015-07-03"
   />
   <Day
+    ISODate="2015-07-04"
     blockClassName="example-class"
-    date="2015-07-04"
+    date={2015-07-04T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1703,12 +1904,14 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-04"
   />
   <Day
+    ISODate="2015-07-05"
     blockClassName="example-class"
-    date="2015-07-05"
+    date={2015-07-05T00:00:00.000Z}
+    getDayFormatted={[Function]}
     handleOnClick={[MockFunction]}
     handleOnEnter={[MockFunction]}
     isCurrentMonth={false}
@@ -1723,7 +1926,7 @@ exports[`Week #render when prop \`selectedMin\` and \`selectedMax\` are defined 
     isSelectionStart={false}
     isToday={false}
     isWeekend={true}
-    isWorkday={false}
+    isWorkDay={false}
     key="2015-07-05"
   />
 </div>

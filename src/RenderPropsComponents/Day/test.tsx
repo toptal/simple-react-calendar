@@ -1,36 +1,39 @@
 import { fireEvent, render } from '@testing-library/react'
-import React from 'react'
+import React, { ComponentProps } from 'react'
 
-import Day, { Props } from '../day'
+import { getDayFormatted } from '../../helper'
+import Day from '.'
 
-const renderDay = (props: Partial<Props> = {}) => {
-  return render(
-    <Day
-      blockClassName='example-block-class'
-      date='2015-05-05'
-      handleOnClick={() => {}}
-      handleOnEnter={() => {}}
-      isCurrentMonth={false}
-      isDisabled={false}
-      isHighlighted={false}
-      isMonthNext={false}
-      isMonthPrev={false}
-      isNonSelectable={false}
-      isSelectable={false}
-      isSelected={false}
-      isSelectionEnd={false}
-      isSelectionStart={false}
-      isToday={false}
-      isWeekend={false}
-      isWorkday={false}
-      {...props}
-    />
-  )
+const renderDay = (props: Partial<ComponentProps<typeof Day>>) => {
+  const baseProps = {
+    ISODate: '2020-02-09',
+    blockClassName: 'example-class-name',
+    date: new Date(2020, 1, 9),
+    getDayFormatted,
+    handleOnClick: jest.fn(),
+    handleOnEnter: jest.fn(),
+    isCurrentMonth: true,
+    isDisabled: false,
+    isHighlighted: true,
+    isMonthNext: false,
+    isMonthPrev: false,
+    isNonSelectable: true,
+    isSelectable: true,
+    isSelected: false,
+    isSelectionEnd: false,
+    isSelectionStart: true,
+    isToday: true,
+    isWeekend: true,
+    isWorkDay: false,
+    ...props
+  }
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return render(<Day {...baseProps} />)
 }
-// TODO: remove me
 
 test('default render', () => {
-  const { container } = renderDay()
+  const { container } = renderDay({})
 
   expect(container.firstChild).toMatchSnapshot()
 })
@@ -55,16 +58,6 @@ test('trigger callback on mouseenter', () => {
   fireEvent.mouseEnter(button)
 
   expect(handleOnEnter).toBeCalled()
-})
-
-test('custom render', () => {
-  const customRender = () => {
-    return <button type='button'>Custom</button>
-  }
-
-  const { container } = renderDay({ customRender })
-
-  expect(container.firstChild).toMatchSnapshot()
 })
 
 test('handle currentMonth', () => {
@@ -140,7 +133,7 @@ test('handle isWeekend', () => {
 })
 
 test('handle isWorkday', () => {
-  const { container } = renderDay({ isWorkday: true })
+  const { container } = renderDay({ isWorkDay: true })
 
   expect(container.firstChild).toHaveClass('is-working_day')
 })

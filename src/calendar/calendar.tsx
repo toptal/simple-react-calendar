@@ -1,4 +1,4 @@
-import React, { Component, Fragment, ReactElement } from 'react'
+import React, { Component, ComponentProps, Fragment, ReactElement } from 'react'
 import isSameMonth from 'date-fns/is_same_month'
 import isValidDate from 'date-fns/is_valid'
 import startOfMonth from 'date-fns/start_of_month'
@@ -14,14 +14,21 @@ import {
   IDate,
   IDateSelection,
   IDayOfWeekRenderProps,
-  IDayRenderProps,
   IDaysOfWeekRenderProps,
   IMonthHeaderRenderProps,
   IMonthRenderProps,
   INoticeType,
   ISelectionRange,
-  IWeekRenderProps
+  IWeekRenderProps,
+  RenderPropsDay
 } from '../@types'
+import {
+  getISODate as helperGetISODate,
+  GetISODate as helperGetISODateType,
+  getDayFormatted as helperGetWeekDayFormatted,
+  GetDayFormatted as helperGetWeekDayFormattedType
+} from '../helper'
+import Day from '../RenderPropsComponents/Day'
 import Month from './month'
 import MonthHeader from './month_header'
 import Notice from './notice'
@@ -69,7 +76,9 @@ export type Props = {
   onSelect?: (...args: any[]) => any
   onSelectionProgress?: (...args: any[]) => any
   rangeLimit?: number
-  renderDay?: IDayRenderProps
+  renderDay?: RenderPropsDay
+  getDayFormatted?: helperGetWeekDayFormattedType
+  getISODate?: helperGetISODateType
   renderDayOfWeek?: IDayOfWeekRenderProps
   renderDaysOfWeek?: IDaysOfWeekRenderProps
   renderMonth?: IMonthRenderProps
@@ -93,9 +102,12 @@ export default class Calendar extends Component<Props, State> {
     blockClassName: BLOCK_CLASS_NAME,
     daysOfWeek: DAYS_OF_WEEK,
     disableDaysOfWeek: false,
+    getDayFormatted: helperGetWeekDayFormatted,
+    getISODate: helperGetISODate,
     headerNextTitle: NEXT_MONTH_TITLE,
     headerPrevTitle: PREV_MONTH_TITLE,
     mode: 'single',
+    renderDay: (props: ComponentProps<typeof Day>) => <Day {...props} />,
     weekStartsOn: 1
   }
 
@@ -268,7 +280,9 @@ export default class Calendar extends Component<Props, State> {
       renderWeek,
       renderMonth,
       renderDaysOfWeek,
-      renderDayOfWeek
+      renderDayOfWeek,
+      getDayFormatted,
+      getISODate
     } = this.props
 
     const selection = this._selection()
@@ -285,6 +299,7 @@ export default class Calendar extends Component<Props, State> {
         activeMonth={this._activeMonth()}
         blockClassName={blockClassName}
         daysOfWeek={daysOfWeek}
+        getDayFormatted={getDayFormatted}
         disableDaysOfWeek={disableDaysOfWeek}
         disabledIntervals={disabledIntervals}
         highlightedEnd={highlight.end}
@@ -301,6 +316,7 @@ export default class Calendar extends Component<Props, State> {
         selectedMin={selection.start}
         today={this._today()}
         weekStartsOn={weekStartsOn as number}
+        getISODate={getISODate}
       />
     )
   }
