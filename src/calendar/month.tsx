@@ -12,15 +12,28 @@ import startOfMonth from 'date-fns/start_of_month'
 import startOfWeek from 'date-fns/start_of_week'
 import subDays from 'date-fns/sub_days'
 
-import { GetDayFormatted, GetISODate } from '../helper'
+import {
+  GetDayEachDay,
+  GetDayISOFormatter,
+  GetDayIsCurrentMonth,
+  GetDayIsDisabled,
+  GetDayIsHighlighted,
+  GetDayIsNextMonth,
+  GetDayIsSelectable,
+  GetDayIsSelected,
+  GetDayIsSelectedEnd,
+  GetDayIsSelectedStart,
+  GetDayIsToday,
+  GetDayIsWeekend
+} from '../helper'
 import {
   IDate,
   IDaysOfWeekRenderProps,
   IMonthRenderProps,
   INoticeType,
-  IWeekRenderProps,
+  RenderPropsDayOfWeek,
   RenderPropsDay,
-  RenderPropsDayOfWeek
+  RenderPropsWeek
 } from '../@types'
 import DaysOfWeek from './days_of_week'
 import Week from './week'
@@ -50,9 +63,20 @@ export type Props = {
   renderDay: RenderPropsDay
   renderDayOfWeek: RenderPropsDayOfWeek
   renderDaysOfWeek?: IDaysOfWeekRenderProps
-  getDayFormatted: GetDayFormatted
-  getISODate: GetISODate
-  renderWeek?: IWeekRenderProps
+  getDayEachDay: GetDayEachDay
+  getDayFormatted: GetDayISOFormatter
+  getDayIsCurrentMonth: GetDayIsCurrentMonth
+  getDayIsDisabled: GetDayIsDisabled
+  getDayIsHighlighted: GetDayIsHighlighted
+  getDayIsNextMonth: GetDayIsNextMonth
+  getDayISOFormatter: GetDayISOFormatter
+  getDayIsSelectable: GetDayIsSelectable
+  getDayIsSelected: GetDayIsSelected
+  getDayIsSelectedEnd: GetDayIsSelectedEnd
+  getDayIsSelectedStart: GetDayIsSelectedStart
+  getDayIsToday: GetDayIsToday
+  getDayIsWeekend: GetDayIsWeekend
+  renderWeek: RenderPropsWeek
   selectedMax?: IDate
   selectedMin?: IDate
   today: IDate
@@ -140,15 +164,15 @@ export default class Month extends Component<Props, {}> {
           //       this is passed from the parent component
           // @ts-ignore
           end: !isBefore(this._selectionStart, date)
-            // @ts-ignore
-            ? this._selectionStart
+            ? // @ts-ignore
+              this._selectionStart
             : date,
           // TODO: simplify with FC approach, remove state logic from child components
           //       this is passed from the parent component
           // @ts-ignore
           start: isBefore(this._selectionStart, date)
-            // @ts-ignore
-            ? this._selectionStart
+            ? // @ts-ignore
+              this._selectionStart
             : date
         })
 
@@ -365,7 +389,13 @@ export default class Month extends Component<Props, {}> {
       renderDay,
       renderWeek,
       getDayFormatted,
-      getISODate
+      getDayEachDay,
+      getDayIsDisabled,
+      getDayIsHighlighted,
+      getDayISOFormatter,
+      getDayIsNextMonth,
+      getDayIsCurrentMonth,
+      getDayIsWeekend
     } = this.props
     const weeks = []
     let { minDate, maxDate } = this.props
@@ -395,26 +425,38 @@ export default class Month extends Component<Props, {}> {
     return weeks.map(week => {
       return (
         <Week
-          activeMonth={activeMonth}
+          key={getDayISOFormatter(week)}
           blockClassName={blockClassName}
           customRender={renderWeek}
+          getDayEachDay={getDayEachDay}
           getDayFormatted={getDayFormatted}
-          date={week}
-          disabledIntervals={disabledIntervals}
-          highlightedEnd={highlightedEnd}
-          highlightedStart={highlightedStart}
-          key={week.getTime()}
-          maxDate={maxDate}
-          minDate={minDate}
+          getDayIsCurrentMonth={getDayIsCurrentMonth(activeMonth)}
+          getDayIsDisabled={getDayIsDisabled(disabledIntervals)}
+          getDayIsHighlighted={getDayIsHighlighted({
+            start: highlightedStart,
+            end: highlightedEnd
+          })}
+          getDayIsNextMonth={getDayIsNextMonth(activeMonth)}
+          getDayISOFormatter={getDayISOFormatter}
+          getDayIsSelectable={getDayIsSelectable({
+            start: selectedMin,
+            rangeLimit
+          })}
+          getDayIsSelected={getDayIsSelected({
+            start: selectedMin,
+            end: selectedMax
+          })}
+          getDayIsSelectedEnd={getDayIsSelectedEnd(selectedMax)}
+          getDayIsSelectedStart={getDayIsSelectedStart(selectedMin)}
+          getDayIsToday={getDayIsToday(today)}
+          getDayIsWeekend={getDayIsWeekend(weekStartsOn)}
           onDayClick={this.handleOnDayClick}
           onDayMouseEnter={this.handleOnDayMouseEnter}
           onDisabledDayClick={this.handleOnDisabledDayClick}
           renderDay={renderDay}
-          selectedMax={selectedMax}
-          selectedMin={selectedMin}
-          today={today}
-          weekStartsOn={weekStartsOn}
-          getISODate={getISODate}
+          weekEnd={}
+          weekNumber={}
+          weekStart={}
         />
       )
     })

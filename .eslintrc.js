@@ -17,6 +17,7 @@ module.exports = {
         ignoreMemberSort: false,
         memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single']
       }
-    ]
+    ],
+    complexity: ['error', 10]
   }
 }
