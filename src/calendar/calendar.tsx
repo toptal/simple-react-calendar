@@ -13,14 +13,14 @@ import {
   ICalendarRenderProp,
   IDate,
   IDateSelection,
-  IDayOfWeekRenderProps,
   IDaysOfWeekRenderProps,
   IMonthHeaderRenderProps,
   IMonthRenderProps,
   INoticeType,
   ISelectionRange,
   IWeekRenderProps,
-  RenderPropsDay
+  RenderPropsDay,
+  RenderPropsDayOfWeek
 } from '../@types'
 import {
   getISODate as helperGetISODate,
@@ -29,6 +29,7 @@ import {
   GetDayFormatted as helperGetWeekDayFormattedType
 } from '../helper'
 import Day from '../RenderPropsComponents/Day'
+import DayOfWeek from '../RenderPropsComponents/DayOfWeek'
 import Month from './month'
 import MonthHeader from './month_header'
 import Notice from './notice'
@@ -79,7 +80,7 @@ export type Props = {
   renderDay?: RenderPropsDay
   getDayFormatted?: helperGetWeekDayFormattedType
   getISODate?: helperGetISODateType
-  renderDayOfWeek?: IDayOfWeekRenderProps
+  renderDayOfWeek?: RenderPropsDayOfWeek
   renderDaysOfWeek?: IDaysOfWeekRenderProps
   renderMonth?: IMonthRenderProps
   renderMonthHeader?: IMonthHeaderRenderProps
@@ -108,6 +109,7 @@ export default class Calendar extends Component<Props, State> {
     headerPrevTitle: PREV_MONTH_TITLE,
     mode: 'single',
     renderDay: (props: ComponentProps<typeof Day>) => <Day {...props} />,
+    renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) => <DayOfWeek {...props} />,
     weekStartsOn: 1
   }
 
