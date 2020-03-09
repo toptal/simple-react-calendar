@@ -25,7 +25,7 @@ const getDaysOfWeek = ({ daysOfWeek, dayIndex }: IGetDaysOfWeek): string[] => {
     .concat(daysOfWeek.slice(0, adjustedIndex))
 }
 
-const DaysOfWeek: FC<Props> = props => {
+const DaysOfWeek: FC<Props> & { getDaysOfWeek: (props: IGetDaysOfWeek) => string[] } = props => {
   const {
     blockClassName,
     weekStartsOn,
