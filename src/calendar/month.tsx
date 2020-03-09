@@ -15,12 +15,12 @@ import subDays from 'date-fns/sub_days'
 import { GetDayFormatted, GetISODate } from '../helper'
 import {
   IDate,
-  IDayOfWeekRenderProps,
   IDaysOfWeekRenderProps,
   IMonthRenderProps,
   INoticeType,
   IWeekRenderProps,
-  RenderPropsDay
+  RenderPropsDay,
+  RenderPropsDayOfWeek
 } from '../@types'
 import DaysOfWeek from './days_of_week'
 import Week from './week'
@@ -48,7 +48,7 @@ export type Props = {
   onNoticeChange: (...args: any[]) => any
   rangeLimit?: number
   renderDay: RenderPropsDay
-  renderDayOfWeek?: IDayOfWeekRenderProps
+  renderDayOfWeek: RenderPropsDayOfWeek
   renderDaysOfWeek?: IDaysOfWeekRenderProps
   getDayFormatted: GetDayFormatted
   getISODate: GetISODate
@@ -140,7 +140,7 @@ export default class Month extends Component<Props, {}> {
           //       this is passed from the parent component
           // @ts-ignore
           end: !isBefore(this._selectionStart, date)
-          // @ts-ignore
+            // @ts-ignore
             ? this._selectionStart
             : date,
           // TODO: simplify with FC approach, remove state logic from child components
