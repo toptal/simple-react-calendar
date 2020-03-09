@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`default render 1`] = `
+<div
+  class="example-class-name-days_of_week_day is-weekend"
+>
+  2015-12-12
+</div>
+`;

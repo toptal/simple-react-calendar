@@ -7,6 +7,6 @@ module.exports = {
   setupFiles: ['<rootDir>/config/_jest/setupTests.js'],
   setupFilesAfterEnv: ['<rootDir>/config/_jest/setupAfterEnv.ts'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
-  testMatch: ['**/__specs__/**/*.tsx'],
+  testMatch: ['**/__specs__/**/*.tsx', '**/test.tsx'],
   testPathIgnorePatterns: ['/node_modules/', '/fixtures/', '/dist']
 }

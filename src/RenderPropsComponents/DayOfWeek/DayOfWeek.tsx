@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import classnames from 'classnames'
 
-export type Props = {
+type Props = {
   blockClassName?: string
   day: string
   isWeekend: boolean
