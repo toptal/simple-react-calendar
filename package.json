@@ -19,8 +19,8 @@
     "test:coverage": "env NODE_ENV=test TZ=UTC jest --coverage",
     "test:ci": "env NODE_ENV=test TZ=UTC jest --bail --coverage --maxWorkers=4 --ci",
     "lint:tsc": "tsc -p ./tsconfig.json",
-    "lint:ci": "yarn lint:tsc && davinci-syntax lint code . --max-warnings 266 --quiet",
-    "lint": "yarn lint:tsc && yarn prettier-standard && davinci-syntax lint code . --max-warnings 266",
+    "lint:ci": "yarn lint:tsc && davinci-syntax lint code . --max-warnings 267 --quiet",
+    "lint": "yarn lint:tsc && yarn prettier-standard && davinci-syntax lint code . --max-warnings 267",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook -c .storybook -o docs",
     "storybook:deploy": "storybook-to-ghpages -s public -o docs"
