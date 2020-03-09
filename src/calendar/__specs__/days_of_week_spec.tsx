@@ -33,7 +33,9 @@ describe('DaysOfWeek', () => {
 const getProps = (overrides = {}) => ({
   blockClassName: BLOCK_CLASS_NAME,
   daysOfWeek: DAYS_OF_WEEK,
-  renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) => <DayOfWeek {...props} />,
+  renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) => (
+    <DayOfWeek {...props} />
+  ),
   weekStartsOn: 1,
   ...overrides
 })

@@ -1,9 +1,11 @@
-import React, { ComponentProps } from 'react'
 import { render } from '@testing-library/react'
+import React, { ComponentProps } from 'react'
 
 import DayOfWeek from './DayOfWeek'
 
-const renderDayOfWeek = (props: Partial<ComponentProps<typeof DayOfWeek>> = {}) => {
+const renderDayOfWeek = (
+  props: Partial<ComponentProps<typeof DayOfWeek>> = {}
+) => {
   const baseProps = {
     blockClassName: 'example-class-name',
     day: '2015-12-12',

@@ -25,7 +25,9 @@ const getDaysOfWeek = ({ daysOfWeek, dayIndex }: IGetDaysOfWeek): string[] => {
     .concat(daysOfWeek.slice(0, adjustedIndex))
 }
 
-const DaysOfWeek: FC<Props> & { getDaysOfWeek: (props: IGetDaysOfWeek) => string[] } = props => {
+const DaysOfWeek: FC<Props> & {
+  getDaysOfWeek: (props: IGetDaysOfWeek) => string[]
+} = props => {
   const {
     blockClassName,
     weekStartsOn,
@@ -35,12 +37,14 @@ const DaysOfWeek: FC<Props> & { getDaysOfWeek: (props: IGetDaysOfWeek) => string
   } = props
   const slicedDaysOfWeek = getDaysOfWeek({ dayIndex: weekStartsOn, daysOfWeek })
 
-  const children = slicedDaysOfWeek.map((day, index) => renderDayOfWeek({
-    blockClassName,
-    day,
-    isWeekend: index > FRIDAY_INDEX,
-    key: day
-  }))
+  const children = slicedDaysOfWeek.map((day, index) =>
+    renderDayOfWeek({
+      blockClassName,
+      day,
+      isWeekend: index > FRIDAY_INDEX,
+      key: day
+    })
+  )
 
   if (customRender) {
     return customRender({

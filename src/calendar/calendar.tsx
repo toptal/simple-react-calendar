@@ -109,7 +109,9 @@ export default class Calendar extends Component<Props, State> {
     headerPrevTitle: PREV_MONTH_TITLE,
     mode: 'single',
     renderDay: (props: ComponentProps<typeof Day>) => <Day {...props} />,
-    renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) => <DayOfWeek {...props} />,
+    renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) => (
+      <DayOfWeek {...props} />
+    ),
     weekStartsOn: 1
   }
 

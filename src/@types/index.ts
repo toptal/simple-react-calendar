@@ -29,7 +29,9 @@ type IChildren = {
 }
 
 export type RenderPropsDay = (Props: ComponentProps<typeof Day>) => ReactElement
-export type RenderPropsDayOfWeek = (Props: ComponentProps<typeof DayOfWeek>) => ReactElement
+export type RenderPropsDayOfWeek = (
+  Props: ComponentProps<typeof DayOfWeek>
+) => ReactElement
 
 export type HandleOnDayClick = (
   event: SyntheticEvent<HTMLButtonElement>
@@ -44,18 +46,18 @@ export type OnDisabledDayClick = HandleOnDayClick
 /**
  * Render Props Interface
  */
-interface ICalendarRenderPropArgs extends CalendarProps, IChildren { }
+interface ICalendarRenderPropArgs extends CalendarProps, IChildren {}
 export type ICalendarRenderProp = (
   Props: ICalendarRenderPropArgs
 ) => ReactElement
 
-interface IMonthRenderPropsArgs extends MonthProps, IChildren { }
+interface IMonthRenderPropsArgs extends MonthProps, IChildren {}
 export type IMonthRenderProps = (Props: IMonthRenderPropsArgs) => ReactElement
 
-interface IWeekRenderPropsArgs extends WeekProps, IChildren { }
+interface IWeekRenderPropsArgs extends WeekProps, IChildren {}
 export type IWeekRenderProps = (Props: IWeekRenderPropsArgs) => ReactElement
 
-interface IDaysOfWeekRenderPropsArgs extends DaysOfWeekProps, IChildren { }
+interface IDaysOfWeekRenderPropsArgs extends DaysOfWeekProps, IChildren {}
 export type IDaysOfWeekRenderProps = (
   Props: IDaysOfWeekRenderPropsArgs
 ) => ReactElement
@@ -70,5 +72,5 @@ export type IMonthHeaderRenderProps = (
   Props: IMonthHeaderRenderPropsArgs
 ) => ReactElement
 
-interface INoticeRenderPropsArgs extends NoticeProps, IChildren { }
+interface INoticeRenderPropsArgs extends NoticeProps, IChildren {}
 export type INoticeRenderProps = (Props: INoticeRenderPropsArgs) => ReactElement
