@@ -12,16 +12,20 @@ import startOfMonth from 'date-fns/start_of_month'
 import startOfWeek from 'date-fns/start_of_week'
 import subDays from 'date-fns/sub_days'
 
-import { GetDayFormatted, GetISODate } from '../helper'
+import MonthHeader from 'RenderPropsComponents/MonthHeader'
 import {
+  HandleOnMonthChange,
   IDate,
   IDaysOfWeekRenderProps,
   IMonthRenderProps,
   INoticeType,
   IWeekRenderProps,
   RenderPropsDay,
-  RenderPropsDayOfWeek
+  RenderPropsDayOfWeek,
+  RenderPropsMonthHeader,
+  RenderPropsMonthHeaderButton
 } from '../@types'
+import { getDayFormatted, getISODate, getMonthNameFormatted } from '../helper'
 import DaysOfWeek from './days_of_week'
 import Week from './week'
 
@@ -37,6 +41,9 @@ export type Props = {
     start: IDate
     end: IDate
   }[]
+  getDayFormatted: typeof getDayFormatted
+  getISODate: typeof getISODate
+  getMonthNameFormatted: typeof getMonthNameFormatted
   highlightedEnd?: IDate
   highlightedStart?: IDate
   maxDate?: IDate
@@ -45,13 +52,14 @@ export type Props = {
   mode: string
   onChange: (...args: any[]) => any
   onDayMouseEnter?: (...args: any[]) => any
+  onMonthChange: HandleOnMonthChange
   onNoticeChange: (...args: any[]) => any
   rangeLimit?: number
   renderDay: RenderPropsDay
   renderDayOfWeek: RenderPropsDayOfWeek
   renderDaysOfWeek?: IDaysOfWeekRenderProps
-  getDayFormatted: GetDayFormatted
-  getISODate: GetISODate
+  renderMonthHeader: RenderPropsMonthHeader
+  renderMonthHeaderButton: RenderPropsMonthHeaderButton
   renderWeek?: IWeekRenderProps
   selectedMax?: IDate
   selectedMin?: IDate
@@ -421,10 +429,18 @@ export default class Month extends Component<Props, {}> {
   }
 
   render() {
-    const { blockClassName, customRender } = this.props
+    const { activeMonth, blockClassName, customRender, renderMonthHeader, getMonthNameFormatted, onMonthChange, renderMonthHeaderButton } = this.props
 
     const children = (
       <>
+        <MonthHeader
+          activeMonth={activeMonth}
+          blockClassName={blockClassName}
+          customRender={renderMonthHeader}
+          getMonthNameFormatted={getMonthNameFormatted}
+          onMonthChange={onMonthChange}
+          renderMonthHeaderButton={renderMonthHeaderButton}
+        />
         {this._renderDaysOfWeek()}
         {this._renderWeeks()}
       </>

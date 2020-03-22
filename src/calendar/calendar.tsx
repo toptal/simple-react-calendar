@@ -14,23 +14,23 @@ import {
   IDate,
   IDateSelection,
   IDaysOfWeekRenderProps,
-  IMonthHeaderRenderProps,
   IMonthRenderProps,
   INoticeType,
   ISelectionRange,
   IWeekRenderProps,
   RenderPropsDay,
-  RenderPropsDayOfWeek
+  RenderPropsDayOfWeek,
+  RenderPropsMonthHeader
 } from '../@types'
 import {
   getISODate as helperGetISODate,
-  GetISODate as helperGetISODateType,
-  getDayFormatted as helperGetWeekDayFormatted,
-  GetDayFormatted as helperGetWeekDayFormattedType
+  getMonthNameFormatted as helperGetMonthNameFormatted,
+  getDayFormatted as helperGetWeekDayFormatted
 } from '../helper'
 import Day from '../RenderPropsComponents/Day'
 import DayOfWeek from '../RenderPropsComponents/DayOfWeek'
 import Month from './month'
+import MonthHeader from '../RenderPropsComponents/MonthHeader'
 import MonthHeader from './month_header'
 import Notice from './notice'
 
@@ -78,12 +78,13 @@ export type Props = {
   onSelectionProgress?: (...args: any[]) => any
   rangeLimit?: number
   renderDay?: RenderPropsDay
-  getDayFormatted?: helperGetWeekDayFormattedType
-  getISODate?: helperGetISODateType
+  getDayFormatted?: typeof helperGetWeekDayFormatted
+  getISODate?: typeof helperGetISODate
+  getMonthNameFormatted?: typeof helperGetMonthNameFormatted
   renderDayOfWeek?: RenderPropsDayOfWeek
   renderDaysOfWeek?: IDaysOfWeekRenderProps
   renderMonth?: IMonthRenderProps
-  renderMonthHeader?: IMonthHeaderRenderProps
+  renderMonthHeader?: RenderPropsMonthHeader
   renderWeek?: IWeekRenderProps
   selected?: IDate | ISelectionRange
   today?: IDate
@@ -105,12 +106,16 @@ export default class Calendar extends Component<Props, State> {
     disableDaysOfWeek: false,
     getDayFormatted: helperGetWeekDayFormatted,
     getISODate: helperGetISODate,
+    getMonthNameFormatted: helperGetMonthNameFormatted,
     headerNextTitle: NEXT_MONTH_TITLE,
     headerPrevTitle: PREV_MONTH_TITLE,
     mode: 'single',
     renderDay: (props: ComponentProps<typeof Day>) => <Day {...props} />,
     renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) => (
       <DayOfWeek {...props} />
+    ),
+    renderMonthHeader: (props: ComponentProps<typeof MonthHeader>) => (
+      <MonthHeader {...props} />
     ),
     weekStartsOn: 1
   }
@@ -270,23 +275,25 @@ export default class Calendar extends Component<Props, State> {
   _renderMonth() {
     const {
       blockClassName,
+      daysOfWeek,
       disableDaysOfWeek,
+      disabledIntervals,
+      getDayFormatted,
+      getISODate,
+      getMonthNameFormatted,
       maxDate,
       minDate,
       minNumberOfWeeks,
       mode,
       onDayHover,
-      disabledIntervals,
       rangeLimit,
-      weekStartsOn,
-      daysOfWeek,
       renderDay,
-      renderWeek,
-      renderMonth,
-      renderDaysOfWeek,
       renderDayOfWeek,
-      getDayFormatted,
-      getISODate
+      renderDaysOfWeek,
+      renderMonth,
+      renderMonthHeader,
+      renderWeek,
+      weekStartsOn
     } = this.props
 
     const selection = this._selection()
@@ -295,17 +302,15 @@ export default class Calendar extends Component<Props, State> {
     return (
       // @ts-ignore: No overload matches this call
       <Month
-        customRender={renderMonth}
-        renderDay={renderDay}
-        renderWeek={renderWeek}
-        renderDaysOfWeek={renderDaysOfWeek}
-        renderDayOfWeek={renderDayOfWeek}
         activeMonth={this._activeMonth()}
         blockClassName={blockClassName}
+        customRender={renderMonth}
         daysOfWeek={daysOfWeek}
-        getDayFormatted={getDayFormatted}
         disableDaysOfWeek={disableDaysOfWeek}
         disabledIntervals={disabledIntervals}
+        getDayFormatted={getDayFormatted}
+        getISODate={getISODate}
+        getMonthNameFormatted={getMonthNameFormatted}
         highlightedEnd={highlight.end}
         highlightedStart={highlight.start}
         maxDate={maxDate}
@@ -316,41 +321,15 @@ export default class Calendar extends Component<Props, State> {
         onDayMouseEnter={onDayHover}
         onNoticeChange={this._noticeChanged.bind(this)}
         rangeLimit={rangeLimit}
+        renderDay={renderDay}
+        renderDayOfWeek={renderDayOfWeek}
+        renderDaysOfWeek={renderDaysOfWeek}
+        renderMonthHeader={renderMonthHeader}
+        renderWeek={renderWeek}
         selectedMax={selection.end}
         selectedMin={selection.start}
         today={this._today()}
         weekStartsOn={weekStartsOn as number}
-        getISODate={getISODate}
-      />
-    )
-  }
-
-  _renderMonthHeader() {
-    const {
-      blockClassName,
-      headerNextArrow,
-      headerNextTitle,
-      headerPrevArrow,
-      headerPrevTitle,
-      maxDate,
-      minDate,
-      MonthHeaderComponent = MonthHeader,
-      renderMonthHeader
-    } = this.props
-
-    return (
-      // @ts-ignore
-      <MonthHeaderComponent
-        customRender={renderMonthHeader}
-        activeMonth={this._activeMonth()}
-        blockClassName={blockClassName}
-        headerNextArrow={headerNextArrow}
-        headerNextTitle={headerNextTitle}
-        headerPrevArrow={headerPrevArrow}
-        headerPrevTitle={headerPrevTitle}
-        maxDate={maxDate}
-        minDate={minDate}
-        onMonthChange={this._switchMonth.bind(this)}
       />
     )
   }
@@ -361,7 +340,6 @@ export default class Calendar extends Component<Props, State> {
     const children = (
       <>
         {this._renderNotice()}
-        {this._renderMonthHeader()}
         {this._renderMonth()}
       </>
     )

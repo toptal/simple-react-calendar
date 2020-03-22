@@ -2,12 +2,13 @@ import { ComponentProps, ReactElement, ReactNode, SyntheticEvent } from 'react'
 
 import { Props as CalendarProps } from '../calendar/calendar'
 import { Props as DaysOfWeekProps } from '../calendar/days_of_week'
-import { Props as MonthHeaderProps } from '../calendar/month_header'
 import { Props as MonthProps } from '../calendar/month'
 import { Props as NoticeProps } from '../calendar/notice'
 import { Props as WeekProps } from '../calendar/week'
 import Day from '../RenderPropsComponents/Day'
 import DayOfWeek from '../RenderPropsComponents/DayOfWeek'
+import MonthHeader from '../RenderPropsComponents/MonthHeader'
+import MonthHeaderButton from '../RenderPropsComponents/MonthHeaderButton'
 
 export type INoticeType =
   | 'overlapping_with_disabled'
@@ -33,10 +34,21 @@ export type RenderPropsDayOfWeek = (
   Props: ComponentProps<typeof DayOfWeek>
 ) => ReactElement
 
+export type RenderPropsMonthHeader = (
+  Props: ComponentProps<typeof MonthHeader>
+) => ReactElement
+
+export type RenderPropsMonthHeaderButton = (
+  Props: ComponentProps<typeof MonthHeaderButton>
+) => ReactElement
+
 export type HandleOnDayClick = (
   event: SyntheticEvent<HTMLButtonElement>
 ) => void
 export type HandleOnDayEnter = (
+  event: SyntheticEvent<HTMLButtonElement>
+) => void
+export type HandleOnMonthChange = (
   event: SyntheticEvent<HTMLButtonElement>
 ) => void
 
@@ -60,16 +72,6 @@ export type IWeekRenderProps = (Props: IWeekRenderPropsArgs) => ReactElement
 interface IDaysOfWeekRenderPropsArgs extends DaysOfWeekProps, IChildren {}
 export type IDaysOfWeekRenderProps = (
   Props: IDaysOfWeekRenderPropsArgs
-) => ReactElement
-
-interface IMonthHeaderRenderPropsArgs extends MonthHeaderProps {
-  prevEnabled: boolean
-  nextEnabled: boolean
-  switchMonth: (offset: -1 | 1) => void
-  children: string
-}
-export type IMonthHeaderRenderProps = (
-  Props: IMonthHeaderRenderPropsArgs
 ) => ReactElement
 
 interface INoticeRenderPropsArgs extends NoticeProps, IChildren {}
