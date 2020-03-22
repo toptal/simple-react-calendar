@@ -11,7 +11,7 @@ import isWithinRange from 'date-fns/is_within_range'
 import startOfDay from 'date-fns/start_of_day'
 import startOfWeek from 'date-fns/start_of_week'
 
-import { GetDayFormatted, GetISODate } from '../helper'
+import * as helper from '../helper'
 import {
   IDate,
   IWeekRenderProps,
@@ -30,6 +30,8 @@ export type Props = {
     start: IDate
     end: IDate
   }[]
+  getDayFormatted: typeof helper.getDayFormatted
+  getISODate: typeof helper.getISODate
   highlightedEnd?: IDate
   highlightedStart?: IDate
   maxDate?: IDate
@@ -38,8 +40,6 @@ export type Props = {
   onDayMouseEnter: OnDayMouseEnter
   onDisabledDayClick: OnDisabledDayClick
   renderDay: RenderPropsDay
-  getDayFormatted: GetDayFormatted
-  getISODate: GetISODate
   selectedMax?: IDate
   selectedMin?: IDate
   today: IDate

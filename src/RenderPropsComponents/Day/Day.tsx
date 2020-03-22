@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
 import cx from 'classnames'
 
-import { GetDayFormatted } from '../../helper'
+import * as helper from '../../helper'
 import { HandleOnDayClick, HandleOnDayEnter } from '../../@types'
 
 interface Props {
   blockClassName: string
   date: Date
-  getDayFormatted: GetDayFormatted
+  getDayFormatted: typeof helper.getDayFormatted
   handleOnClick: HandleOnDayClick
   handleOnEnter: HandleOnDayEnter
   isCurrentMonth: boolean

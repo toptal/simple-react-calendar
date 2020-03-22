@@ -88,6 +88,24 @@ All of the properties are optional, just rendering `<Calendar />` will already g
 
 `datePropType` - `number`, `string` or `instanceOf(Date)`
 
+## Render Prop's Components
+
+You can easily override any rendered part of the calendar by providing the proper render function as a Prop.
+
+| Render Prop name  | Default usage                         | Default Render Prop Component                                                                        |
+| ----------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `renderDay`       | `(props) => <Day {...props} />`       | [RenderPropsComponents/Day/Day.tsx](./src/RenderPropsComponents/Day/Day.tsx)                         |
+| `renderDayOfWeek` | `(props) => <DayOfWeek {...props} />` | [RenderPropsComponents/DayOfWeek/DayOfWeek.tsx](./src/RenderPropsComponents/DayOfWeek/DayOfWeek.tsx) |
+
+## Expose date helper methods
+
+You can easily override any date related helper methods, all of them exposed as pure functions.
+
+| Helper function   | Default function                            |
+| ----------------- | ------------------------------------------- |
+| `getDayFormatted` | [getDayFormatted](./src/helper/index.ts#L4) |
+| `getISODate`      | [getISODate](./src/helper/index.ts#L3)      |
+
 ## Class Names
 
 `simple-react-calendar` follows BEM-like class naming approach and uses
