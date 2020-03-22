@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`default render 1`] = `
+<div>
+  <div
+    class="example-class-name-notice"
+  >
+    Example notice error
+  </div>
+</div>
+`;
+
+exports[`when no \`children\` defined renders null 1`] = `<div />`;

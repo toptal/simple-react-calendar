@@ -17,7 +17,6 @@ import {
   IDate,
   IDaysOfWeekRenderProps,
   IMonthRenderProps,
-  INoticeType,
   IWeekRenderProps,
   RenderPropsDay,
   RenderPropsDayOfWeek
@@ -281,7 +280,7 @@ export default class Month extends Component<Props, {}> {
     return calcStartDate
   }
 
-  _pushNoticeUpdate(noticeType: INoticeType) {
+  _pushNoticeUpdate(noticeType: helper.NoticeMessageType) {
     const { onNoticeChange } = this.props
 
     return onNoticeChange(noticeType)

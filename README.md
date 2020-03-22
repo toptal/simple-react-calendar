@@ -62,7 +62,6 @@ All of the properties are optional, just rendering `<Calendar />` will already g
 | Properties             | PropType                                     | Description                                                                                                                                                                                                                                                                                                |
 | ---------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `MonthHeaderComponent` | `object` or `func`                           | replace the month header of the component with this node `object` or `class function`                                                                                                                                                                                                                      |
-| `NoticeComponent`      | `object` or `func`                           | renders when `shownNoticeType` state has been set                                                                                                                                                                                                                                                          |
 | `activeMonth`          | `datePropType`\*                             | any day within the month that you want initially displayed                                                                                                                                                                                                                                                 |
 | `blockClassName`       | `string`                                     | base class name that will be used as a class prefix (see [](#class-names))                                                                                                                                                                                                                                 |
 | `daysOfWeek`           | `[string]`                                   | array of string represents the days                                                                                                                                                                                                                                                                        |
@@ -96,15 +95,17 @@ You can easily override any rendered part of the calendar by providing the prope
 | ----------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `renderDay`       | `(props) => <Day {...props} />`       | [RenderPropsComponents/Day/Day.tsx](./src/RenderPropsComponents/Day/Day.tsx)                         |
 | `renderDayOfWeek` | `(props) => <DayOfWeek {...props} />` | [RenderPropsComponents/DayOfWeek/DayOfWeek.tsx](./src/RenderPropsComponents/DayOfWeek/DayOfWeek.tsx) |
+| `renderNotice`    | `(props) => <Notice {...props} />`    | [RenderPropsComponents/Notice/Notice.tsx](./src/RenderPropsComponents/Notice/Notice.tsx)             |
 
 ## Expose date helper methods
 
-You can easily override any date related helper methods, all of them exposed as pure functions.
+You can easily override any helper methods, all of them exposed as pure functions.
 
-| Helper function   | Default function                            |
-| ----------------- | ------------------------------------------- |
-| `getDayFormatted` | [getDayFormatted](./src/helper/index.ts#L4) |
-| `getISODate`      | [getISODate](./src/helper/index.ts#L3)      |
+| Helper function    | Default function                              |
+| ------------------ | --------------------------------------------- |
+| `getDayFormatted`  | [getDayFormatted](./src/helper/index.ts#L4)   |
+| `getISODate`       | [getISODate](./src/helper/index.ts#L3)        |
+| `getNoticeContent` | [getNoticeContent](./src/helper/index.ts#L10) |
 
 ## Class Names
 
