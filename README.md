@@ -44,12 +44,12 @@ yarn add simple-react-calendar
 ### Usage
 
 ```js
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import SimpleReactCalendar from 'simple-react-calendar'
 
 class MyApp extends Component {
-  render () {
+  render() {
     return <SimpleReactCalendar activeMonth={new Date()} />
   }
 }

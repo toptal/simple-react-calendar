@@ -8,10 +8,8 @@ module.exports = {
       { prefixWithI: 'never' }
     ],
     'react/jsx-props-no-spreading': 'warn',
-    'sort-keys-fix/sort-keys-fix': ['warn', 'asc', { natural: false }],
     'id-length': 'warn',
     'max-lines': 'warn',
-    'sort-vars': 'warn',
     'sort-imports-es6-autofix/sort-imports-es6': [
       'warn',
       {

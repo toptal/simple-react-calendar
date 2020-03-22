@@ -1,4 +1,4 @@
-import React, { Component, ComponentProps, Fragment, ReactElement } from 'react'
+import React, { Component, ComponentProps, ReactElement } from 'react'
 import isSameMonth from 'date-fns/is_same_month'
 import isValidDate from 'date-fns/is_valid'
 import startOfMonth from 'date-fns/start_of_month'
@@ -355,11 +355,11 @@ export default class Calendar extends Component<Props, State> {
     const { blockClassName, customRender } = this.props
 
     const children = (
-      <Fragment>
+      <>
         {this._renderNotice()}
         {this._renderMonthHeader()}
         {this._renderMonth()}
-      </Fragment>
+      </>
     )
 
     if (customRender) {
