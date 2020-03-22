@@ -1,8 +1,8 @@
 **NOTE:**
 
 > This note and all the following _italicized_ text is informational and should be deleted. Additionally, the items
-> non-relevant to the subject of the pull request should be deleted as well. E.g. if task  **Review** checklist items
-> does not apply, or if "Screenshots" can't be provided, the  corresponding checklist items ("Screenshots provided…" and
+> non-relevant to the subject of the pull request should be deleted as well. E.g. if task **Review** checklist items
+> does not apply, or if "Screenshots" can't be provided, the corresponding checklist items ("Screenshots provided…" and
 > "Screen recording…") and their related sections should be removed.
 >
 > Fill **TODO** checklist with all the requirements of the ticket. These are the things you will be working on. You
@@ -14,6 +14,7 @@
 > PRs should be merged if and only if all pre-merge requirements are satisfied! Pay special attention to them!
 >
 > Don't delete the review and pre-merge checklists when filing PRs!!!
+
 ---
 
 ### Description

@@ -1,4 +1,4 @@
-import React, { Component, Fragment, SyntheticEvent } from 'react'
+import React, { Component, SyntheticEvent } from 'react'
 import addDays from 'date-fns/add_days'
 import areRangesOverlapping from 'date-fns/are_ranges_overlapping'
 import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
@@ -424,10 +424,10 @@ export default class Month extends Component<Props, {}> {
     const { blockClassName, customRender } = this.props
 
     const children = (
-      <Fragment>
+      <>
         {this._renderDaysOfWeek()}
         {this._renderWeeks()}
-      </Fragment>
+      </>
     )
 
     if (customRender) {

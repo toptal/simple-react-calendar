@@ -15,18 +15,28 @@ module.exports = {
     [
       '@semantic-release/git',
       {
-        assets: ['CHANGELOG.md', 'README.md', 'package.json', './lib', './dist', './docs'] // Push a release commit and tag, including globed files
+        assets: [
+          'CHANGELOG.md',
+          'README.md',
+          'package.json',
+          './lib',
+          './dist',
+          './docs'
+        ] // Push a release commit and tag, including globed files
       }
     ]
   ],
   publish: [
     '@semantic-release/npm', // Update the package.json version and create the npm package tarball
-    ['@semantic-release/github', {
-      "assets": [
-        {"path": "dist/simple-calendar.js", "label": "Standalone JS file"}
-      ]
-    }]// Publish a GitHub release
+    [
+      '@semantic-release/github',
+      {
+        assets: [
+          { path: 'dist/simple-calendar.js', label: 'Standalone JS file' }
+        ]
+      }
+    ] // Publish a GitHub release
   ],
   success: ['@semantic-release/github'], // Add a comment to GitHub issues and pull requests resolved in the release
-  fail: ['@semantic-release/github'], // Open a GitHub issue when a release fails
+  fail: ['@semantic-release/github'] // Open a GitHub issue when a release fails
 }
