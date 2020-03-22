@@ -3,6 +3,7 @@ import isSameMonth from 'date-fns/is_same_month'
 import isValidDate from 'date-fns/is_valid'
 import startOfMonth from 'date-fns/start_of_month'
 
+import * as helper from '../helper'
 import {
   BLOCK_CLASS_NAME,
   DAYS_OF_WEEK,
@@ -22,12 +23,6 @@ import {
   RenderPropsDay,
   RenderPropsDayOfWeek
 } from '../@types'
-import {
-  getISODate as helperGetISODate,
-  GetISODate as helperGetISODateType,
-  getDayFormatted as helperGetWeekDayFormatted,
-  GetDayFormatted as helperGetWeekDayFormattedType
-} from '../helper'
 import Day from '../RenderPropsComponents/Day'
 import DayOfWeek from '../RenderPropsComponents/DayOfWeek'
 import Month from './month'
@@ -60,6 +55,8 @@ export type Props = {
     start: IDate
     end: IDate
   }[]
+  getDayFormatted: typeof helper.getDayFormatted
+  getISODate: typeof helper.getISODate
   headerNextArrow?: ReactElement
   headerNextTitle?: string
   headerPrevArrow?: ReactElement
@@ -78,8 +75,6 @@ export type Props = {
   onSelectionProgress?: (...args: any[]) => any
   rangeLimit?: number
   renderDay?: RenderPropsDay
-  getDayFormatted?: helperGetWeekDayFormattedType
-  getISODate?: helperGetISODateType
   renderDayOfWeek?: RenderPropsDayOfWeek
   renderDaysOfWeek?: IDaysOfWeekRenderProps
   renderMonth?: IMonthRenderProps
@@ -103,8 +98,8 @@ export default class Calendar extends Component<Props, State> {
     blockClassName: BLOCK_CLASS_NAME,
     daysOfWeek: DAYS_OF_WEEK,
     disableDaysOfWeek: false,
-    getDayFormatted: helperGetWeekDayFormatted,
-    getISODate: helperGetISODate,
+    getDayFormatted: helper.getDayFormatted,
+    getISODate: helper.getISODate,
     headerNextTitle: NEXT_MONTH_TITLE,
     headerPrevTitle: PREV_MONTH_TITLE,
     mode: 'single',

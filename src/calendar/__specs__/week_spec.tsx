@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme'
 import React, { ComponentProps } from 'react'
 
-import { getDayFormatted, getISODate } from '../../helper'
+import * as helper from '../../helper'
 import Day from '../../RenderPropsComponents/Day'
 import Week from '../week'
 
@@ -159,8 +159,8 @@ const getProps = (overrides = {}) => ({
   activeMonth: new Date(2015, 7, 17),
   blockClassName: 'example-class',
   date: new Date(2015, 7, 17),
-  getDayFormatted,
-  getISODate,
+  getDayFormatted: helper.getDayFormatted,
+  getISODate: helper.getISODate,
   onDayClick: jest.fn(),
   onDayMouseEnter: jest.fn(),
   onDisabledDayClick: jest.fn(),

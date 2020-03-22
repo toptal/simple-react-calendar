@@ -12,7 +12,7 @@ import startOfMonth from 'date-fns/start_of_month'
 import startOfWeek from 'date-fns/start_of_week'
 import subDays from 'date-fns/sub_days'
 
-import { GetDayFormatted, GetISODate } from '../helper'
+import * as helper from '../helper'
 import {
   IDate,
   IDaysOfWeekRenderProps,
@@ -37,6 +37,8 @@ export type Props = {
     start: IDate
     end: IDate
   }[]
+  getDayFormatted: typeof helper.getDayFormatted
+  getISODate: typeof helper.getISODate
   highlightedEnd?: IDate
   highlightedStart?: IDate
   maxDate?: IDate
@@ -50,8 +52,6 @@ export type Props = {
   renderDay: RenderPropsDay
   renderDayOfWeek: RenderPropsDayOfWeek
   renderDaysOfWeek?: IDaysOfWeekRenderProps
-  getDayFormatted: GetDayFormatted
-  getISODate: GetISODate
   renderWeek?: IWeekRenderProps
   selectedMax?: IDate
   selectedMin?: IDate
