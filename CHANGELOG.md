@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/toptal/simple-react-calendar/compare/v2.0.0...v2.1.0) (2020-03-23)
+
+
+### Features
+
+* **notice:** recreate notice component with a render prop approach ([#141](https://github.com/toptal/simple-react-calendar/issues/141)) ([5b86b65](https://github.com/toptal/simple-react-calendar/commit/5b86b65c836ac5e748524bb4a8c2fbe2dd6ff770))
+
 # [2.0.0](https://github.com/toptal/simple-react-calendar/compare/v1.9.4...v2.0.0) (2020-02-22)
 
 ### Bug Fixes
