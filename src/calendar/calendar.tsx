@@ -17,19 +17,19 @@ import {
   IDaysOfWeekRenderProps,
   IMonthHeaderRenderProps,
   IMonthRenderProps,
-  INoticeType,
   ISelectionRange,
   IWeekRenderProps,
   RenderPropsDay,
-  RenderPropsDayOfWeek
+  RenderPropsDayOfWeek,
+  RenderPropsNotice
 } from '../@types'
 import Day from '../RenderPropsComponents/Day'
 import DayOfWeek from '../RenderPropsComponents/DayOfWeek'
 import Month from './month'
 import MonthHeader from './month_header'
-import Notice from './notice'
+import Notice from '../RenderPropsComponents/Notice'
 
-const isValid = function(date: Date) {
+const isValid = function (date: Date) {
   try {
     return isValidDate(date)
   } catch (e) {
@@ -45,7 +45,6 @@ type ISelection = {
 
 export type Props = {
   MonthHeaderComponent?: ReactElement
-  NoticeComponent?: ReactElement
   activeMonth?: IDate
   blockClassName: string
   customRender?: ICalendarRenderProp
@@ -57,6 +56,7 @@ export type Props = {
   }[]
   getDayFormatted: typeof helper.getDayFormatted
   getISODate: typeof helper.getISODate
+  getNoticeContent: typeof helper.getNoticeContent
   headerNextArrow?: ReactElement
   headerNextTitle?: string
   headerPrevArrow?: ReactElement
@@ -74,6 +74,7 @@ export type Props = {
   onSelect?: (...args: any[]) => any
   onSelectionProgress?: (...args: any[]) => any
   rangeLimit?: number
+  renderNotice?: RenderPropsNotice
   renderDay?: RenderPropsDay
   renderDayOfWeek?: RenderPropsDayOfWeek
   renderDaysOfWeek?: IDaysOfWeekRenderProps
@@ -100,12 +101,16 @@ export default class Calendar extends Component<Props, State> {
     disableDaysOfWeek: false,
     getDayFormatted: helper.getDayFormatted,
     getISODate: helper.getISODate,
+    getNoticeContent: helper.getNoticeContent,
     headerNextTitle: NEXT_MONTH_TITLE,
     headerPrevTitle: PREV_MONTH_TITLE,
     mode: 'single',
     renderDay: (props: ComponentProps<typeof Day>) => <Day {...props} />,
     renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) => (
       <DayOfWeek {...props} />
+    ),
+    renderNotice: (props: ComponentProps<typeof Notice>) => (
+      <Notice {...props} />
     ),
     weekStartsOn: 1
   }
@@ -236,30 +241,13 @@ export default class Calendar extends Component<Props, State> {
     }
   }
 
-  _noticeChanged(shownNoticeType: INoticeType) {
+  _noticeChanged(shownNoticeType: helper.NoticeMessageType) {
     this.setState({ shownNoticeType })
   }
 
   _today() {
     /* eslint-disable react/destructuring-assignment */
     return this.props.today || new Date()
-  }
-
-  _renderNotice() {
-    const { shownNoticeType } = this.state
-    const { blockClassName } = this.props
-    /* eslint-disable react/destructuring-assignment */
-    const NoticeComponent = this.props.NoticeComponent || Notice
-
-    return (
-      shownNoticeType && (
-        // @ts-ignore
-        <NoticeComponent
-          blockClassName={blockClassName}
-          type={shownNoticeType}
-        />
-      )
-    )
   }
 
   _renderMonth() {
@@ -351,11 +339,22 @@ export default class Calendar extends Component<Props, State> {
   }
 
   render() {
-    const { blockClassName, customRender } = this.props
+    const {
+      blockClassName,
+      customRender,
+      getNoticeContent,
+      renderNotice = (props: ComponentProps<typeof Notice>) => (
+        <Notice {...props} />
+      )
+    } = this.props
+    const { shownNoticeType } = this.state
 
     const children = (
       <>
-        {this._renderNotice()}
+        {renderNotice({
+          blockClassName,
+          children: getNoticeContent(shownNoticeType)
+        })}
         {this._renderMonthHeader()}
         {this._renderMonth()}
       </>
