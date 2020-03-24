@@ -87,7 +87,7 @@
     "@storybook/react": "^5.3.12",
     "@storybook/storybook-deployer": "^2.8.1",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
+    "@testing-library/react": "^10.0.1",
     "@toptal/davinci": "^0.2.37",
     "@types/classnames": "^2.2.9",
     "@types/jest": "^24.0.23",
