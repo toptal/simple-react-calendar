@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/toptal/simple-react-calendar/compare/v2.1.0...v2.2.0) (2020-04-20)
+
+
+### Features
+
+* move react and react-dom to devDependencies ([#185](https://github.com/toptal/simple-react-calendar/issues/185)) ([15f0ed0](https://github.com/toptal/simple-react-calendar/commit/15f0ed0bccb7f5cffd7a826e9db96cad5132a12b))
+
 # [2.1.0](https://github.com/toptal/simple-react-calendar/compare/v2.0.0...v2.1.0) (2020-03-23)
 
 
