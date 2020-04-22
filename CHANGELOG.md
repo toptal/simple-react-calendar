@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/toptal/simple-react-calendar/compare/v2.2.0...v2.2.1) (2020-04-22)
+
+
+### Bug Fixes
+
+* call preventDefault method of event object properly ([#188](https://github.com/toptal/simple-react-calendar/issues/188)) ([614c194](https://github.com/toptal/simple-react-calendar/commit/614c194963f0b84cb6713b57832b5492b7c2b1a7))
+
 # [2.2.0](https://github.com/toptal/simple-react-calendar/compare/v2.1.0...v2.2.0) (2020-04-20)
 
 

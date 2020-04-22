@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/toptal/simple-react-calendar.git"
   },
-  "version": "2.2.0",
+  "version": "2.2.1",
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js  --env.development --hot --progress",
     "build": "rm -rf ./dist && webpack --config config/webpack.lib.js --progress --env.production ",
