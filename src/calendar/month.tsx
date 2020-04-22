@@ -210,12 +210,10 @@ export default class Month extends Component<Props, {}> {
     this._pushNoticeUpdate(null)
   }
 
-  handleOnDisabledDayClick = ({
-    preventDefault
-  }: SyntheticEvent<HTMLButtonElement>) => {
+  handleOnDisabledDayClick = (event: SyntheticEvent<HTMLButtonElement>) => {
     const { onNoticeChange } = this.props
 
-    preventDefault()
+    event.preventDefault()
     onNoticeChange('disabled_day_click')
   }
 
