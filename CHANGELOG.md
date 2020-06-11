@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/toptal/simple-react-calendar/compare/v2.2.1...v2.2.2) (2020-06-11)
+
+
+### Bug Fixes
+
+* documentation for weekStartsOn ([#208](https://github.com/toptal/simple-react-calendar/issues/208)) ([8ca17a4](https://github.com/toptal/simple-react-calendar/commit/8ca17a4d97e5008541bcf8f79ab24bd0023699a1))
+
 ## [2.2.1](https://github.com/toptal/simple-react-calendar/compare/v2.2.0...v2.2.1) (2020-04-22)
 
 
