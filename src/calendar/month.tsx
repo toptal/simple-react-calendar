@@ -18,12 +18,11 @@ import * as helper from '../helper'
 import {
   IDate,
   IMonthRenderProps,
-  IWeekRenderProps,
   RenderPropsDay,
   RenderPropsDayOfWeek,
-  RenderPropsDaysOfWeek
+  RenderPropsDaysOfWeek,
+  RenderPropsWeek
 } from '../@types'
-import Week from './week'
 
 const RANGE_MODE = 'range'
 
@@ -52,7 +51,7 @@ export type Props = {
   renderDay: RenderPropsDay
   renderDayOfWeek: RenderPropsDayOfWeek
   renderDaysOfWeek: RenderPropsDaysOfWeek
-  renderWeek?: IWeekRenderProps
+  renderWeek: RenderPropsWeek
   selectedMax?: IDate
   selectedMin?: IDate
   today: IDate
@@ -389,32 +388,29 @@ export default class Month extends Component<Props, {}> {
       date = addDays(date, 7)
     }
 
-    return weeks.map(week => {
-      return (
-        <Week
-          activeMonth={activeMonth}
-          blockClassName={blockClassName}
-          customRender={renderWeek}
-          getDayFormatted={getDayFormatted}
-          date={week}
-          disabledIntervals={disabledIntervals}
-          highlightedEnd={highlightedEnd}
-          highlightedStart={highlightedStart}
-          key={week.getTime()}
-          maxDate={maxDate}
-          minDate={minDate}
-          onDayClick={this.handleOnDayClick}
-          onDayMouseEnter={this.handleOnDayMouseEnter}
-          onDisabledDayClick={this.handleOnDisabledDayClick}
-          renderDay={renderDay}
-          selectedMax={selectedMax}
-          selectedMin={selectedMin}
-          today={today}
-          weekStartsOn={weekStartsOn}
-          getISODate={getISODate}
-        />
-      )
-    })
+    return weeks.map(week =>
+      renderWeek({
+        activeMonth,
+        blockClassName,
+        getDayFormatted,
+        date: week,
+        disabledIntervals,
+        highlightedEnd,
+        highlightedStart,
+        key: week.getTime(),
+        maxDate,
+        minDate,
+        getISODate,
+        weekStartsOn,
+        today,
+        selectedMin,
+        selectedMax,
+        renderDay,
+        onDayClick: this.handleOnDayClick,
+        onDayMouseEnter: this.handleOnDayMouseEnter,
+        onDisabledDayClick: this.handleOnDisabledDayClick
+      })
+    )
   }
 
   render() {

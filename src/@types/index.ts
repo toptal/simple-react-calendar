@@ -2,12 +2,12 @@ import { ComponentProps, ReactElement, ReactNode, SyntheticEvent } from 'react'
 
 import { Props as CalendarProps } from '../calendar/calendar'
 import { Props as MonthProps } from '../calendar/month'
-import { Props as WeekProps } from '../calendar/week'
 import Day from '../RenderPropsComponents/Day'
 import DayOfWeek from '../RenderPropsComponents/DayOfWeek'
 import DaysOfWeek from '../RenderPropsComponents/DaysOfWeek'
 import Notice from '../RenderPropsComponents/Notice'
 import MonthHeader from '../RenderPropsComponents/MonthHeader'
+import Week from '../RenderPropsComponents/Week'
 
 export type IDateSelection = 'start' | 'end'
 
@@ -36,6 +36,9 @@ export type RenderPropsNotice = (
 export type RenderPropsMonthHeader = (
   Props: ComponentProps<typeof MonthHeader>
 ) => ReactElement
+export type RenderPropsWeek = (
+  Props: ComponentProps<typeof Week>
+) => ReactElement
 
 export type HandleOnDayClick = (
   event: SyntheticEvent<HTMLButtonElement>
@@ -57,6 +60,3 @@ export type ICalendarRenderProp = (
 
 interface IMonthRenderPropsArgs extends MonthProps, IChildren { }
 export type IMonthRenderProps = (Props: IMonthRenderPropsArgs) => ReactElement
-
-interface IWeekRenderPropsArgs extends WeekProps, IChildren { }
-export type IWeekRenderProps = (Props: IWeekRenderPropsArgs) => ReactElement
