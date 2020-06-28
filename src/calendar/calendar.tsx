@@ -15,20 +15,20 @@ import {
   ICalendarRenderProp,
   IDate,
   IDateSelection,
-  IMonthHeaderRenderProps,
   IMonthRenderProps,
   ISelectionRange,
   IWeekRenderProps,
   RenderPropsDay,
   RenderPropsDayOfWeek,
   RenderPropsDaysOfWeek,
-  RenderPropsNotice
+  RenderPropsNotice,
+  RenderPropsMonthHeader
 } from '../@types'
 import Day from '../RenderPropsComponents/Day'
 import DayOfWeek from '../RenderPropsComponents/DayOfWeek'
 import DaysOfWeek from '../RenderPropsComponents/DaysOfWeek'
 import Month from './month'
-import MonthHeader from './month_header'
+import MonthHeader from '../RenderPropsComponents/MonthHeader'
 import Notice from '../RenderPropsComponents/Notice'
 
 const isValid = function(date: Date) {
@@ -81,7 +81,7 @@ export type Props = {
   renderDayOfWeek?: RenderPropsDayOfWeek
   renderDaysOfWeek?: RenderPropsDaysOfWeek
   renderMonth?: IMonthRenderProps
-  renderMonthHeader?: IMonthHeaderRenderProps
+  renderMonthHeader?: RenderPropsMonthHeader
   renderWeek?: IWeekRenderProps
   selected?: IDate | ISelectionRange
   today?: IDate
@@ -114,6 +114,8 @@ export default class Calendar extends Component<Props, State> {
       <DaysOfWeek {...props} />,
     renderNotice: (props: ComponentProps<typeof Notice>) =>
       <Notice {...props} />,
+    renderMonthHeader: (props: ComponentProps<typeof MonthHeader>) =>
+      <MonthHeader {...props} />,
     weekStartsOn: 1
   }
 

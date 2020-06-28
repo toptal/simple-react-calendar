@@ -19,17 +19,17 @@ const HeaderButton: FC<Props> = ({
   title,
   onClick
 }) => (
-  <button
-    className={classnames(`${blockClassName}-header_button`, `is-${type}`, {
-      'is-disabled': !enabled
-    })}
-    type='button'
-    disabled={!enabled}
-    title={title}
-    onClick={onClick}
-  >
-    {arrow}
-  </button>
-)
+    <button
+      className={classnames(`${blockClassName}-header_button`, `is-${type}`, {
+        'is-disabled': !enabled
+      })}
+      type='button'
+      disabled={!enabled}
+      title={title}
+      onClick={onClick}
+    >
+      {arrow}
+    </button>
+  )
 
 export default HeaderButton
