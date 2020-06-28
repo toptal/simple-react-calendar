@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React, { Component, ComponentProps, ReactElement } from 'react'
 import isSameMonth from 'date-fns/is_same_month'
 import isValidDate from 'date-fns/is_valid'
@@ -14,22 +15,23 @@ import {
   ICalendarRenderProp,
   IDate,
   IDateSelection,
-  IDaysOfWeekRenderProps,
   IMonthHeaderRenderProps,
   IMonthRenderProps,
   ISelectionRange,
   IWeekRenderProps,
   RenderPropsDay,
   RenderPropsDayOfWeek,
+  RenderPropsDaysOfWeek,
   RenderPropsNotice
 } from '../@types'
 import Day from '../RenderPropsComponents/Day'
 import DayOfWeek from '../RenderPropsComponents/DayOfWeek'
+import DaysOfWeek from '../RenderPropsComponents/DaysOfWeek'
 import Month from './month'
 import MonthHeader from './month_header'
 import Notice from '../RenderPropsComponents/Notice'
 
-const isValid = function (date: Date) {
+const isValid = function(date: Date) {
   try {
     return isValidDate(date)
   } catch (e) {
@@ -77,7 +79,7 @@ export type Props = {
   renderNotice?: RenderPropsNotice
   renderDay?: RenderPropsDay
   renderDayOfWeek?: RenderPropsDayOfWeek
-  renderDaysOfWeek?: IDaysOfWeekRenderProps
+  renderDaysOfWeek?: RenderPropsDaysOfWeek
   renderMonth?: IMonthRenderProps
   renderMonthHeader?: IMonthHeaderRenderProps
   renderWeek?: IWeekRenderProps
@@ -106,12 +108,12 @@ export default class Calendar extends Component<Props, State> {
     headerPrevTitle: PREV_MONTH_TITLE,
     mode: 'single',
     renderDay: (props: ComponentProps<typeof Day>) => <Day {...props} />,
-    renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) => (
-      <DayOfWeek {...props} />
-    ),
-    renderNotice: (props: ComponentProps<typeof Notice>) => (
-      <Notice {...props} />
-    ),
+    renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) =>
+      <DayOfWeek {...props} />,
+    renderDaysOfWeek: (props: ComponentProps<typeof DaysOfWeek>) =>
+      <DaysOfWeek {...props} />,
+    renderNotice: (props: ComponentProps<typeof Notice>) =>
+      <Notice {...props} />,
     weekStartsOn: 1
   }
 

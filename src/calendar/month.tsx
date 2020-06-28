@@ -1,3 +1,5 @@
+/* eslint-disable max-statements */
+/* eslint-disable complexity */
 import React, { Component, SyntheticEvent } from 'react'
 import addDays from 'date-fns/add_days'
 import areRangesOverlapping from 'date-fns/are_ranges_overlapping'
@@ -15,13 +17,12 @@ import subDays from 'date-fns/sub_days'
 import * as helper from '../helper'
 import {
   IDate,
-  IDaysOfWeekRenderProps,
   IMonthRenderProps,
   IWeekRenderProps,
   RenderPropsDay,
-  RenderPropsDayOfWeek
+  RenderPropsDayOfWeek,
+  RenderPropsDaysOfWeek
 } from '../@types'
-import DaysOfWeek from './days_of_week'
 import Week from './week'
 
 const RANGE_MODE = 'range'
@@ -50,7 +51,7 @@ export type Props = {
   rangeLimit?: number
   renderDay: RenderPropsDay
   renderDayOfWeek: RenderPropsDayOfWeek
-  renderDaysOfWeek?: IDaysOfWeekRenderProps
+  renderDaysOfWeek: RenderPropsDaysOfWeek
   renderWeek?: IWeekRenderProps
   selectedMax?: IDate
   selectedMin?: IDate
@@ -336,13 +337,12 @@ export default class Month extends Component<Props, {}> {
     if (disableDaysOfWeek) return
 
     return (
-      <DaysOfWeek
-        blockClassName={blockClassName}
-        weekStartsOn={weekStartsOn}
-        daysOfWeek={daysOfWeek}
-        customRender={renderDaysOfWeek}
-        renderDayOfWeek={renderDayOfWeek}
-      />
+      renderDaysOfWeek({
+        blockClassName,
+        weekStartsOn,
+        daysOfWeek,
+        renderDayOfWeek
+      })
     )
   }
 
