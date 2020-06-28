@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthHeader #render renders <MonthHeader /> 1`] = `
+<div
+  className="example-class-month_header"
+>
+  <HeaderButton
+    blockClassName="example-class"
+    enabled={true}
+    onClick={[Function]}
+    title="Previous month"
+    type="prev"
+  />
+  <div
+    className="example-class-month_header_title"
+  >
+    August 2015
+  </div>
+  <HeaderButton
+    blockClassName="example-class"
+    enabled={true}
+    onClick={[Function]}
+    title="Next month"
+    type="next"
+  />
+</div>
+`;
+
+exports[`MonthHeader #render when prop \`maxDate\` is before prop \`activeMonth\` renders <MonthHeader /> 1`] = `
+<div
+  className="example-class-month_header"
+>
+  <HeaderButton
+    blockClassName="example-class"
+    enabled={true}
+    onClick={[Function]}
+    title="Previous month"
+    type="prev"
+  />
+  <div
+    className="example-class-month_header_title"
+  >
+    August 2015
+  </div>
+  <HeaderButton
+    blockClassName="example-class"
+    enabled={false}
+    onClick={[Function]}
+    title="Next month"
+    type="next"
+  />
+</div>
+`;
+
+exports[`MonthHeader #render when prop \`minDate\` is after prop \`activeMonth\` renders <MonthHeader /> 1`] = `
+<div
+  className="example-class-month_header"
+>
+  <HeaderButton
+    blockClassName="example-class"
+    enabled={false}
+    onClick={[Function]}
+    title="Previous month"
+    type="prev"
+  />
+  <div
+    className="example-class-month_header_title"
+  >
+    August 2015
+  </div>
+  <HeaderButton
+    blockClassName="example-class"
+    enabled={true}
+    onClick={[Function]}
+    title="Next month"
+    type="next"
+  />
+</div>
+`;
