@@ -15,11 +15,11 @@ import {
   ICalendarRenderProp,
   IDate,
   IDateSelection,
-  IMonthRenderProps,
   ISelectionRange,
   RenderPropsDay,
   RenderPropsDayOfWeek,
   RenderPropsDaysOfWeek,
+  RenderPropsMonth,
   RenderPropsMonthHeader,
   RenderPropsNotice,
   RenderPropsWeek
@@ -27,12 +27,12 @@ import {
 import Day from '../RenderPropsComponents/Day'
 import DayOfWeek from '../RenderPropsComponents/DayOfWeek'
 import DaysOfWeek from '../RenderPropsComponents/DaysOfWeek'
-import Month from './month'
+import Month from '../RenderPropsComponents/Month'
 import MonthHeader from '../RenderPropsComponents/MonthHeader'
 import Notice from '../RenderPropsComponents/Notice'
 import Week from '../RenderPropsComponents/Week'
 
-const isValid = function(date: Date) {
+const isValid = function (date: Date) {
   try {
     return isValidDate(date)
   } catch (e) {
@@ -81,7 +81,7 @@ export type Props = {
   renderDay?: RenderPropsDay
   renderDayOfWeek?: RenderPropsDayOfWeek
   renderDaysOfWeek?: RenderPropsDaysOfWeek
-  renderMonth?: IMonthRenderProps
+  renderMonth?: RenderPropsMonth
   renderMonthHeader?: RenderPropsMonthHeader
   renderWeek?: RenderPropsWeek
   selected?: IDate | ISelectionRange
@@ -119,6 +119,8 @@ export default class Calendar extends Component<Props, State> {
       <MonthHeader {...props} />,
     renderWeek: (props: ComponentProps<typeof Week>) =>
       <Week {...props} />,
+    renderMonth: (props: ComponentProps<typeof Month>) =>
+      <Month {...props} />,
     weekStartsOn: 1
   }
 
@@ -272,7 +274,7 @@ export default class Calendar extends Component<Props, State> {
       daysOfWeek,
       renderDay,
       renderWeek,
-      renderMonth,
+      renderMonth = (props: ComponentProps<typeof Month>) => <Month {...props} />,
       renderDaysOfWeek,
       renderDayOfWeek,
       getDayFormatted,
@@ -282,37 +284,40 @@ export default class Calendar extends Component<Props, State> {
     const selection = this._selection()
     const highlight = this._highlight()
 
-    return (
-      // @ts-ignore: No overload matches this call
-      <Month
-        customRender={renderMonth}
-        renderDay={renderDay}
-        renderWeek={renderWeek}
-        renderDaysOfWeek={renderDaysOfWeek}
-        renderDayOfWeek={renderDayOfWeek}
-        activeMonth={this._activeMonth()}
-        blockClassName={blockClassName}
-        daysOfWeek={daysOfWeek}
-        getDayFormatted={getDayFormatted}
-        disableDaysOfWeek={disableDaysOfWeek}
-        disabledIntervals={disabledIntervals}
-        highlightedEnd={highlight.end}
-        highlightedStart={highlight.start}
-        maxDate={maxDate}
-        minDate={minDate}
-        minNumberOfWeeks={minNumberOfWeeks}
-        mode={mode as 'range' | 'single'}
-        onChange={this._selectionChanged.bind(this)}
-        onDayMouseEnter={onDayHover}
-        onNoticeChange={this._noticeChanged.bind(this)}
-        rangeLimit={rangeLimit}
-        selectedMax={selection.end}
-        selectedMin={selection.start}
-        today={this._today()}
-        weekStartsOn={weekStartsOn as number}
-        getISODate={getISODate}
-      />
-    )
+    // TODO: rework defaultProps to default function params
+    return renderMonth({
+      renderDay: renderDay!,
+      renderWeek: renderWeek!,
+      renderDaysOfWeek: renderDaysOfWeek!,
+      renderDayOfWeek: renderDayOfWeek!,
+      activeMonth: this._activeMonth(),
+      blockClassName,
+      // @ts-ignore
+      daysOfWeek,
+      getDayFormatted,
+      // @ts-ignore
+      disableDaysOfWeek,
+      disabledIntervals,
+      // @ts-ignore
+      highlightedEnd: highlight.end,
+      // @ts-ignore
+      highlightedStart: highlight.start,
+      maxDate,
+      minDate,
+      minNumberOfWeeks,
+      mode: mode as 'range' | 'single',
+      onChange: this._selectionChanged.bind(this),
+      onDayMouseEnter: onDayHover,
+      onNoticeChange: this._noticeChanged.bind(this),
+      rangeLimit,
+      // @ts-ignore
+      selectedMax: selection.end,
+      // @ts-ignore
+      selectedMin: selection.start,
+      today: this._today(),
+      weekStartsOn: weekStartsOn as number,
+      getISODate
+    })
   }
 
   _renderMonthHeader() {
@@ -324,25 +329,20 @@ export default class Calendar extends Component<Props, State> {
       headerPrevTitle,
       maxDate,
       minDate,
-      MonthHeaderComponent = MonthHeader,
-      renderMonthHeader
+      renderMonthHeader = (props: ComponentProps<typeof MonthHeader>) => <MonthHeader {...props} />
     } = this.props
 
-    return (
-      // @ts-ignore
-      <MonthHeaderComponent
-        customRender={renderMonthHeader}
-        activeMonth={this._activeMonth()}
-        blockClassName={blockClassName}
-        headerNextArrow={headerNextArrow}
-        headerNextTitle={headerNextTitle}
-        headerPrevArrow={headerPrevArrow}
-        headerPrevTitle={headerPrevTitle}
-        maxDate={maxDate}
-        minDate={minDate}
-        onMonthChange={this._switchMonth.bind(this)}
-      />
-    )
+    return renderMonthHeader({
+      activeMonth: this._activeMonth(),
+      blockClassName,
+      headerNextArrow,
+      headerNextTitle,
+      headerPrevArrow,
+      headerPrevTitle,
+      maxDate,
+      minDate,
+      onMonthChange: this._switchMonth.bind(this)
+    })
   }
 
   render() {

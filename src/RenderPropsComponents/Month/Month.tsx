@@ -14,22 +14,20 @@ import startOfMonth from 'date-fns/start_of_month'
 import startOfWeek from 'date-fns/start_of_week'
 import subDays from 'date-fns/sub_days'
 
-import * as helper from '../helper'
+import * as helper from '../../helper'
 import {
   IDate,
-  IMonthRenderProps,
   RenderPropsDay,
   RenderPropsDayOfWeek,
   RenderPropsDaysOfWeek,
   RenderPropsWeek
-} from '../@types'
+} from '../../@types'
 
 const RANGE_MODE = 'range'
 
 export type Props = {
   activeMonth: IDate
   blockClassName: string
-  customRender?: IMonthRenderProps
   daysOfWeek: string[]
   disableDaysOfWeek: boolean
   disabledIntervals?: {
@@ -397,6 +395,7 @@ export default class Month extends Component<Props, {}> {
         disabledIntervals,
         highlightedEnd,
         highlightedStart,
+        // @ts-ignore
         key: week.getTime(),
         maxDate,
         minDate,
@@ -414,7 +413,7 @@ export default class Month extends Component<Props, {}> {
   }
 
   render() {
-    const { blockClassName, customRender } = this.props
+    const { blockClassName } = this.props
 
     const children = (
       <>
@@ -422,13 +421,6 @@ export default class Month extends Component<Props, {}> {
         {this._renderWeeks()}
       </>
     )
-
-    if (customRender) {
-      return customRender({
-        ...this.props,
-        children
-      })
-    }
 
     return <div className={`${blockClassName}-month`}>{children}</div>
   }
