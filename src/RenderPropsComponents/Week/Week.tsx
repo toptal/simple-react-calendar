@@ -69,12 +69,12 @@ export default class Week extends Component<Props, {}> {
 
     return Boolean(
       selectedMin &&
-      selectedMax &&
-      isWithinRange(
-        startOfDay(date),
-        startOfDay(selectedMin),
-        startOfDay(selectedMax)
-      )
+        selectedMax &&
+        isWithinRange(
+          startOfDay(date),
+          startOfDay(selectedMin),
+          startOfDay(selectedMax)
+        )
     )
   }
 
@@ -148,9 +148,9 @@ export default class Week extends Component<Props, {}> {
         handleOnClick: isSelectable
           ? onDayClick
           : isDisabled
-            ? onDisabledDayClick
-            : () => { },
-        handleOnEnter: isSelectable ? onDayMouseEnter : () => { },
+          ? onDisabledDayClick
+          : () => {},
+        handleOnEnter: isSelectable ? onDayMouseEnter : () => {},
         isCurrentMonth,
         isDisabled,
         isHighlighted: this._dateHighlighted(day),

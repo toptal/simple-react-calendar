@@ -137,15 +137,13 @@ export default class Month extends Component<Props, {}> {
           //       this is passed from the parent component
           // @ts-ignore
           end: !isBefore(this._selectionStart, date)
-            // @ts-ignore
-            ? this._selectionStart
+            ? (this as any)._selectionStart
             : date,
           // TODO: simplify with FC approach, remove state logic from child components
           //       this is passed from the parent component
           // @ts-ignore
           start: isBefore(this._selectionStart, date)
-            // @ts-ignore
-            ? this._selectionStart
+            ? (this as any)._selectionStart
             : date
         })
 
@@ -333,14 +331,12 @@ export default class Month extends Component<Props, {}> {
 
     if (disableDaysOfWeek) return
 
-    return (
-      renderDaysOfWeek({
-        blockClassName,
-        weekStartsOn,
-        daysOfWeek,
-        renderDayOfWeek
-      })
-    )
+    return renderDaysOfWeek({
+      blockClassName,
+      weekStartsOn,
+      daysOfWeek,
+      renderDayOfWeek
+    })
   }
 
   _renderWeeks() {

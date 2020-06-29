@@ -9,7 +9,7 @@ import Month from './Month'
 const date = '2017-01-01'
 
 describe('Month', () => {
-  let instance, mockEvent, props, wrapper
+  let instance: any, mockEvent: any, props: any, wrapper: any
 
   beforeEach(() => {
     props = getProps()
@@ -240,7 +240,7 @@ describe('Month', () => {
       describe('when `_selectionInProgress` is `true`', () => {
         describe('when #_getDisabledRange is `true`', () => {
           it('sets instance states', () => {
-            instance._pushNoticeUpdate = () => { }
+            instance._pushNoticeUpdate = () => {}
             instance._selectionInProgress = true
             instance.handleOnDayClick(mockEvent)
 
@@ -254,7 +254,7 @@ describe('Month', () => {
 
         describe('when #_getDisabledRange is `false`', () => {
           beforeEach(() => {
-            instance._pushNoticeUpdate = () => { }
+            instance._pushNoticeUpdate = () => {}
             instance._selectionInProgress = true
             instance._getDisabledRange = () => false
             instance.handleOnDayClick(mockEvent)
@@ -273,7 +273,7 @@ describe('Month', () => {
 
       describe('when `_selectionInProgress` is `false`', () => {
         it('sets instance states', () => {
-          instance._pushNoticeUpdate = () => { }
+          instance._pushNoticeUpdate = () => {}
           instance._selectionInProgress = false
           instance.handleOnDayClick(mockEvent)
 
@@ -294,7 +294,7 @@ describe('Month', () => {
         wrapper = shallow(<Month {...props} />)
         const instance = wrapper.instance()
 
-        instance._pushNoticeUpdate = () => { }
+        instance._pushNoticeUpdate = () => {}
         instance.handleOnDayClick(mockEvent)
 
         expect(instance._selectionInProgress).toBe(false)
@@ -306,13 +306,13 @@ describe('Month', () => {
     })
     it('calls #_pushUpdate', () => {
       instance._pushUpdate = jest.fn()
-      instance._pushNoticeUpdate = () => { }
+      instance._pushNoticeUpdate = () => {}
       instance.handleOnDayClick(mockEvent)
 
       expect(instance._pushUpdate).toHaveBeenCalledTimes(1)
     })
     it('calls #_pushNoticeUpdate', () => {
-      instance._pushUpdate = () => { }
+      instance._pushUpdate = () => {}
       instance._pushNoticeUpdate = jest.fn()
       instance.handleOnDayClick(mockEvent)
 

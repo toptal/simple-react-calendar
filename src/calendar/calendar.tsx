@@ -32,7 +32,7 @@ import MonthHeader from '../RenderPropsComponents/MonthHeader'
 import Notice from '../RenderPropsComponents/Notice'
 import Week from '../RenderPropsComponents/Week'
 
-const isValid = function (date: Date) {
+const isValid = function(date: Date) {
   try {
     return isValidDate(date)
   } catch (e) {
@@ -109,18 +109,20 @@ export default class Calendar extends Component<Props, State> {
     headerPrevTitle: PREV_MONTH_TITLE,
     mode: 'single',
     renderDay: (props: ComponentProps<typeof Day>) => <Day {...props} />,
-    renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) =>
-      <DayOfWeek {...props} />,
-    renderDaysOfWeek: (props: ComponentProps<typeof DaysOfWeek>) =>
-      <DaysOfWeek {...props} />,
-    renderNotice: (props: ComponentProps<typeof Notice>) =>
-      <Notice {...props} />,
-    renderMonthHeader: (props: ComponentProps<typeof MonthHeader>) =>
-      <MonthHeader {...props} />,
-    renderWeek: (props: ComponentProps<typeof Week>) =>
-      <Week {...props} />,
-    renderMonth: (props: ComponentProps<typeof Month>) =>
-      <Month {...props} />,
+    renderDayOfWeek: (props: ComponentProps<typeof DayOfWeek>) => (
+      <DayOfWeek {...props} />
+    ),
+    renderDaysOfWeek: (props: ComponentProps<typeof DaysOfWeek>) => (
+      <DaysOfWeek {...props} />
+    ),
+    renderNotice: (props: ComponentProps<typeof Notice>) => (
+      <Notice {...props} />
+    ),
+    renderMonthHeader: (props: ComponentProps<typeof MonthHeader>) => (
+      <MonthHeader {...props} />
+    ),
+    renderWeek: (props: ComponentProps<typeof Week>) => <Week {...props} />,
+    renderMonth: (props: ComponentProps<typeof Month>) => <Month {...props} />,
     weekStartsOn: 1
   }
 
@@ -274,7 +276,9 @@ export default class Calendar extends Component<Props, State> {
       daysOfWeek,
       renderDay,
       renderWeek,
-      renderMonth = (props: ComponentProps<typeof Month>) => <Month {...props} />,
+      renderMonth = (props: ComponentProps<typeof Month>) => (
+        <Month {...props} />
+      ),
       renderDaysOfWeek,
       renderDayOfWeek,
       getDayFormatted,
@@ -329,7 +333,9 @@ export default class Calendar extends Component<Props, State> {
       headerPrevTitle,
       maxDate,
       minDate,
-      renderMonthHeader = (props: ComponentProps<typeof MonthHeader>) => <MonthHeader {...props} />
+      renderMonthHeader = (props: ComponentProps<typeof MonthHeader>) => (
+        <MonthHeader {...props} />
+      )
     } = this.props
 
     return renderMonthHeader({

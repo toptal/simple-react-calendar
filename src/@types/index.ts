@@ -56,7 +56,7 @@ export type OnDisabledDayClick = HandleOnDayClick
 /**
  * Render Props Interface
  */
-interface ICalendarRenderPropArgs extends CalendarProps, IChildren { }
+interface ICalendarRenderPropArgs extends CalendarProps, IChildren {}
 export type ICalendarRenderProp = (
   Props: ICalendarRenderPropArgs
 ) => ReactElement

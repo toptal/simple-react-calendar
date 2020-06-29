@@ -6,7 +6,7 @@ import DayOfWeek from '../../RenderPropsComponents/DayOfWeek'
 import DaysOfWeek from './DaysOfWeek'
 
 describe('DaysOfWeek', () => {
-  let props, wrapper
+  let props, wrapper: any
 
   beforeEach(() => {
     props = getProps()

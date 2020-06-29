@@ -27,12 +27,7 @@ const getDaysOfWeek = ({ daysOfWeek, dayIndex }: IGetDaysOfWeek): string[] => {
 const DaysOfWeek: FC<Props> & {
   getDaysOfWeek: (props: IGetDaysOfWeek) => string[]
 } = props => {
-  const {
-    blockClassName,
-    weekStartsOn,
-    renderDayOfWeek,
-    daysOfWeek
-  } = props
+  const { blockClassName, weekStartsOn, renderDayOfWeek, daysOfWeek } = props
   const slicedDaysOfWeek = getDaysOfWeek({ dayIndex: weekStartsOn, daysOfWeek })
 
   const children = slicedDaysOfWeek.map((day, index) =>

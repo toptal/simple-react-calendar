@@ -5,7 +5,7 @@ import { NEXT_MONTH_TITLE, PREV_MONTH_TITLE } from '../../calendar/consts'
 import MonthHeader from './MonthHeader'
 
 describe('MonthHeader', () => {
-  let instance, props, wrapper
+  let instance: any, props: any, wrapper: any
 
   beforeEach(() => {
     props = getProps()

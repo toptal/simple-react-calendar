@@ -6,7 +6,7 @@ import Day from '../../RenderPropsComponents/Day'
 import Week from './Week'
 
 describe('Week', () => {
-  let props, wrapper
+  let props, wrapper: any
 
   beforeEach(() => {
     props = getProps()

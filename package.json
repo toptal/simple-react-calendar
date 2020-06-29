@@ -19,8 +19,8 @@
     "test:coverage": "env NODE_ENV=test TZ=UTC jest --coverage",
     "test:ci": "env NODE_ENV=test TZ=UTC jest --bail --coverage --maxWorkers=4 --ci",
     "lint:tsc": "tsc -p ./tsconfig.json",
-    "lint:ci": "yarn lint:tsc && davinci-syntax lint code . --max-warnings 267 --quiet",
-    "lint": "yarn lint:tsc && yarn prettier-standard && davinci-syntax lint code . --max-warnings 267",
+    "lint:ci": "yarn lint:tsc && davinci-syntax lint code . --max-warnings 279 --quiet",
+    "lint": "yarn lint:tsc && yarn prettier-standard && davinci-syntax lint code . --max-warnings 279",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook -c .storybook -o docs",
     "storybook:deploy": "storybook-to-ghpages -s public -o docs"
@@ -90,6 +90,7 @@
     "@testing-library/react": "^10.0.1",
     "@toptal/davinci-syntax": "^0.1.0-alpha.46",
     "@types/classnames": "^2.2.9",
+    "@types/enzyme": "^3.10.5",
     "@types/jest": "^25.1.4",
     "@types/react-dom": "^16.9.4",
     "autoprefixer": "^9.5.0",
