@@ -11,20 +11,18 @@ import isWithinRange from 'date-fns/is_within_range'
 import startOfDay from 'date-fns/start_of_day'
 import startOfWeek from 'date-fns/start_of_week'
 
-import * as helper from '../helper'
+import * as helper from '../../helper'
 import {
   IDate,
-  IWeekRenderProps,
   OnDayClick,
   OnDayMouseEnter,
   OnDisabledDayClick,
   RenderPropsDay
-} from '../@types'
+} from '../../@types'
 
 export type Props = {
   activeMonth: IDate
   blockClassName: string
-  customRender?: IWeekRenderProps
   date: IDate
   disabledIntervals?: {
     start: IDate
@@ -172,15 +170,8 @@ export default class Week extends Component<Props, {}> {
   }
 
   render() {
-    const { customRender, blockClassName } = this.props
+    const { blockClassName } = this.props
     const children = this._renderDays()
-
-    if (customRender) {
-      return customRender({
-        ...this.props,
-        children
-      })
-    }
 
     return <div className={`${blockClassName}-week`}>{children}</div>
   }

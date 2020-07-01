@@ -1,11 +1,15 @@
 import { shallow } from 'enzyme'
 import React from 'react'
 
-import { BLOCK_CLASS_NAME, NEXT_MONTH_TITLE, PREV_MONTH_TITLE } from '../consts'
-import HeaderButton from '../header_button'
+import {
+  BLOCK_CLASS_NAME,
+  NEXT_MONTH_TITLE,
+  PREV_MONTH_TITLE
+} from '../../calendar/consts'
+import HeaderButton from '.'
 
 describe('HeaderButton', () => {
-  let props, wrapper
+  let props: any, wrapper: any
 
   beforeEach(() => {
     props = getProps()
@@ -50,7 +54,9 @@ describe('HeaderButton', () => {
 
   describe('when prop `arrow` is defined', () => {
     it('renders <HeaderButton />', () => {
-      wrapper.setProps({ arrow: <i className='icon'>Test</i> })
+      wrapper.setProps({
+        arrow: <i className='icon'> Test </i>
+      })
 
       expect(wrapper).toMatchSnapshot()
     })

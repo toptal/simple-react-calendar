@@ -4,12 +4,12 @@ import addDays from 'date-fns/add_days'
 import parse from 'date-fns/parse'
 import subDays from 'date-fns/sub_days'
 
-import Month from '../month'
+import Month from './Month'
 
 const date = '2017-01-01'
 
 describe('Month', () => {
-  let instance, mockEvent, props, wrapper
+  let instance: any, mockEvent: any, props: any, wrapper: any
 
   beforeEach(() => {
     props = getProps()
@@ -379,7 +379,7 @@ describe('Month', () => {
 
   describe('#_getMaxDate', () => {
     describe('when `maxDate` is `undefined`', () => {
-      it('returns `calcEndDate`', () => {
+      it.only('returns `calcEndDate`', () => {
         props = getProps({
           rangeLimit: 5
         })
@@ -572,5 +572,8 @@ const getProps = (overrides = {}) => ({
   onNoticeChange: jest.fn(),
   today: new Date(2015, 7, 17),
   weekStartsOn: 1,
+  // TODO: remove and use shallow randering instead
+  renderDaysOfWeek: () => <div key={Math.random()} />,
+  renderWeek: () => <div key={Math.random()} />,
   ...overrides
 })

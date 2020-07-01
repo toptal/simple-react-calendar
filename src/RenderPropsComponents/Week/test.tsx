@@ -3,10 +3,10 @@ import React, { ComponentProps } from 'react'
 
 import * as helper from '../../helper'
 import Day from '../../RenderPropsComponents/Day'
-import Week from '../week'
+import Week from './Week'
 
 describe('Week', () => {
-  let props, wrapper
+  let props, wrapper: any
 
   beforeEach(() => {
     props = getProps()
