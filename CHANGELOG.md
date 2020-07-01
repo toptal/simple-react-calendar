@@ -1,3 +1,10 @@
+## [2.2.3](https://github.com/toptal/simple-react-calendar/compare/v2.2.2...v2.2.3) (2020-07-01)
+
+
+### Bug Fixes
+
+* componentWillMount -> UNSAFE_componentWillMount ([#216](https://github.com/toptal/simple-react-calendar/issues/216)) ([85503b1](https://github.com/toptal/simple-react-calendar/commit/85503b12696a2b3c00ccdb04cc7f8206e80e3112))
+
 ## [2.2.2](https://github.com/toptal/simple-react-calendar/compare/v2.2.1...v2.2.2) (2020-06-11)
 
 
