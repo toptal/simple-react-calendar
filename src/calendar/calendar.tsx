@@ -125,7 +125,6 @@ export default class Calendar extends Component<Props, State> {
   }
 
   // TODO: FC Rewrite
-  /* eslint-disable react/no-deprecated */
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const { activeMonth } = this.props
 
