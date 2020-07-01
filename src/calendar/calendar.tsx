@@ -29,7 +29,7 @@ import Month from './month'
 import MonthHeader from './month_header'
 import Notice from '../RenderPropsComponents/Notice'
 
-const isValid = function (date: Date) {
+const isValid = function(date: Date) {
   try {
     return isValidDate(date)
   } catch (e) {
@@ -125,8 +125,7 @@ export default class Calendar extends Component<Props, State> {
   }
 
   // TODO: FC Rewrite
-  /* eslint-disable react/no-deprecated */
-  componentWillReceiveProps(nextProps: Props) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const { activeMonth } = this.props
 
     if (
