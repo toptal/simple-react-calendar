@@ -91,4 +91,8 @@ workflows:
 
   pr_check:
     jobs:
-      - prCheck
+      - prCheck:
+          filters:
+            branches:
+              ignore:
+                - master
