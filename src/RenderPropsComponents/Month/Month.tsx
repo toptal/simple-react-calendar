@@ -162,6 +162,7 @@ export default class Month extends Component<Props, {}> {
           this._selectionEnd = null
           this._pushUpdate()
           this._pushNoticeUpdate('overlapping_with_disabled')
+
           return
         }
         // TODO: simplify with FC approach, remove state logic from child components
@@ -271,6 +272,7 @@ export default class Month extends Component<Props, {}> {
 
       return isCalcStartDayAfter ? calcStartDate : minDate
     }
+
     return calcStartDate
   }
 
@@ -316,6 +318,7 @@ export default class Month extends Component<Props, {}> {
 
       return isCalcEndDayBefore ? calcEndDate : maxDate
     }
+
     return calcEndDate
   }
 

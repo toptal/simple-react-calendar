@@ -61,6 +61,7 @@ export default class Week extends Component<Props, {}> {
     } else if (maxDate && !minDate) {
       return isBefore(date, maxDate) || isEqual(date, maxDate)
     }
+
     return true
   }
 

@@ -183,6 +183,7 @@ export default class Calendar extends Component<Props, State> {
     if (onMonthChange) {
       return activeMonth
     }
+
     /* eslint-disable react/destructuring-assignment */
     return this.state.activeMonth
   }
@@ -197,6 +198,7 @@ export default class Calendar extends Component<Props, State> {
     if (isValid(start as Date) && isValid(end as Date)) {
       return { end, start }
     }
+
     return { end: null, start: null }
   }
 
@@ -207,6 +209,7 @@ export default class Calendar extends Component<Props, State> {
     if (isValid(start) && isValid(end)) {
       return { end, start }
     }
+
     return { end: null, start: null }
   }
 
@@ -230,6 +233,7 @@ export default class Calendar extends Component<Props, State> {
         if (!onSelectionProgress && selection) {
           return selection[dateType]
         }
+
         return selected && (selected as ISelectionRange)[dateType]
     }
   }

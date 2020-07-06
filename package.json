@@ -40,10 +40,11 @@
     }
   },
   "lint-staged": {
-    "*.{jsx, js, tsx, ts, md, yml}": [
-      "npm run lint",
-      "prettier-standard",
-      "git add"
+    "*.{jsx,js,tsx,ts,md,yml}": [
+      "yarn prettier-standard --changed"
+    ],
+    "*.{jsx,js,tsx,ts}": [
+      "davinci-syntax lint code"
     ]
   },
   "keywords": [
@@ -88,7 +89,7 @@
     "@storybook/storybook-deployer": "^2.8.1",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^10.0.1",
-    "@toptal/davinci-syntax": "^0.1.0-alpha.46",
+    "@toptal/davinci-syntax": "^0.1.0-alpha.60",
     "@types/classnames": "^2.2.9",
     "@types/enzyme": "^3.10.5",
     "@types/jest": "^25.1.4",
@@ -108,9 +109,9 @@
     "html-webpack-inline-source-plugin": "^0.0.10",
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-template": "^6.2.0",
-    "husky": "^4.2.1",
+    "husky": "^4.2.5",
     "jest": "^25.1.0",
-    "lint-staged": "^10.0.9",
+    "lint-staged": "^10.2.11",
     "markdown-table": "^2.0.0",
     "mockdate": "^2.0.2",
     "prettier-standard": "^16.2.1",
