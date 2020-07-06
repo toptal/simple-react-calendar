@@ -1,3 +1,10 @@
+## [2.2.6](https://github.com/toptal/simple-react-calendar/compare/v2.2.5...v2.2.6) (2020-07-06)
+
+
+### Bug Fixes
+
+* **circleci:** filter master triggered PR job ([#226](https://github.com/toptal/simple-react-calendar/issues/226)) ([8b33b3b](https://github.com/toptal/simple-react-calendar/commit/8b33b3bfd78dd0932625f37839b797006281a137))
+
 ## [2.2.5](https://github.com/toptal/simple-react-calendar/compare/v2.2.4...v2.2.5) (2020-07-06)
 
 
