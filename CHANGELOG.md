@@ -1,3 +1,10 @@
+## [2.2.5](https://github.com/toptal/simple-react-calendar/compare/v2.2.4...v2.2.5) (2020-07-06)
+
+
+### Bug Fixes
+
+* **dev:** update packages and fix commit lint ([#225](https://github.com/toptal/simple-react-calendar/issues/225)) ([b8a4241](https://github.com/toptal/simple-react-calendar/commit/b8a42416153ff29eb1269687c51f451704563231))
+
 ## [2.2.4](https://github.com/toptal/simple-react-calendar/compare/v2.2.3...v2.2.4) (2020-07-01)
 
 
