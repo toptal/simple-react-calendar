@@ -21,7 +21,7 @@ exports[`HeaderButton when prop \`arrow\` is defined renders <HeaderButton /> 1`
   <i
     className="icon"
   >
-     Test 
+    Test
   </i>
 </button>
 `;

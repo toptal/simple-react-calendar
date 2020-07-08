@@ -1,11 +1,12 @@
 import React, { FC } from 'react'
 
-import { RenderPropsDayOfWeek } from '../../@types'
+import { IDaysOfWeekRenderProps, RenderPropsDayOfWeek } from '../@types'
 
 const FRIDAY_INDEX = 4
 
 export type Props = {
   blockClassName: string
+  customRender?: IDaysOfWeekRenderProps
   daysOfWeek: string[]
   renderDayOfWeek: RenderPropsDayOfWeek
   weekStartsOn: number
@@ -27,7 +28,13 @@ const getDaysOfWeek = ({ daysOfWeek, dayIndex }: IGetDaysOfWeek): string[] => {
 const DaysOfWeek: FC<Props> & {
   getDaysOfWeek: (props: IGetDaysOfWeek) => string[]
 } = props => {
-  const { blockClassName, weekStartsOn, renderDayOfWeek, daysOfWeek } = props
+  const {
+    blockClassName,
+    weekStartsOn,
+    customRender,
+    renderDayOfWeek,
+    daysOfWeek
+  } = props
   const slicedDaysOfWeek = getDaysOfWeek({ dayIndex: weekStartsOn, daysOfWeek })
 
   const children = slicedDaysOfWeek.map((day, index) =>
@@ -38,6 +45,13 @@ const DaysOfWeek: FC<Props> & {
       key: day
     })
   )
+
+  if (customRender) {
+    return customRender({
+      ...props,
+      children
+    })
+  }
 
   return <div className={`${blockClassName}-days_of_week`}>{children}</div>
 }
