@@ -1,3 +1,10 @@
+## [2.2.7](https://github.com/toptal/simple-react-calendar/compare/v2.2.6...v2.2.7) (2020-07-08)
+
+
+### Bug Fixes
+
+* revert "fix: render props rework ([#214](https://github.com/toptal/simple-react-calendar/issues/214))" ([#228](https://github.com/toptal/simple-react-calendar/issues/228)) ([6f6f617](https://github.com/toptal/simple-react-calendar/commit/6f6f61750110acf0fdf633aecec627bd3892eaa1))
+
 ## [2.2.6](https://github.com/toptal/simple-react-calendar/compare/v2.2.5...v2.2.6) (2020-07-06)
 
 
