@@ -1,5 +1,3 @@
-/* eslint-disable max-statements */
-/* eslint-disable complexity */
 import React, { Component, SyntheticEvent } from 'react'
 import addDays from 'date-fns/add_days'
 import areRangesOverlapping from 'date-fns/are_ranges_overlapping'
@@ -14,20 +12,24 @@ import startOfMonth from 'date-fns/start_of_month'
 import startOfWeek from 'date-fns/start_of_week'
 import subDays from 'date-fns/sub_days'
 
-import * as helper from '../../helper'
+import * as helper from '../helper'
 import {
   IDate,
+  IDaysOfWeekRenderProps,
+  IMonthRenderProps,
+  IWeekRenderProps,
   RenderPropsDay,
-  RenderPropsDayOfWeek,
-  RenderPropsDaysOfWeek,
-  RenderPropsWeek
-} from '../../@types'
+  RenderPropsDayOfWeek
+} from '../@types'
+import DaysOfWeek from './days_of_week'
+import Week from './week'
 
 const RANGE_MODE = 'range'
 
 export type Props = {
   activeMonth: IDate
   blockClassName: string
+  customRender?: IMonthRenderProps
   daysOfWeek: string[]
   disableDaysOfWeek: boolean
   disabledIntervals?: {
@@ -48,8 +50,8 @@ export type Props = {
   rangeLimit?: number
   renderDay: RenderPropsDay
   renderDayOfWeek: RenderPropsDayOfWeek
-  renderDaysOfWeek: RenderPropsDaysOfWeek
-  renderWeek: RenderPropsWeek
+  renderDaysOfWeek?: IDaysOfWeekRenderProps
+  renderWeek?: IWeekRenderProps
   selectedMax?: IDate
   selectedMin?: IDate
   today: IDate
@@ -137,13 +139,15 @@ export default class Month extends Component<Props, {}> {
           //       this is passed from the parent component
           // @ts-ignore
           end: !isBefore(this._selectionStart, date)
-            ? (this as any)._selectionStart
+            // @ts-ignore
+            ? this._selectionStart
             : date,
           // TODO: simplify with FC approach, remove state logic from child components
           //       this is passed from the parent component
           // @ts-ignore
           start: isBefore(this._selectionStart, date)
-            ? (this as any)._selectionStart
+            // @ts-ignore
+            ? this._selectionStart
             : date
         })
 
@@ -334,12 +338,15 @@ export default class Month extends Component<Props, {}> {
 
     if (disableDaysOfWeek) return
 
-    return renderDaysOfWeek({
-      blockClassName,
-      weekStartsOn,
-      daysOfWeek,
-      renderDayOfWeek
-    })
+    return (
+      <DaysOfWeek
+        blockClassName={blockClassName}
+        weekStartsOn={weekStartsOn}
+        daysOfWeek={daysOfWeek}
+        customRender={renderDaysOfWeek}
+        renderDayOfWeek={renderDayOfWeek}
+      />
+    )
   }
 
   _renderWeeks() {
@@ -385,34 +392,36 @@ export default class Month extends Component<Props, {}> {
       date = addDays(date, 7)
     }
 
-    return weeks.map(week =>
-      renderWeek({
-        activeMonth,
-        blockClassName,
-        getDayFormatted,
-        date: week,
-        disabledIntervals,
-        highlightedEnd,
-        highlightedStart,
-        // @ts-ignore
-        key: week.getTime(),
-        maxDate,
-        minDate,
-        getISODate,
-        weekStartsOn,
-        today,
-        selectedMin,
-        selectedMax,
-        renderDay,
-        onDayClick: this.handleOnDayClick,
-        onDayMouseEnter: this.handleOnDayMouseEnter,
-        onDisabledDayClick: this.handleOnDisabledDayClick
-      })
-    )
+    return weeks.map(week => {
+      return (
+        <Week
+          activeMonth={activeMonth}
+          blockClassName={blockClassName}
+          customRender={renderWeek}
+          getDayFormatted={getDayFormatted}
+          date={week}
+          disabledIntervals={disabledIntervals}
+          highlightedEnd={highlightedEnd}
+          highlightedStart={highlightedStart}
+          key={week.getTime()}
+          maxDate={maxDate}
+          minDate={minDate}
+          onDayClick={this.handleOnDayClick}
+          onDayMouseEnter={this.handleOnDayMouseEnter}
+          onDisabledDayClick={this.handleOnDisabledDayClick}
+          renderDay={renderDay}
+          selectedMax={selectedMax}
+          selectedMin={selectedMin}
+          today={today}
+          weekStartsOn={weekStartsOn}
+          getISODate={getISODate}
+        />
+      )
+    })
   }
 
   render() {
-    const { blockClassName } = this.props
+    const { blockClassName, customRender } = this.props
 
     const children = (
       <>
@@ -420,6 +429,13 @@ export default class Month extends Component<Props, {}> {
         {this._renderWeeks()}
       </>
     )
+
+    if (customRender) {
+      return customRender({
+        ...this.props,
+        children
+      })
+    }
 
     return <div className={`${blockClassName}-month`}>{children}</div>
   }

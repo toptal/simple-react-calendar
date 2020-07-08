@@ -1,11 +1,11 @@
 import { shallow } from 'enzyme'
 import React from 'react'
 
-import { NEXT_MONTH_TITLE, PREV_MONTH_TITLE } from '../../calendar/consts'
-import MonthHeader from './MonthHeader'
+import { NEXT_MONTH_TITLE, PREV_MONTH_TITLE } from '../consts'
+import MonthHeader from '../month_header'
 
 describe('MonthHeader', () => {
-  let instance: any, props: any, wrapper: any
+  let instance, props, wrapper
 
   beforeEach(() => {
     props = getProps()

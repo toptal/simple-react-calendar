@@ -1,13 +1,13 @@
 import { ComponentProps, ReactElement, ReactNode, SyntheticEvent } from 'react'
 
 import { Props as CalendarProps } from '../calendar/calendar'
+import { Props as DaysOfWeekProps } from '../calendar/days_of_week'
+import { Props as MonthHeaderProps } from '../calendar/month_header'
+import { Props as MonthProps } from '../calendar/month'
+import { Props as WeekProps } from '../calendar/week'
 import Day from '../RenderPropsComponents/Day'
 import DayOfWeek from '../RenderPropsComponents/DayOfWeek'
-import DaysOfWeek from '../RenderPropsComponents/DaysOfWeek'
-import Month from '../RenderPropsComponents/Month'
-import MonthHeader from '../RenderPropsComponents/MonthHeader'
 import Notice from '../RenderPropsComponents/Notice'
-import Week from '../RenderPropsComponents/Week'
 
 export type IDateSelection = 'start' | 'end'
 
@@ -27,20 +27,8 @@ export type RenderPropsDay = (Props: ComponentProps<typeof Day>) => ReactElement
 export type RenderPropsDayOfWeek = (
   Props: ComponentProps<typeof DayOfWeek>
 ) => ReactElement
-export type RenderPropsDaysOfWeek = (
-  Props: ComponentProps<typeof DaysOfWeek>
-) => ReactElement
 export type RenderPropsNotice = (
   Props: ComponentProps<typeof Notice>
-) => ReactElement
-export type RenderPropsMonthHeader = (
-  Props: ComponentProps<typeof MonthHeader>
-) => ReactElement
-export type RenderPropsMonth = (
-  Props: ComponentProps<typeof Month>
-) => ReactElement
-export type RenderPropsWeek = (
-  Props: ComponentProps<typeof Week>
 ) => ReactElement
 
 export type HandleOnDayClick = (
@@ -59,4 +47,25 @@ export type OnDisabledDayClick = HandleOnDayClick
 interface ICalendarRenderPropArgs extends CalendarProps, IChildren {}
 export type ICalendarRenderProp = (
   Props: ICalendarRenderPropArgs
+) => ReactElement
+
+interface IMonthRenderPropsArgs extends MonthProps, IChildren {}
+export type IMonthRenderProps = (Props: IMonthRenderPropsArgs) => ReactElement
+
+interface IWeekRenderPropsArgs extends WeekProps, IChildren {}
+export type IWeekRenderProps = (Props: IWeekRenderPropsArgs) => ReactElement
+
+interface IDaysOfWeekRenderPropsArgs extends DaysOfWeekProps, IChildren {}
+export type IDaysOfWeekRenderProps = (
+  Props: IDaysOfWeekRenderPropsArgs
+) => ReactElement
+
+interface IMonthHeaderRenderPropsArgs extends MonthHeaderProps {
+  prevEnabled: boolean
+  nextEnabled: boolean
+  switchMonth: (offset: -1 | 1) => void
+  children: string
+}
+export type IMonthHeaderRenderProps = (
+  Props: IMonthHeaderRenderPropsArgs
 ) => ReactElement

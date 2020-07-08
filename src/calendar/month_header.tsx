@@ -5,12 +5,13 @@ import isAfter from 'date-fns/is_after'
 import isBefore from 'date-fns/is_before'
 import startOfMonth from 'date-fns/start_of_month'
 
-import { IDate } from '../../@types'
-import HeaderButton from '../HeaderButton'
+import { IDate, IMonthHeaderRenderProps } from '../@types'
+import HeaderButton from './header_button'
 
 export type Props = {
   activeMonth: IDate
   blockClassName?: string
+  customRender?: IMonthHeaderRenderProps
   headerNextArrow?: ReactElement
   headerNextTitle?: string
   headerPrevArrow?: ReactElement
@@ -38,7 +39,8 @@ export default class MonthHeader extends Component<Props, {}> {
       headerNextArrow,
       headerNextTitle,
       headerPrevArrow,
-      headerPrevTitle
+      headerPrevTitle,
+      customRender
     } = this.props
 
     const prevEnabled = minDate
@@ -47,6 +49,17 @@ export default class MonthHeader extends Component<Props, {}> {
     const nextEnabled = maxDate
       ? isAfter(startOfMonth(maxDate), startOfMonth(activeMonth))
       : true
+
+    if (customRender) {
+      return customRender({
+        ...this.props,
+        children:
+          'no content, please use activeMonth prop and custom buttons instead',
+        nextEnabled,
+        prevEnabled,
+        switchMonth: this._switchMonth.bind(this)
+      })
+    }
 
     return (
       <div className={`${blockClassName}-month_header`}>

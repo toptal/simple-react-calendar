@@ -1,12 +1,12 @@
 import { shallow } from 'enzyme'
 import React, { ComponentProps } from 'react'
 
-import { BLOCK_CLASS_NAME, DAYS_OF_WEEK } from '../../calendar/consts'
+import { BLOCK_CLASS_NAME, DAYS_OF_WEEK } from '../consts'
 import DayOfWeek from '../../RenderPropsComponents/DayOfWeek'
-import DaysOfWeek from './DaysOfWeek'
+import DaysOfWeek from '../days_of_week'
 
 describe('DaysOfWeek', () => {
-  let props, wrapper: any
+  let props, wrapper
 
   beforeEach(() => {
     props = getProps()
