@@ -2,11 +2,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
 const autoprefixer = require('autoprefixer')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 
 const baseWebpackConfig = require('./webpack.core')
 
-const developmentConfig = merge.smart(baseWebpackConfig, {
+const developmentConfig = merge(baseWebpackConfig, {
   devServer: {
     contentBase: path.resolve(__dirname, '../dist'),
     hot: true,
