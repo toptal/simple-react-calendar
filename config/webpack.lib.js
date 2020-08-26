@@ -1,9 +1,9 @@
 const path = require('path')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 
 const baseWebpackConfig = require('./webpack.core')
 
-const libraryWebpackConfig = merge.smart(baseWebpackConfig, {
+const libraryWebpackConfig = merge(baseWebpackConfig, {
   entry: {
     'simple-calendar': path.resolve(__dirname, '../src')
   },
