@@ -1,3 +1,10 @@
+## [2.2.8](https://github.com/toptal/simple-react-calendar/compare/v2.2.7...v2.2.8) (2020-09-03)
+
+
+### Bug Fixes
+
+* change minDate to start at the beginning of the day ([#247](https://github.com/toptal/simple-react-calendar/issues/247)) ([545cada](https://github.com/toptal/simple-react-calendar/commit/545cada7099eee21c7d281aeacce605c774561ee))
+
 ## [2.2.7](https://github.com/toptal/simple-react-calendar/compare/v2.2.6...v2.2.7) (2020-07-08)
 
 
