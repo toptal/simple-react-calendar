@@ -3,6 +3,7 @@ import React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 
 import Calendar from '../calendar'
+import Month from '../month'
 
 describe('Calendar', () => {
   let instance, props, wrapper
@@ -229,7 +230,7 @@ describe('Calendar', () => {
 
       describe('when prop `onSelectionProgress` is defined', () => {
         it('returns prop `selected.start`', () => {
-          props = { mode: 'range', onSelectionProgress: () => {}, selected }
+          props = { mode: 'range', onSelectionProgress: () => { }, selected }
           wrapper = shallow(<Calendar {...props} />)
           wrapper.setState({ selection })
 
@@ -354,10 +355,21 @@ describe('Calendar', () => {
   describe('#render', () => {
     it('renders <Calendar />', () => {
       const tree = ReactTestRenderer.create(
-        <Calendar activeMonth={date} onMonthChange={() => {}} />
+        <Calendar activeMonth={date} onMonthChange={() => { }} />
       ).toJSON()
 
       expect(tree).toMatchSnapshot()
     })
+  })
+
+  it('uses normalized minDate with a start at 00:00', () => {
+    const dirtyMinDate = '2020-09-03T11:26:49.526Z'
+    const { root } = ReactTestRenderer.create(
+      <Calendar minDate={dirtyMinDate} activeMonth={date} onMonthChange={() => { }} />
+    )
+
+    const startOfMinDate = new Date(2020, 8, 3) // start of the day in local time - 00:00
+
+    expect(root.findByType(Month).props.minDate).toEqual(startOfMinDate)
   })
 })
