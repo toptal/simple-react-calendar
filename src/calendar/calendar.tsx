@@ -1,6 +1,7 @@
 import React, { Component, ComponentProps, ReactElement } from 'react'
 import isSameMonth from 'date-fns/is_same_month'
 import isValidDate from 'date-fns/is_valid'
+import startOfDay from 'date-fns/start_of_day'
 import startOfMonth from 'date-fns/start_of_month'
 
 import * as helper from '../helper'
@@ -278,6 +279,8 @@ export default class Calendar extends Component<Props, State> {
     const selection = this._selection()
     const highlight = this._highlight()
 
+    const normalizedMinDate = minDate ? startOfDay(minDate) : minDate
+
     return (
       // @ts-ignore: No overload matches this call
       <Month
@@ -295,7 +298,7 @@ export default class Calendar extends Component<Props, State> {
         highlightedEnd={highlight.end}
         highlightedStart={highlight.start}
         maxDate={maxDate}
-        minDate={minDate}
+        minDate={normalizedMinDate}
         minNumberOfWeeks={minNumberOfWeeks}
         mode={mode as 'range' | 'single'}
         onChange={this._selectionChanged.bind(this)}

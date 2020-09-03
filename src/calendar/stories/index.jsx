@@ -58,7 +58,7 @@ stories
 
     // minDate
     const minDateLabel = 'minDate'
-    const minDateDefaultValue = new Date('2018-01-01')
+    const minDateDefaultValue = new Date('2018-01-02')
     const minDate = date(minDateLabel, minDateDefaultValue)
 
     // minNumberOfWeeks
