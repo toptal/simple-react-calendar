@@ -118,7 +118,7 @@
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.11.0",
     "semantic-release": "^17.0.2",
-    "style-loader": "^1.0.0",
+    "style-loader": "^2.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "typescript": "^3.6.4",
