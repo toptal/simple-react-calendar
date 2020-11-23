@@ -84,7 +84,7 @@
     "@semantic-release/release-notes-generator": "^9.0.0",
     "@storybook/addon-actions": "^5.3.12",
     "@storybook/addon-knobs": "^5.3.12",
-    "@storybook/addons": "^5.3.12",
+    "@storybook/addons": "^6.1.2",
     "@storybook/react": "^5.3.12",
     "@storybook/storybook-deployer": "^2.8.1",
     "@testing-library/jest-dom": "^5.1.1",
