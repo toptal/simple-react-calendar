@@ -3,7 +3,6 @@ import '../../example/style/date_picker.styl'
 
 import { action } from '@storybook/addon-actions'
 import {
-  array,
   boolean,
   date,
   number,
@@ -34,7 +33,7 @@ stories
     const disableDaysOfWeek = boolean('disableDaysOfWeek', false)
 
     // disabledIntervals
-    const disabledIntervals = array('disabledIntervals', [
+    const disabledIntervals = object('disabledIntervals', [
       { end: new Date('2018-01-27'), start: new Date('2018-01-23') }
     ])
 
@@ -59,7 +58,7 @@ stories
 
     // minDate
     const minDateLabel = 'minDate'
-    const minDateDefaultValue = new Date('2018-01-01')
+    const minDateDefaultValue = new Date('2018-01-02')
     const minDate = date(minDateLabel, minDateDefaultValue)
 
     // minNumberOfWeeks

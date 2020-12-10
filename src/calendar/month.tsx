@@ -1,4 +1,4 @@
-import React, { Component, Fragment, SyntheticEvent } from 'react'
+import React, { Component, SyntheticEvent } from 'react'
 import addDays from 'date-fns/add_days'
 import areRangesOverlapping from 'date-fns/are_ranges_overlapping'
 import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
@@ -12,14 +12,14 @@ import startOfMonth from 'date-fns/start_of_month'
 import startOfWeek from 'date-fns/start_of_week'
 import subDays from 'date-fns/sub_days'
 
+import * as helper from '../helper'
 import {
   IDate,
-  IDayOfWeekRenderProps,
-  IDayRenderProps,
   IDaysOfWeekRenderProps,
   IMonthRenderProps,
-  INoticeType,
-  IWeekRenderProps
+  IWeekRenderProps,
+  RenderPropsDay,
+  RenderPropsDayOfWeek
 } from '../@types'
 import DaysOfWeek from './days_of_week'
 import Week from './week'
@@ -36,6 +36,8 @@ export type Props = {
     start: IDate
     end: IDate
   }[]
+  getDayFormatted: typeof helper.getDayFormatted
+  getISODate: typeof helper.getISODate
   highlightedEnd?: IDate
   highlightedStart?: IDate
   maxDate?: IDate
@@ -46,8 +48,8 @@ export type Props = {
   onDayMouseEnter?: (...args: any[]) => any
   onNoticeChange: (...args: any[]) => any
   rangeLimit?: number
-  renderDay?: IDayRenderProps
-  renderDayOfWeek?: IDayOfWeekRenderProps
+  renderDay: RenderPropsDay
+  renderDayOfWeek: RenderPropsDayOfWeek
   renderDaysOfWeek?: IDaysOfWeekRenderProps
   renderWeek?: IWeekRenderProps
   selectedMax?: IDate
@@ -67,9 +69,11 @@ export default class Month extends Component<Props, {}> {
   handleOnDayMouseEnter = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()
     const {
-      currentTarget: { value }
+      currentTarget: {
+        dataset: { simpleReactCalendarDay }
+      }
     } = event
-    const date = parse(value)
+    const date = parse(simpleReactCalendarDay as string)
 
     const { onDayMouseEnter } = this.props
 
@@ -116,10 +120,13 @@ export default class Month extends Component<Props, {}> {
 
   handleOnDayClick = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()
+
     const {
-      currentTarget: { value }
+      currentTarget: {
+        dataset: { simpleReactCalendarDay }
+      }
     } = event
-    const date = parse(value)
+    const date = parse(simpleReactCalendarDay as string)
     const { mode } = this.props
 
     if (mode === RANGE_MODE) {
@@ -132,7 +139,7 @@ export default class Month extends Component<Props, {}> {
           //       this is passed from the parent component
           // @ts-ignore
           end: !isBefore(this._selectionStart, date)
-          // @ts-ignore
+            // @ts-ignore
             ? this._selectionStart
             : date,
           // TODO: simplify with FC approach, remove state logic from child components
@@ -159,6 +166,7 @@ export default class Month extends Component<Props, {}> {
           this._selectionEnd = null
           this._pushUpdate()
           this._pushNoticeUpdate('overlapping_with_disabled')
+
           return
         }
         // TODO: simplify with FC approach, remove state logic from child components
@@ -192,6 +200,7 @@ export default class Month extends Component<Props, {}> {
       //       this is passed from the parent component
       // @ts-ignore
       this._selectionStart = date
+
       // TODO: simplify with FC approach, remove state logic from child components
       //       this is passed from the parent component
       // @ts-ignore
@@ -202,12 +211,10 @@ export default class Month extends Component<Props, {}> {
     this._pushNoticeUpdate(null)
   }
 
-  handleOnDisabledDayClick = ({
-    preventDefault
-  }: SyntheticEvent<HTMLButtonElement>) => {
+  handleOnDisabledDayClick = (event: SyntheticEvent<HTMLButtonElement>) => {
     const { onNoticeChange } = this.props
 
-    preventDefault()
+    event.preventDefault()
     onNoticeChange('disabled_day_click')
   }
 
@@ -269,10 +276,11 @@ export default class Month extends Component<Props, {}> {
 
       return isCalcStartDayAfter ? calcStartDate : minDate
     }
+
     return calcStartDate
   }
 
-  _pushNoticeUpdate(noticeType: INoticeType) {
+  _pushNoticeUpdate(noticeType: helper.NoticeMessageType) {
     const { onNoticeChange } = this.props
 
     return onNoticeChange(noticeType)
@@ -314,6 +322,7 @@ export default class Month extends Component<Props, {}> {
 
       return isCalcEndDayBefore ? calcEndDate : maxDate
     }
+
     return calcEndDate
   }
 
@@ -354,7 +363,9 @@ export default class Month extends Component<Props, {}> {
       rangeLimit,
       weekStartsOn,
       renderDay,
-      renderWeek
+      renderWeek,
+      getDayFormatted,
+      getISODate
     } = this.props
     const weeks = []
     let { minDate, maxDate } = this.props
@@ -374,7 +385,8 @@ export default class Month extends Component<Props, {}> {
       /* eslint-disable no-unmodified-loop-condition */
       (typeof minNumberOfWeeks === 'number' &&
         minNumberOfWeeks > weeks.length) ||
-      (isBefore(date, end) || isSameDay(date, end))
+      isBefore(date, end) ||
+      isSameDay(date, end)
     ) {
       weeks.push(date)
       date = addDays(date, 7)
@@ -386,6 +398,7 @@ export default class Month extends Component<Props, {}> {
           activeMonth={activeMonth}
           blockClassName={blockClassName}
           customRender={renderWeek}
+          getDayFormatted={getDayFormatted}
           date={week}
           disabledIntervals={disabledIntervals}
           highlightedEnd={highlightedEnd}
@@ -401,6 +414,7 @@ export default class Month extends Component<Props, {}> {
           selectedMin={selectedMin}
           today={today}
           weekStartsOn={weekStartsOn}
+          getISODate={getISODate}
         />
       )
     })
@@ -410,10 +424,10 @@ export default class Month extends Component<Props, {}> {
     const { blockClassName, customRender } = this.props
 
     const children = (
-      <Fragment>
+      <>
         {this._renderDaysOfWeek()}
         {this._renderWeeks()}
-      </Fragment>
+      </>
     )
 
     if (customRender) {

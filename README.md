@@ -44,12 +44,12 @@ yarn add simple-react-calendar
 ### Usage
 
 ```js
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import SimpleReactCalendar from 'simple-react-calendar'
 
 class MyApp extends Component {
-  render () {
+  render() {
     return <SimpleReactCalendar activeMonth={new Date()} />
   }
 }
@@ -62,7 +62,6 @@ All of the properties are optional, just rendering `<Calendar />` will already g
 | Properties             | PropType                                     | Description                                                                                                                                                                                                                                                                                                |
 | ---------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `MonthHeaderComponent` | `object` or `func`                           | replace the month header of the component with this node `object` or `class function`                                                                                                                                                                                                                      |
-| `NoticeComponent`      | `object` or `func`                           | renders when `shownNoticeType` state has been set                                                                                                                                                                                                                                                          |
 | `activeMonth`          | `datePropType`\*                             | any day within the month that you want initially displayed                                                                                                                                                                                                                                                 |
 | `blockClassName`       | `string`                                     | base class name that will be used as a class prefix (see [](#class-names))                                                                                                                                                                                                                                 |
 | `daysOfWeek`           | `[string]`                                   | array of string represents the days                                                                                                                                                                                                                                                                        |
@@ -84,10 +83,30 @@ All of the properties are optional, just rendering `<Calendar />` will already g
 | `rangeLimit`           | `number`                                     | limit number of days for selection (`number`)                                                                                                                                                                                                                                                              |
 | `selected`             |                                              | selected dates. Can be ether single `Date` object if `mode` is `single`, or object `{start: Date(), end: Date()}` if `mode` is `range`                                                                                                                                                                     |
 | `today`                | `datePropType`\*                             | current date (useful when you want to show current date in different time zone). Default is `new Date()` selects a date (in `single` mode) or a dates range (`range` mode) selection. Works only in the `range` mode. When the function is passed then automatic range selection handing will be disabled. |
-| `weekStartsOn`         | `number`                                     | the index of the first day of the week (0 - Sunday). Default is 0                                                                                                                                                                                                                                          |
-`locale` |  `string` | locale for month names. See [date-fns locales](https://github.com/date-fns/date-fns/blob/master/src/locale/index.js) for available options. Defaults to 'en'.
+| `weekStartsOn`         | `number`                                     | the index of the first day of the week (0 - Sunday). Default is 1 - Monday                                                                                                                                                                                                                                 |
+| `locale`               | `string`                                     | locale for month names. See [date-fns locales](https://github.com/date-fns/date-fns/blob/master/src/locale/index.js) for available options. Defaults to 'en'.
 
 `datePropType` - `number`, `string` or `instanceOf(Date)`
+
+## Render Prop's Components
+
+You can easily override any rendered part of the calendar by providing the proper render function as a Prop.
+
+| Render Prop name  | Default usage                         | Default Render Prop Component                                                                        |
+| ----------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `renderDay`       | `(props) => <Day {...props} />`       | [RenderPropsComponents/Day/Day.tsx](./src/RenderPropsComponents/Day/Day.tsx)                         |
+| `renderDayOfWeek` | `(props) => <DayOfWeek {...props} />` | [RenderPropsComponents/DayOfWeek/DayOfWeek.tsx](./src/RenderPropsComponents/DayOfWeek/DayOfWeek.tsx) |
+| `renderNotice`    | `(props) => <Notice {...props} />`    | [RenderPropsComponents/Notice/Notice.tsx](./src/RenderPropsComponents/Notice/Notice.tsx)             |
+
+## Expose date helper methods
+
+You can easily override any helper methods, all of them exposed as pure functions.
+
+| Helper function    | Default function                              |
+| ------------------ | --------------------------------------------- |
+| `getDayFormatted`  | [getDayFormatted](./src/helper/index.ts#L4)   |
+| `getISODate`       | [getISODate](./src/helper/index.ts#L3)        |
+| `getNoticeContent` | [getNoticeContent](./src/helper/index.ts#L10) |
 
 ## Class Names
 

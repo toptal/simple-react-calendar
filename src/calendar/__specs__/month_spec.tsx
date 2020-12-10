@@ -16,7 +16,7 @@ describe('Month', () => {
     wrapper = shallow(<Month {...props} />)
     instance = wrapper.instance()
     mockEvent = {
-      currentTarget: { value: date },
+      currentTarget: { dataset: { simpleReactCalendarDay: date } },
       preventDefault: jest.fn()
     }
   })

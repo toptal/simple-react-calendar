@@ -1,7 +1,6 @@
-import React, { Component, SyntheticEvent } from 'react'
+import React, { Component } from 'react'
 import eachDay from 'date-fns/each_day'
 import endOfWeek from 'date-fns/end_of_week'
-import format from 'date-fns/format'
 import isAfter from 'date-fns/is_after'
 import isBefore from 'date-fns/is_before'
 import isEqual from 'date-fns/is_equal'
@@ -12,8 +11,15 @@ import isWithinRange from 'date-fns/is_within_range'
 import startOfDay from 'date-fns/start_of_day'
 import startOfWeek from 'date-fns/start_of_week'
 
-import { IDate, IDayRenderProps, IWeekRenderProps } from '../@types'
-import Day from './day'
+import * as helper from '../helper'
+import {
+  IDate,
+  IWeekRenderProps,
+  OnDayClick,
+  OnDayMouseEnter,
+  OnDisabledDayClick,
+  RenderPropsDay
+} from '../@types'
 
 export type Props = {
   activeMonth: IDate
@@ -24,14 +30,16 @@ export type Props = {
     start: IDate
     end: IDate
   }[]
+  getDayFormatted: typeof helper.getDayFormatted
+  getISODate: typeof helper.getISODate
   highlightedEnd?: IDate
   highlightedStart?: IDate
   maxDate?: IDate
   minDate?: IDate
-  onDayClick: (event: SyntheticEvent<HTMLButtonElement>) => void
-  onDayMouseEnter: (event: SyntheticEvent<HTMLButtonElement>) => void
-  onDisabledDayClick: (event: SyntheticEvent<HTMLButtonElement>) => void
-  renderDay?: IDayRenderProps
+  onDayClick: OnDayClick
+  onDayMouseEnter: OnDayMouseEnter
+  onDisabledDayClick: OnDisabledDayClick
+  renderDay: RenderPropsDay
   selectedMax?: IDate
   selectedMin?: IDate
   today: IDate
@@ -55,6 +63,7 @@ export default class Week extends Component<Props, {}> {
     } else if (maxDate && !minDate) {
       return isBefore(date, maxDate) || isEqual(date, maxDate)
     }
+
     return true
   }
 
@@ -114,6 +123,8 @@ export default class Week extends Component<Props, {}> {
       onDayClick,
       onDisabledDayClick,
       onDayMouseEnter,
+      getISODate,
+      getDayFormatted,
       blockClassName,
       activeMonth,
       selectedMax,
@@ -125,42 +136,39 @@ export default class Week extends Component<Props, {}> {
     const end = endOfWeek(date, { weekStartsOn })
 
     return eachDay(start, end).map(day => {
-      const date = format(day, 'YYYY-MM-DD')
+      const date = getISODate(day)
       const isSelectable = this._dateSelectable(day)
       const isDisabled = this._dateDisabled(date)
       const isWorkDay = !isWeekend(date)
       const isCurrentMonth = isSameMonth(date, activeMonth)
       const isNextMonth = !isCurrentMonth && isAfter(date, activeMonth)
 
-      return (
-        <Day
-          blockClassName={blockClassName}
-          customRender={renderDay}
-          date={date}
-          handleOnClick={
-            isSelectable
-              ? onDayClick
-              : isDisabled
-              ? onDisabledDayClick
-              : undefined
-          }
-          handleOnEnter={isSelectable ? onDayMouseEnter : undefined}
-          isCurrentMonth={isCurrentMonth}
-          isDisabled={isDisabled}
-          isHighlighted={this._dateHighlighted(day)}
-          isMonthNext={isNextMonth}
-          isMonthPrev={!isCurrentMonth && !isNextMonth}
-          isNonSelectable={!isSelectable}
-          isSelectable={isSelectable}
-          isSelected={this._dateSelected(day)}
-          isSelectionEnd={Boolean(selectedMax && isSameDay(selectedMax, day))}
-          isSelectionStart={Boolean(selectedMin && isSameDay(selectedMin, day))}
-          isToday={isSameDay(today, day)}
-          isWeekend={!isWorkDay}
-          isWorkday={isWorkDay}
-          key={date}
-        />
-      )
+      return renderDay({
+        ISODate: getISODate(day),
+        blockClassName,
+        date: day,
+        getDayFormatted,
+        handleOnClick: isSelectable
+          ? onDayClick
+          : isDisabled
+          ? onDisabledDayClick
+          : () => {},
+        handleOnEnter: isSelectable ? onDayMouseEnter : () => {},
+        isCurrentMonth,
+        isDisabled,
+        isHighlighted: this._dateHighlighted(day),
+        isMonthNext: isNextMonth,
+        isMonthPrev: !isCurrentMonth && !isNextMonth,
+        isNonSelectable: !isSelectable,
+        isSelectable,
+        isSelected: this._dateSelected(day),
+        isSelectionEnd: Boolean(selectedMax && isSameDay(selectedMax, day)),
+        isSelectionStart: Boolean(selectedMin && isSameDay(selectedMin, day)),
+        isToday: isSameDay(today, day),
+        isWeekend: !isWorkDay,
+        isWorkDay,
+        key: getISODate(day)
+      })
     })
   }
 

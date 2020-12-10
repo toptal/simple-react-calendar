@@ -73,7 +73,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
       className="calendar-week"
     >
       <button
-        className="calendar-day is-prev_month is-selectable is-working_day"
+        className="calendar-week-day is-prev_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-06-29"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -82,7 +83,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         29
       </button>
       <button
-        className="calendar-day is-prev_month is-selectable is-working_day"
+        className="calendar-week-day is-prev_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-06-30"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -91,7 +93,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         30
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-01"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -100,7 +103,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         1
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-02"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -109,7 +113,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         2
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-03"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -118,7 +123,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         3
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-weekend"
+        className="calendar-week-day is-current_month is-selectable is-weekend"
+        data-simple-react-calendar-day="2015-07-04"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -127,7 +133,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         4
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-weekend"
+        className="calendar-week-day is-current_month is-selectable is-weekend"
+        data-simple-react-calendar-day="2015-07-05"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -140,7 +147,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
       className="calendar-week"
     >
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-06"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -149,7 +157,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         6
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-07"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -158,7 +167,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         7
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-08"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -167,7 +177,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         8
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-09"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -176,7 +187,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         9
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-10"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -185,7 +197,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         10
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-weekend"
+        className="calendar-week-day is-current_month is-selectable is-weekend"
+        data-simple-react-calendar-day="2015-07-11"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -194,7 +207,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         11
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-weekend"
+        className="calendar-week-day is-current_month is-selectable is-weekend"
+        data-simple-react-calendar-day="2015-07-12"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -207,7 +221,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
       className="calendar-week"
     >
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-13"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -216,7 +231,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         13
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-14"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -225,7 +241,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         14
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-15"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -234,7 +251,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         15
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-16"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -243,7 +261,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         16
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-17"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -252,7 +271,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         17
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-weekend"
+        className="calendar-week-day is-current_month is-selectable is-weekend"
+        data-simple-react-calendar-day="2015-07-18"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -261,7 +281,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         18
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-weekend"
+        className="calendar-week-day is-current_month is-selectable is-weekend"
+        data-simple-react-calendar-day="2015-07-19"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -274,7 +295,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
       className="calendar-week"
     >
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-20"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -283,7 +305,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         20
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-21"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -292,7 +315,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         21
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-22"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -301,7 +325,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         22
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-23"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -310,7 +335,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         23
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-24"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -319,7 +345,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         24
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-weekend"
+        className="calendar-week-day is-current_month is-selectable is-weekend"
+        data-simple-react-calendar-day="2015-07-25"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -328,7 +355,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         25
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-weekend"
+        className="calendar-week-day is-current_month is-selectable is-weekend"
+        data-simple-react-calendar-day="2015-07-26"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -341,7 +369,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
       className="calendar-week"
     >
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-27"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -350,7 +379,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         27
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-28"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -359,7 +389,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         28
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-29"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -368,7 +399,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         29
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-30"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -377,7 +409,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         30
       </button>
       <button
-        className="calendar-day is-current_month is-selectable is-working_day"
+        className="calendar-week-day is-current_month is-selectable is-working_day"
+        data-simple-react-calendar-day="2015-07-31"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -386,7 +419,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         31
       </button>
       <button
-        className="calendar-day is-next_month is-selectable is-weekend"
+        className="calendar-week-day is-next_month is-selectable is-weekend"
+        data-simple-react-calendar-day="2015-08-01"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"
@@ -395,7 +429,8 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         1
       </button>
       <button
-        className="calendar-day is-next_month is-selectable is-weekend"
+        className="calendar-week-day is-next_month is-selectable is-weekend"
+        data-simple-react-calendar-day="2015-08-02"
         onClick={[Function]}
         onMouseEnter={[Function]}
         type="button"

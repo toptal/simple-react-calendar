@@ -1,6 +1,8 @@
 import { shallow } from 'enzyme'
-import React from 'react'
+import React, { ComponentProps } from 'react'
 
+import * as helper from '../../helper'
+import Day from '../../RenderPropsComponents/Day'
 import Week from '../week'
 
 describe('Week', () => {
@@ -157,9 +159,12 @@ const getProps = (overrides = {}) => ({
   activeMonth: new Date(2015, 7, 17),
   blockClassName: 'example-class',
   date: new Date(2015, 7, 17),
+  getDayFormatted: helper.getDayFormatted,
+  getISODate: helper.getISODate,
   onDayClick: jest.fn(),
   onDayMouseEnter: jest.fn(),
   onDisabledDayClick: jest.fn(),
+  renderDay: (props: ComponentProps<typeof Day>) => <Day {...props} />,
   today: new Date(2015, 7, 17),
   weekStartsOn: 1,
   ...overrides
