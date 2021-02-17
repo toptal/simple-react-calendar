@@ -1,6 +1,6 @@
 import React, { Component, ReactElement } from 'react'
 import addMonths from 'date-fns/add_months'
-import formatDate from 'date-fns/format'
+import format from 'date-fns/format'
 import isAfter from 'date-fns/is_after'
 import isBefore from 'date-fns/is_before'
 import startOfMonth from 'date-fns/start_of_month'
@@ -18,12 +18,33 @@ export type Props = {
   headerPrevTitle?: string
   maxDate?: IDate
   minDate?: IDate
+  locale?: string
   onMonthChange: (...args: any[]) => any
+}
+
+export type State = {
+  localeModule: any
 }
 
 // TODO: FC Rewrite
 /* eslint-disable react/require-optimization */
-export default class MonthHeader extends Component<Props, {}> {
+export default class MonthHeader extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      localeModule: null
+    }
+  }
+
+  componentDidMount() {
+    import(`date-fns/locale/${this.props.locale}`)
+      .then(localeModule => this.setState({ localeModule }))
+      .catch(err => {
+        import('date-fns/locale/en')
+          .then(localeModule => this.setState({ localeModule }))
+      });
+  }
+
   _switchMonth(offset: -1 | 1) {
     const { onMonthChange, activeMonth } = this.props
 
@@ -42,6 +63,8 @@ export default class MonthHeader extends Component<Props, {}> {
       headerPrevTitle,
       customRender
     } = this.props
+
+    const { localeModule } = this.state;
 
     const prevEnabled = minDate
       ? isBefore(startOfMonth(minDate), startOfMonth(activeMonth))
@@ -72,7 +95,7 @@ export default class MonthHeader extends Component<Props, {}> {
           blockClassName={blockClassName}
         />
         <div className={`${blockClassName}-month_header_title`}>
-          {formatDate(activeMonth, 'MMMM YYYY')}
+          { localeModule && format(activeMonth, 'MMMM YYYY', { locale: localeModule })}
         </div>
         <HeaderButton
           type='next'

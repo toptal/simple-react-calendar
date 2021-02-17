@@ -85,6 +85,7 @@ export type Props = {
   selected?: IDate | ISelectionRange
   today?: IDate
   weekStartsOn?: number
+  locale?: string
 }
 
 type State = {
@@ -113,7 +114,8 @@ export default class Calendar extends Component<Props, State> {
     renderNotice: (props: ComponentProps<typeof Notice>) => (
       <Notice {...props} />
     ),
-    weekStartsOn: 1
+    weekStartsOn: 1,
+    locale: 'en'
   }
 
   constructor(props: Props) {
@@ -324,7 +326,8 @@ export default class Calendar extends Component<Props, State> {
       maxDate,
       minDate,
       MonthHeaderComponent = MonthHeader,
-      renderMonthHeader
+      renderMonthHeader,
+      locale
     } = this.props
 
     return (
@@ -339,6 +342,7 @@ export default class Calendar extends Component<Props, State> {
         headerPrevTitle={headerPrevTitle}
         maxDate={maxDate}
         minDate={minDate}
+        locale={locale}
         onMonthChange={this._switchMonth.bind(this)}
       />
     )
