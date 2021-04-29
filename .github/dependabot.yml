@@ -1,0 +1,38 @@
+version: 2
+registries:
+  npm-registry-registry-npmjs-org:
+    type: npm-registry
+    url: https://registry.npmjs.org
+    token: "${{secrets.NPM_REGISTRY_REGISTRY_NPMJS_ORG_TOKEN}}"
+
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "07:00"
+  pull-request-branch-name:
+    separator: "-"
+  open-pull-requests-limit: 3
+  labels:
+  - dependencies
+  ignore:
+  - dependency-name: date-fns
+    versions:
+    - ">= 2.a, < 3"
+  - dependency-name: "@storybook/react"
+    versions:
+    - 6.0.28
+    - 6.2.2
+    - 6.2.7
+  - dependency-name: "@storybook/addons"
+    versions:
+    - 6.1.15
+    - 6.1.17
+    - 6.1.18
+    - 6.1.20
+    - 6.1.21
+    - 6.2.2
+    - 6.2.7
+  registries:
+  - npm-registry-registry-npmjs-org
