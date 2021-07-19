@@ -5,6 +5,7 @@ exports[`HeaderButton renders <HeaderButton /> 1`] = `
   className="calendar-header_button is-prev"
   disabled={false}
   onClick={[Function]}
+  tabIndex={0}
   title="Previous month"
   type="button"
 />
@@ -15,6 +16,7 @@ exports[`HeaderButton when prop \`arrow\` is defined renders <HeaderButton /> 1`
   className="calendar-header_button is-prev"
   disabled={false}
   onClick={[Function]}
+  tabIndex={0}
   title="Previous month"
   type="button"
 >
@@ -31,6 +33,7 @@ exports[`HeaderButton when prop \`blockClassName\` is defined renders <HeaderBut
   className="cal-header_button is-prev"
   disabled={false}
   onClick={[Function]}
+  tabIndex={0}
   title="Previous month"
   type="button"
 />
@@ -41,6 +44,7 @@ exports[`HeaderButton when prop \`enabled\` is \`false\` renders <HeaderButton /
   className="calendar-header_button is-prev is-disabled"
   disabled={true}
   onClick={[Function]}
+  tabIndex={-1}
   title="Previous month"
   type="button"
 />
@@ -51,6 +55,7 @@ exports[`HeaderButton when prop \`title\` is defined renders <HeaderButton /> 1`
   className="calendar-header_button is-prev"
   disabled={false}
   onClick={[Function]}
+  tabIndex={0}
   title="testTitle"
   type="button"
 />
@@ -61,6 +66,7 @@ exports[`HeaderButton when prop \`type\` is "next" renders <HeaderButton /> 1`] 
   className="calendar-header_button is-next"
   disabled={false}
   onClick={[Function]}
+  tabIndex={0}
   title="Next month"
   type="button"
 />
