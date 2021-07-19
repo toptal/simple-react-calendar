@@ -27,6 +27,7 @@ const HeaderButton: FC<Props> = ({
     disabled={!enabled}
     title={title}
     onClick={onClick}
+    tabIndex={!enabled ? -1 : 0}
   >
     {arrow}
   </button>
