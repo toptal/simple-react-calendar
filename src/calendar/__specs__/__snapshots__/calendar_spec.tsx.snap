@@ -11,6 +11,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
       className="calendar-header_button is-prev"
       disabled={false}
       onClick={[Function]}
+      tabIndex={0}
       title="Previous month"
       type="button"
     />
@@ -23,6 +24,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
       className="calendar-header_button is-next"
       disabled={false}
       onClick={[Function]}
+      tabIndex={0}
       title="Next month"
       type="button"
     />
@@ -77,6 +79,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-06-29"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-06-29"
       >
@@ -87,6 +90,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-06-30"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-06-30"
       >
@@ -97,6 +101,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-01"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-01"
       >
@@ -107,6 +112,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-02"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-02"
       >
@@ -117,6 +123,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-03"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-03"
       >
@@ -127,6 +134,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-04"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-04"
       >
@@ -137,6 +145,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-05"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-05"
       >
@@ -151,6 +160,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-06"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-06"
       >
@@ -161,6 +171,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-07"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-07"
       >
@@ -171,6 +182,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-08"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-08"
       >
@@ -181,6 +193,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-09"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-09"
       >
@@ -191,6 +204,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-10"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-10"
       >
@@ -201,6 +215,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-11"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-11"
       >
@@ -211,6 +226,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-12"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-12"
       >
@@ -225,6 +241,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-13"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-13"
       >
@@ -235,6 +252,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-14"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-14"
       >
@@ -245,6 +263,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-15"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-15"
       >
@@ -255,6 +274,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-16"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-16"
       >
@@ -265,6 +285,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-17"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-17"
       >
@@ -275,6 +296,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-18"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-18"
       >
@@ -285,6 +307,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-19"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-19"
       >
@@ -299,6 +322,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-20"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-20"
       >
@@ -309,6 +333,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-21"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-21"
       >
@@ -319,6 +344,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-22"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-22"
       >
@@ -329,6 +355,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-23"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-23"
       >
@@ -339,6 +366,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-24"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-24"
       >
@@ -349,6 +377,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-25"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-25"
       >
@@ -359,6 +388,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-26"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-26"
       >
@@ -373,6 +403,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-27"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-27"
       >
@@ -383,6 +414,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-28"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-28"
       >
@@ -393,6 +425,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-29"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-29"
       >
@@ -403,6 +436,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-30"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-30"
       >
@@ -413,6 +447,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-07-31"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-07-31"
       >
@@ -423,6 +458,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-08-01"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-08-01"
       >
@@ -433,6 +469,7 @@ exports[`Calendar #render renders <Calendar /> 1`] = `
         data-simple-react-calendar-day="2015-08-02"
         onClick={[Function]}
         onMouseEnter={[Function]}
+        tabIndex={0}
         type="button"
         value="2015-08-02"
       >

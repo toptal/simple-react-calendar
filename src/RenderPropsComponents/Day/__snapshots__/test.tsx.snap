@@ -4,6 +4,7 @@ exports[`default render 1`] = `
 <button
   class="example-class-name-week-day is-current_month is-highlighted is-not_selectable is-selectable is-start_selection is-today is-weekend"
   data-simple-react-calendar-day="2020-02-09"
+  tabindex="-1"
   type="button"
   value="2020-02-09"
 >
