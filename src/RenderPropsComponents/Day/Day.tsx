@@ -69,7 +69,7 @@ const Day: FC<Props> = ({
     onMouseEnter={handleOnEnter}
     type='button'
     value={ISODate}
-    tabIndex={isNonSelectable ? -1 : 0}
+    tabIndex={isNonSelectable || isDisabled ? -1 : 0}
   >
     {getDayFormatted(date)}
   </button>
