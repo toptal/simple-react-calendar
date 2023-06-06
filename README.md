@@ -1,5 +1,11 @@
 # simple-react-calendar <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
 
+---
+
+## ⚠️ Please note that the repository is no longer maintained and was archived. If you need to use a calendar, please use the `Calendar` component from `@toptal/picasso` package.
+
+---
+
 [![NPM version][npm-image]][npm-url]
 [![deps][deps]][deps-url]
 [![build status][travis-image]][travis-url]
