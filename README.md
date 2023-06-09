@@ -2,8 +2,7 @@
 
 ---
 
-## ⚠️ Please note that the repository is no longer maintained and was archived. If you need to use a calendar, please use the `Calendar` component from `@toptal/picasso` package or [React Day Picker](https://react-day-picker.js.org/) library.
-
+## ⚠️ Please note that the repository is no longer maintained and was archived. If you need to use a calendar, please use the `Calendar` component from [Picasso component library](https://picasso.toptal.net/) or [React Day Picker](https://react-day-picker.js.org/) library
 ---
 
 [![NPM version][npm-image]][npm-url]
